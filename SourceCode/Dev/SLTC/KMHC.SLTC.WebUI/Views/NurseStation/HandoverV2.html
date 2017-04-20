@@ -1,0 +1,136 @@
+﻿<link href="../../../Content/socialworker.css" rel="stylesheet" />
+<div class="row">
+    <div id="content" class="col-md-12">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="page-header">
+                    <ul class="breadcrumb">
+                        <li>
+                            <i class="fa fa-home"></i>
+                            <a href="/">首页</a>
+                        </li>
+                        <li>行政交班记录</li>
+                       
+                    </ul>
+
+                </div>
+            </div>
+        </div>
+        <div class="row">
+   
+            <div class="col-md-12">
+
+                    <div class="panel">
+                        <div class="panel-body">
+                            <form class="form-horizontal tb" name="inForm" role="form" novalidate>
+                                <div class="col-md-12 marginBottom5">
+                                    <div style="">
+                                        <div class="panel-title  center ">
+                                            <h3>
+                                                <strong>行政交班记录</strong>
+                                            </h3>
+                                            <h4>
+                                                <strong>{{SearchDate}}</strong>
+                                            </h4>
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label style="float:left" class="control-label">日期</label>
+                                        <div class="col-md-2">
+                                            <input type="text" class="form-control" ng-model="SearchDate" ca-date-picker required>
+                                        </div>
+                                        <button class="btn btn-info col-md-1" ng-click="Search()">查询</button>
+                                    </div>
+                                </div>
+                                <div class="div col-md-12">
+                                    <table class="col-md-12">
+                                        <tr>
+                                            <td rowspan="3">项目</td>
+                                            <td rowspan="2">新入住人数</td>
+                                            <td colspan="3">转出人数</td>
+                                            <td colspan="3">外出情况</td>
+                                            <td rowspan="2">实际人数 </td>
+                                            <td colspan="4">入住情况 </td>
+                                        </tr>
+                                        <tr>
+                                            <td>社会</td>
+                                            <td>"三无"</td>
+                                            <td>残疾</td>
+                                            <td>外出</td>
+                                            <td>已归</td>
+                                            <td>未归</td>
+                                            <td>社会</td>
+                                            <td>三无</td>
+                                            <td>残疾</td>
+                                            <td>总数</td>
+                                        </tr>
+                                        <tr>
+                                            <td><span ng-bind="Data.NewComer"></span></td>
+                                            <td><span ng-bind="Data.TransferSociety"></span></td>
+                                            <td><span ng-bind="Data.TransferMiniter"></span></td>
+                                            <td><span ng-bind="Data.TransferDisabled"></span></td>
+                                            <td><span ng-bind="Data.OutOverall"></span></td>
+                                            <td><span ng-bind="Data.OutReturn"></span></td>
+                                            <td><span ng-bind="Data.OutStill"></span></td>
+                                            <td><span ng-bind="Data.ActualPopulation"></span></td>
+                                            <td><span ng-bind="Data.InnaiSociety"></span></td>
+                                            <td><span ng-bind="Data.InnaiMiniter"></span></td>
+                                            <td><span ng-bind="Data.InnaiDisabled"></span></td>
+                                            <td><span ng-bind="Data.InnaiOverall"></span></td>
+                                        </tr>
+                                        <tr>
+                                            <td rowspan="4">交班内容</td>
+                                            <td>1:消防安全情况<button class="btn btn-info btn-xs" ng-click="AddHandoverRecord('001')"><i class="fa fa-pencil"></i> 新增</button></td>
+                                            <td colspan="11" style="font-size:initial;">
+                                                <div ng-repeat="Dtl in Data.LTC_HandoverDtl | filter:{ItemCode:'001'}">
+                                                    <div class="alert-block alert-info fade in" ng-dblclick="EditHandoverDtl(Dtl)">
+                                                        <p><span class="badge badge-red" ng-bind="$index+1"></span>{{Dtl.Content}}</p>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        <tr >
+                                            <td>2:设施、设备全情况<button class="btn btn-info btn-xs" ng-click="AddHandoverRecord('002')"><i class="fa fa-pencil"></i> 新增</button></td>
+                                            <td colspan="11">
+                                                <div ng-repeat="Dtl in Data.LTC_HandoverDtl | filter:{ItemCode:'002'}">
+                                                    <div class="alert-block alert-info fade in">
+                                                        <p><span class="badge badge-blue" ng-bind="$index+1"></span>{{Dtl.Content}}</p>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>3:其他<button class="btn btn-info btn-xs" ng-click="AddHandoverRecord('003')"><i class="fa fa-pencil"></i> 新增</button></td>
+                                            <td colspan="11">
+                                                <div ng-repeat="Dtl in Data.LTC_HandoverDtl | filter:{ItemCode:'003'}">
+                                                    <div class="alert-block alert-info fade in">
+                                                        <p><span class="badge badge-green" ng-bind="$index+1"></span>{{Dtl.Content}}</p>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        <tr >
+                                            <td>4:老人情况<button class="btn btn-info btn-xs" ng-click="AddHandoverRecord('004')"><i class="fa fa-pencil"></i> 新增</button></td>
+                                            <td colspan="11">
+                                                <div ng-repeat="Dtl in Data.LTC_HandoverDtl | filter:{ItemCode:'004'}">
+                                                    <div class="alert-block alert-info fade in">
+                                                        <p><span class="badge badge-orange" ng-bind="$index+1"></span>{{Dtl.Content}}</p>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+             
+
+            </div>
+
+        </div>
+    </div>
+</div>

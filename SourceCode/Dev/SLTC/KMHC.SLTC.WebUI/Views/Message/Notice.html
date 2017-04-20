@@ -1,0 +1,73 @@
+<div class="row">
+    <div id="content" class="col-lg-12">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="page-header">
+                    <ul class="breadcrumb">
+                        <li>
+                            <i class="fa fa-home"></i>
+                            <a href="/">首页</a>
+                        </li>
+                        <li>
+                             院内公告
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="box border primary">
+                    <div class="box-title">
+                        <h4><i class="fa fa-table"></i>院内公告</h4>
+                    </div>
+                    <div class="box-body">
+                        <div class="panel panel-default">
+                            <div class="panel-body">
+                                <form class="form-horizontal" role="form">
+                                    <div class="form-group">
+                                        <label class="col-sm-1 control-label">开始日期</label>
+                                        <div class="col-sm-2">
+                                            <input type="text" class="form-control" ng-model="options.params.sDate" ca-date-picker ng-change="checksDate()" />
+                                        </div>
+                                        <label class="col-sm-1 control-label">结束日期</label>
+                                        <div class="col-sm-2">
+                                            <input type="text" class="form-control" ng-model="options.params.eDate" ca-date-picker ng-change="checkeDate()" />
+                                        </div>
+                                        <div class="col-sm-2 input-group-btn">
+                                            <a class="btn btn-primary" ng-click="options.search()"><i class="fa fa-search"></i>查询</a>
+                                            <a class="btn btn-primary" ui-sref="NoticeAdd">新增</a>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                        <ui-data-table options="options">
+                            <table class="table table-striped">
+                                <thead>
+                                    <tr>
+                                        <th class="col-sm-8">标题</th>
+                                        <th class="col-sm-2">日期</th>
+                                        <th class="col-sm-2"><i class="fa fa-bars"></i> 操作</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr ng-repeat="Item in Notices">
+                                        <td class="col-sm-8"><a ui-sref="NoticeDetail({id:Item.Id})">{{Item.Subjects|cut:true:20}}</a></td>
+                                        <td class="col-sm-2">{{Item.CreateDate |date:'yyyy-MM-dd'}}</td>
+                                        <td class="col-sm-2 btn-group btn-group-xs">
+                                            <a ui-sref="NoticeEdit({id:Item.Id})" class="btn btn-info"><i class="fa fa-pencil"></i>编辑</a>
+                                            <a class="btn btn-primary" ng-click="delete(Item.Id)"><i class="fa fa-times"></i>删除</a>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </ui-data-table>
+                    </div>
+                    <div id="pager" class="pull-right"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

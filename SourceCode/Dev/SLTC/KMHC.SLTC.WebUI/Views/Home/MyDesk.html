@@ -1,0 +1,163 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>控制台</title>
+    <link href="../../Content/Mydesk/style.default.css" rel="stylesheet" />
+    <script type="text/javascript" src="../../Scripts/js/plugins/jquery-1.7.min.js"></script>
+    <script type="text/javascript" src="../../Scripts/js/plugins/jquery-ui-1.8.16.custom.min.js"></script>
+    <script type="text/javascript" src="../../Scripts/js/plugins/jquery.cookie.js"></script>
+    <script type="text/javascript" src="../../Scripts/js/plugins/jquery.uniform.min.js"></script>
+    <script type="text/javascript" src="../../Scripts/js/plugins/jquery.flot.min.js"></script>
+    <script type="text/javascript" src="../../Scripts/js/plugins/jquery.flot.resize.min.js"></script>
+    <script type="text/javascript" src="../../Scripts/js/plugins/jquery.slimscroll.js"></script>
+    <script type="text/javascript" src="../../Scripts/js/custom/general.js"></script>
+    <style type="text/css">
+        .container {
+            padding-left: 0px;
+            padding-right: 0px;
+        }
+
+        button {
+            width: 70px;
+        }
+    </style>
+</head>
+
+<body class="withvernav">
+    <div class="bodywrapper">
+        <div class="centercontent">
+            <div class="pageheader">
+                <h1 class="pagetitle">控制台</h1>
+                <ul class="hornav">
+                    <li class="current"><a href="#updates">最新更新</a></li>
+                    <li><a href="#activities">院内公告</a></li>
+                </ul>
+            </div>
+            <div id="contentwrapper" class="contentwrapper">
+                <div id="updates" class="subcontent">
+                    <div class="alert alert-block alert-warning fade in" style="padding:0px 5px 0px;margin-bottom:0px;" ng-show="Data[5]>0">
+                        <a class="close" data-dismiss="alert" href="#" aria-hidden="true">&times;</a>
+                        <p><h4><i class="fa fa-bell"></i>&nbsp;Notifications <a style="cursor:pointer;font-size:small" ng-click="aClick()"> 您有<span style="color:red">{{Data[5]}}</span>条未读工作提醒，点击可以查看！</a></h4></p>
+                    </div>
+                    <div class="two_third dashboard_left">
+                        <div class="contenttitle2 nomargintop">
+                            <h3>即时统计</h3>
+                        </div>
+                        <table cellpadding="0" cellspacing="0" border="0" class="stdtable overviewtable">
+                            <colgroup>
+                                <col class="con0" width="20%" />
+                                <col class="con1" width="20%" />
+                                <col class="con0" width="20%" />
+                                <col class="con1" width="20%" />
+                                <col class="con0" width="20%" />
+                            </colgroup>
+                            <thead>
+                                <tr>
+                                    <th class="head0">院民总数</th>
+                                    <th class="head1">请假人数</th>
+                                    <th class="head0">非计划住院人数</th>
+                                    <th class="head1">跌倒人数</th>
+                                    <th class="head0">压疮人数</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td style="cursor:pointer">
+                                        <a ui-sref="ServiceResidentList">{{Data[0]}}</a>
+                                    </td>
+                                    <td ng-click="clickDetail('L')" style="cursor:pointer"> {{Data[1]}}</td>
+                                    <td ng-click="clickDetail('U')" style="cursor:pointer"> {{Data[2]}}</td>
+                                    <td ng-click="clickDetail('F')" style="cursor:pointer" class="center"> {{Data[3]}}</td>
+                                    <td ng-click="clickDetail('B')" style="cursor:pointer" class="center"> {{Data[4]}}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <br clear="all" />
+                        <div class="contenttitle2 nomargintop">
+                            <h3>工作提醒</h3>
+                        </div>
+                        <div class="centercontent">
+                            <div id='calendar'></div>
+                        </div>
+                        <br />
+                        <br clear="all" />
+                    </div>
+                    <div class="one_third last dashboard_right">
+                        <div class="widgetbox">
+                            <div class="title"><h3>床位占用比例</h3></div>
+                            <div class="widgetcontent userlistwidget nopadding">
+                                <div id="container2" style="60%">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="widgetbox">
+                            <div class="title"><h3>压疮</h3></div>
+                            <div class="widgetcontent userlistwidget nopadding">
+                                <div id="container3" style="60%">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="widgetbox">
+                            <div class="title"><h3>本年度入院人数</h3></div>
+                            <div class="widgetcontent userlistwidget nopadding">
+
+                                <div id="container" style="60%">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="widgetbox">
+                            <div class="title"><h3>本年度结案人数</h3></div>
+                            <div class="widgetcontent userlistwidget nopadding">
+                                <div id="container1" style="60%">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div id="activities" class="subcontent" style="display: none;">
+                    <style>
+                        #pageFooter {
+                            margin-top: 5px;
+                        }
+
+                        .dataTables_paginate {
+                            border: none;
+                        }
+
+                        .dataTables_info {
+                            display: none;
+                        }
+
+                            .dataTables_info ng-binding {
+                                display: none;
+                            }
+                    </style>
+                    <div class="col-md-12">
+                        <div class="widgetbox">
+                            <div class="title" style="font-size:20px;font-family:'Microsoft YaHei'"><h3>院内公告</h3></div>
+                        </div>
+                        <ui-data-table options="options">
+                            <table class="table table-striped" style="margin-bottom:10px;font-size:18px;">
+                                <tbody>
+                                    <tr>
+                                        <td class="col-sm-10" style="background-color:#EFEFEF;text-align:left;font-family:'Microsoft YaHei'">标题</td>
+                                        <td class="col-sm-2" style="background-color:#EFEFEF;text-align:left;font-family:'Microsoft YaHei'">日期</td>
+                                    </tr>
+                                    <tr ng-repeat="Item in Notices">
+                                        <td style="text-align:left;font-family:'Microsoft YaHei'"><a ui-sref="NoticeDetail({id:Item.Id})">{{Item.Subjects|cut:true:20}}</a></td>
+                                        <td style="font-family:'Microsoft YaHei'">{{Item.CreateDate |date:'yyyy-MM-dd'}}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </ui-data-table>
+                    </div>
+                </div>
+            </div>
+            <br clear="all" />
+        </div>
+    </div>
+</body>
+</html>
+

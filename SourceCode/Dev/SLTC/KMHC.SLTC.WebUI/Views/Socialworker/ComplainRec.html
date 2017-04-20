@@ -1,0 +1,186 @@
+<!--申诉/权益维护-->
+<div class="row">
+    <div id="content" class="col-md-12">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="page-header">
+                    <!-- BREADCRUMBS -->
+                    <ul class="breadcrumb">
+                        <li>
+                            <i class="fa fa-home"></i>
+                            <a href="/">首页</a>
+                        </li>
+                        <li>
+                            申诉/权益维护
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-12">
+                <div class="col-sm-2">
+                    <div class="box border primary">
+                        <div class="box-title">
+                            <h4>
+                                <i class="fa fa-bars"></i>住民信息
+                            </h4>
+                        </div>
+                        <div class="box-body">
+                            <resident-card feeno={{FeeNo}} callback="residentSelected(resident)" />
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-10">
+                    <div class="box border primary">
+                        <div class="box-title">
+                            <h4><i class="fa fa-bars"></i><span class="hidden-inline-mobile">新建申诉</span></h4>
+                        </div>
+                        <div class="box-body">
+                            <form class="form-horizontal" name="clrForm" role="form" novalidate>
+
+                                <div class="form-group">
+
+                                    <label for="selRecordBy" class="col-sm-1 control-label">处理人员<span class="required">*</span></label>
+                                    <div class="col-sm-2">
+                                        <!--<select class="form-control" id="selNextEvaluator" ng-model="currentItem.ProcessBy" ng-options="t.EmpName as t.EmpName for t in Data.EmpList"></select>-->
+                                        <input-staff callback="staffSelected_1(item)" value="{{currentItem.ProcessBy}}" name="处理人员" required=true />
+                                    </div>
+                                    <label for="dtContactDate" class="col-sm-1 control-label">申诉日期<span class="required">*</span></label>
+                                    <div class="col-sm-2">
+                                        <input type="text" class="form-control" id="dtRecDate" ng-model="currentItem.RecDate" name="申诉日期" ca-date-picker required />
+                                    </div>
+                                    <label for="dtFinishDate" class="col-sm-1 control-label"></label>
+                                    <div class="col-sm-5">
+
+                                    </div>
+
+
+                                </div>
+                                <div class="form-group">
+
+                                    <label for="selType" class="col-sm-1 control-label">问题分类<span class="required">*</span></label>
+                                    <div class="col-sm-2">
+                                        <select class="form-control" id="selType" ng-model="currentItem.QuestionType" name="问题分类" ng-options="QuestionType.value as QuestionType.text for QuestionType in Data.QuestionType" required>
+                                            <option value="">-- 请选择 --</option>
+                                        </select>
+                                    </div>
+                                    <label for="selName" class="col-sm-1 control-label">申诉对象<span class="required">*</span></label>
+                                    <div class="col-sm-2">
+                                        <select class="form-control" id="selNextEvaluator" ng-model="currentItem.EmpNo" name="申诉对象" ng-options="t.EmpNo as t.EmpName for t in Data.EmpList" required>
+                                            <option value="">-- 请选择 --</option>
+                                        </select>
+                                        <!--<input-staff callback="staffSelected_2(item)" value="{{currentItem.SSName}}"  />-->
+                                    </div>
+
+                                </div>
+                                <div class="form-group">
+                                    <label for="selName" class="col-sm-1 control-label">问题简述</label>
+                                    <div class="col-sm-11">
+                                        <textarea class="form-control" rows="5" ng-model="currentItem.QuestionDesc" name="问题简述" ng-maxlength="1000"></textarea>
+                                    </div>
+
+                                </div>
+                                <div class="form-group">
+                                    <label for="selName" class="col-sm-1 control-label">处理结果<span class="required">*</span></label>
+                                    <div class="col-sm-2">
+                                        <select class="form-control" id="selName" ng-model="currentItem.Status" select-code="E00.213" name="处理结果" required>
+                                            <option value="">-- 请选择 --</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-sm-9"></div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="selName" class="col-sm-1 control-label">处理说明</label>
+                                    <div class="col-sm-11">
+                                        <textarea class="form-control" rows="5" ng-model="currentItem.Results" ng-maxlength="1000" name="处理说明"></textarea>
+                                    </div>
+
+                                </div>
+                                <div class="form-group">
+                                    <label for="selName" class="col-sm-1 control-label">备注</label>
+                                    <div class="col-sm-11">
+                                        <textarea class="form-control" rows="5" ng-model="currentItem.Description" ng-maxlength="1000" name="备注"></textarea>
+                                    </div>
+
+                                </div>
+                                <div class="form-group">
+
+                                    <div class="col-sm-offset-10">
+                                        <div class="btn-group btn-group-sm" role="group" aria-label="...">
+                                            <button class="btn btn-primary" ng-show="buttonShow" ng-disabled="clrForm.$invalid" ng-click="saveComplainRec(currentItem)">保存</button>&nbsp;
+                                            <button type="button" class="btn btn-default" ng-show="buttonShow" ng-click="resetComplain()">重置</button>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+
+                    <div class="box border primary">
+                        <div class="box-title">
+                            <h4>
+                                <i class="fa fa-table"></i>历次申诉记录
+                            </h4>
+                        </div>
+                        <div class="box-body">
+                            <ui-data-table options="options">
+                                <table id="tbEvalList" class="table table-striped table-bordered table-hover table-handler">
+                                    <thead>
+                                        <tr>
+                                            <th>申诉日期</th>
+                                            <th>处理人员</th>
+                                            <th>申诉问题分类</th>
+                                            <th>申诉对象</th>
+                                            <th>申诉问题简述</th>
+                                            <th>处理结果分类</th>
+                                            <th>处理说明</th>
+                                            <th><i class="fa fa-bars"></i> 操作</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr ng-repeat="complainrec in Data.complainrecList" ng-click="rowSelect(complainrec)">
+                                            <td>{{complainrec.RecDate | dateFormat}}</td>
+                                            <td>{{complainrec.ProcessName}}</td>
+                                            <td>{{complainrec.QuestionType}}</td>
+                                            <td>{{complainrec.EmpName}}</td>
+
+                                            <td style=" word-break: break-all; word-wrap: break-word;">
+                                                <label style="font-weight:normal" title="{{complainrec.QuestionDesc}}"> {{complainrec.QuestionDesc.length>20?complainrec.QuestionDesc.substring(0,20)+"...":complainrec.QuestionDesc}}</label>
+                                            </td>
+                                            <!--<td>
+                                                {{complainrec.QuestionDesc}}
+                                            </td>-->
+                                            <td><span select-code="E00.213" select-value="{{complainrec.Status}}"></td>
+
+                                            <td style=" word-break: break-all; word-wrap: break-word;">
+                                                <label style="font-weight:normal" title="{{complainrec.Results}}"> {{complainrec.Results.length>20?complainrec.Results.substring(0,20)+"...":complainrec.Results}}</label>
+                                            </td>
+
+                                            <!--<td>{{complainrec.Results}}</td>-->
+                                            <td>
+                                                <div class="btn-group btn-group-xs" role="group" aria-label="...">
+
+                                                    <!--<a ui-sref="AddLifeRecord({id:records.RegNo})" class=" btn btn-primary" role="button" data-toggle="modal">新增</a>-->
+                                                    <button class="btn btn-info" ng-click="rowSelect(complainrec)"><i class="fa fa-pencil">编辑</i></button>
+
+                                                    <a class="btn btn-primary" role="button" data-toggle="modal" ng-click="deleteComplain(complainrec)"><i class="fa fa-times">删除</i></a>
+                                                    <!--<a ui-sref="EvaluateHistory({id:person.id})" class="btn btn-info" role="button" data-toggle="modal">历次资料</a>-->
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+
+                                </table>
+                            </ui-data-table>
+
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+

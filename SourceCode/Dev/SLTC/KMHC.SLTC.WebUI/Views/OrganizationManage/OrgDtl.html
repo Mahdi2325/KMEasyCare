@@ -1,0 +1,196 @@
+<div class="row">
+    <div class="box-body">
+        <div id="content" class="col-lg-12">
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="page-header" >
+                        <ul class="breadcrumb">
+                            <li>
+                                <i class="fa fa-home"></i>
+                                <a href="/">首页</a>
+                            </li>
+                            <li>
+                                <a ui-sref="OrgList">机构管理列表</a>
+                            </li>
+                            <li>机构信息管理</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="box border primary">
+                        <div class="box-title">
+                            <h4><i class="fa fa-bars"></i>机构信息</h4>
+                        </div>
+                        <div class="box-body">
+                            <form class="form-horizontal" role="form" name="formOrg" ng-submit="save()" novalidate>
+                                <div class="form-group">
+                                    <label class="col-sm-1 control-label">名称<span class="required">*</span></label>
+                                    <div class="col-sm-4">
+                                        <input type="text" class="form-control" ng-model="Data.Org.OrgName" ng-minlength="1" ng-maxlength="50" placeholder="请填入机构名称" required />
+                                    </div>
+                                    <label class="col-sm-2 control-label">所属集团<span class="required">*</span></label>
+                                    <div class="col-sm-4">
+                                        <select name="GroupId" class="form-control" ng-model="Data.Org.GroupId" ng-options="t.GroupId as t.GroupName for t in Data.Groups" required></select>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-1 control-label">床位数</label>
+                                    <div class="col-sm-4">
+                                        <input class="form-control" type="number" ng-model="Data.Org.BedCount" ng-pattern="/^[1-9]\d*|0$/"  ng-maxlength="9"/>
+                                    </div>
+                                    <label class="col-sm-2 control-label">类型</label>
+                                    <div class="col-sm-4">
+                                        <select class="form-control" id="selectOrgType" ng-model="Data.Org.OrgType" select-code="A00.021"></select>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-1 control-label">负责人</label>
+                                    <div class="col-sm-4">
+                                        <input class="form-control" ng-model="Data.Org.Responsible" ng-maxlength="10" />
+                                    </div>
+                                    <label class="col-sm-2 control-label">电话</label>
+                                    <div class="col-sm-4">
+                                        <input class="form-control" ng-model="Data.Org.Tel" ng-maxlength="20" />
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-1 control-label">电子邮箱</label>
+                                    <div class="col-sm-4">
+                                        <input class="form-control" type="email" ng-model="Data.Org.Email" ng-maxlength="50" />
+                                    </div>
+                                    <label class="col-sm-2 control-label">传真</label>
+                                    <div class="col-sm-4">
+                                        <input class="form-control" ng-model="Data.Org.Fax" ng-maxlength="20" />
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-1 control-label">机构网站</label>
+                                    <div class="col-sm-10">
+                                        <input class="form-control" ng-model="Data.Org.Website" ng-maxlength="50" />
+                                    </div>
+                                </div>
+                                <!--  此功能暂时拿掉 on 2016-07-12 By Duke Start-->
+                                <!--<div class="form-group">
+                                    <label class="col-sm-1 control-label">选择模板</label>
+                                    <div class="col-sm-4">
+                                        <select class="form-control" ng-model="Data.Org.RoleTemplateId" ng-options="t.RoleId as t.RoleName for t in Data.RoleTemplate">
+                                            <option value="">-- 请选择 --</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-sm-offset-2 col-sm-5">
+                                        <button class="btn-primary" type="button" ng-click="loadTree()">导入模板数据</button>
+                                    </div>
+                                </div>-->
+                                <!-- End -->
+                                <div class="form-group">
+                                    <button class="btn-primary" type="button" ng-click="expandAll()">全部展开</button>
+                                    <button class="btn-primary" type="button" ng-click="collapseAll()">全部折叠</button>
+                                    <button class="btn-primary" type="button" ng-click="chooseAll()">全部选择</button>
+                                    <button class="btn-primary" type="button" ng-click="cancelChooseAll()">取消全部选择</button>
+                                </div>
+                                <div class="form-group">
+                                    <div id="moduleTree" class="row tree" style="height:480px">
+                                    </div>
+                                </div>
+                                <div class="form-group center">
+                                    <button class="btn btn-info btn-lg" type="submit" ng-disabled="formOrg.$invalid">保存</button>
+                                    <button class="btn btn-grey btn-lg" ui-sref="OrgList">取消</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!--<div class="row">
+    <div class="row">
+        <div id="content" class="col-lg-12">
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="page-header">
+                        <ul class="breadcrumb">
+                            <li>
+                                <i class="fa fa-home"></i>
+                                <a href="/">首页</a>
+                            </li>
+                            <li>
+                                <a href="/angular/OrgList">机构管理列表</a>
+                            </li>
+                            <li>机构管理信息</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="box border primary">
+                        <div class="box-title">
+                            <h4><i class="fa fa-bars"></i>机构信息</h4>
+                        </div>
+                        <div class="box-body">
+                            <form class="form-horizontal" role="form" name="formOrg" ng-submit="save()" novalidate>
+                                <div class="form-group">
+                                    <label class="col-sm-1 control-label">代码</label>
+                                    <div class="col-sm-4">
+                                        <input id="GroupID" name="GroupID" type="text" class="form-control" ng-model="Data.Org.GroupID" ng-minlength="1" ng-maxlength="10" placeholder="请输入机构代码" required />
+                                    </div>
+                                    <label class="col-sm-2 control-label">名称</label>
+                                    <div class="col-sm-4">
+                                        <input id="OrgName" name="OrgName" type="text" class="form-control" ng-model="Data.Org.OrgName" ng-minlength="1" ng-maxlength="50" placeholder="请填入机构名称" required />
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-1 control-label">类型</label>
+                                    <div class="col-sm-4">
+                                        <input class="form-control" ng-model="Data.Org.OrgType" />
+                                    </div>
+                                    <label class="col-sm-2 control-label">负责人</label>
+                                    <div class="col-sm-4">
+                                        <input class="form-control" ng-model="Data.Org.Responsible" />
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-1 control-label">电话</label>
+                                    <div class="col-sm-4">
+                                        <input class="form-control" ng-model="Data.Org.Tel" />
+                                    </div>
+                                    <label class="col-sm-2 control-label">传真</label>
+                                    <div class="col-sm-4">
+                                        <input class="form-control" ng-model="Data.Org.Fax" />
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-1 control-label">床位数</label>
+                                    <div class="col-sm-4">
+                                        <input class="form-control" ng-model="Data.Org.BedCount" />
+                                    </div>
+                                    <label class="col-sm-2 control-label">电子邮件</label>
+                                    <div class="col-sm-4">
+                                        <input class="form-control" ng-model="Data.Org.Email" />
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-1 control-label">机构网站</label>
+                                    <div class="col-sm-10">
+                                        <input class="form-control" ng-model="Data.Org.Website" />
+                                    </div>
+                                </div>
+
+                                <div class="form-group center">
+                                    <button class="btn btn-info btn-lg" type="submit" ng-disabled="formOrg.$invalid">保存</button>
+                                    <button class="btn btn-grey btn-lg" ui-sref="StaffList">取消</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>-->

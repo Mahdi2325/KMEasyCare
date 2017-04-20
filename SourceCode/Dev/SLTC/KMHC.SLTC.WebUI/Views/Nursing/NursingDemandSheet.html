@@ -1,0 +1,1082 @@
+
+<div class="row">
+    <div id="content" class="col-lg-12">
+        <!-- PAGE HEADER-->
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="page-header">
+                    <ul class="breadcrumb">
+                        <li>
+                            <i class="fa fa-home"><a href="/">首页</a></i>
+                        </li>
+                        <li><a href="/angular/NursingDemandList">护理需求评估</a></li>
+                        <li>护理需求评估表 </li>
+                    </ul>
+                    <!-- /BREADCRUMBS -->
+                    <!---->
+                    <!--<div class="description">护理需求评估表</div>-->
+                </div>
+            </div>
+        </div>
+        <!-- /PAGE HEADER -->
+        <form class="form-horizontal" name="myForm">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="box border primary">
+                        <div class="box-title">
+                            <h4><i class="fa fa-bars"></i><span class="hidden-inline-mobile">护理需求评估表</span></h4>
+                        </div>
+                        <div class="box-body">
+                            <div class="tab-pane " id="tbBasic">
+                                <div class="panel panel-default">
+                                    <div class="panel-body">
+                                        <div class="form-group">
+                                            <label class="col-sm-1 control-label">评估人员</label>
+                                            <div class="col-sm-2">
+                                                <input-staff callback="staffSelected(item,'EVALUATEBY')" id="EVALUATEBY" value="{{Data.Demand.EVALUATEBY}}" />
+                                                <!--<select ng-model="Data.Demand.EVALUATEBY" class="form-control" ng-options="item.EmpNo as item.EmpName  for item in EmpList"></select>-->
+                                            </div>
+                                            <label class="col-sm-1 control-label">评估日期<span class="required">*</span></label>
+                                            <div class="col-sm-2">
+                                                <input ng-model="Data.Demand.EVALDATE" class="form-control" ng-change="setNextValDate(Data.Demand.Gap)" type="text" name="评估日期" ca-date-picker required>
+                                            </div>
+                                            <label class="col-sm-1 control-label">间隔天数</label>
+                                            <div class="col-sm-2">
+                                                <input ng-model="Data.Demand.Gap" class="form-control" ng-change="setNextValDate(Data.Demand.Gap)" only-int type="text">
+                                                <!--<select class="form-control" id="selGap" ng-model="Data.Demand.Gap" ng-options="gap.ITEMCODE as gap.ITEMNAME for gap in EvalDateGap" ng-change="setNextValDate()"></select>-->
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-sm-1 control-label">下次评估日期</label>
+                                            <div class="col-sm-2">
+                                                <input class="form-control" ng-model="Data.Demand.NEXTEVALDATE" ng-change="ChangeNextEvalDate()" type="text" ca-date-picker>
+                                            </div>
+                                            <label class="col-sm-1 control-label">下次受托者</label>
+                                            <div class="col-sm-2">
+                                                <input-staff callback="staffSelected(item,'NEXTEVALUATEBY')" id="NEXTEVALUATEBY" value="{{Data.Demand.NEXTEVALUATEBY}}" />
+                                                <!--<select ng-model="Data.Demand.NEXTEVALUATEBY" class="form-control" ng-options="item.EmpNo as item.EmpName  for item in EmpList"></select>-->
+                                            </div>
+                                            <div class="col-sm-2 col-sm-offset-2">
+                                                <button class="btn btn-primary" ng-click="Save()">保存</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row" id="tabContent">
+                <div class="col-md-12">
+                    <div class="box border primary">
+                        <div class="box-title">
+                            <h4><i class="fa fa-columns"></i><span class="hidden-inline-mobile">详细信息</span></h4>
+                        </div>
+                        <div class="box-body">
+                            <div class="tabbable header-tabs">
+                                <ul class="nav nav-tabs" id="tabResident">
+                                    <li ui-sref-active="active">
+                                        <a href="#NursingPlan" data-toggle="tab"><i class="fa fa-circle-o"></i> <span class="hidden-inline-mobile">各类评估与护理计划</span></a>
+                                    </li>
+                                    <li ui-sref-active="active"><a href="#SocialActivities" data-toggle="tab"><i class="fa fa-circle-o"></i> <span class="hidden-inline-mobile">社会互动、评估史</span></a></li>
+                                    <li ui-sref-active="active"><a data-toggle="tab" href="#LifeSkills"><i class="fa fa-circle-o"></i> <span class="hidden-inline-mobile">活动技能、皮肤疾病、知觉</span></a></li>
+                                    <li ui-sref-active="active"><a data-toggle="tab" href="#DailyLife"><i class="fa fa-laptop"></i> <span class="hidden-inline-mobile">营养、排泄、睡眠</span></a></li>
+                                    <li class="active" ui-sref-active="active"><a data-toggle="tab" href="#NurBasicInfo"><i class="fa fa-calendar-o"></i> <span class="hidden-inline-mobile">疾病史、生命体征、外观、呼吸</span></a></li>
+                                </ul>
+                                <div class="tab-content">
+                                    <!--NurBasicInfo-->
+                                    <div class="tab-pane active" id="NurBasicInfo">
+                                        <div class="form-horizontal">
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                    <div class="panel-body">
+                                                        <div class="form-group">
+                                                            <div class="col-sm-1">
+                                                                <label class="checkbox-inline" style="font-size:12px">
+                                                                    <input type="checkbox" class="uniform" ng-change="checkHealth(Data.Demand.HEALTHFLAG)" ng-model="Data.Demand.HEALTHFLAG">有健康问题
+                                                                </label>
+                                                                <!--<p><label class="control-label">过去病史</label></p>-->
+                                                            </div>
+                                                            <div class="col-sm-10">
+                                                                <textarea style="height:80px" ng-model="Data.Demand.HEALTHDESC" ng-disabled="healthFlag" ng-maxlength="500" name="过去病史" placeholder="过去病史" select-items="健康状况" class="form-control"></textarea>
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <div class="col-sm-1">
+                                                                <label class="checkbox-inline" style="font-size:12px">
+                                                                    <input type="checkbox" class="uniform" style="font-size:small" ng-change="checkInfection(Data.Demand.INFECTIONFLAG)" ng-model="Data.Demand.INFECTIONFLAG">有传染病史
+                                                                </label>
+                                                                <!--<p><label class="control-label">目前问题</label></p>-->
+                                                            </div>
+                                                            <div class="col-sm-10">
+                                                                <textarea style="height:80px" ng-model="Data.Demand.INFECTIONDESC" ng-disabled="infectionFlag" select-items="传染疾病状况" name="目前问题" placeholder="传染疾病" ng-maxlength="500" class="form-control"></textarea>
+                                                            </div>
+                                                        </div>
+                                                        <div class="panel panel-default">
+                                                            <div class="panel-heading" style="font-weight:700">
+                                                                <input type="checkbox" class="uniform" style="font-size:small" ng-checked="VITALSIGNFLAG" ng-click="checkVITALSIGNFLAG(VITALSIGNFLAG)">
+                                                                有生命体征问题
+                                                            </div>
+                                                            
+                                                            <div class="panel-body" ng-show="VITALSIGNFLAG">
+
+                                                                <div class="form-group">
+                                                                    <div class="col-sm-1 control-label">
+                                                                        <label class="control-label">体温</label>
+                                                                    </div>
+                                                                    <div class="col-sm-2">
+                                                                        <input ng-model="Data.Demand.BODYTEMP" ng-maxlength="5" name="体温" min="0.01" ng-pattern="/^([0-9]{1,3}|0)([.][0-9]{0,2})?$/" only-number class="form-control" type="text">
+                                                                    </div>
+                                                                    <label class="col-sm-1 control-label">脉搏次数</label>
+                                                                    <div class="col-sm-2">
+                                                                        <input ng-model="Data.Demand.PULSE" class="form-control" name="脉搏次数" ng-pattern="/^\d+(\.\d+)?$/" ng-maxlength="5" only-number type="text">
+                                                                    </div>
+                                                                    <label class="col-sm-1 control-label">呼吸次数</label>
+                                                                    <div class="col-sm-2">
+                                                                        <input ng-model="Data.Demand.BREATHE" class="form-control" name="呼吸次数" ng-pattern="/^\d+(\.\d+)?$/" ng-maxlength="5" only-number type="text">
+                                                                    </div>
+                                                                    <label class="col-sm-1 control-label">眼球对光反射</label>
+                                                                    <div class="col-sm-2">
+                                                                        <!--<input id="txttValuationDate" ng-model="Data.Demand.LIGHTREFLECTION" class="form-control" maxlength="5" type="text">-->
+
+                                                                        <select class="form-control" ng-model="Data.Demand.LIGHTREFLECTION" name="眼球对光反射" ng-maxlength="50" select-code="E00.318"></select>
+
+                                                                    </div>
+                                                                </div>
+
+                                                                <div class="form-group">
+                                                                    <div class="col-sm-1 control-label">
+                                                                        <label class="control-label">血压/收缩</label>
+                                                                    </div>
+                                                                    <div class="col-sm-2">
+                                                                        <input ng-model="Data.Demand.SBP" class="form-control" name="血压/收缩" only-number ng-pattern="/^\d+(\.\d+)?$/" ng-maxlength="5" type="text">
+                                                                    </div>
+                                                                    <label class="col-sm-1 control-label">血压/舒张</label>
+                                                                    <div class="col-sm-2">
+                                                                        <input ng-model="Data.Demand.DBP" class="form-control" name="血压/舒张" only-number ng-pattern="/^\d+(\.\d+)?$/" ng-maxlength="5" type="text">
+                                                                    </div>
+                                                                    <label class="col-sm-1 control-label">身高(CM)</label>
+                                                                    <div class="col-sm-2">
+                                                                        <input ng-model="Data.Demand.HEIGHT" class="form-control" name="身高" only-number ng-pattern="/^\d+(\.\d+)?$/" ng-maxlength="6" type="text">
+                                                                    </div>
+                                                                    <label class="col-sm-1 control-label">体重(Kg)</label>
+                                                                    <div class="col-sm-2">
+                                                                        <input ng-model="Data.Demand.WEIGHT" class="form-control" name="体重" only-number ng-pattern="/^\d+(\.\d+)?$/" ng-maxlength="6" type="text">
+                                                                    </div>
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <div class="col-sm-1 control-label">
+                                                                        <label class="control-label">意识</label>
+                                                                        <p>E/V/M</p>
+                                                                    </div>
+                                                                    <div class="col-sm-2">
+                                                                        <!--<input type="text" class="form-control" ng-model="Data.Demand.CONSCIOUSNESS_E" maxlength="50" select-items="意识E" />-->
+
+                                                                        <select class="form-control" ng-model="Data.Demand.CONSCIOUSNESS_E" name="意识E" ng-maxlength="50" select-code="E00.312"></select>
+                                                                    </div>
+                                                                    <div class="col-sm-2">
+                                                                        <!--<input type="text" class="form-control" ng-model="Data.Demand.CONSCIOUSNESS_V" maxlength="50" select-items="意识V" />-->
+                                                                        <select class="form-control" ng-model="Data.Demand.CONSCIOUSNESS_V" name="意识V" ng-maxlength="50" select-code="E00.313"></select>
+                                                                    </div>
+                                                                    <div class="col-sm-2">
+                                                                        <!--<input type="text" class="form-control" ng-model="Data.Demand.CONSCIOUSNESS_M" maxlength="50" select-items="意识M" />-->
+                                                                        <select class="form-control" ng-model="Data.Demand.CONSCIOUSNESS_M" name="意识M" ng-maxlength="50" select-code="E00.314"></select>
+                                                                    </div>
+                                                                    <!--<label class="col-sm-1 control-label">GCS评估</label>-->
+                                                                    <label class="col-sm-1 control-label"></label>
+                                                                    <div class="col-sm-1">
+                                                                        <!--<input class="form-control" type="text">-->
+                                                                    </div>
+                                                                    <label class="col-sm-1 control-label">外表意识</label>
+                                                                    <div class="col-sm-2">
+                                                                        <!--<input ng-model="Data.Demand.CONSCIOUSNESS" class="form-control" maxlength="200" select-items="意识">-->
+
+                                                                        <select class="form-control" ng-model="Data.Demand.CONSCIOUSNESS" name="外表意识" ng-maxlength="50" select-code="E00.315"></select>
+
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="panel panel-default">
+                                                            <div class="panel-heading" style="font-weight:700">
+                                                                <input type="checkbox" class="uniform" style="font-size:small" ng-checked="APPEARANCEFLAG" ng-click="checkAPPEARANCEFLAG(APPEARANCEFLAG)">有外观问题
+                                                            </div>
+                                                            <div class="panel-body" ng-show="APPEARANCEFLAG">
+                                                                <div class="form-group">
+                                                                    <label class="col-sm-1 control-label">外观</label>
+                                                                    <div class="col-sm-5">
+                                                                        <input ng-model="Data.Demand.APPEARANCEDESC" class="form-control" type="text" name="外观" ng-maxlength="50" select-items="外观_文字">
+                                                                    </div>
+
+                                                                    <label class="col-sm-1 control-label">态度</label>
+                                                                    <div class="col-sm-5">
+                                                                        <select ng-model="Data.Demand.ATTITUDE" select-code="E00.207" name="态度" ng-maxlength="30" class="form-control"></select>
+                                                                    </div>
+                                                                </div>
+
+                                                            </div>
+                                                        </div>
+                                                        <div class="panel panel-default">
+                                                            <div class="panel-heading" style="font-weight:700">
+                                                                <input type="checkbox" class="uniform" style="font-size:small" ng-checked="BREATHPROBLEMFLAG" ng-click="checkBREATHPROBLEMFLAG(BREATHPROBLEMFLAG)">有心肺循环问题
+                                                            </div>
+                                                            <div class="panel-body" ng-show="BREATHPROBLEMFLAG">
+                                                                <div class="form-group">
+                                                                    <div class="col-sm-1 control-label">
+                                                                        <label class="control-label">心律</label>
+                                                                    </div>
+                                                                    <div class="col-sm-2">
+                                                                        <!--<input ng-model="Data.Demand.HEARTBEAT" select-items="心率" maxlength="50" class="form-control" type="text">-->
+                                                                        <select ng-model="Data.Demand.HEARTBEAT" select-code="E00.316" name="心律" ng-maxlength="30" class="form-control"></select>
+                                                                    </div>
+                                                                    <label class="col-sm-1 control-label">呼吸情形</label>
+                                                                    <div class="col-sm-2">
+                                                                        <select ng-model="Data.Demand.BREATEDESC" select-code="E00.300" name="呼吸情形" ng-maxlength="30" class="form-control"></select>
+                                                                    </div>
+                                                                    <label class="col-sm-1 control-label">分泌物状况</label>
+                                                                    <div class="col-sm-2">
+                                                                        <select ng-model="Data.Demand.SECRETIONDESC" select-code="E00.301" name="分泌物状况" ng-maxlength="50" class="form-control"></select>
+                                                                    </div>
+                                                                    <label class="col-sm-1 control-label">分泌物性质</label>
+                                                                    <div class="col-sm-2">
+                                                                        <select ng-model="Data.Demand.SECRETIONNATURE" select-code="E00.302" name="分泌物性质" ng-maxlength="50" class="form-control"></select>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <div class="col-sm-1 control-label">
+                                                                        <label class="control-label">分泌物量</label>
+                                                                    </div>
+                                                                    <div class="col-sm-2">
+                                                                        <select ng-model="Data.Demand.SECRETIONAMT" select-code="E00.303" name="分泌物量" ng-maxlength="50" class="form-control"></select>
+                                                                    </div>
+                                                                    <label class="col-sm-1 control-label">咳嗽情形</label>
+                                                                    <div class="col-sm-2">
+                                                                        <select ng-model="Data.Demand.COUGHDESC" select-code="E00.304" name="咳嗽情形" ng-maxlength="50" class="form-control"></select>
+                                                                    </div>
+                                                                    <label class="col-sm-1 control-label">使用呼吸辅助器材</label>
+                                                                    <div class="col-sm-2">
+                                                                        <input ng-model="Data.Demand.BREATHAIDTOOLS" class="form-control" name="使用呼吸辅助器材" ng-maxlength="50" type="text" select-items="使用呼吸辅助器材">
+                                                                    </div>
+                                                                    <label class="col-sm-1 control-label">吸烟史</label>
+                                                                    <div class="col-sm-2">
+                                                                        <input ng-model="Data.Demand.SMOKINGHISTORY" class="form-control" name="抽菸史" ng-maxlength="50" type="text">
+                                                                    </div>
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <div class="col-sm-1 control-label">
+                                                                        <label class="control-label">肢体水肿</label>
+                                                                    </div>
+                                                                    <div class="col-sm-5">
+                                                                        <div class="form-group">
+                                                                            <label class="col-sm-1 control-label">左手</label>
+                                                                            <div class="col-sm-4">
+                                                                                <select class="form-control" ng-model="Data.Demand.LIMBEDEMA_LH" name="肢体水肿左手" ng-maxlength="20" select-code="E00.305"></select>
+                                                                            </div>
+                                                                            <label for="lbNextEvaluGap" class="col-sm-2 control-label">右手</label>
+                                                                            <div class="col-sm-5">
+                                                                                <select class="form-control" ng-model="Data.Demand.LIMBEDEMA_RH" name="肢体水肿右手" ng-maxlength="20" select-code="E00.305"></select>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="form-group">
+                                                                            <label class="col-sm-1 control-label">左脚</label>
+                                                                            <div class="col-sm-4">
+                                                                                <select class="form-control" ng-model="Data.Demand.LIMBEDEMA_LF" name="肢体水肿左脚" ng-maxlength="20" select-code="E00.305"></select>
+                                                                            </div>
+                                                                            <label class="col-sm-2 control-label">右脚</label>
+                                                                            <div class="col-sm-5">
+                                                                                <select class="form-control" ng-model="Data.Demand.LIMBEDEMA_RF" name="肢体水肿右脚" ng-maxlength="20" select-code="E00.305"></select>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!--NurBasicInfo-->
+                                    <!--DailyLife-->
+                                    <div class="tab-pane" id="DailyLife">
+                                        <div class="form-horizontal">
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                    <div class="panel-body">
+                                                        <div class="panel panel-default">
+                                                            <div class="panel-heading" style="font-weight:700">
+                                                                <input type="checkbox" class="uniform" style="font-size:small" ng-checked="NUTRITIONFLAG" ng-click="checkNUTRITIONFLAG(NUTRITIONFLAG)">有营养进食问题
+                                                            </div>
+                                                            <div class="panel-body" ng-show="NUTRITIONFLAG">
+                                                                <div class="form-group">
+                                                                    <div class="col-sm-1 control-label">
+                                                                        <label class="control-label">进食方式</label>
+                                                                    </div>
+                                                                    <div class="col-sm-3">
+                                                                        <select ng-model="Data.Demand.EATTYPE" select-code="E00.203" name="进食方式" ng-maxlength="30" class="form-control"></select>
+                                                                    </div>
+                                                                    <label class="col-sm-1 control-label">进食种类</label>
+                                                                    <div class="col-sm-7">
+                                                                        <input ng-model="Data.Demand.DIETTYPEDESC" class="form-control" name="进食种类" ng-maxlength="30" type="text" select-items="饮食习惯">
+                                                                    </div>
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <div class="col-sm-1 control-label">
+                                                                        <label class="control-label">进食量</label>
+                                                                    </div>
+                                                                    <div class="col-sm-3">
+                                                                        <input ng-model="Data.Demand.FOODINTAKEAMT" class="form-control" name="进食量" ng-maxlength="30" type="text" select-items="进食量">
+                                                                    </div>
+                                                                    <label class="col-sm-1 control-label">每日饮水量</label>
+                                                                    <div class="col-sm-3">
+                                                                        <input ng-model="Data.Demand.WATERAMT" class="form-control" name="每日饮水量" ng-maxlength="30" type="text">
+                                                                    </div>
+                                                                    <label class="col-sm-1 control-label">每日足够饮水量</label>
+                                                                    <div class="col-sm-3">
+                                                                        <input ng-model="Data.Demand.WATERENOUGHAMT" name="每日足够饮水量" ng-maxlength="30" class="form-control" type="text">
+                                                                    </div>
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <div class="col-sm-1 control-label">
+                                                                        <label class="control-label">口腔黏膜</label>
+                                                                    </div>
+                                                                    <div class="col-sm-3">
+                                                                        <select ng-model="Data.Demand.ORALMUCOSA" select-code="E00.306" name="口腔黏膜" ng-maxlength="30" class="form-control"></select>
+                                                                    </div>
+                                                                    <label class="col-sm-1 control-label">假牙固定情形</label>
+                                                                    <div class="col-sm-3">
+                                                                        <select ng-model="Data.Demand.DENTUREFIXED" select-code="E00.307" name="假牙固定情形" ng-maxlength="30" class="form-control"></select>
+                                                                    </div>
+                                                                    <label class="col-sm-1 control-label">假牙活动情形</label>
+                                                                    <div class="col-sm-3">
+                                                                        <select id="DENTUREMOVABLE" ng-model="Data.Demand.DENTUREMOVABLE" name="假牙活动情形" ng-maxlength="30" select-code="E00.308" class="form-control"></select>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <div class="col-sm-1 control-label">
+                                                                        <label class="control-label">假牙安全性</label>
+                                                                    </div>
+                                                                    <div class="col-sm-3">
+                                                                        <select ng-model="Data.Demand.DENTURESAFETY" select-code="E00.309" name="假牙安全性" ng-maxlength="30" class="form-control"></select>
+                                                                    </div>
+                                                                    <label class="col-sm-1 control-label">假牙适合性</label>
+                                                                    <div class="col-sm-3">
+                                                                        <select ng-model="Data.Demand.DENTUREFIT" select-code="E00.309" name="假牙适合性" ng-maxlength="30" class="form-control"></select>
+                                                                    </div>
+                                                                    <label class="col-sm-1 control-label">牙龈健康情形</label>
+                                                                    <div class="col-sm-3">
+                                                                        <select ng-model="Data.Demand.DENTUREHEALTH" select-code="E00.310" name="牙龈健康情形" ng-maxlength="30" class="form-control"></select>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <div class="col-sm-1 control-label">
+                                                                        <label class="control-label">口腔疼痛</label>
+                                                                    </div>
+                                                                    <div class="col-sm-3">
+                                                                        <input ng-model="Data.Demand.MOUTHPAIN" class="form-control" type="text" name="口腔疼痛" ng-maxlength="30" select-items="口腔疼痛">
+                                                                    </div>
+                                                                    <label class="col-sm-1 control-label">牙齿状况</label>
+                                                                    <div class="col-sm-3">
+                                                                        <input ng-model="Data.Demand.TOOTHDESC" class="form-control" type="text" name="牙齿状况" ng-maxlength="30" select-items="牙齿状况">
+                                                                    </div>
+                                                                    <label class="col-sm-1 control-label">吞咽能力</label>
+                                                                    <div class="col-sm-3">
+                                                                        <input ng-model="Data.Demand.SWALLOWDESC" class="form-control" type="text" name="吞咽能力" ng-maxlength="30" select-items="吞食能力">
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="panel panel-default">
+                                                            <div class="panel-heading" style="font-weight:700">
+                                                                <input type="checkbox" class="uniform" style="font-size:small" ng-checked="EXCRETIONFLAG" ng-click="checkEXCRETIONFLAG(EXCRETIONFLAG)">有排泄问题
+                                                            </div>
+                                                            <div class="panel-body" ng-show="EXCRETIONFLAG">
+                                                                <div class="form-group">
+
+                                                                    <label class="col-sm-1 control-label">小便形状</label>
+
+                                                                    <div class="col-sm-3">
+                                                                        <input ng-model="Data.Demand.URINESHAPE" class="form-control" name="小便形状" ng-maxlength="30" type="text" select-items="小便形状">
+                                                                    </div>
+                                                                    <label class=" col-sm-1 control-label">排尿情形</label>
+                                                                    <div class="col-sm-3">
+                                                                        <input ng-model="Data.Demand.MICTURITIONDESC" class="form-control" name="排尿情形" ng-maxlength="30" type="text" select-items="排尿情形_文字">
+                                                                    </div>
+                                                                    <label class="col-sm-1 control-label">排尿辅助方式</label>
+                                                                    <div class="col-sm-3">
+                                                                        <input ng-model="Data.Demand.MICTURITIONAIDTYPE" class="form-control" name="排尿辅助方式" ng-maxlength="30" type="text" select-items="排尿辅助方式_文字">
+                                                                    </div>
+                                                                </div>
+                                                                <div class="form-group">
+
+
+                                                                    <label class="col-sm-1 control-label">排便频率(天/次)</label>
+
+
+                                                                    <div class="col-sm-3">
+                                                                        <input ng-model="Data.Demand.DEFECATIONFREQ" class="form-control" name="排便频率" ng-maxlength="30" type="text">
+                                                                    </div>
+                                                                    <label class="col-sm-1 control-label">排便情形</label>
+                                                                    <div class="col-sm-3">
+                                                                        <input ng-model="Data.Demand.DEFECATIONDESC" class="form-control" type="text" name="排便情形" ng-maxlength="30" select-items="排便情形">
+                                                                    </div>
+                                                                    <label class="col-sm-1 control-label">大便形状</label>
+                                                                    <div class="col-sm-3">
+                                                                        <input ng-model="Data.Demand.STOOLSHAPE" class="form-control" type="text" name="大便形状" ng-maxlength="30" select-items="大便形状">
+                                                                    </div>
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <label class="col-sm-1 control-label">排便辅助方式</label>
+                                                                    <div class="col-sm-3">
+                                                                        <input ng-model="Data.Demand.DEFECATIONAIDDESC" class="form-control" name="排便辅助方式" ng-maxlength="30" type="text" select-items="排便辅助方式_文字">
+                                                                    </div>
+                                                                    <label class="col-sm-1 control-label">其他排泄问题</label>
+                                                                    <div class="col-sm-3">
+                                                                        <input ng-model="Data.Demand.OTHERDEFECATION" class="form-control" name="其他排泄问题" ng-maxlength="30" type="text">
+                                                                    </div>
+                                                                    <label class="col-sm-1 control-label">肠蠕动-肠音</label>
+
+                                                                    <!--<label class="col-sm-1 control-label">肠蠕动-肠音</label>-->
+
+                                                                    <div class="col-sm-3">
+                                                                        <input ng-model="Data.Demand.GUT_SOUND" class="form-control" type="text" name="肠蠕动肠音" ng-maxlength="30" select-items="肠音">
+                                                                    </div>
+                                                                </div>
+                                                                <div class="form-group">
+
+                                                                    <label class="col-sm-1 control-label">肠蠕动-胀气</label>
+                                                                    <div class="col-sm-3">
+                                                                        <input ng-model="Data.Demand.GUT_FLATULENCE" class="form-control" type="text" name="肠蠕动胀气" ng-maxlength="30" select-items="有无">
+                                                                    </div>
+                                                                    <label class="col-sm-1 control-label">肠蠕动-硬块</label>
+                                                                    <div class="col-sm-3">
+                                                                        <input ng-model="Data.Demand.GUT_LUMP" class="form-control" type="text" name="肠蠕动硬块" ng-maxlength="30" select-items="有无">
+                                                                    </div>
+                                                                </div>
+
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="panel panel-default">
+                                                            <div class="panel-heading" style="font-weight:700">
+                                                                <input type="checkbox" style="font-size:small" ng-checked="SLEEPFLAG" ng-click="checkSLEEPFLAG(SLEEPFLAG)">有睡眠问题
+                                                            </div>
+                                                            <div class="panel-body" ng-show="SLEEPFLAG">
+                                                                <div class="form-group">
+                                                                    <div class="col-sm-1 control-label">
+                                                                        <label class="control-label">夜间睡眠(小时)</label>
+                                                                    </div>
+                                                                    <div class="col-sm-3">
+                                                                        <input ng-model="Data.Demand.SLEEPHOURS_N" class="form-control" name="夜间睡眠" ng-maxlength="5" type="text">
+                                                                    </div>
+                                                                    <label class="col-sm-1 control-label">日间睡眠(小时)</label>
+                                                                    <div class="col-sm-3">
+                                                                        <input ng-model="Data.Demand.SLEEPHOURS_D" class="form-control" name="日间睡眠" ng-maxlength="5" type="text">
+                                                                    </div>
+                                                                    <label class="col-sm-1 control-label">睡眠情形</label>
+                                                                    <div class="col-sm-3">
+                                                                        <select ng-model="Data.Demand.SLEEPDESC" select-code="F00.060" name="睡眠情形" ng-maxlength="20" class="form-control"></select>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="form-group">
+
+                                                                    <div class="col-sm-1 control-label">
+                                                                        <label class="control-label">安眠药物</label>
+                                                                    </div>
+
+                                                                    <div class="col-sm-11">
+                                                                        <input ng-model="Data.Demand.SLEEPPILLS" class="form-control" name="安眠药物" ng-maxlength="20" type="text">
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!--DailyLife-->
+                                    <!--LifeSkills-->
+                                    <div class="tab-pane" id="LifeSkills">
+                                        <div class="form-horizontal" role="form">
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                    <div class="panel-body">
+                                                        <div class="form-group">
+                                                            <div class="col-sm-1">
+                                                                <label class="control-label">已使用之辅具</label>
+                                                            </div>
+                                                            <div class="col-sm-10">
+                                                                <input ng-model="Data.Demand.AIDTOOLS" class="form-control" type="text" select-items="已使用辅具_文字">
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="panel panel-default">
+                                                            <div class="panel-heading" style="font-weight:700">
+                                                                <input type="checkbox" class="uniform" style="font-size:small" ng-checked="ACTIVEFUNFLAG" ng-click="checkACTIVEFUNFLAG(ACTIVEFUNFLAG)">有活动机械问题
+                                                            </div>
+                                                            <div class="panel-body" ng-show="ACTIVEFUNFLAG">
+
+                                                                <div class="form-group">
+                                                                    <div class="col-sm-1 control-label">
+                                                                        <label class="control-label">步态</label>
+                                                                    </div>
+                                                                    <div class="col-sm-3">
+                                                                        <select ng-model="Data.Demand.GAIT" select-code="E00.311" class="form-control"></select>
+                                                                    </div>
+                                                                    <div class="col-sm-1 control-label">
+                                                                        <label class="control-label">肢体障碍情形</label>
+                                                                    </div>
+                                                                    <div class="col-sm-7">
+                                                                        <input ng-model="Data.Demand.PHYSICALIMPAIRMENT" class="form-control" type="text" select-items="肢体障碍情形">
+                                                                    </div>
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <div class="col-sm-1 control-label">
+                                                                        <label class="control-label">平衡-坐姿</label>
+                                                                    </div>
+                                                                    <div class="col-sm-3">
+                                                                        <input ng-model="Data.Demand.BALANCE_SIT" class="form-control" type="text" select-items="平衡">
+                                                                    </div>
+                                                                    <div class="col-sm-1 control-label">
+                                                                        <label class="control-label">平衡-站姿</label>
+                                                                    </div>
+                                                                    <div class="col-sm-3">
+                                                                        <input ng-model="Data.Demand.BALANCE_STAND" class="form-control" type="text" select-items="平衡">
+                                                                    </div>
+                                                                    <div class="col-sm-1 control-label">
+                                                                        <label class="control-label">平衡-步行</label>
+                                                                    </div>
+                                                                    <div class="col-sm-3">
+                                                                        <input ng-model="Data.Demand.BALANCE_WALK" class="form-control" type="text" select-items="平衡">
+                                                                    </div>
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <div class="col-sm-1 control-label">
+                                                                        <label class="control-label">肌肉形态</label>
+                                                                    </div>
+                                                                    <div class="col-sm-3">
+                                                                        <div class="form-group">
+                                                                            <label class="col-sm-2 control-label">左手</label>
+                                                                            <div class="col-sm-4">
+                                                                                <!--<input ng-model="Data.Demand.MUSCLETYPE_LH" class="form-control" type="text" select-items="肌肉形态">-->
+
+                                                                                <select ng-model="Data.Demand.MUSCLETYPE_LH" select-code="E00.321" class="form-control"></select>
+
+
+                                                                            </div>
+                                                                            <label class="col-sm-2 control-label">右手</label>
+                                                                            <div class="col-sm-4">
+                                                                                <!--<input ng-model="Data.Demand.MUSCLETYPE_RH" class="form-control" type="text" select-items="肌肉形态">-->
+
+                                                                                <select ng-model="Data.Demand.MUSCLETYPE_RH" select-code="E00.321" class="form-control"></select>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="form-group">
+                                                                            <label class="col-sm-2 control-label">左脚</label>
+                                                                            <div class="col-sm-4">
+                                                                                <!--<input ng-model="Data.Demand.MUSCLETYPE_LF" class="form-control" type="text" select-items="肌肉形态">-->
+
+                                                                                <select ng-model="Data.Demand.MUSCLETYPE_LF" select-code="E00.321" class="form-control"></select>
+                                                                            </div>
+                                                                            <label class="col-sm-2 control-label">右脚</label>
+                                                                            <div class="col-sm-4">
+                                                                                <!--<input ng-model="Data.Demand.MUSCLETYPE_RF" class="form-control" type="text" select-items="肌肉形态">-->
+
+                                                                                <select ng-model="Data.Demand.MUSCLETYPE_RF" select-code="E00.321" class="form-control"></select>
+
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col-sm-1 control-label">
+                                                                        <label class="control-label">四肢肌力</label>
+                                                                    </div>
+                                                                    <div class="col-sm-3">
+                                                                        <div class="form-group">
+                                                                            <label class="col-sm-2 control-label">左手</label>
+                                                                            <div class="col-sm-4">
+                                                                                <!--<input ng-model="Data.Demand.MUSCLE_LH" class="form-control" type="text" select-items="四肢肌力">-->
+
+                                                                                <select ng-model="Data.Demand.MUSCLE_LH" select-code="E00.322" class="form-control"></select>
+
+
+                                                                            </div>
+                                                                            <label class="col-sm-2 control-label">右手</label>
+                                                                            <div class="col-sm-4">
+                                                                                <!--<input ng-model="Data.Demand.MUSCLE_RH" class="form-control" type="text" select-items="四肢肌力">-->
+
+                                                                                <select ng-model="Data.Demand.MUSCLE_RH" select-code="E00.322" class="form-control"></select>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="form-group">
+                                                                            <label class="col-sm-2 control-label">左脚</label>
+                                                                            <div class="col-sm-4">
+                                                                                <!--<input ng-model="Data.Demand.MUSCLE_LF" class="form-control" type="text" select-items="四肢肌力">-->
+                                                                                <select ng-model="Data.Demand.MUSCLE_LF" select-code="E00.322" class="form-control"></select>
+                                                                            </div>
+                                                                            <label class="col-sm-2 control-label">右脚</label>
+                                                                            <div class="col-sm-4">
+                                                                                <!--<input ng-model="Data.Demand.MUSCLE_RF" class="form-control" type="text" select-items="四肢肌力">-->
+
+                                                                                <select ng-model="Data.Demand.MUSCLE_RF" select-code="E00.322" class="form-control"></select>
+
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col-sm-1 control-label">
+                                                                        <label class="control-label">开节形态</label>
+                                                                    </div>
+                                                                    <div class="col-sm-3">
+                                                                        <div class="form-group">
+                                                                            <label class="col-sm-2 control-label">左手</label>
+                                                                            <div class="col-sm-4">
+                                                                                <!--<input ng-model="Data.Demand.JOINTTYPE_LH" class="form-control" type="text" select-items="开节形态">-->
+
+                                                                                <select ng-model="Data.Demand.JOINTTYPE_LH" select-code="E00.323" class="form-control"></select>
+
+
+                                                                            </div>
+                                                                            <label class="col-sm-2 control-label">右手</label>
+                                                                            <div class="col-sm-4">
+                                                                                <!--<input ng-model="Data.Demand.JOINTTYPE_RH" class="form-control" type="text" select-items="开节形态">-->
+
+                                                                                <select ng-model="Data.Demand.JOINTTYPE_RH" select-code="E00.323" class="form-control"></select>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="form-group">
+                                                                            <label class="col-sm-2 control-label">左脚</label>
+                                                                            <div class="col-sm-4">
+                                                                                <!--<input ng-model="Data.Demand.JOINTTYPE_LF" class="form-control" type="text" select-items="开节形态">-->
+                                                                                <select ng-model="Data.Demand.JOINTTYPE_LF" select-code="E00.323" class="form-control"></select>
+                                                                            </div>
+                                                                            <label class="col-sm-2 control-label">右脚</label>
+                                                                            <div class="col-sm-4">
+                                                                                <!--<input ng-model="Data.Demand.JOINTTYPE_RF" class="form-control" type="text" select-items="开节形态">-->
+                                                                                <select ng-model="Data.Demand.JOINTTYPE_RF" select-code="E00.323" class="form-control"></select>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="panel panel-default">
+                                                            <div class="panel-heading" style="font-weight:700">
+                                                                <input type="checkbox" class="uniform" style="font-size:small" ng-checked="SKINFLAG" ng-click="checkSKINFLAG(SKINFLAG)">有皮肤疾病
+                                                            </div>
+                                                            <div class="panel-body" ng-show="SKINFLAG">
+                                                                <div class="form-group">
+                                                                    <div class="col-sm-1 control-label">
+                                                                        <label class="control-label">皮肤情形</label>
+                                                                    </div>
+
+                                                                    <div class="col-sm-5">
+                                                                        <input ng-model="Data.Demand.SKINDESC" class="form-control" type="text" select-items="皮肤情形_文字">
+                                                                    </div>
+                                                                    <label class="col-sm-1 control-label">部位</label>
+                                                                    <div class="col-sm-5">
+                                                                        <input ng-model="Data.Demand.SKINPARTDESC" class="form-control" type="text">
+                                                                    </div>
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <div class="col-sm-1 control-label">
+                                                                        <label class="control-label">伤口情形</label>
+                                                                    </div>
+                                                                    <div class="col-sm-5">
+                                                                        <input ng-model="Data.Demand.WOUNDDESC" class="form-control" type="text" select-items="伤口情形">
+                                                                    </div>
+                                                                    <label class="col-sm-1 control-label">褥疮部位</label>
+                                                                    <div class="col-sm-5">
+                                                                        <input ng-model="Data.Demand.BEDSOREPART" class="form-control" type="text" select-items="褥疮部位_文字">
+                                                                    </div>
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <div class="col-sm-1 control-label">
+                                                                        <label class="control-label">褥疮大小cm</label>
+                                                                    </div>
+                                                                    <div class="col-sm-5">
+                                                                        <input ng-model="Data.Demand.BEDSORESIZE" class="form-control" type="text" select-items="褥疮大小_文字">
+                                                                    </div>
+                                                                    <label class="col-sm-1 control-label">褥疮程度</label>
+                                                                    <div class="col-sm-5">
+                                                                        <input ng-model="Data.Demand.BEDSOREDEGREE" class="form-control" type="text" select-items="褥疮程度_文字">
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="panel panel-default">
+                                                            <div class="panel-heading" style="font-weight:700">
+                                                                <input type="checkbox" class="uniform" style="font-size:small" ng-checked="FEELINGFLAG" ng-click="checkFEELINGFLAG(FEELINGFLAG)">有知觉问题
+                                                            </div>
+                                                            <div class="panel-body" ng-show="FEELINGFLAG">
+                                                                <div class="form-group">
+                                                                    <div class="col-sm-1 control-label">
+                                                                        <label class="control-label">视力情形</label>
+                                                                    </div>
+                                                                    <div class="col-sm-2">
+                                                                        <input ng-model="Data.Demand.SIGHTDESC" class="form-control" name="视力情形" ng-maxlength="50" type="text" select-items="视力情形">
+                                                                    </div>
+                                                                    <label class="col-sm-1 control-label">左眼视力</label>
+                                                                    <div class="col-sm-2">
+                                                                        <!--<input ng-model="Data.Demand.SIGHT_L" class="form-control" type="text" select-items="左眼视力">-->
+                                                                        <select ng-model="Data.Demand.SIGHT_L" select-code="E00.319" name="左眼视力" ng-maxlength="50" class="form-control"></select>
+                                                                    </div>
+                                                                    <label class="col-sm-1 control-label">右眼视力</label>
+                                                                    <div class="col-sm-2">
+                                                                        <!--<input ng-model="Data.Demand.SIGHT_R" class="form-control" type="text" select-items="右眼视力">-->
+                                                                        <select ng-model="Data.Demand.SIGHT_R" select-code="E00.319" name="右眼视力" ng-maxlength="50" class="form-control"></select>
+                                                                    </div>
+                                                                    <label class="col-sm-1 control-label">视力矫正</label>
+                                                                    <div class="col-sm-2">
+                                                                        <input ng-model="Data.Demand.SIGHTCORRECTED" class="form-control" type="text" name="视力矫正" ng-maxlength="50" select-items="视力矫正">
+                                                                    </div>
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <div class="col-sm-1 control-label">
+                                                                        <label class="control-label">听力情形</label>
+                                                                    </div>
+                                                                    <div class="col-sm-2">
+                                                                        <input ng-model="Data.Demand.LISTENDESC" class="form-control" type="text" name="听力情形" ng-maxlength="50" select-items="听力情形">
+                                                                    </div>
+                                                                    <label class="col-sm-1 control-label">左耳听力</label>
+                                                                    <div class="col-sm-2">
+                                                                        <!--<input ng-model="Data.Demand.LISTEN_L" class="form-control" type="text" select-items="左耳听力">-->
+
+                                                                        <select ng-model="Data.Demand.LISTEN_L" select-code="E00.320" name="左耳听力" ng-maxlength="50" class="form-control"></select>
+                                                                    </div>
+                                                                    <label class="col-sm-1 control-label">右耳听力</label>
+                                                                    <div class="col-sm-2">
+                                                                        <!--<input ng-model="Data.Demand.LISTEN_R" class="form-control" type="text" select-items="右耳听力">-->
+                                                                        <select ng-model="Data.Demand.LISTEN_R" select-code="E00.320" name="右耳听力" ng-maxlength="50" class="form-control"></select>
+                                                                    </div>
+                                                                    <label class="col-sm-1 control-label">助听器</label>
+                                                                    <div class="col-sm-2">
+                                                                        <!--<input ng-model="Data.Demand.HEARINGAID" class="form-control" type="text" select-items="有无">-->
+                                                                        <select ng-model="Data.Demand.HEARINGAID" select-code="E00.317" name="助听器" ng-maxlength="50" class="form-control"></select>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <div class="col-sm-1 control-label">
+                                                                        <label class="control-label">触觉</label>
+                                                                    </div>
+                                                                    <div class="col-sm-2">
+                                                                        <input ng-model="Data.Demand.SENSATIONDESC" class="form-control" type="text" name="触觉" ng-maxlength="20" select-items="触觉">
+                                                                    </div>
+                                                                    <label class="col-sm-1 control-label">疼痛情形</label>
+                                                                    <div class="col-sm-2">
+                                                                        <input ng-model="Data.Demand.PAINDESC" class="form-control" type="text" name="疼痛情形" ng-maxlength="20" select-items="有无">
+                                                                    </div>
+                                                                    <label class="col-sm-1 control-label">疼痛部位</label>
+                                                                    <div class="col-sm-2">
+                                                                        <input ng-model="Data.Demand.PAINPART" class="form-control" type="text" name="疼痛部位" ng-maxlength="20" select-items="疼痛部位">
+                                                                    </div>
+                                                                    <label class="col-sm-1 control-label">疼痛频率</label>
+                                                                    <div class="col-sm-2">
+                                                                        <input ng-model="Data.Demand.PAIN_FREQ" class="form-control" type="text" name="疼痛频率" ng-maxlength="20" select-items="疼痛频率">
+                                                                    </div>
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <div class="col-sm-1 control-label">
+                                                                        <label class="control-label">疼痛性质</label>
+                                                                    </div>
+                                                                    <div class="col-sm-2">
+                                                                        <input ng-model="Data.Demand.PAIN_NUTURE" class="form-control" type="text" name="疼痛性质" ng-maxlength="20" select-items="疼痛性质">
+                                                                    </div>
+                                                                    <label class="col-sm-1 control-label">疼痛表达方式</label>
+                                                                    <div class="col-sm-2">
+                                                                        <input ng-model="Data.Demand.PAIN_SHOW" class="form-control" type="text" name="疼痛表达方式" ng-maxlength="50" select-items="疼痛表达方式">
+                                                                    </div>
+
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <div class="col-sm-1 control-label">
+                                                                        <label class="control-label">止疼药物</label>
+                                                                    </div>
+
+                                                                    <div class="col-sm-5">
+                                                                        <input ng-model="Data.Demand.PAINDRUGDESC" class="form-control" type="text" name="止疼药物" ng-maxlength="50" select-items="止痛药物_文字">
+                                                                    </div>
+                                                                    <label class="col-sm-1 control-label">幻觉</label>
+                                                                    <div class="col-sm-5">
+                                                                        <input ng-model="Data.Demand.ILLUSIONDESC" class="form-control" type="text" name="幻觉" ng-maxlength="50" select-items="幻觉_文字">
+                                                                    </div>
+                                                                </div>
+
+                                                            </div>
+                                                        </div>
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!--LifeSkills-->
+                                    <!--SocialActivities-->
+                                    <div class="tab-pane" id="SocialActivities">
+                                        <div class="form-horizontal">
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                    <div class="panel-body">
+
+                                                        <div class="panel panel-default">
+                                                            <div class="panel-heading" style="font-weight:700">
+                                                                <input type="checkbox" class="uniform" style="font-size:small" ng-checked="INTERACTIONFLAG" ng-click="checkINTERACTIONFLAG(INTERACTIONFLAG)">有社会互动问题
+                                                            </div>
+                                                            <div class="panel-body" ng-show="INTERACTIONFLAG">
+                                                                <div class="form-group">
+                                                                    <div class="col-sm-1 control-label">
+                                                                        <label class="control-label">沟通能力</label>
+                                                                    </div>
+                                                                    <div class="col-sm-5">
+                                                                        <input ng-model="Data.Demand.COMMUNICATESKILL" class="form-control" name="沟通能力" ng-maxlength="50" type="text" select-items="沟通能力_文字">
+                                                                    </div>
+                                                                    <div class="col-sm-1 control-label">
+                                                                        <label class="control-label">沟通方式</label>
+                                                                    </div>
+                                                                    <div class="col-sm-5">
+                                                                        <!--<input ng-model="Data.Demand.COMMUNICATETYPE" class="form-control" type="text">-->
+
+                                                                        <input ng-model="Data.Demand.COMMUNICATETYPE" class="form-control" name="沟通方式" ng-maxlength="50" type="text" select-items="沟通方式">
+                                                                    </div>
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <div class="col-sm-1 control-label">
+                                                                        <label class="control-label">沟通内容</label>
+                                                                    </div>
+                                                                    <div class="col-sm-2">
+                                                                        <input ng-model="Data.Demand.COMMUNICATEDESC" class="form-control" name="沟通内容" ng-maxlength="50" type="text" select-items="沟通内容">
+                                                                    </div>
+                                                                    <label class="col-sm-1 control-label">喜欢的称呼</label>
+                                                                    <div class="col-sm-2">
+                                                                        <input ng-model="Data.Demand.APPELLATION" class="form-control" name="喜欢的称呼" ng-maxlength="10" type="text">
+                                                                    </div>
+                                                                    <label class="col-sm-1 control-label">情绪表现</label>
+                                                                    <div class="col-sm-2">
+                                                                        <input ng-model="Data.Demand.EMOTION" class="form-control" type="text" name="情绪表现" ng-maxlength="30" select-items="情绪表现">
+                                                                    </div>
+
+                                                                </div>
+
+                                                            </div>
+                                                        </div>
+
+
+
+                                                        <div class="panel panel-default">
+                                                            <div class="panel-heading" style="font-weight:700">
+                                                                <input type="checkbox" class="uniform" style="font-size:small" ng-checked="ALLERGYFLAG" ng-click="checkALLERGYFLAG(ALLERGYFLAG)">有过敏史
+                                                            </div>
+                                                            <div class="panel-body" ng-show="ALLERGYFLAG">
+                                                                <div class="form-group">
+                                                                    <div class="col-sm-1 control-label">
+                                                                        <label class="control-label">药物过敏史</label>
+                                                                    </div>
+                                                                    <div class="col-sm-11">
+                                                                        <textarea class="form-control" ng-model="Data.Demand.ALLERGY_DRUG" name="药物过敏史" ng-maxlength="200" select-items="有无"></textarea>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <div class="col-sm-1 control-label">
+                                                                        <label class="control-label">食物过敏</label>
+                                                                    </div>
+                                                                    <div class="col-sm-11">
+                                                                        <input ng-model="Data.Demand.ALLERGY_FOOD" class="form-control" name="食物过敏" ng-maxlength="200" type="text" select-items="有无">
+                                                                    </div>
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <div class="col-sm-1 control-label">
+                                                                        <label class="control-label">其他过敏</label>
+                                                                    </div>
+                                                                    <div class="col-sm-11">
+                                                                        <input ng-model="Data.Demand.ALLERGY_OTHERS" class="form-control" name="其他过敏" type="text" ng-maxlength="200" select-items="其他过敏">
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+
+                                                        <div class="panel panel-default">
+                                                            <div class="panel-heading" style="font-weight:700">
+                                                                <input type="checkbox" class="uniform" style="font-size:small" ng-checked="showOther" ng-click="checkshowOther(showOther)">其他状况（一周内）
+                                                            </div>
+                                                            <div class="panel-body" ng-show="showOther">
+                                                                <div class="form-group">
+                                                                    <div class="col-sm-1 control-label">
+                                                                        <label class="control-label">意外伤害</label>
+                                                                    </div>
+                                                                    <div class="col-sm-5">
+                                                                        <select class="form-control" ng-model="Data.Demand.ACCIDENT_W" name="意外伤害" ng-maxlength="50" select-code="K00.018"></select>
+                                                                        <!--<input ng-model="Data.Demand.ACCIDENT_W" class="form-control" type="text">-->
+                                                                    </div>
+                                                                    <label class="col-sm-1 control-label">异常状况</label>
+                                                                    <div class="col-sm-5">
+                                                                        <input ng-model="Data.Demand.ABNORMAL_W" class="form-control" type="text" name="异常状况" ng-maxlength="50" select-items="异常状况">
+                                                                    </div>
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <div class="col-sm-1">
+                                                                        <label class="control-label">备注(注明性质、部位)</label>
+                                                                    </div>
+                                                                    <div class="col-sm-11">
+                                                                        <textarea ng-model="Data.Demand.PAINDEGREEDESC_W" name="备注(注明性质、部位)" ng-maxlength="50" class="form-control"></textarea>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!--SocialActivities-->
+                                    <!--NursingPlan-->
+                                    <div class="tab-pane" id="NursingPlan">
+                                        <div class="form-horizontal">
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                    <div class="panel-body">
+                                                        <div class="form-group">
+                                                            <div class="col-sm-2">
+                                                                <button class="btn btn-primary" ng-click="UpdateEvalResult()">更新最后评估结果</button>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="form-group">
+                                                            <div class="col-sm-1">
+                                                                <label class="control-label">ADL评估结果</label>
+                                                            </div>
+                                                            <div class="col-sm-5">
+                                                                <div class="select-input-div">
+                                                                    <select ng-model="Data.Demand.ADLRESULTS" class="width20" ng-options="item.RESULTNAME as item.LOWBOUND+'~'+item.UPBOUND+'.'+item.RESULTNAME  for item in  Data.ADLREF"></select>
+                                                                </div>
+                                                                <input class="form-control" ng-model="Data.Demand.ADLRESULTS" name="ADL评估结果" ng-maxlength="50" />
+                                                            </div>
+                                                            <label class="col-sm-1 control-label">ADL分数</label>
+                                                            <div class="col-sm-2">
+                                                                <input class="form-control" only-number ng-model="Data.Demand.ADLSCORE" name="ADL分数" ng-maxlength="5" only-int />
+                                                            </div>
+
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <div class="col-sm-1">
+                                                                <label class="control-label">MMSE评估结果</label>
+                                                            </div>
+                                                            <div class="col-sm-5">
+                                                                <div class="select-input-div">
+                                                                    <select ng-model="Data.Demand.MMSEDESC" class="width20" ng-options="item.RESULTNAME as item.LOWBOUND+'~'+item.UPBOUND+'.'+item.RESULTNAME  for item in  Data.MMSEREF"></select>
+                                                                </div>
+                                                                <input class="form-control" ng-model="Data.Demand.MMSEDESC" name="MMSE评估结果" ng-maxlength="50" />
+                                                            </div>
+                                                            <label class="col-sm-1 control-label">MMSE分数</label>
+                                                            <div class="col-sm-2">
+                                                                <input class="form-control" only-number ng-model="Data.Demand.MMSESCORE" name="MMSE分数" ng-maxlength="10" />
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <div class="col-sm-1">
+                                                                <label class="control-label">IADL评估结果</label>
+                                                            </div>
+                                                            <div class="col-sm-5">
+                                                                <div class="select-input-div">
+                                                                    <select ng-model="Data.Demand.iADLRESULTS" class="width20" ng-options="item.RESULTNAME as item.LOWBOUND+'~'+item.UPBOUND+'.'+item.RESULTNAME  for item in  Data.iADLREF"></select>
+                                                                </div>
+                                                                <input class="form-control" ng-model="Data.Demand.iADLRESULTS" ng-maxlength="50" only-int name="IADL评估结果" />
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <div class="col-sm-1">
+                                                                <label class="control-label">柯氏量表评估结果</label>
+                                                            </div>
+                                                            <div class="col-sm-5">
+                                                                <div class="select-input-div">
+                                                                    <select ng-model="Data.Demand.KS_RESULTS" class="width20" ng-options="item.RESULTNAME as item.LOWBOUND+'~'+item.UPBOUND+'.'+item.RESULTNAME  for item in Data.KSREF"></select>
+                                                                </div>
+                                                                <input class="form-control" ng-model="Data.Demand.KS_RESULTS" ng-maxlength="50" name="柯氏量表评估结果" />
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <div class="col-sm-1">
+                                                                <label class="control-label">忧郁量表评估结果</label>
+                                                            </div>
+                                                            <div class="col-sm-5">
+                                                                <div class="select-input-div">
+                                                                    <select ng-model="Data.Demand.YY_RESULTS" class="width20" ng-options="item.RESULTNAME as item.LOWBOUND+'~'+item.UPBOUND+'.'+item.RESULTNAME  for item in Data.YYREF"></select>
+                                                                </div>
+                                                                <input class="form-control" ng-model="Data.Demand.YY_RESULTS" ng-maxlength="50" name="忧郁量表评估结果" />
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <div class="col-sm-1">
+                                                                <label class="control-label">跌倒因子评估结果</label>
+                                                            </div>
+                                                            <div class="col-sm-5">
+                                                                <div class="select-input-div">
+                                                                    <select ng-model="Data.Demand.FALLRESULTS" class="width20" ng-options="item.RESULTNAME as item.LOWBOUND+'~'+item.UPBOUND+'.'+item.RESULTNAME  for item in Data.FALLREF"></select>
+                                                                </div>
+                                                                <input class="form-control" ng-model="Data.Demand.FALLRESULTS" ng-maxlength="50" name="跌倒因子评估结果" />
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <div class="col-sm-1">
+                                                                <label class="control-label">压疮风险评估结果</label>
+                                                            </div>
+                                                            <div class="col-sm-5">
+                                                                <div class="select-input-div">
+                                                                    <select ng-model="Data.Demand.PRESSURESORE" class="width20" ng-options="item.RESULTNAME as item.LOWBOUND+'~'+item.UPBOUND+'.'+item.RESULTNAME  for item in Data.PRESSUREREF"></select>
+                                                                </div>
+                                                                <input class="form-control" ng-model="Data.Demand.PRESSURESORE" ng-maxlength="50" name="压疮风险评估结果" />
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="form-group">
+                                                            <div class="col-sm-1">
+                                                                <label class="control-label">护理需求</label>
+                                                            </div>
+                                                            <div class="col-sm-8">
+                                                                <textarea ng-model="Data.Demand.CARENEEDS" class="form-control" ng-maxlength="80" name="护理需求"></textarea>
+                                                            </div>
+
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <div class="col-sm-1">
+                                                                <label class="control-label">照护问题</label>
+                                                            </div>
+                                                            <div class="col-sm-8">
+                                                                <textarea ng-model="Data.Demand.CAREQUESTION" class="form-control" ng-maxlength="80" name="照护问题"></textarea>
+                                                            </div>
+
+                                                        </div>
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!--NursingPlan-->
+
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+<div class="footer-tools">
+    <span class="go-top">
+        <i class="fa fa-chevron-up"></i> Top
+    </span>
+</div>
+
+
+
+
+

@@ -1,0 +1,135 @@
+<div class="panel panel-default">
+    <div class="panel-body">
+        <form class="form-horizontal">
+            <div class="form-group">
+                <label class="col-sm-1 control-label">开始日期</label>
+                <div class="col-sm-2">
+                    <input class="form-control" type="text" ng-model="searchText.startDate" ca-date-picker>
+                </div>
+                <label class="col-sm-1 control-label">结束日期</label>
+                <div class="col-sm-2">
+                    <input class="form-control" type="text" ng-model="searchText.endDate" ca-date-picker>
+                </div>
+                <label class="col-sm-1 control-label"></label>
+                <div class="col-sm-2 input-group">
+                    <a class="btn btn-info" ng-click="search()">查询</a>
+                    <!--<a class="btn btn-info">新增</a>-->
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+<div class="box border primary">
+    <div class="box-title">
+        <h4><i class="fa fa-table"></i>进货/退货列表</h4></div>
+    <div class="box-body">
+        <ui-data-table options="loanOptions">
+            <table class="table table-striped table-bordered table-hover table-handler">
+                <thead>
+                    <tr>
+                        <th>编号</th>
+                        <th>厂商</th>
+                        <th>进货日期</th>
+                        <th>进货单价</th>
+                        <th>进货量</th>
+                        <th>进货金额</th>
+                        <th>进货间隔天数</th>
+                        <th>下次进货日期</th>
+                        <!--<th>采购人</th>-->
+                        <th>备注</th>
+                        <th><i class="fa fa-bars"></i> 操作</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="item in Loans" ng-click="rowSelect(item)" ng-class="{true: 'ng-scope active', false: 'ng-scope'}[item.Id==currentItem.Id]">
+                        <td>{{item.No}}</td>
+                        <td>{{showManufactur(item.ManufactureId)}}</td>
+                        <td>{{item.LoanDate | dateFormat}}</td>
+                        <td>{{item.Price}}</td>
+                        <td>{{item.Amount}}</td>
+                        <td>{{item.Sum}}</td>
+                        <td>{{item.IntervalDay}}</td>
+                        <td>{{item.NextDate | dateFormat}}</td>
+                        <!--<td>{{item.Purchaser}}</td>-->
+                        <td>{{item.Remark}}</td>
+                        <td class="col-sm-2 btn-group btn-group-xs" style="text-align:center;">
+                            <a class="btn btn-info" ng-click="rowSelect(item)"><i class="fa fa-pencil"></i>编辑</a>
+                            <a class="btn btn-primary" ng-show="false" ng-click="delete(item.Id)"><i class="fa fa-times"></i>删除</a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </ui-data-table>    
+    </div>
+</div>
+
+<div class="well">
+    <form class="form-horizontal" role="form" name="formLoan" novalidate>
+        <input type="hidden" ng-model="currentItem.GoodsId" />
+        <div class="form-group">
+            <!--<label class="col-sm-1 control-label">编码</label>
+            <div class="col-sm-5">
+                <input type="text" class="form-control" placeholder="编码必填项" ng-model="currentItem.No" id="txtNo"/>
+            </div>-->
+            <label class="col-sm-1 control-label">采购人</label>
+            <div class="col-sm-5">
+                <input-staff value="{{currentItem.Purchaser}}" callback="staffSelected(item)"/>
+            </div>
+            <label class="col-sm-1 control-label">厂商</label>
+            <div class="col-sm-5">
+                <select class="form-control" ng-model="currentItem.ManufactureId" ng-options="item.Id as item.Name for item in manufactures"></select>
+                <!--<input type="text" class="form-control" ng-model="currentItem.ManufactureId"/>-->
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-1 control-label">进货日期<span class="required">*</span></label>
+            <div class="col-sm-5">
+                <input type="text" class="form-control" name="进货日期" ng-model="currentItem.LoanDate" ca-date-picker ng-change="dateChange()" required />
+            </div>
+            <label class="col-sm-1 control-label">进货单价</label>
+            <div class="col-sm-5">
+                <input ng-pattern="/^[1-9]\d*|[1-9]\d*\.\d*[1-9]|0\.\d*[1-9]$/" type="number" ng-maxlength="15" name="进货单价" class="form-control" placeholder="进货单价" ng-model="currentItem.Price" />
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-1 control-label">进货/退货总量<span class="required">*</span></label>
+            <div class="col-sm-5">
+                <input type="number" name="进货/退货总量" class="form-control" ng-maxlength="9" ng-model="currentItem.Amount" required />
+                <span class="help-block">负数表示退货,正数表示进货</span>
+            </div>
+            <label class="col-sm-1 control-label">进货/退货金额</label>
+            <div class="col-sm-5">
+                <input ng-pattern="/^[1-9]\d*|[1-9]\d*\.\d*[1-9]|0\.\d*[1-9]$/" ng-maxlength="15" type="number" name="进货金额" class="form-control" ng-model="currentItem.Sum" />
+            </div>
+        </div>
+        <div class="form-group">    
+            <label class="col-sm-1 control-label">下次进货日期</label>
+            <div class="col-sm-5">
+                <input type="text" class="form-control" name="下次进货日期" ng-model="currentItem.NextDate" ca-date-picker ng-change="dateChange()" />
+            </div>
+            <label class="col-sm-1 control-label">下次间隔天数</label>
+            <div class="col-sm-5">
+                <input ng-pattern="/^[1-9]\d*$/" type="number" name="下次间隔天数" ng-maxlength="15" class="form-control" ng-model="currentItem.IntervalDay" disabled />
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-1 control-label">备注</label>
+            <div class="col-sm-11">
+                <input type="text" class="form-control" name="备注" ng-model="currentItem.Remark" ng-maxlength="150" />
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-sm-offset-1 col-sm-11">
+                <button class="btn btn-info" ng-click="saveEdit(currentItem)" >保存</button>
+                <button class="btn btn-info" ng-click="add()">重置</button>
+                <!--<button class="btn btn-info" ng-click="delete(currentItem.Id)"><i class="fa fa-times"></i>删除</button>-->
+            </div>
+        </div>
+    </form>
+</div>
+
+
+
+
+

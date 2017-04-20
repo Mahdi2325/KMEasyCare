@@ -1,0 +1,134 @@
+<style type="text/css">
+    /*.content {
+        background-color: white;
+        margin-top: 0;
+        min-height: 800px;
+        border-left: 1px solid #cdd2d2;
+        padding-bottom: 30px;
+    }*/
+
+    .control-element {
+        float: left;
+        padding-left: 15px;
+        font-size: large;
+    }
+
+    .timeline-group-header {
+        float: left;
+        width: 10%;
+        padding-right: 15px;
+        padding-left: 15px;
+        position: relative;
+        min-height: 1px;
+        font-weight: bolder;
+    }
+
+    .timeline-group-content {
+        float: left;
+        width: 70%;
+        padding-right: 15px;
+        padding-left: 15px;
+        position: relative;
+        min-height: 1px;
+    }
+
+    .timeline-group-content-lable {
+        width: 100%;
+        position: relative;
+    }
+
+
+    .timeline-group-div {
+        padding: 10px 0px;
+    }
+
+    .timeline-task-text {
+        font-size: 18px;
+        font-family: 'Microsoft YaHei';
+        font-weight: 100;
+    }
+
+    .timeline-hack-border {
+        border-bottom: 1px solid #d6d6d6;
+    }
+</style>
+<div class="row">
+    <div id="content" class="col-md-12">
+        <div class="row">
+
+            <div class="col-md-2" style="padding-right:15px">
+                <resident-list feeno={{FeeNo}} callback="residentSelected(resident)" />
+            </div>
+            <div class="col-md-10" style="padding-left:15px">
+                <div class="row" style="height:60px;background-color:#f7f7f7;  border-bottom:solid 1px #d6d6d6; ">
+                    <div style="height: 60px;width:130px; background-color: #3dc7a1;text-align:center">
+                        <label style="line-height:60px;font-size:large;color:white">照顾计划时间轴</label>
+                    </div>
+                </div>
+                <div class="row" style="padding:26px 0px">
+
+                    <form class="form-horizontal" role="form">
+                        <label class="control-label control-element" style="color:#b6b6b6">开始日期</label>
+                        <div class="control-element">
+                            <input type="text" class="form-control" ng-model="StartDate" ca-date-picker>
+                        </div>
+                        <label class="control-label control-element" style="color:#b6b6b6">结束日期</label>
+                        <div class="control-element">
+                            <input type="text" class="form-control " ng-model="EndDate" ca-date-picker>
+                        </div>
+                        <div style="padding-top:50px">
+                            <div class="control-element">
+                                <input type="button" class=" form-control btn btn-primary" ng-click="Search(1)" value="社工时间轴">
+                            </div>
+                            <div class="control-element">
+                                <input type="button" class=" form-control btn btn-default" ng-click="Search(2)" value="护理时间轴">
+                            </div>
+                            <div class="control-element">
+                                <input type="button" class=" form-control btn btn-info" ng-click="Search(10)" value="跨专业时间轴">
+                            </div>
+
+                        </div>
+                    </form>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+
+        <script type="text/javascript">
+            $(document).ready(function () {
+                //var option = {
+                //    url: "/DC_Charts/GetDailyUUTrend",
+                //    type: 'Post',
+                //    cache: false,
+                //    dataType: 'json',
+                //    data: {},
+                //    success: function (res) {
+                //        charts_data = res.data;
+                //        AccumulateUU(charts_data);
+                //    },
+                //    error: function (XMLHttpRequest, textStatus, errorThrown) {
+                //        alert(textStatus);
+                //    }
+                //};
+                //$.ajax(option);
+
+
+            });
+
+
+
+
+
+
+
+
+        </script>
+

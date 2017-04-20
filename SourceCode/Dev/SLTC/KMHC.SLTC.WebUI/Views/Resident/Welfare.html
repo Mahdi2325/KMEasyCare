@@ -1,0 +1,564 @@
+<div class="row">
+    <div id="content" class="col-lg-12">
+        <!--标题-->
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="page-header">
+                    <ul class="breadcrumb">
+                        <li>
+                            <i class="fa fa-home"></i>
+                            <a href="/">首页</a>
+                        </li>
+                        <li>福利信息</li>
+                    </ul>
+
+                </div>
+            </div>
+        </div>
+        <!--标题-->
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="col-sm-2">
+                    <div class="box border primary">
+                        <div class="box-title">
+                            <h4>
+                                <i class="fa fa-bars"></i>住民信息
+                            </h4>
+                        </div>
+                        <div class="box-body">
+                            <resident-card feeno={{FeeNo}} callback="residentSelected(resident)" />
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-10">
+                    <div class="box border primary">
+                        <div class="box-title">
+                            <h4>
+                                <i class="fa fa-bars"></i>福利信息
+                            </h4>
+                        </div>
+                        <div class="box-body">
+                            <form class="form-horizontal" role="form" name="myForm" ng-submit="saveItem()" novalidate>
+                                <div class="form-group" ng-show="hasCertInfo">
+                                    <div class="alert alert-block alert-success fade in">
+                                        <p>已获取最新的长期护理保险待遇资格信息</p>
+                                    </div>
+                                </div>
+
+                                <div class="form-group" ng-show="norCertInfo">
+                                    <div class="alert alert-block alert-success fade in">
+                                        <p>当前机构该住民无长期护理保险待遇资格</p>
+                                    </div>
+                                </div>
+
+                                <div class="form-group" ng-show="needCertInfo">
+                                    <div class="alert alert-block alert-warning  fade in">
+                                        <p>查询到有新的长期护理保险待遇资格信息，请点击同步护理险信息按钮进行同步</p>
+                                    </div>
+                                </div>
+                                <div class="panel panel-default">
+                                    <div class="panel-heading">护理险资格信息</div>
+                                    <div class="panel-body">
+                                        <div class="form-group">
+                                            <label class="col-sm-1 control-label">姓名</label>
+                                            <div class="col-sm-3">
+                                                <input class="form-control" type="text" ng-model="LTCCertInfo.RegName" ng-disabled="true">
+                                            </div>
+                                            <label class="col-sm-1 control-label">身份证号</label>
+                                            <div class="col-sm-3">
+                                                <input class="form-control" type="text" ng-model="LTCCertInfo.IdNo" ng-disabled="true">
+                                            </div>
+                                            <label class="col-sm-1 control-label">社保卡号</label>
+                                            <div class="col-sm-3">
+                                                <input class="form-control" type="text" ng-model="LTCCertInfo.SsNo" ng-disabled="true">
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-sm-1 control-label">资格证书</label>
+                                            <div class="col-sm-3">
+                                                <input class="form-control" type="text" ng-model="LTCCertInfo.Certno" ng-disabled="true">
+                                            </div>
+                                            <label class="col-sm-1 control-label">是否拥有</label>
+                                            <div class="col-sm-3">
+                                                <input class="form-control" type="text" ng-model="CertTxt" ng-disabled="true">
+                                            </div>
+                                            <label class="col-sm-1 control-label">入院日期</label>
+                                            <div class="col-sm-3">
+                                                <input class="form-control" type="text" ng-model="LTCCertInfo.ApplyHosTime" ca-date-time-picker ng-disabled="true">
+                                            </div>
+                                            <label class="col-sm-1 control-label" ng-show="false">生效时间</label>
+                                            <div class="col-sm-3">
+                                                <input class="form-control" type="text" ng-show="false" ng-model="LTCCertInfo.CertStartTime" ca-date-time-picker ng-disabled="true">
+                                            </div>
+                                            <label class="col-sm-1 control-label" ng-show="false">失效时间</label>
+                                            <div class="col-sm-3">
+                                                <input class="form-control" type="text" ng-show="false" ng-model="LTCCertInfo.CertexpiredTime" ca-date-time-picker ng-disabled="true">
+                                            </div>
+
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-sm-1 control-label">护理形式</label>
+                                            <div class="col-sm-3">
+                                                <input class="form-control" type="text" value="{{LTCCertInfo.Caretypeid | careTypeFormat}}" ng-disabled="true">
+                                            </div>
+                                            <label class="col-sm-1 control-label">报销标准</label>
+                                            <div class="col-sm-3">
+                                                <input class="form-control" type="text" ng-model="LTCCertInfo.NCIPaylevel" ng-disabled="true">
+                                            </div>
+                                            <label class="col-sm-1 control-label">报销比例</label>
+                                            <div class="col-sm-3">
+                                                <input class="form-control" type="text" ng-model="LTCCertInfo.NCIPayscale" ng-disabled="true">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="panel panel-default" ng-show="false">
+                                    <div class="panel-heading">最新护理险信息</div>
+                                    <div class="panel-body">
+                                        <div class="form-group">
+                                            <label class="col-sm-1 control-label">姓名</label>
+                                            <div class="col-sm-2">
+                                                <input class="form-control" type="text" ng-model="AppCert.Name" ng-disabled="true">
+                                            </div>
+                                            <label class="col-sm-1 control-label">身份证号</label>
+                                            <div class="col-sm-2">
+                                                <input class="form-control" type="text" ng-model="AppCert.IdNo" ng-disabled="true">
+                                            </div>
+                                            <label class="col-sm-1 control-label">社保卡号</label>
+                                            <div class="col-sm-2">
+                                                <input class="form-control" type="text" ng-model="AppCert.SsNo" ng-disabled="true">
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-sm-1 control-label">资格证书</label>
+                                            <div class="col-sm-2">
+                                                <input class="form-control" type="text" ng-model="AppCert.CertNo" ng-disabled="true">
+                                            </div>
+                                            <label class="col-sm-1 control-label">生效时间</label>
+                                            <div class="col-sm-2">
+                                                <input class="form-control" type="text" ng-model="AppCert.CertStartTime" ca-date-time-picker ng-disabled="true">
+                                            </div>
+                                            <label class="col-sm-1 control-label">失效时间</label>
+                                            <div class="col-sm-2">
+                                                <input class="form-control" type="text" ng-model="AppCert.CertExpiredTime" ca-date-time-picker ng-disabled="true">
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-sm-1 control-label">护理形式</label>
+                                            <div class="col-sm-2">
+                                                <input class="form-control" type="text" ng-model="AppCert.CaretypeName" ng-disabled="true">
+                                            </div>
+                                            <label class="col-sm-1 control-label">报销标准</label>
+                                            <div class="col-sm-2">
+                                                <input class="form-control" type="text" ng-model="AppCert.NCIPayLevel" ng-disabled="true">
+                                            </div>
+                                            <label class="col-sm-1 control-label">报销比例</label>
+                                            <div class="col-sm-2">
+                                                <input class="form-control" type="text" ng-model="AppCert.NCIPayScale" ng-disabled="true">
+                                            </div>
+                                            <label class="col-sm-1 control-label">病种</label>
+                                            <div class="col-sm-2">
+                                                <input class="form-control" type="text" ng-model="AppCert.DiseaseTxt" ng-disabled="true">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <div class="center">
+                                        <button class="btn btn-warning" ng-show="isShowbtn" ng-click="SyncData()" type="button">同步护理险信息</button>
+                                    </div>
+                                </div>
+
+                                <div ng-show="false">
+
+                                    <div class="panel panel-default">
+                                        <div class="panel-heading">福利信息</div>
+                                        <div class="panel-body">
+                                            <input type="hidden" ng-model="reginsdtl.id" />
+                                            <div class="form-group">
+                                                <label class="col-sm-1 control-label">个案来源</label>
+                                                <div class="col-sm-2">
+                                                    <select class="form-control" ng-model="reginsdtl.SourceType" select-code="A00.016"></select>
+                                                </div>
+                                                <label class="col-sm-1 control-label">补助资格</label>
+                                                <div class="col-sm-2">
+                                                    <select class="form-control" ng-model="reginsdtl.InsType" select-code="A00.017"></select>
+                                                </div>
+                                                <label class="col-sm-1 control-label">入住原因</label>
+                                                <div class="col-sm-2">
+                                                    <select class="form-control" ng-model="reginsdtl.InReason" select-code="A00.018"></select>
+                                                </div>
+                                                <label class="col-sm-1 control-label">入住方式</label>
+                                                <div class="col-sm-2">
+                                                    <select class="form-control" ng-model="reginsdtl.InType" select-code="A00.019"></select>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-sm-1 control-label">经济状况</label>
+                                                <div class="col-sm-2">
+                                                    <select class="form-control" ng-model="reginsdtl.EconomyFlag" select-code="A00.020"></select>
+                                                </div>
+                                                <label class="col-sm-1 control-label">个案类型</label>
+                                                <div class="col-sm-2">
+                                                    <select class="form-control" ng-model="reginsdtl.CaseType" select-code="A00.021"></select>
+                                                </div>
+                                                <label class="col-sm-1 control-label">特殊身份</label>
+                                                <div class="col-sm-2">
+                                                    <input ng-model="reginsdtl.InsMark" class="form-control" select-items="特殊身份" name="特殊身份" ng-maxlength="10" type="text">
+                                                    <!--<select class="form-control" ng-model="reginsdtl.InsMark" select-code="A00.102"></select>-->
+                                                </div>
+                                                <label class="col-sm-1 control-label">监护宣布</label>
+                                                <div class="col-sm-2">
+                                                    <label class="checkbox-inline">
+                                                        <input type="checkbox" class="uniform" ng-model="reginsdtl.CustodyFlag">是
+                                                    </label>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="ckbAuxiliary" class="col-sm-1 control-label">辅助宣布</label>
+                                                <div class="col-sm-2">
+                                                    <label class="checkbox-inline">
+                                                        <input type="checkbox" class="uniform" id="ckbAuxiliary" ng-model="reginsdtl.AssistFlag">是
+                                                    </label>
+                                                </div>
+                                                <label class="col-sm-1 control-label">转介单位</label>
+                                                <div class="col-sm-8">
+                                                    <input type="text" class="form-control" ng-model="reginsdtl.HospFile" name="转介单位" ng-maxlength="200">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="panel panel-default">
+                                        <div class="panel-heading">中低收入信息</div>
+                                        <div class="panel-body">
+                                            <div class="form-group">
+                                                <label for="txtIssueDate" class="col-sm-1 control-label">核准日期</label>
+                                                <div class="col-sm-3">
+                                                    <input id="txtIssueDate" class="form-control" type="text" ng-model="reginsdtl.LpappDate" ca-date-picker>
+                                                </div>
+                                                <label for="txtReviewDate" class="col-sm-1 control-label">复核日期</label>
+                                                <div class="col-sm-3">
+                                                    <input id="txtReviewDate" class="form-control" type="text" ng-model="reginsdtl.LpcheckDate" ca-date-picker>
+                                                </div>
+                                                <label for="txtDocumentNo" class="col-sm-1 control-label">中低收入文号</label>
+                                                <div class="col-sm-3">
+                                                    <input type="text" class="form-control" id="txtDocumentNo" ng-model="reginsdtl.AppdocNo" name="中低收入文号" ng-maxlength="100">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="panel panel-default">
+                                        <div class="panel-heading">重大伤病信息</div>
+                                        <div class="panel-body">
+                                            <div class="form-group">
+                                                <label for="txtDiseaseType" class="col-sm-1 control-label">伤病类别</label>
+                                                <div class="col-sm-3">
+                                                    <input id="txtDiseaseType" class="form-control" type="text" ng-model="reginsdtl.IllFlag" name="伤病类别" ng-maxlength="1000" select-items="重大伤病卡名称" />
+                                                </div>
+                                                <label for="txtProofNo" class="col-sm-1 control-label">证明编号</label>
+                                                <div class="col-sm-3">
+                                                    <input type="text" class="form-control" id="txtProofNo" ng-model="reginsdtl.CertifyNo" name="证明编号" ng-maxlength="50">
+                                                </div>
+                                                <!--<div class="col-sm-2">
+                                                    <label class="checkbox-inline">
+                                                        <input type="checkbox" class="uniform" ng-model="reginsdtl.Needcertify">需重新设定，日期为
+                                                    </label>
+                                                </div>-->
+                                                <label class="col-sm-1 control-label">重新鉴定日期</label>
+                                                <div class="col-sm-2">
+                                                    <input id="txtReAuditDate" class="form-control" type="text" ng-model="reginsdtl.CertifyDate" ca-date-picker>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="panel panel-default">
+                                        <div class="panel-heading">身心障碍状况</div>
+                                        <div class="panel-body">
+                                            <div class="form-group">
+                                                <label class="col-sm-1 control-label">手册情形</label>
+                                                <div class="col-sm-2">
+                                                    <label class="checkbox-inline">
+                                                        <input type="checkbox" class="uniform" ng-model="reginsdtl.BookFlag">领有身心障碍手册
+                                                    </label>
+                                                </div>
+                                                <label for="txtManualNo" class="col-sm-1 control-label">手册编号</label>
+                                                <div class="col-sm-2">
+                                                    <input type="text" class="form-control" id="txtManualNo" ng-model="reginsdtl.BookNo" name="手册编号" ng-maxlength="50">
+                                                </div>
+                                                <label for="txtGetTime" class="col-sm-1 control-label">取得时间</label>
+                                                <div class="col-sm-2">
+                                                    <input id="txtGetTime" class="form-control" type="text" ng-model="reginsdtl.BookissueDate" ca-date-picker>
+                                                </div>
+                                                <label for="txtMaturityDate" class="col-sm-1 control-label">到期日期</label>
+                                                <div class="col-sm-2">
+                                                    <input id="txtMaturityDate" class="form-control" type="text" ng-model="reginsdtl.BookexpDate" ca-date-picker>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="selManualBarrier" class="col-sm-1 control-label">障别</label>
+                                                <div class="col-sm-2">
+                                                    <select class="form-control" id="selManualBarrier" ng-model="reginsdtl.BookType" select-code="A00.023"></select>
+                                                </div>
+                                                <label for="selDisability" class="col-sm-1 control-label">失能程度</label>
+                                                <div class="col-sm-2">
+                                                    <select class="form-control" id="selDisability" ng-model="reginsdtl.Disabdegree" select-code="A00.022"></select>
+                                                </div>
+                                                <label for="txtIQ" class="col-sm-1 control-label">智商</label>
+                                                <div class="col-sm-2">
+                                                    <input type="text" class="form-control" id="txtIQ" ng-model="reginsdtl.Iq" name="智商" ng-maxlength="50">
+                                                </div>
+                                                <label for="txtDisabilityReason" class="col-sm-1 control-label">残疾原因</label>
+                                                <div class="col-sm-2">
+                                                    <input type="text" class="form-control" id="txtDisabilityReason" ng-model="reginsdtl.DisabCause" name="残疾原因" ng-maxlength="100" select-items="致残原因" />
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <!--<label for="txtBarrierDetail" class="col-sm-1 control-label">障别明细</label>
+                                                <div class="col-sm-5">
+                                                    <input type="text" class="form-control" id="txtBarrierDetail" ng-model="reginsdtl.DisabTypeDtl" name="障别明细" ng-maxlength="100" select-items="手册障别_文字">
+                                                </div>-->
+                                                <label for="txtMark" class="col-sm-1 control-label">鉴定注记</label>
+                                                <div class="col-sm-5">
+                                                    <input type="text" class="form-control" id="txtMark" ng-model="reginsdtl.DisabCheckDesc" name="鉴定注记" ng-maxlength="100" select-items="鉴定注记">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="panel panel-default hide">
+                                        <div class="panel-heading"></div>
+                                        <div class="panel-body">
+                                            <div class="form-group">
+                                                <label class="col-sm-1 control-label">有效期限</label>
+                                                <div class="col-sm-5">
+                                                    <input id="txtDISABILITYEXPDATE" class="form-control" type="text" ng-model="reginsdtl.DISABILITYEXPDATE" ca-date-picker>
+                                                </div>
+                                                <label class="col-sm-1 control-label">障碍等级</label>
+                                                <div class="col-sm-5">
+                                                    <select class="form-control" id="selManualBarrier" ng-model="reginsdtl.DISABILITYGRADE" select-code="L03.021"></select>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-sm-1 control-label">鉴定日期</label>
+                                                <div class="col-sm-5">
+                                                    <input id="txtDISABILITYEVALDATE" class="form-control" type="text" ng-model="reginsdtl.DISABILITYEVALDATE" ca-date-picker>
+                                                </div>
+                                                <label class="col-sm-1 control-label">重新鉴定日期</label>
+                                                <div class="col-sm-2">
+                                                    <input ng-disabled="reginsdtl.ISREEVAL" class="form-control" type="text" ng-model="reginsdtl.DISABILITYREEVALDATE" ca-date-picker>
+                                                </div>
+                                                <div class="col-sm-2">
+                                                    <label class="checkbox-inline">
+                                                        <input type="checkbox" class="uniform" ng-click="checkItem(reginsdtl.ISREEVAL)" ng-model="reginsdtl.ISREEVAL">无需再次鉴定
+                                                    </label>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-sm-1 control-label">户籍转移标记1</label>
+                                                <div class="col-sm-2">
+                                                    <label class="checkbox-inline">
+                                                        <input type="checkbox" class="uniform" ng-click="checkItem2(reginsdtl.ISHOUSEMIGRATION1)" ng-model="reginsdtl.ISHOUSEMIGRATION1">是
+                                                    </label>
+                                                </div>
+                                                <label class="col-sm-1 control-label">转入日期1</label>
+                                                <div class="col-sm-2">
+                                                    <input id="txtINMIGRATIONDATE1" ng-disabled="!reginsdtl.ISHOUSEMIGRATION1" class="form-control" type="text" ng-model="reginsdtl.INMIGRATIONDATE1" ca-date-picker>
+                                                </div>
+                                                <label class="col-sm-1 control-label">户籍转移标记2</label>
+                                                <div class="col-sm-2">
+                                                    <label class="checkbox-inline">
+                                                        <input type="checkbox" class="uniform" ng-click="checkItem3(reginsdtl.ISHOUSEMIGRATION2)" ng-model="reginsdtl.ISHOUSEMIGRATION2">是
+                                                    </label>
+                                                </div>
+                                                <label class="col-sm-1 control-label">转入日期2</label>
+                                                <div class="col-sm-2">
+                                                    <input class="form-control" id="txtINMIGRATIONDATE2" ng-disabled="!reginsdtl.ISHOUSEMIGRATION2" type="text" ng-model="reginsdtl.INMIGRATIONDATE2" ca-date-picker>
+                                                </div>
+                                            </div>
+                                            <div class="panel panel-default">
+                                                <div class="panel-heading"><label>障碍类别</label></div>
+                                                <div class="panel-body">
+                                                    <div>
+                                                        <fieldset>
+                                                            <legend></legend>
+                                                            <div class="form-group">
+                                                                <div class="col-sm-12">
+                                                                    <div>
+                                                                        <div class="form-group">
+                                                                            <div>
+                                                                                <div class="col-sm-12">
+                                                                                    <label class="checkbox-inline col-sm-6">
+                                                                                        <input type="checkbox" class="uniform" ng-model="reginsdtl.DISABILITYCATE1">第一类 神经系统构造及精神、心智功能
+                                                                                    </label>
+                                                                                    <label for="txtICFCODE1" class="col-sm-2 control-label">ICF编码</label>
+                                                                                    <div class="col-sm-4">
+                                                                                        <input id="txtICFCODE1" class="form-control" ng-disabled="!reginsdtl.DISABILITYCATE1" check-item item="reginsdtl.DISABILITYCATE1" type="text" name="ICF编码" ng-model="reginsdtl.ICFCODE1" ng-maxlength="50">
+                                                                                    </div>
+                                                                                </div>
+
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="form-group">
+                                                                            <div>
+                                                                                <div class="col-sm-12">
+                                                                                    <label class="checkbox-inline col-sm-6">
+                                                                                        <input type="checkbox" class="uniform" ng-model="reginsdtl.DISABILITYCATE2">第二类 眼，耳及相关机构与感官功能及疼痛
+                                                                                    </label>
+                                                                                    <label for="txtICFCODE2" class="col-sm-2 control-label">ICF编码</label>
+                                                                                    <div class="col-sm-4">
+                                                                                        <input id="txtICFCODE2" class="form-control" ng-disabled="!reginsdtl.DISABILITYCATE2" check-item item="reginsdtl.DISABILITYCATE2" type="text" name="ICF编码" ng-model="reginsdtl.ICFCODE2" ng-maxlength="50">
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="form-group">
+                                                                            <div>
+                                                                                <div class="col-sm-12">
+                                                                                    <label class="checkbox-inline col-sm-6">
+                                                                                        <input type="checkbox" class="uniform" ng-model="reginsdtl.DISABILITYCATE3">第三类 涉及声音与言语构造及其功能
+                                                                                    </label>
+                                                                                    <label for="txtICFCODE3" class="col-sm-2 control-label">ICF编码</label>
+                                                                                    <div class="col-sm-4">
+                                                                                        <input id="txtICFCODE3" class="form-control" ng-disabled="!reginsdtl.DISABILITYCATE3" check-item item="reginsdtl.DISABILITYCATE3" type="text" name="ICF编码" ng-model="reginsdtl.ICFCODE3" ng-maxlength="50">
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="form-group">
+                                                                            <div>
+                                                                                <div class="col-sm-12">
+                                                                                    <label class="checkbox-inline col-sm-6">
+                                                                                        <input type="checkbox" class="uniform" ng-model="reginsdtl.DISABILITYCATE4">第四类 循环、造血、免疫与呼吸系统构造及其功能
+                                                                                    </label>
+                                                                                    <label for="txtICFCODE4" class="col-sm-2 control-label">ICF编码</label>
+                                                                                    <div class="col-sm-4">
+                                                                                        <input id="txtICFCODE4" class="form-control" ng-disabled="!reginsdtl.DISABILITYCATE4" check-item item="reginsdtl.DISABILITYCATE4" type="text" name="ICF编码" ng-model="reginsdtl.ICFCODE4" ng-maxlength="50">
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="form-group">
+                                                                            <div>
+                                                                                <div class="col-sm-12">
+                                                                                    <label class="checkbox-inline col-sm-6">
+                                                                                        <input type="checkbox" class="uniform" ng-model="reginsdtl.DISABILITYCATE5">第五类 消化、新陈代谢与内分泌系统相关构造及其功能
+                                                                                    </label>
+                                                                                    <label for="txtICFCODE5" class="col-sm-2 control-label">ICF编码</label>
+                                                                                    <div class="col-sm-4">
+                                                                                        <input id="txtICFCODE5" class="form-control" ng-disabled="!reginsdtl.DISABILITYCATE5" check-item item="reginsdtl.DISABILITYCATE5" type="text" name="ICF编码" ng-model="reginsdtl.ICFCODE5" ng-maxlength="50">
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="form-group">
+                                                                            <div>
+                                                                                <div class="col-sm-12">
+                                                                                    <label class="checkbox-inline col-sm-6">
+                                                                                        <input type="checkbox" class="uniform" ng-model="reginsdtl.DISABILITYCATE6">第六类 泌尿与生殖系统相关构造及其功能
+                                                                                    </label>
+                                                                                    <label for="txtICFCODE6" class="col-sm-2 control-label">ICF编码</label>
+                                                                                    <div class="col-sm-4">
+                                                                                        <input id="txtICFCODE6" class="form-control" ng-disabled="!reginsdtl.DISABILITYCATE6" check-item item="reginsdtl.DISABILITYCATE6" type="text" name="ICF编码" ng-model="reginsdtl.ICFCODE6" ng-maxlength="50">
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="form-group">
+                                                                            <div>
+                                                                                <div class="col-sm-12">
+                                                                                    <label class="checkbox-inline col-sm-6">
+                                                                                        <input type="checkbox" class="uniform" ng-model="reginsdtl.DISABILITYCATE7">第七类 神经、肌肉、骨骼之移动相关构造及其功能
+                                                                                    </label>
+                                                                                    <label for="txtICFCODE7" class="col-sm-2 control-label">ICF编码</label>
+                                                                                    <div class="col-sm-4">
+                                                                                        <input id="txtICFCODE7" class="form-control" ng-disabled="!reginsdtl.DISABILITYCATE7" check-item item="reginsdtl.DISABILITYCATE7" type="text" name="ICF编码" ng-model="reginsdtl.ICFCODE7" ng-maxlength="50">
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="form-group">
+                                                                            <div>
+                                                                                <div class="col-sm-12">
+                                                                                    <label class="checkbox-inline col-sm-6">
+                                                                                        <input type="checkbox" class="uniform" ng-model="reginsdtl.DISABILITYCATE8">第八类 皮肤与相关构造及其功能
+                                                                                    </label>
+                                                                                    <label for="txtICFCODE8" class="col-sm-2 control-label">ICF编码</label>
+                                                                                    <div class="col-sm-4">
+                                                                                        <input id="txtICFCODE8" class="form-control" ng-disabled="!reginsdtl.DISABILITYCATE8" check-item item="reginsdtl.DISABILITYCATE8" type="text" name="ICF编码" ng-model="reginsdtl.ICFCODE8" ng-maxlength="50">
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+
+                                                            </div>
+                                                        </fieldset>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <!--<label for="txtBarrierDetail" class="col-sm-1 control-label">障别明细</label>
+                                                <div class="col-sm-5">
+                                                    <input type="text" class="form-control" id="txtBarrierDetail" ng-model="reginsdtl.DisabTypeDtl" name="障别明细" ng-maxlength="100" select-items="手册障别_文字">
+                                                </div>-->
+                                                <label for="txtICDDIAGNOSI" class="col-sm-1 control-label">ICD诊断</label>
+                                                <div class="col-sm-11">
+                                                    <input type="text" class="form-control" id="txtICDDIAGNOSI" ng-model="reginsdtl.ICDDIAGNOSI" name="ICD诊断" ng-maxlength="50">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="panel panel-default">
+                                        <div class="panel-heading">手续文件状况</div>
+                                        <div class="panel-body">
+                                            <div class="form-group">
+                                                <label for="txtProofFile" class="col-sm-1 control-label">证明文件</label>
+                                                <div class="col-sm-5">
+                                                    <input id="txtProofFile" class="form-control" type="text" ng-model="reginsdtl.Procdoc" name="证明文件" ng-maxlength="100" select-items="证明文件_文字">
+                                                </div>
+                                                <label for="txtInsuranceStatus" class="col-sm-1 control-label">保险状况</label>
+                                                <div class="col-sm-5">
+                                                    <input type="text" class="form-control" id="txtInsuranceStatus" ng-model="reginsdtl.InsuranceDesc" name="保险状况" ng-maxlength="400" select-items="保险状况_文字" />
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-sm-1 control-label">入住手续</label>
+                                                <div class="col-sm-2">
+                                                    <label class="checkbox-inline">
+                                                        <input type="checkbox" class="uniform" ng-model="reginsdtl.InsFlag">证件手续不齐全
+                                                    </label>
+                                                </div>
+                                                <div class="col-sm-9">
+                                                    <input type="text" class="form-control" ng-model="reginsdtl.DoclackDesc" name="证件手续" ng-maxlength="400" select-items="证明文件_文字">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <div class="center">
+                                            <button class="btn btn-info" ng-show="buttonShow" type="submit">保存</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('.dateFormat').mask('000年00月00日');
+    })
+</script>
+

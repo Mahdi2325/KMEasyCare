@@ -1,0 +1,198 @@
+<!--居家服务督导-->
+<div class="row">
+    <div id="content" class="col-md-12">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="page-header">
+                    <!-- BREADCRUMBS -->
+                    <ul class="breadcrumb">
+                        <li>
+                            <i class="fa fa-home"></i>
+                            <a href="/">首页</a>
+                        </li>
+                        <li>
+                            <a href="#">社工/行政</a>
+                        </li>
+                        <li>居家服务督导</li>
+                    </ul>
+                    <!-- /BREADCRUMBS -->
+                    <div class="clearfix"></div>
+                    <div class="description">
+                        <!--<h3 class="content-title pull-left">住民权益/申诉列表</h3>-->
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="col-sm-2">
+                    <div class="box border primary">
+                        <div class="box-title">
+                            <h4>
+                                <i class="fa fa-bars">住民信息</i>
+                            </h4>
+                        </div>
+                        <div class="box-body">
+                            <resident-card callback="residentSelected(resident)" />
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-10">
+                    <div class="panel panel-primary">
+                        <div class="panel-heading" style="font-weight:700">
+                            新建督导服务
+                        </div>
+                        <div class="panel-body">
+                            <form class="form-horizontal" role="form" novalidate>
+
+                                <div class="panel panel-default">
+                                    <div class="panel-body">
+                                        <label for="selRecordBy" class="col-sm-1 control-label">服务人员</label>
+                                        <div class="col-sm-2">
+                                            <input-staff callback="staffSelected(item)" value="{{currentItem.Operator}}"  />
+                                            <!--<select class="form-control" id="selRecordBy" ng-model="currentItem.Operator" ng-options="Creator.value as Creator.text for Creator in Data.Creator">
+                                                <option value="">-- 请选择 --</option>
+                                            </select>-->
+                                        </div>
+                                        <label for="dtContactDate" class="col-sm-1 control-label">督导日期</label>
+                                        <div class="col-sm-2">
+                                            <input type="text" class="form-control datepicker" readonly id="dtSuperviseDate" ng-model="currentItem.SuperviseDate" required>
+                                        </div>
+                                        <div class="col-sm-1">
+                                            <table style="width:100%">
+                                                <tr>
+                                                    <td><input type="text" style="width:50px" class="form-control" ng-model="TWYear" readonly></td>
+                                                    <td><label class="control-label">年</label></td>
+                                                </tr>
+                                            </table>
+                                        </div>
+
+                                        <div class="col-sm-2">
+                                            <table style="width:100%">
+                                                <tr>
+                                                    <td><input class="form-control" ng-model="TWMonth" style="width:50px"  readonly/></td>
+                                                    <td><label class="control-label">月督导记录</label></td>
+                                                </tr>
+                                            </table>
+
+                                        </div>
+                                        <label class="control-label col-sm-1">督导人员</label>
+                                        <div class="col-sm-2">
+                                            <input-staff callback="staffSelected(item)" value="{{currentItem.Supervisor}}" />
+                                            <!--<select class="form-control" id="selRecordBy" ng-model="currentItem.Supervisor" ng-options="Creator.value as Creator.text for Creator in Data.Creator">
+                                                <option value="">-- 请选择 --</option>
+                                            </select>-->
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label col-md-1">访谈形式</label>
+                                    <div class="col-md-2">
+                                        <select class="form-control" id="selContactType" ng-model="currentItem.ContactType" ng-options="ContactType.value as ContactType.text for ContactType in Data.ContactType">
+                                            <option value="">-- 请选择 --</option>
+                                        </select>
+                                    </div>
+
+                                    <label class="control-label col-md-1">日期</label>
+                                    <div class="col-md-2">
+                                        <input type="text" class="form-control datepicker" id="dtContactDate" ng-model="currentItem.ContactDate">
+                                    </div>
+                                    <label class="control-label col-md-1">访谈时长</label>
+                                    <div class="col-md-2">
+                                        <div class="input-group">
+                                            <input type="number" class="form-control" id="dtMinutes" ng-model="currentItem.Minutes">
+                                            <div class="input-group-addon">分钟</div>
+                                        </div>
+                                        
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label col-md-1">报道内容摘要</label>
+                                    <div class="col-md-11">
+                                        <textarea class="form-control" rows="3" ng-model="currentItem.SuperviseDesc" select-items="报道内容摘要"></textarea>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label col-md-1">专业评估</label>
+                                    <div class="col-md-11">
+                                        <textarea class="form-control" rows="3" ng-model="currentItem.Assessment" select-items="专业评估"></textarea>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label col-md-1">处遇说明</label>
+                                    <div class="col-md-11">
+                                        <textarea class="form-control" rows="3" ng-model="currentItem.ProcessDesc" select-items="处遇说明"></textarea>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+
+                                    <div class="col-sm-offset-11">
+                                        <div class="btn-group btn-group-sm" role="group" aria-label="...">
+                                            <button class="btn btn-primary" type="submit" ng-click="savehomeCareSupervise(currentItem)">保存</button>
+                                            <button type="button" class="btn btn-default" ng-click="currentItem={}">重置</button>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                    <div class="box border primary">
+                        <div class="box-title">
+                            <h4>
+                                <i class="fa fa-bars"></i>历次申诉记录
+                            </h4>
+                        </div>
+                        <div class="box-body">
+                            <table id="tbEvalList"   class="table table-striped table-bordered table-hover table-handler">
+                                <thead>
+                                    <tr>
+
+                                        <th>督导日期</th>
+                                        <th>督导人员</th>
+                                        <th>督导内容</th>
+                                        <th>专业评估</th>
+                                        <th>处理说明</th>
+                                        <th>服务人员</th>
+                                        <th><i class="fa fa-bars"></i> 操作</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr ng-repeat="homeCareSupervise in Data.homeCareSuperviseList">
+                                        <td>{{homeCareSupervise.SuperviseDate | dateFormat}}</td>
+                                        <td>{{homeCareSupervise.Supervisor}}</td>
+                                        <td>{{homeCareSupervise.Supervisedesc}}</td>
+                                        <td>{{homeCareSupervise.Assessment}}</td>
+                                        <td>{{homeCareSupervise.Processdesc}}</td>
+                                        <td>{{homeCareSupervise.Operator}}</td>
+
+                                        <td>
+                                            <div class="btn-group btn-group-xs" role="group" aria-label="...">
+
+                                                <button class="btn btn-primary" ng-click="rowSelect(homeCareSupervise)">编辑</button>
+
+                                                <a class="btn btn-primary" role="button" data-toggle="modal" ng-click="deletehomeCareSupervise(homeCareSupervise)">删除</a>
+
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </tbody>
+
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                
+            </div>
+
+        </div>
+    </div>
+</div>
+<script>
+    $(".datepicker").datepicker({
+        dateFormat: "yy-mm-dd",
+        changeMonth: true,
+        changeYear: true
+    });
+</script>
+

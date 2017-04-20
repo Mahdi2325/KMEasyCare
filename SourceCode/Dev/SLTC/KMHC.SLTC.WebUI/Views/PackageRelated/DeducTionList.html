@@ -1,0 +1,24 @@
+﻿<div class="container-fluid">
+    <div class="row">
+        <ui-data-table options="options">
+            <table class="table table-striped table-bordered table-hover">
+                <thead>
+                    <tr role="row">
+                        <th class="center col-sm-1">序号</th>
+                        <th class="col-sm-1">扣款月份</th>
+                        <th class="col-sm-1">扣款金额</th>
+                        <th>扣款原因</th>
+                    </tr>
+                </thead>
+                <tbody role="alert" aria-live="polite" aria-relevant="all">
+                    <tr ng-repeat="dedu in DeductionList">
+                        <td class="center">{{(options.pageInfo.CurrentPage-1)*10+$index+1}}</td>
+                        <td>{{dedu.Debitmonth}}</td>
+                        <td>{{dedu.Amount}}</td>
+                        <td>{{dedu.DeductionReason}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </ui-data-table>
+    </div>
+</div>

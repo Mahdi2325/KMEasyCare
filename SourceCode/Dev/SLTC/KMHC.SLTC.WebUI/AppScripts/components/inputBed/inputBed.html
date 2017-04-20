@@ -1,0 +1,23 @@
+<div ng-mouseleave="mouseleave()">
+    <input class="form-control" type="text" ng-model="searchWords" ng-change="change()" placeholder="输入床号,房间号,楼层" ng-focus="focus()" ng-keydown="keydown()" ng-required={{required}} />
+    <table class="table table-hover table-bordered input-select" ng-show="showList">
+        <thead>
+            <tr>
+                <th>床号</th>
+                <th>房间号</th>
+                <th>楼层</th>
+                <th>床等别</th>
+                <th>病床种类</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="item in Beds | filter:filterItems" ng-click="rowClick(item)">
+                <td>{{item.Code}}</td>
+                <td>{{item.RoomNo}}</td>
+                <td>{{item.Floor}}</td>
+                <td><span select-code="J00.004" select-value="{{item.BedClass}}"></span></td>
+                <td><span select-code="J00.004" select-value="{{item.BedKind}}"></span></td>
+            </tr>
+        </tbody>
+    </table>
+</div>

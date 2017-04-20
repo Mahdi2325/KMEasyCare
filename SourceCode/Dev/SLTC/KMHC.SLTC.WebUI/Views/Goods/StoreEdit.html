@@ -1,0 +1,107 @@
+
+
+<div class="row">
+    <div id="content" class="col-lg-12">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="page-header">
+                    <!-- BREADCRUMBS -->
+                    <ul class="breadcrumb">
+                        <li>
+                            <i class="fa fa-home"></i>
+                            <a href="/">首页</a>
+                        </li>
+                        <li><a ui-sref="storeList">库存管理</a></li>
+                        <li>库存维护</li>
+                    </ul>
+                    <div class="clearfix"></div>
+                    <!---->
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="box border primary">
+                    <div class="box-title">
+                        <h4><i class="fa fa-bars"></i>物品信息</h4>
+                    </div>
+                    <div class="box-body">
+                        <form class="form-horizontal" name="form1" ng-submit="submit()" novalidate>
+                            <input type="hidden" ng-model="Data.goods.Id" />
+                            <div class="form-group">
+                                <label class="col-sm-1 control-label">名称<span class="required">*</span></label>
+                                <div class="col-sm-2">
+                                    <input type="text" name="名称" class="form-control" ng-model="Data.goods.Name" ng-maxlength="50" required />
+                                </div>
+                                <!--<label class="col-sm-1 control-label">自订编号</label>
+            <div class="col-sm-2">
+                <input type="text" class="form-control" ng-model="Data.goods.No" ng-maxlength="50"/>
+            </div>-->
+                                <label class="col-sm-1 control-label">条码编号</label>
+                                <div class="col-sm-2">
+                                    <input type="text" name="条码编号" class="form-control" ng-model="Data.goods.BarNo" ng-maxlength="50" />
+                                </div>
+                                <div class="col-sm-1">&nbsp;</div>
+                                <div class="col-sm-5">
+                                    <label class="checkbox-inline" ng-show="false"> <input type="checkbox" class="uniform" ng-model="Data.goods.NotLess">销货不扣库存</label>
+                                    <label class="checkbox-inline" ng-show="false"> <input type="checkbox" class="uniform" ng-model="Data.goods.IsPayItem">列为收费专案</label>
+                                    <label class="checkbox-inline" ng-show="false"> <input type="checkbox" class="uniform" ng-model="Data.goods.IsUsed">此物使用中</label>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-1 control-label">单位</label>
+                                <div class="col-sm-2">
+                                    <select class="form-control" ng-model="Data.goods.Unit" select-code="H00.002"></select>
+                                    <!--<input name="Unit" class="form-control" ng-model="Data.goods.Unit"/>-->
+                                </div>
+                                <label class="col-sm-1 control-label">类别</label>
+                                <div class="col-sm-2">
+                                    <select class="form-control" ng-model="Data.goods.Type" select-code="H00.001"></select>
+                                    <!--<input name="type" class="form-control" ng-model="Data.goods.Type"/>-->
+                                </div>
+                                <label class="col-sm-1 control-label">销售单价</label>
+                                <div class="col-sm-2">
+                                    <input ng-pattern="/^[0-9]\d*|[1-9]\d*\.\d*[1-9]|0\.\d*[1-9]$/" type="number" ng-maxlength="15" name="销售单价" class="form-control" ng-model="Data.goods.SellingPrice" />
+                                </div>
+                                <label class="col-sm-1 control-label">最后进货单价</label>
+                                <div class="col-sm-2">
+                                    <input ng-pattern="/^[0-9]\d*|[1-9]\d*\.\d*[1-9]|0\.\d*[1-9]$/" type="number" name="最後进货单价" class="form-control" ng-model="Data.goods.LoanPrice" readonly="readonly" />
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-1 control-label">库存底限</label>
+                                <div class="col-sm-2">
+                                    <input ng-pattern="/^\d*$/" type="number" name="库存底限" class="form-control" ng-model="Data.goods.InventoryBaseline">
+                                </div>
+                                <label class="col-sm-1 control-label">目前库存量</label>
+                                <div class="col-sm-2">
+                                    <input ng-pattern="/^\d*$/" type="number" name="目前库存量" class="form-control" ng-model="Data.goods.InventoryQuantity" readonly="readonly" />
+                                </div>
+                                <label class="col-sm-1 control-label">总进货量</label>
+                                <div class="col-sm-2">
+                                    <input ng-pattern="/^\d*$/" type="number" name="总进货量" class="form-control" ng-model="Data.goods.TotalLoanAmount" readonly="readonly" />
+                                </div>
+                                <label class="col-sm-1 control-label">总销售量</label>
+                                <div class="col-sm-2">
+                                    <input ng-pattern="/^\d*$/" type="number" name="总销售量" class="form-control" ng-model="Data.goods.TotalSaleAmount" readonly="readonly" />
+                                </div>
+                            </div>
+                            <div class="form-group center">
+                                <hr />
+                                <input type="submit" class="btn btn-info" value="保存" />
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="footer-tools">
+            <span class="go-top">
+                <i class="fa fa-chevron-up"></i> Top
+            </span>
+        </div>
+    </div>
+</div>
+
+
+

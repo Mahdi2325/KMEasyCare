@@ -1,0 +1,81 @@
+<!--添加申请补助-->
+
+    <div class="row" ng-controller="subsidyCtrl">
+        <div class="col-md-12">
+            <div class="box border primary">
+                <div class="box-title">
+                    <h4>新增补助申请</h4>
+                </div>
+                <div class="box-body">
+                    <div class="panel panel-default">
+                        <div class="panel-title">
+
+                        </div>
+                        <div class="panel-body">
+                            <form class="form-horizontal" role="form" novalidate>
+                                <div class="form-group">
+                                    <label class="col-sm-1 control-label">补助项目</label>
+                                    <div class="col-sm-2">
+                                        <input type="text" class="form-control" id="txtItemName" ng-model="currentItem.ItemName">
+                                    </div>
+                                    <label class="col-sm-1 control-label">申请人员</label>
+                                    <div class="col-sm-2">
+                                        <select class="form-control" id="selApplyBy" ng-model="currentItem.ApplyBy"  ng-options="Socialworkers.Value as Socialworkers.Name for Socialworkers in Dic.Socialworkers"></select>
+                                    </div>
+                                    <label class="col-sm-1 control-label">本次日期</label>
+                                    <div class="col-sm-2">
+                                        <input type="text" class="form-control datepicker" id="dtApplyDate" ng-model="currentItem.ApplyDate">
+                                    </div>
+                                    <label class="col-sm-1 control-label">间隔天数</label>
+                                    <div class="col-sm-2">
+                                        <!--<select class="form-control" id="selGap" ng-model="currentDate" ng-change="calNextDate(Data.EvalDateGap)" ng-options="EvalDateGap.Value as EvalDateGap.Name for EvalDateGap in Dic.EvalDateGap"></select>-->
+                                        <select class="form-control" id="selGap" ng-model="days" ng-options="gap.Value for gap in Dic.EvalDateGap"></select>
+                                    </div>
+
+                                </div>
+
+                                <div class="form-group">
+  
+                                    <label class="col-sm-1 control-label">下次申请日期</label>
+                                    <div class="col-sm-2">
+                                        <input type="text" class="form-control" id="dtNextApplyDate" readonly="readonly" ng-model="nextDate">
+                                    </div>
+
+                                    <label class="col-sm-1 control-label">下次受托者</label>
+                                    <div class="col-sm-2">
+                                        <select class="form-control" id="selNextApplyBy" ng-model="Data.subsidy.NextApplyBy" ng-options="Socialworkers.Value as Socialworkers.Name for Socialworkers in Dic.Socialworkers">
+                                            <option value="">-- 请选择 --</option>
+                                        </select>
+                                    </div>
+
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-1 control-label">备注</label>
+                                    <div class="col-sm-11">
+                                        <textarea class="form-control" rows="6" ng-model="currentItem.Descriptoin"></textarea>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label"></label>
+                                    <div class="col-sm-offset-10">
+                                        <div class="btn-group btn-group-sm" role="group" aria-label="...">
+                                            <button class="btn btn-primary" type="button" ng-click="saveEdit(currentItem)">保存</button>&nbsp;<button type="button" class="btn btn-default" ng-click="cancelEdit()">取消</button>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+<script>
+    $(".datepicker").datepicker({
+        dateFormat: "yy-mm-dd",
+        changeMonth: true,
+        changeYear: true
+    });
+</script>

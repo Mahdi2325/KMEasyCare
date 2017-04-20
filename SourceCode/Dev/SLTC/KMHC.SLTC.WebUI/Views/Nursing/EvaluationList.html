@@ -1,0 +1,96 @@
+<div class="row">
+    <div class="row">
+        <div id="content" class="col-lg-12">
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="page-header">
+                        <!-- BREADCRUMBS -->
+                        <ul class="breadcrumb">
+                            <li>
+                                <i class="fa fa-home"></i>
+                                <a href="/">首页</a>
+                            </li>
+                            <li>
+                                <a href="#">护理评估</a>
+                            </li>
+                            <li>{{Data.QuestionName}}列表</li>
+                        </ul>
+                        <!-- /BREADCRUMBS -->
+                        <div class="clearfix"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="panel panel-default">
+                        <div class="panel-body">
+                            <form class="form-horizontal" role="form">
+                                <div class="form-group">
+                                    <label for="selGender" class="col-sm-1 control-label">姓名</label>
+                                    <div class="col-sm-2">
+                                        <input type="text" class="form-control" ng-model="Data.Filter.Name">
+                                    </div>
+
+                                    <label for="selGender" class="col-sm-1 control-label">个案编号</label>
+                                    <div class="col-sm-2">
+                                        <input type="text" class="form-control" ng-model="Data.Filter.FeeNO">
+                                    </div>
+                                    <label for="selGender" class="col-sm-1 control-label">性别</label>
+                                    <div class="col-sm-2">
+                                        <select class="form-control" ng-model="Data.Filter.Sex" select-code="A00.001"></select>
+                                        <!--<select class="form-control" id="selCategory" ng-model="filter.Sex" ng-options="Gender.Value as Gender.Name for Gender in Dic.Gender"></select>-->
+                                    </div>
+                                    <div class="col-sm-1">
+                                        <input type="button"  class="form-control btn btn-primary" ng-click="Search()" value="查询资料">
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <table class="table table-striped table-bordered table-hover table-handler">
+                        <thead>
+                            <tr>
+                                <th><i class="fa fa-user"></i>个案姓名</th>
+                                <th>个案编号</th>
+                                <th>性别</th>
+                                <th>最近一次评估日期</th>
+                                <th>评估人</th>
+                                <th>下次评估日期</th>
+                                <th>下次评估人</th>
+                                <th>评估次数</th>
+                                <th><i class="fa fa-bars"></i> 操作</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="Item in Data.Question">
+                                <td>{{Item.NAME}}</td>
+                                <td>{{Item.FEENO}}</td>
+                                <td><span select-code="A00.001" select-value="{{Item.SEX}}"></span></td>
+                                <td>{{Item.EVALDATE |date:'yyyy-MM-dd'}}</td>
+                                <td>{{Item.EVALUATEBY}}</td>
+                                <td>{{Item.NEXTEVALDATE | date:'yyyy-MM-dd'}}</td>
+                                <td>{{Item.NEXTEVALUATEBY}}</td>
+                                <td>{{Item.QUANTITY}}</td>
+                                <td style="text-align: left;width: 15%">
+                                    <div class="btn-group btn-group-xs" style="text-align:left" role="group" aria-label="...">
+                                        <a ng-click="JumpToAdd(Data.QuestionId,Item.REGNO,Item.FEENO,Item.NAME,-1,Data.QuestionName)" class="btn btn-primary" role="button">新增</a>
+                                        <div class="btn-group btn-group-xs" ng-if="Item.QUANTITY>0">
+                                            <a ng-click="JumpToAdd(Data.QuestionId,Item.REGNO,Item.FEENO,Item.NAME,Item.RECORDID,Data.QuestionName)" class=" btn btn-info" role="button"><i class="fa fa-pencil"></i>编辑</a>
+                                            <a ng-click="JumpToHistory(Data.QuestionId,Item.FEENO,Item.NAME,Data.QuestionName)" class=" btn btn-default" role="button">历史资料</a>
+                                            <!--<a ng-click="JumpToReport(Item.FEENO)" target="_blank" class=" btn btn-info" role="button">报告</a>-->
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,45 @@
+/*
+Navicat MySQL Data Transfer
+
+Source Server         : sltc_dc01
+Source Server Version : 50630
+Source Host           : 192.168.1.106:3306
+Source Database       : KMECare
+
+Target Server Type    : MYSQL
+Target Server Version : 50630
+File Encoding         : 65001
+
+Date: 2017-03-28 16:41:36
+*/
+
+SET FOREIGN_KEY_CHECKS=0;
+
+-- ----------------------------
+-- Table structure for `LTC_NCIDEDUCTION`
+-- ----------------------------
+DROP TABLE IF EXISTS `LTC_NCIDEDUCTION`;
+CREATE TABLE `LTC_NCIDEDUCTION` (
+  `ID` int(11) NOT NULL AUTO_INCREMENT,
+  `BILLID` varchar(32) COLLATE utf8_bin DEFAULT NULL COMMENT '账单ID',
+  `DEDUCTIONTYPE` int(2) NOT NULL COMMENT '扣款类型 0:请假 1:经办机构操作',
+  `DEBITMONTH` varchar(7) COLLATE utf8_bin NOT NULL COMMENT '扣款月份',
+  `LEAVEID` int(11) DEFAULT NULL COMMENT '请假记录ID',
+  `DEBITDAYS` int(4) DEFAULT NULL COMMENT '扣款天数',
+  `AMOUNT` double(18,2) NOT NULL COMMENT '扣款金额',
+  `DEDUCTIONREASON` varchar(200) COLLATE utf8_bin DEFAULT NULL COMMENT '扣款原因',
+  `DEDUCTIONSTATUS` int(2) DEFAULT NULL COMMENT '扣款状态0:未扣款 1:已扣款',
+  `CREATEBY` varchar(10) COLLATE utf8_bin NOT NULL,
+  `CREATTIME` datetime NOT NULL,
+  `UPDATEBY` varchar(10) COLLATE utf8_bin DEFAULT NULL,
+  `UPDATETIME` datetime DEFAULT NULL,
+  `ORGID` varchar(10) COLLATE utf8_bin NOT NULL,
+  `ISDELETE` tinyint(1) DEFAULT NULL,
+  PRIMARY KEY (`ID`),
+  KEY `PK_NCIDEDUCTION_LEAVE` (`LEAVEID`),
+  KEY `PK_NCIDEDUCTION_BILL` (`BILLID`),
+  CONSTRAINT `PK_NCIDEDUCTION_BILL` FOREIGN KEY (`BILLID`) REFERENCES `LTC_BILLV2` (`BILLID`),
+  CONSTRAINT `PK_NCIDEDUCTION_LEAVE` FOREIGN KEY (`LEAVEID`) REFERENCES `LTC_LEAVEHOSP` (`ID`)
+) ENGINE=InnoDB AUTO_INCREMENT=30 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+
+

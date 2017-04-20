@@ -1,0 +1,210 @@
+<div class="row">
+    <div class="box-body">
+        <div id="content" class="col-lg-12">
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="page-header">
+                        <ul class="breadcrumb">
+                            <li>
+                                <i class="fa fa-home"></i>
+                                <a href="/">首页</a>
+                            </li>
+                            <li>
+                                <a href="/angular/BillPay">帐单列表</a>
+                            </li>
+                            <li>
+                                <a href="/angular/BillPayList/{{Data.Pay.BillID}}">帐单缴费列表</a>
+                            </li>
+                            <li>帐单缴费信息</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="box border primary">
+                        <div class="box-title">
+                            <h4><i class="fa fa-bars"></i>缴费状况</h4>
+                        </div>
+                        <div class="box-body">
+                            <form class="form-horizontal" role="form" name="formPay" ng-submit="saveBillPay()">
+                                <div class="panel panel-default">
+                                    <!--<div class="panel-heading">收款</div>-->
+                                    <div class="panel-body">
+                                        <div class="form-group">
+                                            <label for="txtChargeYear" class="col-sm-1 control-label">收费列账年月</label>
+                                            <div class="col-sm-2">
+                                                <input id="txtChargeYear" type="text" class="form-control" ng-model="Data.Pay.ChargeYear" ng-maxlength="4" placeholder="年份,如：2016" required />
+                                            </div>
+                                            <div class="col-sm-2">
+                                                <input id="txtChargeMonth" type="text" class="form-control" ng-model="Data.Pay.ChargeMonth" ng-maxlength="2" placeholder="月份,如：1-12" required />
+                                            </div>
+                                            <label for="txtStartDate" class="col-sm-2 control-label">收费期间起至</label>
+                                            <div class="col-sm-2">
+                                                <input id="txtStartDate" class="form-control datepicker" type="text" ng-model="Data.Pay.StartDate" ca-date-picker  required>
+                                            </div>
+                                            <div class="col-sm-2">
+                                                <input id="txtEndDate" class="form-control datepicker" type="text" ng-model="Data.Pay.EndDate" ca-date-picker  required>
+                                            </div>
+
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="txtOperator" class="col-sm-1 control-label">经办人</label>
+                                            <div class="col-sm-4">
+                                                <input id="txtOperator" class="form-control" type="text" ng-model="Data.Pay.Operator">
+                                            </div>
+                                            <label for="txtAccountantCode" class="col-sm-2 control-label">会计编码</label>
+                                            <div class="col-sm-4">
+                                                <input id="txtAccountantCode" class="form-control" type="text" ng-model="Data.Pay.AccountantCode">
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="txtReceivable" class="col-sm-1 control-label">应收金额</label>
+                                            <div class="col-sm-2">
+                                                <input id="txtReceivable" class="form-control" type="text" ng-model="Data.Pay.Receivable" readonly="readonly">
+                                            </div>
+                                            <label for="txtReceived" class="col-sm-1 control-label">已收总金额</label>
+                                            <div class="col-sm-2">
+                                                <input id="txtReceived" class="form-control" type="text" ng-model="Data.Pay.Received">
+                                            </div>
+                                            <label for="txtBalance" class="col-sm-1 control-label">未收余额</label>
+                                            <div class="col-sm-2">
+                                                <input id="txtBalance" class="form-control" type="text" ng-model="Data.Pay.Balance" readonly="readonly">
+                                            </div>
+                                            <label for="selectChargeStatus" class="col-sm-1 control-label">收费情形</label>
+                                            <div class="col-sm-2">
+                                                <select class="form-control" id="selectChargeStatus" ng-model="Data.Pay.ChargeStatus" select-code="C00.002"></select>
+                                                <!--<select class="form-control" id="selectChargeStatus" ng-model="Data.Pay.ChargeStatus" ng-options="x.Value as x.Name for x in Dic.BillStatuses"></select>-->
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="panel panel-default">
+                                    <div class="panel-heading">缴费明细</div>
+                                    <div class="panel-body">
+                                        <div class="form-group">
+                                            <label for="txtMonthlyFee" class="col-sm-1 control-label">膳宿月费</label>
+                                            <div class="col-sm-2">
+                                                <input id="txtMonthlyFee" class="form-control" type="text" ng-model="Data.Pay.MonthlyFee">
+                                            </div>
+                                            <label for="txtDiapers" class="col-sm-1 control-label">纸尿裤护垫</label>
+                                            <div class="col-sm-2">
+                                                <input id="txtDiapers" class="form-control" type="text" ng-model="Data.Pay.Diapers">
+                                            </div>
+                                            <label for="txtAirBed" class="col-sm-1 control-label">气垫床</label>
+                                            <div class="col-sm-2">
+                                                <input id="txtAirBed" class="form-control" type="text" ng-model="Data.Pay.AirBed">
+                                            </div>
+                                            <label for="txtBath" class="col-sm-1 control-label">洗澡</label>
+                                            <div class="col-sm-2">
+                                                <input id="txtBath" class="form-control" type="text" ng-model="Data.Pay.Bath">
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="txtWound" class="col-sm-1 control-label">伤口处理</label>
+                                            <div class="col-sm-2">
+                                                <input id="txtWound" class="form-control" type="text" ng-model="Data.Pay.Wound">
+                                            </div>
+                                            <label for="txtSelfFunded" class="col-sm-1 control-label">自费药</label>
+                                            <div class="col-sm-2">
+                                                <input id="txtSelfFunded" class="form-control" type="text" ng-model="Data.Pay.SelfFunded">
+                                            </div>
+                                            <label for="txtFestivalGold" class="col-sm-1 control-label">年节金</label>
+                                            <div class="col-sm-2">
+                                                <input id="txtFestivalGold" class="form-control" type="text" ng-model="Data.Pay.FestivalGold">
+                                            </div>
+                                            <label for="txtNutrition" class="col-sm-1 control-label">营养食品</label>
+                                            <div class="col-sm-2">
+                                                <input id="txtNutrition" class="form-control" type="text" ng-model="Data.Pay.Nutrition">
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="txtAccompany" class="col-sm-1 control-label">就医陪诊</label>
+                                            <div class="col-sm-2">
+                                                <input id="txtAccompany" class="form-control" type="text" ng-model="Data.Pay.Accompany">
+                                            </div>
+                                            <label for="txtBloodGlucose" class="col-sm-1 control-label">血糖测试</label>
+                                            <div class="col-sm-2">
+                                                <input id="txtBloodGlucose" class="form-control" type="text" ng-model="Data.Pay.BloodGlucose">
+                                            </div>
+                                            <label for="txtReducePhlegm" class="col-sm-1 control-label">抽蒸痰管</label>
+                                            <div class="col-sm-2">
+                                                <input id="txtReducePhlegm" class="form-control" type="text" ng-model="Data.Pay.ReducePhlegm">
+                                            </div>
+                                            <label for="txtRecuperate" class="col-sm-1 control-label">复健</label>
+                                            <div class="col-sm-2">
+                                                <input id="txtRecuperate" class="form-control" type="text" ng-model="Data.Pay.Recuperate">
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="txtOxygenFee" class="col-sm-1 control-label">氧气费</label>
+                                            <div class="col-sm-2">
+                                                <input id="txtOxygenFee" class="form-control" type="text" ng-model="Data.Pay.OxygenFee">
+                                            </div>
+                                            <label for="txtConsumabler" class="col-sm-1 control-label">医疗耗材</label>
+                                            <div class="col-sm-2">
+                                                <input id="txtConsumabler" class="form-control" type="text" ng-model="Data.Pay.Consumable">
+                                            </div>
+                                            <label for="txtMedicalFee" class="col-sm-1 control-label">医疗费</label>
+                                            <div class="col-sm-2">
+                                                <input id="txtMedicalFee" class="form-control" type="text" ng-model="Data.Pay.MedicalFee">
+                                            </div>
+                                            <label for="txtCarFare" class="col-sm-1 control-label">交通费</label>
+                                            <div class="col-sm-2">
+                                                <input id="txtCarFare" class="form-control" type="text" ng-model="Data.Pay.CarFare">
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="txtAmbulance" class="col-sm-1 control-label">救护车</label>
+                                            <div class="col-sm-2">
+                                                <input id="txtAmbulance" class="form-control" type="text" ng-model="Data.Pay.Ambulance">
+                                            </div>
+                                            <label for="txtDeposit" class="col-sm-1 control-label">保证金</label>
+                                            <div class="col-sm-2">
+                                                <input id="txtDeposit" class="form-control" type="text" ng-model="Data.Pay.Deposit">
+                                            </div>
+                                            <label for="txtHemodialysis" class="col-sm-1 control-label">洗肾费用</label>
+                                            <div class="col-sm-2">
+                                                <input id="txtHemodialysis" class="form-control" type="text" ng-model="Data.Pay.Hemodialysis">
+                                            </div>
+                                            <label for="txtExamination" class="col-sm-1 control-label">体检费用</label>
+                                            <div class="col-sm-2">
+                                                <input id="txtExamination" class="form-control" type="text" ng-model="Data.Pay.Examination">
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="txtCuttingFee" class="col-sm-1 control-label">气切费用</label>
+                                            <div class="col-sm-2">
+                                                <input id="txtCuttingFee" class="form-control" type="text" ng-model="Data.Pay.CuttingFee">
+                                            </div>
+                                            <label for="txtOther" class="col-sm-1 control-label">其他</label>
+                                            <div class="col-sm-2">
+                                                <input id="txtOther" class="form-control" type="text" ng-model="Data.Pay.Other">
+                                            </div>
+                                            <label for="txtDeduct" class="col-sm-1 control-label">住院扣除</label>
+                                            <div class="col-sm-2">
+                                                <input id="txtDeduct" class="form-control" type="text" ng-model="Data.Pay.Deduct">
+                                            </div>
+                                            <label for="txtDiscount" class="col-sm-1 control-label">折让扣除</label>
+                                            <div class="col-sm-2">
+                                                <input id="txtDiscount" class="form-control" type="text" ng-model="Data.Pay.Discount">
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+
+                                <input id="txtBillID" class="form-control" type="hidden" ng-model="Data.Pay.BillID"/>
+                                <div class="form-group center">
+                                    <button class="btn btn-info btn-lg" type="submit" ng-disabled="formPay.$invalid">保存</button>
+                                    <button class="btn btn-grey btn-lg" ui-sref="BillPayList({id:Data.Pay.BillID})">取消</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

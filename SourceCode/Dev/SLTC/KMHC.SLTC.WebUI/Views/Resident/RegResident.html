@@ -1,0 +1,495 @@
+<!-- WIZARD -->
+<link rel="stylesheet" type="text/css" href="/Content/CloudAdmin/js/bootstrap-wizard/wizard.css" />
+<script src="../../Content/twitter-bootstrap-wizard-master/jquery.bootstrap.wizard.min.js"></script>
+
+<!--ng-controller="regResidentCtrl"-->
+<div class="row" id="regResidentContent">
+    <div id="content" class="col-lg-12">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="page-header">
+                    <!-- BREADCRUMBS -->
+                    <ul class="breadcrumb">
+                        <li>
+                            <i class="fa fa-home"></i>
+                            <a href="/">首页</a>
+                        </li>
+                        <li>入住登记</li>
+                    </ul>
+                    <div class="clearfix">
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <!-- BOX -->
+                <div class="box border primary" id="formWizard">
+                    <div class="box-title">
+                        <h4><i class="fa fa-columns"></i>入住登记 - <span class="stepHeader">步骤 1 of 2</span></h4>
+                        <div class="tools hidden-xs">
+                            <a href="javascript:;" class="collapse" ca-collapse>
+                                <i class="fa fa-chevron-up"></i>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="box-body form">
+                        <form class="form-horizontal" name="wizform" role="form" novalidate>
+                            <div class="wizard-form">
+                                <div class="wizard-content">
+                                    <ul class="nav nav-pills nav-justified steps">
+                                        <li>
+                                            <a href="#basicInfo" data-toggle="tab" class="wiz-step">
+                                                <span class="step-number">1</span>
+                                                <span class="step-name"><i class="fa fa-check"></i>住民基本信息</span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="#checkInInfo" data-toggle="tab" class="wiz-step active">
+                                                <span class="step-number">2</span>
+                                                <span class="step-name"><i class="fa fa-check"></i>入住信息</span>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                    <div id="bar" class="progress progress-striped progress-sm active" role="progressbar">
+                                        <div class="progress-bar progress-bar-warning"></div>
+                                    </div>
+                                    <div class="tab-content">
+                                        <div class="alert alert-danger display-none">
+                                            <a class="close" aria-hidden="true" href="#" onclick="$(this).parent().hide()">×</a>
+                                            <p>有错误，请输入必填项！</p>
+                                        </div>
+                                        <div class="alert alert-success display-none">
+                                            <a class="close" aria-hidden="true" href="#" onclick="$(this).parent().hide()">×</a>
+                                            检验成功!
+                                        </div>
+                                        <div class="tab-pane active" id="basicInfo">
+                                            <input type="hidden" ng-model="person.RegNo" />
+                                            <div class="form-group">
+                                                <label class="control-label col-md-3">姓名<span class="required">*</span></label>
+                                                <div class="col-md-4">
+                                                    <input-resident-check callback="ResidentSelected(item)" value="person.Name" required="true" />
+                                                </div>
+                                                <!--<input type="text" class="form-control" name="name" placeholder="请输入姓名" ng-model="person.Name" />-->
+                                                <!--<div class="col-md-1">
+                                                    <button class="btn btn-info" ng-click="choosePerson()" data-toggle="modal" data-target="#modalPerson">选择已注册客户</button>
+                                                </div>-->
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="control-label col-md-3">性别</label>
+                                                <div class="col-md-4">
+                                                    <select class="form-control" ng-model="person.Sex" select-code="A00.001"></select>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="control-label col-md-3">身份证号<span class="required">*</span></label>
+                                                <div class="col-md-4">
+                                                    <input type="text" class="form-control" ng-keypress="KeyPress()" ng-blur="GetAppcertInfo(person.IdNo)" ng-model="person.IdNo" idcard required autocomplete="off">
+                                                </div>
+                                            </div>
+                                            <!--<div class="form-group">
+                                                <label class="control-label col-md-3">年龄</label>
+                                                <div class="col-md-4">
+                                                    <input type="text" class="form-control" id="txtAge" name="gender" ng-keypress="KeyPress()" ng-model="person.Age">
+                                                </div>
+                                            </div>-->
+                                            <!--<div class="form-group">
+                                                <label class="control-label col-md-3">机构<span class="required">*</span></label>
+                                                <div class="col-md-4">
+                                                    <select name="country" class="col-sm-12 form-control" ng-model="person.OrgId" ng-options="t.OrgId as t.OrgName for t in Orgs"></select>
+                                                    <span class="error-span"></span>
+                                                </div>
+                                            </div>-->
+                                        </div>
+                                        <div class="tab-pane" id="checkInInfo">
+                                            <div class="panel panel-default" ng-show="isShowNCIInfo">
+                                                <div class="panel-heading">
+                                                    <h4>
+                                                        <i class="fa fa-bars"></i>护理险基本信息
+                                                    </h4>
+                                                </div>
+                                                <div class="panel-body">
+                                                    <div class="form-group">
+                                                        <label class="col-sm-1 control-label">姓名</label>
+                                                        <div class="col-sm-2">
+                                                            <input class="form-control" type="text" ng-model="AppCert.Name" ng-disabled="true">
+                                                        </div>
+                                                        <label class="col-sm-1 control-label">身份证号</label>
+                                                        <div class="col-sm-2">
+                                                            <input class="form-control" type="text" ng-model="AppCert.IdNo" ng-disabled="true">
+                                                        </div>
+                                                        <label class="col-sm-1 control-label">社保卡号</label>
+                                                        <div class="col-sm-2">
+                                                            <input class="form-control" type="text" ng-model="person.SsNo" ng-disabled="true">
+                                                        </div>
+                                                        <label class="col-sm-1 control-label">资格证书</label>
+                                                        <div class="col-sm-2">
+                                                            <input class="form-control" type="text" ng-model="RegNCIInfo.Certno" ng-disabled="true">
+                                                        </div>
+                                                      </div>
+                                                    <div class="form-group">
+                                                        <label class="col-sm-1 control-label">生效时间</label>
+                                                        <div class="col-sm-2">
+                                                            <input class="form-control" type="text" ng-model="RegNCIInfo.CertStartTime" ca-date-time-picker ng-disabled="true">
+                                                        </div>
+                                                        <label class="col-sm-1 control-label">失效时间</label>
+                                                        <div class="col-sm-2">
+                                                            <input class="form-control" type="text" ng-model="RegNCIInfo.CertExpiredTime" ca-date-time-picker ng-disabled="true">
+                                                        </div>
+                                                        <label class="col-sm-1 control-label">护理形式</label>
+                                                        <div class="col-sm-2">
+                                                            <input class="form-control" type="text" ng-model="RegNCIInfo.CaretypeName" ng-disabled="true">
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group">
+                             
+                                                        <label class="col-sm-1 control-label">报销标准</label>
+                                                        <div class="col-sm-2">
+                                                            <input class="form-control" type="text" ng-model="RegNCIInfo.NCIPaylevel" ng-disabled="true">
+                                                        </div>
+                                                        <label class="col-sm-1 control-label">报销比例</label>
+                                                        <div class="col-sm-2">
+                                                            <input class="form-control" type="text" ng-model="RegNCIInfo.NCIPayscale" ng-disabled="true">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="panel panel-default">
+                                                <div class="panel-body">
+                                                    <input type="hidden" ng-model="resident.id" />
+                                                    <div class="form-group">
+                                                        <label class="col-sm-1 control-label">入住日期</label>
+                                                        <div class="col-sm-2">
+                                                            <input class="form-control" type="text" ng-model="resident.InDate" ca-date-picker>
+                                                        </div>
+                                                        <!--<label class="col-sm-1 control-label">住民类型</label>
+                                                        <div class="col-sm-2">
+                                                            <select class="form-control" ng-model="resident.RsType" select-code="A00.051"></select>
+                                                        </div>
+                                                        <label class="col-sm-1 control-label">住民身份</label>
+                                                        <div class="col-sm-2">
+                                                            <select class="form-control" ng-model="resident.RsStatus" select-code="A00.052"></select>
+                                                        </div>-->
+                                                        <label class="col-sm-1 control-label" ng-show="false">服务类型</label>
+                                                        <div class="col-sm-2" ng-show="false">
+                                                            <select class="form-control" ng-model="resident.ServiceType" select-code="A00.002" ></select>
+                                                        </div>
+                                                        <label class="col-sm-1 control-label">楼层</label>
+                                                        <div class="col-sm-2">
+                                                            <input ng-model="FloorName" class="form-control" type="text" readonly="readonly">
+                                                        </div>
+                                                        <label class="col-sm-1 control-label">房间号</label>
+                                                        <div class="col-sm-2">
+                                                            <input ng-model="RoomName" class="form-control" type="text" readonly="readonly">
+                                                        </div>
+                                                        <!--<label class="col-sm-1 control-label">床号</label>
+                                                        <div class="col-sm-2">
+                                                            <input ng-model="resident.BedNo" class="form-control" type="text" readonly="readonly">
+                                                        </div>-->
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <!--<label class="col-sm-1 control-label">床类别</label>
+                                                        <div class="col-sm-2">
+                                                            <select class="form-control" ng-model="resident.BedKind" select-code="J00.004" disabled></select>
+                                                        </div>
+                                                        <label class="col-sm-1 control-label">床位型态</label>
+                                                        <div class="col-sm-2">
+                                                            <select class="form-control" ng-model="resident.BedType" select-code="J00.003" disabled></select>
+                                                            <select class="form-control" ng-model="state" select-code="A00.080" style="display:none"></select>
+                                                        </div>-->
+
+                                                        <label class="col-sm-1 control-label">所属区域</label>
+                                                        <div class="col-sm-2">
+                                                            <select class="form-control" ng-model="resident.Area" select-code="L04.001" ng-disabled="true" readonly="readonly"></select>
+                                                        </div>
+                                                        <label class="col-sm-1 control-label">房间类别</label>
+                                                        <div class="col-sm-2">
+                                                            <select class="form-control" ng-model="resident.RoomType" select-code="L04.002" ng-disabled="true" readonly="readonly"></select>
+                                                        </div>
+                                                        <label class="col-sm-1 control-label">床号</label>
+                                                        <div class="col-sm-2">
+                                                            <!--<button class="btn btn-info col-sm-12" ng-click="chooseBed()" data-toggle="modal" data-target="#modalBed">安排床位</button>-->
+                                                            <km-look-up title="床位" single="true" callback="selectBed(item)" is-can-choose="[{key:'BedStatus',value:'Empty'},{key:'BedStatus',value:'Subscribe'}]" ng-model="resident.BedNo" input-show="true" item-property="{key:'BedNo',name:'BedNo'}" factory-name="bedRes" search-params="{Code:'keyWords',Text:'请输入楼层或房间号查询'}" col-list="[{Code:'BedNo',Name:'床位号'},{Code:'BedStatus',Name:'状态',Format:'dic',dicCode:'J00.002'},{Code:'FloorName',Name:'所在楼层'},{Code:'RoomName',Name:'所在房间'},{Code:'Area',Name:'所属区域',Format:'dic',dicCode:'L04.001'},{Code:'RoomType',Name:'房间类别',Format:'dic',dicCode:'L04.002'},{Code:'ResidentName',Name:'姓名'}]"></km-look-up>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label class="col-sm-1 control-label">主责护士</label>
+                                                        <div class="col-sm-2">
+                                                            <!--<select class="form-control" ng-model="resident.NurseNo" ng-options="item.EmpNo as item.EmpName+'('+item.EmpNo+')' for item in NurseNoData">
+                                                                <option></option>
+                                                            </select>-->
+                                                            <!--<input-staff value="{{resident.NurseNo}}" />-->
+                                                            <div class="input-group input-group-sm">
+                                                                <input type="text" readonly class="form-control" value={{resident.NurseNo|filterLookupName}} />
+                                                                <span class="input-group-btn">
+                                                                    <button class="btn btn-default" ng-click="showNurse(enum.careerType.Nurse)">
+                                                                        <span class="fa fa-search"></span>
+                                                                    </button>
+                                                                </span>
+                                                            </div>
+                                                        </div>
+                                                        
+                                                        <label class="col-sm-1 control-label">主责社工</label>
+                                                        <div class="col-sm-2">
+                                                            <!--<select class="form-control" ng-model="resident.Carer" ng-options="item.EmpNo as item.EmpName+'('+item.EmpNo+')'  for item in CarerData">
+                                                                <option></option>
+                                                            </select>-->
+                                                            <!--<input-staff value="{{resident.Carer}}" />-->
+                                                            <div class="input-group input-group-sm">
+                                                                <input type="text" readonly class="form-control" value={{resident.Carer|filterLookupName}} />
+                                                                <span class="input-group-btn">
+                                                                    <button class="btn btn-default" ng-click="showNurse(enum.careerType.Carer)">
+                                                                        <span class="fa fa-search"></span>
+                                                                    </button>
+                                                                </span>
+                                                            </div>
+                                                        </div>
+                                                        <label class="col-sm-1 control-label">医师</label>
+                                                        <div class="col-sm-2">
+                                                            <!--<select class="form-control" ng-model="resident.Doctor" ng-options="item.EmpNo as item.EmpName+'('+item.EmpNo+')'  for item in DoctorData">
+                                                                <option></option>
+                                                            </select>-->
+                                                            <!--<input-staff callback="DoctorSelected(item)" value="{{resident.Doctor}}" />-->
+                                                            <div class="input-group input-group-sm">
+                                                                <input type="text" readonly class="form-control" value={{resident.Doctor|filterLookupName}} />
+                                                                <span class="input-group-btn">
+                                                                    <button class="btn btn-default" ng-click="showNurse(enum.careerType.Doctor)">
+                                                                        <span class="fa fa-search"></span>
+                                                                    </button>
+                                                                </span>
+                                                            </div>
+                                                        </div>
+
+                                                        <label class="col-sm-1 control-label">物理治疗师</label>
+                                                        <div class="col-sm-2">
+                                                            <!--<select class="form-control" ng-model="resident.Physiotherapist" ng-options="item.EmpNo as item.EmpName+'('+item.EmpNo+')'  for item in PhysiotherapistData">
+                                                                <option></option>
+                                                            </select>-->
+                                                            <!--<input-staff value="{{resident.Physiotherapist}}" />-->
+                                                            <div class="input-group input-group-sm">
+                                                                <input type="text" readonly class="form-control" value={{resident.Physiotherapist|filterLookupName}} />
+                                                                <span class="input-group-btn">
+                                                                    <button class="btn btn-default" ng-click="showNurse(enum.careerType.Physiotherapist)">
+                                                                        <span class="fa fa-search"></span>
+                                                                    </button>
+                                                                </span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="form-group">
+                                                        <label class="col-sm-1 control-label">住民类型</label>
+                                                        <div class="col-sm-2">
+                                                            <select class="form-control" ng-model="person.RsType" select-code="A00.051"></select>
+                                                        </div>
+                                                        <label class="col-sm-1 control-label">住民身份</label>
+                                                        <div class="col-sm-2">
+                                                            <select class="form-control" ng-model="person.RsStatus" select-code="A00.052"></select>
+                                                        </div>
+
+                                                        <label class="col-sm-1 control-label"  ng-show="false">营养师</label>
+                                                        <div class="col-sm-2" ng-show="false">
+                                                            <select class="form-control" ng-model="resident.Nutritionist" ng-options="item.EmpNo as item.EmpName+'('+item.EmpNo+')' for item in NutritionistData">
+                                                                <option></option>
+                                                            </select>
+                                                            <!--<input-staff value="{{resident.Nutritionist}}" emp-group="001"/>-->
+                                                        </div>
+                                                    </div>
+                                             
+                                                    <div class="form-group">
+                                                        <!--<label class="col-sm-1 control-label">动态说明</label>
+                                                        <div class="col-sm-3">
+                                                            <input ng-model="resident.StateReason" class="form-control" type="text">
+                                                        </div>-->
+                                                        <!--<div class="col-sm-7 col-sm-offset-1">
+                                                            <input type="checkbox" class="uniform" ng-model="resident.SickFlag"> 隔离床别
+                                                            <input type="checkbox" class="uniform" ng-model="resident.RoomFlag"> 包房
+                                                            <input type="checkbox" class="uniform" ng-model="resident.ProtFlaf"> 需保密
+                                                            <input type="checkbox" class="uniform" ng-model="resident.DangerFlag"> 病危设定
+                                                        </div>-->
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="wizard-buttons">
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <div class="col-md-offset-3 col-md-9">
+                                                <a href="javascript:;" class="btn btn-default prevBtn">
+                                                    <i class="fa fa-arrow-circle-left"></i> 后退
+                                                </a>
+                                                <a href="javascript:;" class="btn btn-primary nextBtn">
+                                                    继续 <i class="fa fa-arrow-circle-right"></i>
+                                                </a>
+                                                <a href="javascript:;" class="btn btn-info submitBtn" ng-disabled="submiting">
+                                                    提交 <i class="fa fa-arrow-circle-right"></i>
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <!-- /BOX -->
+            </div>
+        </div>
+        <!-- /SAMPLE -->
+        <div class="footer-tools">
+            <span class="go-top">
+                <i class="fa fa-chevron-up"></i> Top
+            </span>
+        </div>
+    </div>
+</div>
+<!-- 住民Modal -->
+<div class="modal fade" id="modalPerson" tabindex="-1" role="dialog" aria-labelledby="modalPersonLabel" data-target=".bs-example-modal-lg">
+    <div class="modal-dialog bs-example-modal-lg" role="document">
+        <div class="modal-content modal-lg">
+            <div class="modal-header bg-success">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="modalPersonLabel">住民信息</h4>
+            </div>
+            <div class="modal-body">
+                <div ng-include="'/Views/Resident/PersonModal.html'"></div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-dismiss="modal">关闭</button>
+                <!--<button type="button" class="btn btn-primary" id="btnOk">确定</button>-->
+            </div>
+        </div>
+    </div>
+</div>
+<!-- 住民Modal -->
+<div class="modal fade" id="modalBed" tabindex="-1" role="dialog" aria-labelledby="modalBedLabel" data-target=".bs-example-modal-lg">
+    <div class="modal-dialog bs-example-modal-lg" role="document">
+        <div style="width:850px" class="modal-content modal-lg">
+            <div class="modal-header bg-success">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="modalBedLabel">床位信息</h4>
+            </div>
+            <!--<button type="button" class="close" style="padding-right:5px" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>-->
+            <div class="modal-body">
+                <div ng-include="'/Views/OrganizationManage/BedModal.html'"></div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-dismiss="modal">关闭</button>
+                <!--<button type="button" class="btn btn-primary" id="btnOk">确定</button>-->
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- WIZARD -->
+<!--<script src="../../Content/CloudAdmin/js/bootstrap-wizard/jquery.bootstrap.wizard.js"></script>-->
+<!--<script src="/Content/CloudAdmin/js/bootstrap-wizard/jquery.bootstrap.wizard.min.js"></script>-->
+<!--<script src="/Content/CloudAdmin/js/bootstrap-wizard/form-wizard.js"></script>-->
+
+<script type="text/javascript">
+
+    (function () {
+        return {
+            init: function () {
+
+                var $wizform = $('[name=wizform]');
+                var alert_success = $('.alert-success', $wizform);
+                var alert_error = $('.alert-danger', $wizform);
+                var element = angular.element(document.getElementById("regResidentContent"));
+                var $scope = element.scope();
+                $('#formWizard').bootstrapWizard({
+                    'nextSelector': '.nextBtn',
+                    'previousSelector': '.prevBtn',
+                    onNext: function (tab, navigation, index) {
+                        alert_success.hide();
+                        alert_error.hide();
+                        //if ($wizform.valid() == false) {
+                        //    return false;
+                        //}
+                        var total = navigation.find('li').length;
+                        var current = index + 1;
+                        if (current == 2) {//保存基本信息
+                            if ($scope.valid(current, alert_success, alert_error) == false) {
+                                return false;
+                            }
+                        }
+                        $('.stepHeader', $('#formWizard')).text('Step ' + (index + 1) + ' of ' + total);
+                        jQuery('li', $('#formWizard')).removeClass("done");
+                        var li_list = navigation.find('li');
+                        for (var i = 0; i < index; i++) {
+                            jQuery(li_list[i]).addClass("done");
+                        }
+                        if (current == 1) {
+                            $('#formWizard').find('.prevBtn').hide();
+                        } else {
+                            $('#formWizard').find('.prevBtn').show();
+                        }
+                        if (current >= total) {
+                            $('#formWizard').find('.nextBtn').hide();
+                            $('#formWizard').find('.submitBtn').show();
+                        } else {
+                            $('#formWizard').find('.nextBtn').show();
+                            $('#formWizard').find('.submitBtn').hide();
+                        }
+
+
+                        //if (current == 4) {
+                        //    $scope.saveReginsdtl();
+                        //}
+                    },
+                    onPrevious: function (tab, navigation, index) {
+                        alert_success.hide();
+                        alert_error.hide();
+                        var total = navigation.find('li').length;
+                        var current = index + 1;
+                        $('.stepHeader', $('#formWizard')).text('Step ' + (index + 1) + ' of ' + total);
+                        jQuery('li', $('#formWizard')).removeClass("done");
+                        var li_list = navigation.find('li');
+                        for (var i = 0; i < index; i++) {
+                            jQuery(li_list[i]).addClass("done");
+                        }
+                        if (current == 1) {
+                            $('#formWizard').find('.prevBtn').hide();
+                        } else {
+                            $('#formWizard').find('.prevBtn').show();
+                        }
+                        if (current >= total) {
+                            $('#formWizard').find('.nextBtn').hide();
+                            $('#formWizard').find('.submitBtn').show();
+                        } else {
+                            $('#formWizard').find('.nextBtn').show();
+                            $('#formWizard').find('.submitBtn').hide();
+                        }
+                    },
+                    onTabClick: function (tab, navigation, index) {
+                        //bootbox.alert('On Tab click is disabled');
+                        return false;
+                    },
+                    onTabShow: function (tab, navigation, index) {
+                        var total = navigation.find('li').length;
+                        var current = index + 1;
+                        var $percent = (current / total) * 100;
+                        $('#formWizard').find('.progress-bar').css({
+                            width: $percent + '%'
+                        });
+                    }
+                });
+
+                $('#formWizard').find('.prevBtn').hide();
+                $('#formWizard .submitBtn').unbind('click').click(function () {
+                    if ($scope.saveIpdreg()) {
+                        $(this).hide();
+                    } else {
+                        $(this).show();
+                    }
+
+                }).hide();
+            }
+        };
+    })().init();
+
+</script>

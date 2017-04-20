@@ -1,0 +1,126 @@
+
+<div class="row">
+    <div id="content" class="col-md-12">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="page-header">
+                    <!-- BREADCRUMBS -->
+                    <ul class="breadcrumb">
+                        <li>
+                            <i class="fa fa-home"></i>
+                            <a href="/">首页</a>
+                        </li>
+                        <li>
+                            <a href="#">社工/行政</a>
+                        </li>
+                        <li>社工评估</li>
+                    </ul>
+                    <!-- /BREADCRUMBS -->
+                    <div class="clearfix"></div>
+                    
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-2">
+                <div class="box border primary">
+                    <div class="box-title">
+                        <h4>
+                            <i class="fa fa-bars">住民信息</i>
+                        </h4>
+                    </div>
+                    <div class="box-body">
+                        <resident-card callback="residentSelected(resident)" />
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-10">
+                <div class="box border primary">
+                    <div class="box-title">
+                        <h4><i class="fa fa-columns"></i><span class="hidden-inline-mobile">社工评估-管理</span></h4>
+                    </div>
+                    <div class="box-body">
+                        <div class="tabbable header-tabs">
+                            <ul class="nav nav-tabs" id="tabEvaluate">
+                                <li ui-sref-active="active"><a ui-sref=".RelativeSdiscussEvaluate" href=""><i class="fa fa-circle-o"></i> <span class="hidden-inline-mobile">计划修订</span></a></li>
+                                <li ui-sref-active="active"><a ui-sref=".QuestionEvaluate" href=""><i class="fa fa-circle-o"></i> <span class="hidden-inline-mobile">问题与处遇</span></a></li>
+                                <li ui-sref-active="active"><a ui-sref=".SocialRelEvaluate" href=""><i class="fa fa-circle-o"></i> <span class="hidden-inline-mobile">社会资源评估</span></a></li>
+                                <li ui-sref-active="active"><a ui-sref=".HomeEvaluate" href=""><i class="fa fa-laptop"></i> <span class="hidden-inline-mobile">家庭评估</span></a></li>
+                                <li ui-sref-active="active"><a ui-sref=".PsychologyInfo" href=""><i class="fa fa-calendar-o"></i> <span class="hidden-inline-mobile">身心社会评估</span></a></li>
+                            </ul>
+                            <div class="tab-content" style="padding: 10px">
+                                <div ui-view=""></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <div class="row" style="display:none">
+            <div class="col-md-12">
+                <div class="box border primary">
+                    <div class="box-title">
+                        <h4>定期评估人员列表</h4>
+                        <div class="tools hidden-xs">
+                            <!--<a href="#box-config" data-toggle="modal" class="config">
+                                <i class="fa fa-cog"></i>
+                            </a>-->
+                            <a class="reload" href="javascript:;" ca-reload>
+                                <i class="fa fa-refresh"></i>
+                            </a>
+                            <a href="javascript:;" class="collapse" ca-collapse>
+                                <i class="fa fa-chevron-up"></i>
+                            </a>
+                            <a class="remove" href="javascript:;" ca-remove>
+                                <i class="fa fa-times"></i>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="box-body">
+                        <table id="tbEvalList"   class="table table-striped table-bordered table-hover table-handler">
+                            <thead>
+                                <tr>
+                                    <th><i class="fa fa-user"></i>个案姓名</th>
+                                    <th>个案编号</th>
+                                    <th>性别</th>
+                                    <th>床号</th>
+
+                                    <th>最近一次评估日期</th>
+                                    <th>评估人</th>
+                                    <th>下次评估日期</th>
+                                    <th>下次评估人</th>
+                                    <th>评估次数</th>
+                                    <th><i class="fa fa-bars"></i> 操作</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr ng-repeat="person in Data.persons|filter:filter.evalName|filter:filter.regNo">
+                                    <td>{{person.Name}}</td>
+                                    <td>{{person.id}}</td>
+                                    <td>{{person.Gender}}</td>
+                                    <td>{{person.Bunk}}</td>
+                                    <td>{{person.EvalDate}}</td>
+                                    <td>{{person.EvaluateBy}}</td>
+                                    <td>{{person.NextEvalDate}}</td>
+                                    <td>{{person.NextEvaluateBy}}</td>
+                                    <td>{{person.Count}}</td>
+                                    <td>
+                                        <div class="btn-group btn-group-xs" role="group" aria-label="...">
+                                            <a ui-sref="EvaluateAdd.PsychologyInfo({id:person.id})" class=" btn btn-primary" role="button" data-toggle="modal">新增</a>
+                                            <button class="btn btn-default" ui-sref="EvaluateAdd.PsychologyInfo({id:person.id})">编辑</button>
+                                            <a ui-sref="EvaluateHistory({id:person.id})" class="btn btn-info" role="button" data-toggle="modal">历次资料</a>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+

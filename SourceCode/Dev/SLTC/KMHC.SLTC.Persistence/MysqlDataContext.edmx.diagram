@@ -1,0 +1,417 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="b4a031237ba348fa8ed2b1169455484b" Name="Diagram1">
+        <EntityTypeShape EntityType="KMECareModel.CARE_PLANACTIVITY" Width="1.5" PointX="3" PointY="4.625" />
+        <EntityTypeShape EntityType="KMECareModel.CARE_PLANCHECKPOINT" Width="1.5" PointX="3" PointY="8" />
+        <EntityTypeShape EntityType="KMECareModel.CARE_PLANDATA" Width="1.5" PointX="3" PointY="16.75" />
+        <EntityTypeShape EntityType="KMECareModel.CARE_PLANEVAL" Width="1.5" PointX="3" PointY="22.25" />
+        <EntityTypeShape EntityType="KMECareModel.CARE_PLANFOCUS" Width="1.5" PointX="3" PointY="19.625" />
+        <EntityTypeShape EntityType="KMECareModel.CARE_PLANGOAL" Width="1.5" PointX="3" PointY="14.125" />
+        <EntityTypeShape EntityType="KMECareModel.CARE_PLANPROBLEM" Width="1.5" PointX="0.75" PointY="11.5" />
+        <EntityTypeShape EntityType="KMECareModel.CARE_PLANREASON" Width="1.5" PointX="3" PointY="11.375" />
+        <EntityTypeShape EntityType="KMECareModel.CARE_PLANTRAIN" Width="1.5" PointX="3" PointY="2" />
+        <EntityTypeShape EntityType="KMECareModel.CHECKITEM" Width="1.5" PointX="5.75" PointY="13.75" />
+        <EntityTypeShape EntityType="KMECareModel.CHECKTEMPLATE" Width="1.5" PointX="26.75" PointY="0.875" />
+        <EntityTypeShape EntityType="KMECareModel.CHECKTEMPLATEITEM" Width="1.5" PointX="29" PointY="0.875" />
+        <EntityTypeShape EntityType="KMECareModel.DC_ABNORMALEMOTIONREC" Width="1.5" PointX="19.75" PointY="0.75" />
+        <EntityTypeShape EntityType="KMECareModel.DC_ASSESSVALUE" Width="1.5" PointX="29.25" PointY="5.5" />
+        <EntityTypeShape EntityType="KMECareModel.DC_CAREPLANACTIVITY" Width="1.5" PointX="17" PointY="7" />
+        <EntityTypeShape EntityType="KMECareModel.DC_CAREPLANDATA" Width="1.5" PointX="17" PointY="4.125" />
+        <EntityTypeShape EntityType="KMECareModel.DC_CAREPLANEVAL" Width="1.5" PointX="17" PointY="1.5" />
+        <EntityTypeShape EntityType="KMECareModel.DC_CAREPLANGOAL" Width="1.5" PointX="17" PointY="12.75" />
+        <EntityTypeShape EntityType="KMECareModel.DC_CAREPLANPROBLEM" Width="1.5" PointX="14.75" PointY="6.625" />
+        <EntityTypeShape EntityType="KMECareModel.DC_CAREPLANREASON" Width="1.5" PointX="17" PointY="10" />
+        <EntityTypeShape EntityType="KMECareModel.DC_COMMDTL" Width="1.5" PointX="5.75" PointY="5.75" />
+        <EntityTypeShape EntityType="KMECareModel.DC_COMMFILE" Width="1.5" PointX="14.75" PointY="15.75" />
+        <EntityTypeShape EntityType="KMECareModel.DC_DAYLIFECAREDTL" Width="1.5" PointX="52" PointY="45.125" />
+        <EntityTypeShape EntityType="KMECareModel.DC_DAYLIFECAREREC" Width="1.5" PointX="49.75" PointY="45.5" />
+        <EntityTypeShape EntityType="KMECareModel.DC_EVALQUESTION" Width="1.5" PointX="27" PointY="15" />
+        <EntityTypeShape EntityType="KMECareModel.DC_EVALQUESTIONRESULT" Width="1.5" PointX="29.25" PointY="15.75" />
+        <EntityTypeShape EntityType="KMECareModel.DC_IPDREG" Width="1.5" PointX="3" PointY="43.375" />
+        <EntityTypeShape EntityType="KMECareModel.DC_LIFEHISTORY" Width="1.5" PointX="19.75" PointY="9.75" />
+        <EntityTypeShape EntityType="KMECareModel.DC_MULTITEAMCAREPLAN" Width="1.5" PointX="40" PointY="35.25" />
+        <EntityTypeShape EntityType="KMECareModel.DC_MULTITEAMCAREPLANEVAL" Width="1.5" PointX="40" PointY="38.25" />
+        <EntityTypeShape EntityType="KMECareModel.DC_MULTITEAMCAREPLANREC" Width="1.5" PointX="37.75" PointY="38.125" />
+        <EntityTypeShape EntityType="KMECareModel.DC_NOTE" Width="1.5" PointX="21.75" PointY="0.75" />
+        <EntityTypeShape EntityType="KMECareModel.DC_NSCPLACTIVITY" Width="1.5" PointX="29.25" PointY="11.75" />
+        <EntityTypeShape EntityType="KMECareModel.DC_NSCPLGOAL" Width="1.5" PointX="29.25" PointY="8.5" />
+        <EntityTypeShape EntityType="KMECareModel.DC_NURSEINGLIFECAREDTL" Width="1.5" PointX="5" PointY="50.625" />
+        <EntityTypeShape EntityType="KMECareModel.DC_NURSEINGLIFECAREREC" Width="1.5" PointX="2.75" PointY="50.125" />
+        <EntityTypeShape EntityType="KMECareModel.DC_NURSEINGPLANEVAL" Width="1.5" PointX="24.75" PointY="1.875" />
+        <EntityTypeShape EntityType="KMECareModel.DC_QUESTION" Width="1.5" PointX="36.75" PointY="15" />
+        <EntityTypeShape EntityType="KMECareModel.DC_QUESTIONITEM" Width="1.5" PointX="39" PointY="14" />
+        <EntityTypeShape EntityType="KMECareModel.DC_QUESTIONVALUE" Width="1.5" PointX="39" PointY="16.875" />
+        <EntityTypeShape EntityType="KMECareModel.DC_REFERRALLISTS" Width="1.5" PointX="5.25" PointY="43.375" />
+        <EntityTypeShape EntityType="KMECareModel.DC_REGACTIVITYREQUESTEVAL" Width="1.5" PointX="21.75" PointY="4.75" />
+        <EntityTypeShape EntityType="KMECareModel.DC_REGBASEINFOLIST" Width="1.5" PointX="19.75" PointY="28.75" />
+        <EntityTypeShape EntityType="KMECareModel.DC_REGCASECAREPLAN" Width="1.5" PointX="51" PointY="24" />
+        <EntityTypeShape EntityType="KMECareModel.DC_REGCASECAREPLANREC" Width="1.5" PointX="48.75" PointY="24" />
+        <EntityTypeShape EntityType="KMECareModel.DC_REGCHECKRECORD" Width="1.5" PointX="48.75" PointY="5" />
+        <EntityTypeShape EntityType="KMECareModel.DC_REGCHECKRECORDDATA" Width="1.5" PointX="51" PointY="5.375" />
+        <EntityTypeShape EntityType="KMECareModel.DC_REGCPL" Width="1.5" PointX="27" PointY="7.125" />
+        <EntityTypeShape EntityType="KMECareModel.DC_REGDAYLIFE" Width="1.5" PointX="39.75" PointY="45.75" />
+        <EntityTypeShape EntityType="KMECareModel.DC_REGEVALQUESTION" Width="1.5" PointX="39" PointY="9.625" />
+        <EntityTypeShape EntityType="KMECareModel.DC_REGFILE" Width="1.5" PointX="0.75" PointY="40.375" />
+        <EntityTypeShape EntityType="KMECareModel.DC_REGLIFEQUALITYEVAL" Width="1.5" PointX="21.75" PointY="28.75" />
+        <EntityTypeShape EntityType="KMECareModel.DC_REGMEDICINE" Width="1.5" PointX="24.75" PointY="44.75" />
+        <EntityTypeShape EntityType="KMECareModel.DC_REGNOTERECORD" Width="1.5" PointX="7.75" PointY="34.75" />
+        <EntityTypeShape EntityType="KMECareModel.DC_REGNURSINGDIAG" Width="1.5" PointX="31.75" PointY="43.75" />
+        <EntityTypeShape EntityType="KMECareModel.DC_REGQUESTIONDATA" Width="1.5" PointX="41.25" PointY="9.5" />
+        <EntityTypeShape EntityType="KMECareModel.DC_REGQUESTIONEVALREC" Width="1.5" PointX="36.75" PointY="9" />
+        <EntityTypeShape EntityType="KMECareModel.DC_REGVISITRECORD" Width="1.5" PointX="2.75" PointY="39.75" />
+        <EntityTypeShape EntityType="KMECareModel.DC_SWREGEVALPLAN" Width="1.5" PointX="22.75" PointY="49.5" />
+        <EntityTypeShape EntityType="KMECareModel.DC_TASKGOALSSTRATEGY" Width="1.5" PointX="25" PointY="54.125" />
+        <EntityTypeShape EntityType="KMECareModel.DC_TASKREMIND" Width="1.5" PointX="7.75" PointY="46.75" />
+        <EntityTypeShape EntityType="KMECareModel.DC_TEAMACTIVITY" Width="1.5" PointX="0.75" PointY="25.875" />
+        <EntityTypeShape EntityType="KMECareModel.DC_TEAMACTIVITYDTL" Width="1.5" PointX="3" PointY="25.875" />
+        <EntityTypeShape EntityType="KMECareModel.LTC_ACTIVEPERIOD" Width="1.5" PointX="5.25" PointY="34.75" />
+        <EntityTypeShape EntityType="KMECareModel.LTC_ACTIVEPERIOD_HIST" Width="1.5" PointX="9.75" PointY="46.75" />
+        <EntityTypeShape EntityType="KMECareModel.LTC_AFFAIRSHANDOVER" Width="1.5" PointX="41.75" PointY="46.75" />
+        <EntityTypeShape EntityType="KMECareModel.LTC_ASSESSVALUE" Width="1.5" PointX="34" PointY="9.75" />
+        <EntityTypeShape EntityType="KMECareModel.LTC_ASSIGNTASK" Width="1.5" PointX="26.75" PointY="48.75" />
+        <EntityTypeShape EntityType="KMECareModel.LTC_BEDBASIC" Width="1.5" PointX="49.75" PointY="27.75" />
+        <EntityTypeShape EntityType="KMECareModel.LTC_BEDSORECHGREC" Width="1.5" PointX="50" PointY="38.125" />
+        <EntityTypeShape EntityType="KMECareModel.LTC_BEDSOREREC" Width="1.5" PointX="47.75" PointY="38.25" />
+        <EntityTypeShape EntityType="KMECareModel.LTC_BEDTRANSFER" Width="1.5" PointX="34.75" PointY="50.75" />
+        <EntityTypeShape EntityType="KMECareModel.LTC_BILL" Width="1.5" PointX="41.75" PointY="13" />
+        <EntityTypeShape EntityType="KMECareModel.LTC_BILLV2" Width="1.5" PointX="20" PointY="17.5" />
+        <EntityTypeShape EntityType="KMECareModel.LTC_BILLV2PAY" Width="1.5" PointX="17.75" PointY="36.5" />
+        <EntityTypeShape EntityType="KMECareModel.LTC_CAREDEMANDEVAL" Width="1.5" PointX="36.75" PointY="50.75" />
+        <EntityTypeShape EntityType="KMECareModel.LTC_CARERSVRREC" Width="1.5" PointX="43.75" PointY="50.75" />
+        <EntityTypeShape EntityType="KMECareModel.LTC_CHARGEGROUP" Width="1.5" PointX="22.75" PointY="36.125" />
+        <EntityTypeShape EntityType="KMECareModel.LTC_CHARGEGROUP_CHARGEITEM" Width="1.5" PointX="25" PointY="32.375" />
+        <EntityTypeShape EntityType="KMECareModel.LTC_CHARGEGROUP_CHARGERECORD" Width="1.5" PointX="25" PointY="40.75" />
+        <EntityTypeShape EntityType="KMECareModel.LTC_CHARGEGROUP_RESIDENT" Width="1.5" PointX="25" PointY="36.125" />
+        <EntityTypeShape EntityType="KMECareModel.LTC_CHECKGROUP" Width="1.5" PointX="26.75" PointY="23.625" />
+        <EntityTypeShape EntityType="KMECareModel.LTC_CHECKITEM" Width="1.5" PointX="29" PointY="20" />
+        <EntityTypeShape EntityType="KMECareModel.LTC_CHECKREC" Width="1.5" PointX="47.75" PointY="32" />
+        <EntityTypeShape EntityType="KMECareModel.LTC_CHECKRECDTL" Width="1.5" PointX="50" PointY="32.75" />
+        <EntityTypeShape EntityType="KMECareModel.LTC_CHECKTYPE" Width="1.5" PointX="26.75" PointY="20.625" />
+        <EntityTypeShape EntityType="KMECareModel.LTC_CODEDTL_REF" Width="1.5" PointX="4.75" PointY="39.75" />
+        <EntityTypeShape EntityType="KMECareModel.LTC_CODEFILE_REF" Width="1.5" PointX="50.75" PointY="8.75" />
+        <EntityTypeShape EntityType="KMECareModel.LTC_COMMFILE" Width="1.5" PointX="5.75" PointY="26.75" />
+        <EntityTypeShape EntityType="KMECareModel.LTC_COMPLAINREC" Width="1.5" PointX="45.75" PointY="50.75" />
+        <EntityTypeShape EntityType="KMECareModel.LTC_CONSTRAINSBEVAL" Width="1.5" PointX="50" PointY="18.125" />
+        <EntityTypeShape EntityType="KMECareModel.LTC_CONSTRAINTREC" Width="1.5" PointX="47.75" PointY="17.125" />
+        <EntityTypeShape EntityType="KMECareModel.LTC_CONSULTCALLBACK" Width="1.5" PointX="49" PointY="11.875" />
+        <EntityTypeShape EntityType="KMECareModel.LTC_CONSULTREC" Width="1.5" PointX="46.75" PointY="11" />
+        <EntityTypeShape EntityType="KMECareModel.LTC_COSTDTL" Width="1.5" PointX="47.75" PointY="50.75" />
+        <EntityTypeShape EntityType="KMECareModel.LTC_COSTGROUP" Width="1.5" PointX="46.75" PointY="1.375" />
+        <EntityTypeShape EntityType="KMECareModel.LTC_COSTGROUPDTL" Width="1.5" PointX="49" PointY="1" />
+        <EntityTypeShape EntityType="KMECareModel.LTC_COSTITEM" Width="1.5" PointX="44.75" PointY="46.75" />
+        <EntityTypeShape EntityType="KMECareModel.LTC_DEPTFILE" Width="1.5" PointX="51.75" PointY="0.75" />
+        <EntityTypeShape EntityType="KMECareModel.LTC_DOCTORCHECKREC" Width="1.5" PointX="7.75" PointY="51.75" />
+        <EntityTypeShape EntityType="KMECareModel.LTC_DOCTOREVALREC" Width="1.5" PointX="9.75" PointY="51.75" />
+        <EntityTypeShape EntityType="KMECareModel.LTC_DRGFREQREF" Width="1.5" PointX="51.75" PointY="11.75" />
+        <EntityTypeShape EntityType="KMECareModel.LTC_DRUGRECORD" Width="1.5" PointX="32" PointY="47.875" />
+        <EntityTypeShape EntityType="KMECareModel.LTC_EMPFILE" Width="1.5" PointX="49.75" PointY="51.75" />
+        <EntityTypeShape EntityType="KMECareModel.LTC_FALLINCIDENTEVENT" Width="1.5" PointX="51.75" PointY="51.75" />
+        <EntityTypeShape EntityType="KMECareModel.LTC_FAMILYDISCUSSREC" Width="1.5" PointX="52.75" PointY="17.75" />
+        <EntityTypeShape EntityType="KMECareModel.LTC_FEERECORD" Width="1.5" PointX="22.25" PointY="23.625" />
+        <EntityTypeShape EntityType="KMECareModel.LTC_FIXEDCOST" Width="1.5" PointX="47" PointY="46" />
+        <EntityTypeShape EntityType="KMECareModel.LTC_FSTREGREC" Width="1.5" PointX="53.75" PointY="51.75" />
+        <EntityTypeShape EntityType="KMECareModel.LTC_GOODS" Width="1.5" PointX="51.75" PointY="27.75" />
+        <EntityTypeShape EntityType="KMECareModel.LTC_GOODSLOAN" Width="1.5" PointX="52.75" PointY="32.75" />
+        <EntityTypeShape EntityType="KMECareModel.LTC_GOODSSALE" Width="1.5" PointX="52.75" PointY="37.75" />
+        <EntityTypeShape EntityType="KMECareModel.LTC_GROUP" Width="1.5" PointX="0.75" PointY="35.5" />
+        <EntityTypeShape EntityType="KMECareModel.LTC_GROUPACTIVITYREC" Width="1.5" PointX="53.75" PointY="0.75" />
+        <EntityTypeShape EntityType="KMECareModel.LTC_HANDOVERDTL" Width="1.5" PointX="37" PointY="46.25" />
+        <EntityTypeShape EntityType="KMECareModel.LTC_HANDOVERRECORD" Width="1.5" PointX="34.75" PointY="46" />
+        <EntityTypeShape EntityType="KMECareModel.LTC_HOMECARESUPERVISE" Width="1.5" PointX="53.75" PointY="6.75" />
+        <EntityTypeShape EntityType="KMECareModel.LTC_HOMECARESVRREC" Width="1.5" PointX="54.75" PointY="11.75" />
+        <EntityTypeShape EntityType="KMECareModel.LTC_ICD9_DISEASE" Width="1.5" PointX="7.75" PointY="5.75" />
+        <EntityTypeShape EntityType="KMECareModel.LTC_INFECTIONIND" Width="1.5" PointX="36.75" PointY="1.375" />
+        <EntityTypeShape EntityType="KMECareModel.LTC_INFECTIONITEM" Width="1.5" PointX="9.75" PointY="5.75" />
+        <EntityTypeShape EntityType="KMECareModel.LTC_INFECTIONSYMPOTM" Width="1.5" PointX="39" PointY="1.125" />
+        <EntityTypeShape EntityType="KMECareModel.LTC_INSULININJECT" Width="1.5" PointX="53.75" PointY="28.75" />
+        <EntityTypeShape EntityType="KMECareModel.LTC_INVALUE" Width="1.5" PointX="54.75" PointY="32.75" />
+        <EntityTypeShape EntityType="KMECareModel.LTC_IPDCLOSECASE" Width="1.5" PointX="54.75" PointY="36.75" />
+        <EntityTypeShape EntityType="KMECareModel.LTC_IPDORDER" Width="1.5" PointX="55.75" PointY="0.75" />
+        <EntityTypeShape EntityType="KMECareModel.LTC_IPDORDERPOSTREC" Width="1.5" PointX="54.75" PointY="44.75" />
+        <EntityTypeShape EntityType="KMECareModel.LTC_IPDREG" Width="1.5" PointX="17.75" PointY="42" />
+        <EntityTypeShape EntityType="KMECareModel.LTC_IPDREGOUT" Width="1.5" PointX="20" PointY="40" />
+        <EntityTypeShape EntityType="KMECareModel.LTC_IPDVERIFY" Width="1.5" PointX="4.75" PointY="55.75" />
+        <EntityTypeShape EntityType="KMECareModel.LTC_LABEXAMREC" Width="1.5" PointX="39" PointY="4.5" />
+        <EntityTypeShape EntityType="KMECareModel.LTC_LEAVEHOSP" Width="1.5" PointX="20" PointY="44.25" />
+        <EntityTypeShape EntityType="KMECareModel.LTC_LIFERECORDS" Width="1.5" PointX="55.75" PointY="28.75" />
+        <EntityTypeShape EntityType="KMECareModel.LTC_LOG" Width="1.5" PointX="54.75" PointY="48.75" />
+        <EntityTypeShape EntityType="KMECareModel.LTC_LOOKOVER" Width="1.5" PointX="34" PointY="14.125" />
+        <EntityTypeShape EntityType="KMECareModel.LTC_MAKERITEM" Width="1.5" PointX="31.75" PointY="55.75" />
+        <EntityTypeShape EntityType="KMECareModel.LTC_MAKERITEMLIMITED" Width="1.5" PointX="33.75" PointY="55.75" />
+        <EntityTypeShape EntityType="KMECareModel.LTC_MAKERITEMLIMITEDVALUE" Width="1.5" PointX="45.75" PointY="55.75" />
+        <EntityTypeShape EntityType="KMECareModel.LTC_MANUFACTURE" Width="1.5" PointX="55.75" PointY="51.75" />
+        <EntityTypeShape EntityType="KMECareModel.LTC_MATERIALRECORD" Width="1.5" PointX="45" PointY="39.125" />
+        <EntityTypeShape EntityType="KMECareModel.LTC_MATHNUMBER" Width="1.5" PointX="11.75" PointY="5.75" />
+        <EntityTypeShape EntityType="KMECareModel.LTC_MEASUREDRECORD" Width="1.5" PointX="46" PointY="27" />
+        <EntityTypeShape EntityType="KMECareModel.LTC_MEASUREITEM" Width="1.5" PointX="43.75" PointY="27.875" />
+        <EntityTypeShape EntityType="KMECareModel.LTC_MEDICINE" Width="1.5" PointX="27.75" PointY="35.5" />
+        <EntityTypeShape EntityType="KMECareModel.LTC_MODULES" Width="1.5" PointX="5.25" PointY="29.625" />
+        <EntityTypeShape EntityType="KMECareModel.LTC_MONTHLYPAYBILLRECORD" Width="1.5" PointX="55.75" PointY="54.75" />
+        <EntityTypeShape EntityType="KMECareModel.LTC_MONTHLYPAYLIMIT" Width="1.5" PointX="0.75" PointY="56.75" />
+        <EntityTypeShape EntityType="KMECareModel.LTC_NCIDEDUCTION" Width="1.5" PointX="22.25" PointY="18.625" />
+        <EntityTypeShape EntityType="KMECareModel.LTC_NCIEVALUATE" Width="1.5" PointX="43.75" PointY="7" />
+        <EntityTypeShape EntityType="KMECareModel.LTC_NCIEVALUATEDTL" Width="1.5" PointX="46" PointY="7.5" />
+        <EntityTypeShape EntityType="KMECareModel.LTC_NCIFINANCIALMONTH" Width="1.5" PointX="16.75" PointY="15.75" />
+        <EntityTypeShape EntityType="KMECareModel.LTC_NCISUPERVISE" Width="1.5" PointX="56.75" PointY="9.75" />
+        <EntityTypeShape EntityType="KMECareModel.LTC_NEWREGENVADAPTATION" Width="1.5" PointX="56.75" PointY="13.75" />
+        <EntityTypeShape EntityType="KMECareModel.LTC_NEWRESIDENTENVREC" Width="1.5" PointX="27.75" PointY="56.75" />
+        <EntityTypeShape EntityType="KMECareModel.LTC_NOTIFICATION" Width="1.5" PointX="56.75" PointY="19.75" />
+        <EntityTypeShape EntityType="KMECareModel.LTC_NSCPL" Width="1.5" PointX="31.75" PointY="4.375" />
+        <EntityTypeShape EntityType="KMECareModel.LTC_NSCPLACTIVITY" Width="1.5" PointX="34" PointY="5.5" />
+        <EntityTypeShape EntityType="KMECareModel.LTC_NSCPLGOAL" Width="1.5" PointX="34" PointY="1.375" />
+        <EntityTypeShape EntityType="KMECareModel.LTC_NSDRUG" Width="1.5" PointX="29.75" PointY="46.25" />
+        <EntityTypeShape EntityType="KMECareModel.LTC_NSMEDICALMATERIAL" Width="1.5" PointX="42.75" PointY="38.25" />
+        <EntityTypeShape EntityType="KMECareModel.LTC_NSSERVICE" Width="1.5" PointX="7.75" PointY="40.125" />
+        <EntityTypeShape EntityType="KMECareModel.LTC_NURSERPTTPR" Width="1.5" PointX="56.75" PointY="32.75" />
+        <EntityTypeShape EntityType="KMECareModel.LTC_NURSINGHANDOVER" Width="1.5" PointX="38.75" PointY="56.75" />
+        <EntityTypeShape EntityType="KMECareModel.LTC_NURSINGREC" Width="1.5" PointX="56.75" PointY="23.75" />
+        <EntityTypeShape EntityType="KMECareModel.LTC_NUTRTION72EVAL" Width="1.5" PointX="40.75" PointY="56.75" />
+        <EntityTypeShape EntityType="KMECareModel.LTC_NUTRTIONCAREREC" Width="1.5" PointX="42.75" PointY="56.75" />
+        <EntityTypeShape EntityType="KMECareModel.LTC_NUTRTIONEVAL" Width="1.5" PointX="57.75" PointY="0.75" />
+        <EntityTypeShape EntityType="KMECareModel.LTC_ORG" Width="1.5" PointX="3" PointY="34.375" />
+        <EntityTypeShape EntityType="KMECareModel.LTC_ORGFLOOR" Width="1.5" PointX="42.75" PointY="34.25" />
+        <EntityTypeShape EntityType="KMECareModel.LTC_ORGROOM" Width="1.5" PointX="45" PointY="34" />
+        <EntityTypeShape EntityType="KMECareModel.LTC_OUTVALUE" Width="1.5" PointX="56.75" PointY="45.75" />
+        <EntityTypeShape EntityType="KMECareModel.LTC_OWNDRUGDTL" Width="1.5" PointX="6.75" PointY="57.75" />
+        <EntityTypeShape EntityType="KMECareModel.LTC_OWNDRUGREC" Width="1.5" PointX="17.75" PointY="57.75" />
+        <EntityTypeShape EntityType="KMECareModel.LTC_PAINBODYPART" Width="1.5" PointX="45" PointY="18.125" />
+        <EntityTypeShape EntityType="KMECareModel.LTC_PAINEVALREC" Width="1.5" PointX="42.75" PointY="19.25" />
+        <EntityTypeShape EntityType="KMECareModel.LTC_PAYBILL" Width="1.5" PointX="44" PointY="13" />
+        <EntityTypeShape EntityType="KMECareModel.LTC_PHARMACISTEVAL" Width="1.5" PointX="19.75" PointY="57.75" />
+        <EntityTypeShape EntityType="KMECareModel.LTC_PINMONEY" Width="1.5" PointX="57.75" PointY="27.75" />
+        <EntityTypeShape EntityType="KMECareModel.LTC_PIPELINE" Width="1.5" PointX="57.75" PointY="49.75" />
+        <EntityTypeShape EntityType="KMECareModel.LTC_PIPELINEEVAL" Width="1.5" PointX="57.75" PointY="52.75" />
+        <EntityTypeShape EntityType="KMECareModel.LTC_PIPELINEREC" Width="1.5" PointX="57.75" PointY="57.75" />
+        <EntityTypeShape EntityType="KMECareModel.LTC_PRECHARGE" Width="1.5" PointX="35" PointY="40.625" />
+        <EntityTypeShape EntityType="KMECareModel.LTC_PREIPD" Width="1.5" PointX="58.75" PointY="7.75" />
+        <EntityTypeShape EntityType="KMECareModel.LTC_PROPOSALDISSCUSS" Width="1.5" PointX="41.75" PointY="1.25" />
+        <EntityTypeShape EntityType="KMECareModel.LTC_PROPOSALDISSCUSSREC" Width="1.5" PointX="44" PointY="1" />
+        <EntityTypeShape EntityType="KMECareModel.LTC_PUSHTOKEN" Width="1.5" PointX="58.75" PointY="13.75" />
+        <EntityTypeShape EntityType="KMECareModel.LTC_QUESTION" Width="1.5" PointX="58.75" PointY="16.75" />
+        <EntityTypeShape EntityType="KMECareModel.LTC_QUESTIONRESULTS" Width="1.5" PointX="58.75" PointY="20.75" />
+        <EntityTypeShape EntityType="KMECareModel.LTC_RECEIPTS" Width="1.5" PointX="58.75" PointY="31.75" />
+        <EntityTypeShape EntityType="KMECareModel.LTC_REFERRALREC" Width="1.5" PointX="33.75" PointY="58.75" />
+        <EntityTypeShape EntityType="KMECareModel.LTC_REFUND" Width="1.5" PointX="17.75" PointY="18.375" />
+        <EntityTypeShape EntityType="KMECareModel.LTC_REGACTIVITYREQUEVAL" Width="1.5" PointX="58.75" PointY="36.75" />
+        <EntityTypeShape EntityType="KMECareModel.LTC_REGATTACHFILE" Width="1.5" PointX="58.75" PointY="23.75" />
+        <EntityTypeShape EntityType="KMECareModel.LTC_REGDEMAND" Width="1.5" PointX="44.75" PointY="58.75" />
+        <EntityTypeShape EntityType="KMECareModel.LTC_REGDISEASEHIS" Width="1.5" PointX="17.75" PointY="52.75" />
+        <EntityTypeShape EntityType="KMECareModel.LTC_REGDISEASEHISDTL" Width="1.5" PointX="20" PointY="53.125" />
+        <EntityTypeShape EntityType="KMECareModel.LTC_REGEVALUATE" Width="1.5" PointX="46.75" PointY="58.75" />
+        <EntityTypeShape EntityType="KMECareModel.LTC_REGFILE" Width="1.5" PointX="15.5" PointY="42.25" />
+        <EntityTypeShape EntityType="KMECareModel.LTC_REGHEALTH" Width="1.5" PointX="59.75" PointY="0.75" />
+        <EntityTypeShape EntityType="KMECareModel.LTC_REGINSDTL" Width="1.5" PointX="24.75" PointY="59.75" />
+        <EntityTypeShape EntityType="KMECareModel.LTC_REGNCIINFO" Width="1.5" PointX="29.75" PointY="59.75" />
+        <EntityTypeShape EntityType="KMECareModel.LTC_REGQUESTION" Width="1.5" PointX="59.75" PointY="45.75" />
+        <EntityTypeShape EntityType="KMECareModel.LTC_REGQUESTIONDATA" Width="1.5" PointX="59.75" PointY="27.75" />
+        <EntityTypeShape EntityType="KMECareModel.LTC_REGRELATION" Width="1.5" PointX="48.75" PointY="59.75" />
+        <EntityTypeShape EntityType="KMECareModel.LTC_REGRELATIONDTL" Width="1.5" PointX="59.75" PointY="50.75" />
+        <EntityTypeShape EntityType="KMECareModel.LTC_REHABILITREC" Width="1.5" PointX="50.75" PointY="59.75" />
+        <EntityTypeShape EntityType="KMECareModel.LTC_RESIDENTBALANCE" Width="1.5" PointX="32.75" PointY="38" />
+        <EntityTypeShape EntityType="KMECareModel.LTC_RESIDENTBALANCEREFUND" Width="1.5" PointX="35" PointY="36.25" />
+        <EntityTypeShape EntityType="KMECareModel.LTC_RESOURCELINKREC" Width="1.5" PointX="59.75" PointY="58.75" />
+        <EntityTypeShape EntityType="KMECareModel.LTC_ROLES" Width="1.5" PointX="3" PointY="29.625" />
+        <EntityTypeShape EntityType="KMECareModel.LTC_SCENARIO" Width="1.5" PointX="35.75" PointY="26.125" />
+        <EntityTypeShape EntityType="KMECareModel.LTC_SCENARIO_ITEM" Width="1.5" PointX="38" PointY="26" />
+        <EntityTypeShape EntityType="KMECareModel.LTC_SCENARIO_ITEM_OPTION" Width="1.5" PointX="40.25" PointY="26.125" />
+        <EntityTypeShape EntityType="KMECareModel.LTC_SERVICERECORD" Width="1.5" PointX="10" PointY="40.25" />
+        <EntityTypeShape EntityType="KMECareModel.LTC_SUBSIDYREC" Width="1.5" PointX="0.75" PointY="60.75" />
+        <EntityTypeShape EntityType="KMECareModel.LTC_SYMPOTMITEM" Width="1.5" PointX="60.75" PointY="6.75" />
+        <EntityTypeShape EntityType="KMECareModel.LTC_TRANSFERVISIT" Width="1.5" PointX="60.75" PointY="9.75" />
+        <EntityTypeShape EntityType="KMECareModel.LTC_UNPLANEDIPD" Width="1.5" PointX="60.75" PointY="20.75" />
+        <EntityTypeShape EntityType="KMECareModel.LTC_UNPLANWEIGHTIND" Width="1.5" PointX="60.75" PointY="30.75" />
+        <EntityTypeShape EntityType="KMECareModel.LTC_USERS" Width="1.5" PointX="0.75" PointY="29.375" />
+        <EntityTypeShape EntityType="KMECareModel.LTC_VACCINEINJECT" Width="1.5" PointX="60.75" PointY="37.75" />
+        <EntityTypeShape EntityType="KMECareModel.LTC_VISITDEPT" Width="1.5" PointX="38" PointY="22" />
+        <EntityTypeShape EntityType="KMECareModel.LTC_VISITDOCRECORDS" Width="1.5" PointX="27.75" PointY="41.25" />
+        <EntityTypeShape EntityType="KMECareModel.LTC_VISITDOCTOR" Width="1.5" PointX="40.25" PointY="21.875" />
+        <EntityTypeShape EntityType="KMECareModel.LTC_VISITHOSPITAL" Width="1.5" PointX="35.75" PointY="22" />
+        <EntityTypeShape EntityType="KMECareModel.LTC_VISITPRESCRIPTION" Width="1.5" PointX="30" PointY="34.125" />
+        <EntityTypeShape EntityType="KMECareModel.LTC_VITALSIGN" Width="1.5" PointX="61.75" PointY="0.75" />
+        <EntityTypeShape EntityType="KMECareModel.LTC_WORKITEM" Width="1.5" PointX="31.75" PointY="16.375" />
+        <EntityTypeShape EntityType="KMECareModel.LTC_WORKSUBITEM" Width="1.5" PointX="34" PointY="18.25" />
+        <EntityTypeShape EntityType="KMECareModel.LTC_ZIPFILE" Width="1.5" PointX="14.75" PointY="19.75" />
+        <EntityTypeShape EntityType="KMECareModel.NCI_AGENCY" Width="1.5" PointX="10.25" PointY="18.125" />
+        <EntityTypeShape EntityType="KMECareModel.NCI_AGENCYSTAFF" Width="1.5" PointX="12.5" PointY="18.375" />
+        <EntityTypeShape EntityType="KMECareModel.NCI_CARETYPE" Width="1.5" PointX="12.5" PointY="48" />
+        <EntityTypeShape EntityType="KMECareModel.NCI_CODEDTL" Width="1.5" PointX="41" PointY="30" />
+        <EntityTypeShape EntityType="KMECareModel.NCI_CODEFILE" Width="1.5" PointX="38.75" PointY="30" />
+        <EntityTypeShape EntityType="KMECareModel.NCI_COMMFILE" Width="1.5" PointX="60.75" PointY="42.75" />
+        <EntityTypeShape EntityType="KMECareModel.NCI_DRUG" Width="1.5" PointX="2.75" PointY="61.75" />
+        <EntityTypeShape EntityType="KMECareModel.NCI_DRUGBAK" Width="1.5" PointX="15.75" PointY="61.75" />
+        <EntityTypeShape EntityType="KMECareModel.NCI_ERRORCODE" Width="1.5" PointX="28.75" PointY="23.75" />
+        <EntityTypeShape EntityType="KMECareModel.NCI_GOVERNMENT" Width="1.5" PointX="8" PointY="20.625" />
+        <EntityTypeShape EntityType="KMECareModel.NCI_GOVERNMENTLEVEL" Width="1.5" PointX="5.75" PointY="19.125" />
+        <EntityTypeShape EntityType="KMECareModel.NCI_GOVERNMENTSTAFF" Width="1.5" PointX="10.25" PointY="23.125" />
+        <EntityTypeShape EntityType="KMECareModel.NCI_INSURANCECOMPANY" Width="1.5" PointX="10.25" PointY="14" />
+        <EntityTypeShape EntityType="KMECareModel.NCI_INSURANCECOMPANYSTAFF" Width="1.5" PointX="12.5" PointY="14.125" />
+        <EntityTypeShape EntityType="KMECareModel.NCI_LOCATIONCODE" Width="1.5" PointX="5.75" PointY="21.875" />
+        <EntityTypeShape EntityType="KMECareModel.NCI_MEDICALMATERIAL" Width="1.5" PointX="61.75" PointY="45.75" />
+        <EntityTypeShape EntityType="KMECareModel.NCI_MEDICALMATERIALBAK" Width="1.5" PointX="61.75" PointY="51.75" />
+        <EntityTypeShape EntityType="KMECareModel.NCI_MODULES" Width="1.5" PointX="11" PointY="34.875" />
+        <EntityTypeShape EntityType="KMECareModel.NCI_NURSINGHOME" Width="1.5" PointX="10.25" PointY="28.875" />
+        <EntityTypeShape EntityType="KMECareModel.NCI_NURSINGHOMESTAFF" Width="1.5" PointX="12.5" PointY="30.625" />
+        <EntityTypeShape EntityType="KMECareModel.NCI_ROLE" Width="1.5" PointX="8" PointY="8.75" />
+        <EntityTypeShape EntityType="KMECareModel.NCI_ROLE_MODULE" Width="1.5" PointX="13.25" PointY="10.75" />
+        <EntityTypeShape EntityType="KMECareModel.NCI_SERVICE" Width="1.5" PointX="61.75" PointY="57.75" />
+        <EntityTypeShape EntityType="KMECareModel.NCI_SERVICEBAK" Width="1.5" PointX="4.75" PointY="62.75" />
+        <EntityTypeShape EntityType="KMECareModel.NCI_SUPERVISE" Width="1.5" PointX="62.75" PointY="6.75" />
+        <EntityTypeShape EntityType="KMECareModel.NCI_USER" Width="1.5" PointX="10.25" PointY="8.25" />
+        <EntityTypeShape EntityType="KMECareModel.NCIA_AGENCYASSTRECORD" Width="1.5" PointX="13.25" PointY="22.375" />
+        <EntityTypeShape EntityType="KMECareModel.NCIA_AGENCYASSTRECORDDETAIL" Width="1.5" PointX="15.5" PointY="56" />
+        <EntityTypeShape EntityType="KMECareModel.NCIA_APPCERT" Width="1.5" PointX="15.5" PointY="26.25" />
+        <EntityTypeShape EntityType="KMECareModel.NCIA_APPHOSP" Width="1.5" PointX="17.75" PointY="26.75" />
+        <EntityTypeShape EntityType="KMECareModel.NCIA_APPLICANT" Width="1.5" PointX="13.25" PointY="55.625" />
+        <EntityTypeShape EntityType="KMECareModel.NCIA_APPLICANTHISTORY" Width="1.5" PointX="6.75" PointY="62.75" />
+        <EntityTypeShape EntityType="KMECareModel.NCIA_CARETYPECONDITION" Width="1.5" PointX="14.75" PointY="38.625" />
+        <EntityTypeShape EntityType="KMECareModel.NCIA_DEDUCTION" Width="1.5" PointX="33.75" PointY="24.375" />
+        <EntityTypeShape EntityType="KMECareModel.NCIA_NSAPPCERTRATE" Width="1.5" PointX="12.5" PointY="51.625" />
+        <EntityTypeShape EntityType="KMECareModel.NCIA_NSAPPHOSPRATE" Width="1.5" PointX="12.5" PointY="26.625" />
+        <EntityTypeShape EntityType="KMECareModel.NCIA_NURSINGHOMEASSTRECORD" Width="1.5" PointX="13.25" PointY="42.5" />
+        <EntityTypeShape EntityType="KMECareModel.NCIA_NURSINGHOMEASSTRECORDDETAIL" Width="1.5" PointX="15.5" PointY="52.125" />
+        <EntityTypeShape EntityType="KMECareModel.NCIP_NCIPAYGRANT" Width="1.5" PointX="29.25" PointY="25.875" />
+        <EntityTypeShape EntityType="KMECareModel.NCIP_NSMONFEE" Width="1.5" PointX="31.5" PointY="27" />
+        <EntityTypeShape EntityType="KMECareModel.NCIP_RESIDENTMONFEE" Width="1.5" PointX="33.75" PointY="29" />
+        <EntityTypeShape EntityType="KMECareModel.NCIP_RESIDENTMONFEEDTL" Width="1.5" PointX="36" PointY="29.5" />
+        <EntityTypeShape EntityType="KMECareModel.NCIP_SERVICEDEPOSIT" Width="1.5" PointX="27" PointY="27.375" />
+        <EntityTypeShape EntityType="KMECareModel.NCIP_SERVICEDEPOSITGRANT" Width="1.5" PointX="24.75" PointY="27.5" />
+        <EntityTypeShape EntityType="KMECareModel.SYS_CODERULE" Width="1.5" PointX="61.75" PointY="27.75" />
+        <EntityTypeShape EntityType="KMECareModel.SYS_REPORT" Width="1.5" PointX="62.75" PointY="11.75" />
+        <EntityTypeShape EntityType="KMECareModel.TSG_ANSWER" Width="1.5" PointX="10.25" PointY="1.125" />
+        <EntityTypeShape EntityType="KMECareModel.TSG_ANSWERDTL" Width="1.5" PointX="12.5" PointY="1.5" />
+        <EntityTypeShape EntityType="KMECareModel.TSG_CATEGORY" Width="1.5" PointX="5.75" PointY="1.5" />
+        <EntityTypeShape EntityType="KMECareModel.TSG_QUESTION" Width="1.5" PointX="8" PointY="1" />
+        <AssociationConnector Association="KMECareModel.care_planactivity_ibfk_1" />
+        <AssociationConnector Association="KMECareModel.care_plancheckpoint_ibfk_1" />
+        <AssociationConnector Association="KMECareModel.care_plandata_ibfk_1" />
+        <AssociationConnector Association="KMECareModel.care_planeval_ibfk_1" />
+        <AssociationConnector Association="KMECareModel.care_planfocus_ibfk_1" />
+        <AssociationConnector Association="KMECareModel.care_plangoal_ibfk_1" />
+        <AssociationConnector Association="KMECareModel.care_planreason_ibfk_1" />
+        <AssociationConnector Association="KMECareModel.care_plantrain_ibfk_1" />
+        <AssociationConnector Association="KMECareModel.checktemplateitem_ibfk_1" />
+        <AssociationConnector Association="KMECareModel.dc_assessvalue_ibfk_1" />
+        <AssociationConnector Association="KMECareModel.dc_careplanactivity_ibfk_1" />
+        <AssociationConnector Association="KMECareModel.dc_careplandata_ibfk_1" />
+        <AssociationConnector Association="KMECareModel.dc_careplaneval_ibfk_1" />
+        <AssociationConnector Association="KMECareModel.dc_careplangoal_ibfk_1" />
+        <AssociationConnector Association="KMECareModel.dc_careplanreason_ibfk_1" />
+        <AssociationConnector Association="KMECareModel.dc_daylifecaredtl_ibfk_1" />
+        <AssociationConnector Association="KMECareModel.dc_evalquestion_ibfk_1" />
+        <AssociationConnector Association="KMECareModel.dc_evalquestionresult_ibfk_1" />
+        <AssociationConnector Association="KMECareModel.dc_ipdreg_ibfk_1" />
+        <AssociationConnector Association="KMECareModel.dc_referrallists_ibfk_1" />
+        <AssociationConnector Association="KMECareModel.dc_multiteamcareplan_ibfk_1" />
+        <AssociationConnector Association="KMECareModel.dc_multiteamcareplaneval_ibfk_1" />
+        <AssociationConnector Association="KMECareModel.dc_nscplactivity_ibfk_1" />
+        <AssociationConnector Association="KMECareModel.dc_nscplgoal_ibfk_1" />
+        <AssociationConnector Association="KMECareModel.dc_nurseinglifecaredtl_ibfk_1" />
+        <AssociationConnector Association="KMECareModel.dc_regcpl_ibfk_1" />
+        <AssociationConnector Association="KMECareModel.dc_questionitem_ibfk_1" />
+        <AssociationConnector Association="KMECareModel.dc_questionvalue_ibfk_1" />
+        <AssociationConnector Association="KMECareModel.dc_regcasecareplan_ibfk_1" />
+        <AssociationConnector Association="KMECareModel.dc_regcheckrecorddata_ibfk_1" />
+        <AssociationConnector Association="KMECareModel.dc_regevalquestion_ibfk_1" />
+        <AssociationConnector Association="KMECareModel.dc_regquestiondata_ibfk_1" />
+        <AssociationConnector Association="KMECareModel.dc_taskgoalsstrategy_ibfk_1" />
+        <AssociationConnector Association="KMECareModel.dc_teamactivitydtl_ibfk_1" />
+        <AssociationConnector Association="KMECareModel.ltc_activeperiod_ibfk_1" />
+        <AssociationConnector Association="KMECareModel.ltc_assessvalue_ibfk_1" />
+        <AssociationConnector Association="KMECareModel.ltc_bedsorechgrec_ibfk_1" />
+        <AssociationConnector Association="KMECareModel.ltc_paybill_ibfk_1" />
+        <AssociationConnector Association="KMECareModel.ltc_billv2_ibfk_1" />
+        <AssociationConnector Association="KMECareModel.ltc_billv2_ibfk_2" />
+        <AssociationConnector Association="KMECareModel.ltc_feerecord_ibfk_1" />
+        <AssociationConnector Association="KMECareModel.PK_NCIDEDUCTION_BILL" />
+        <AssociationConnector Association="KMECareModel.ltc_chargegroup_chargeitem_ibfk_1" />
+        <AssociationConnector Association="KMECareModel.ltc_chargegroup_chargerecord_ibfk_1" />
+        <AssociationConnector Association="KMECareModel.ltc_chargegroup_resident_ibfk_1" />
+        <AssociationConnector Association="KMECareModel.ltc_checkitem_ibfk_2" />
+        <AssociationConnector Association="KMECareModel.ltc_checkitem_ibfk_1" />
+        <AssociationConnector Association="KMECareModel.ltc_checkrecdtl_ibfk_1" />
+        <AssociationConnector Association="KMECareModel.ltc_constrainsbeval_ibfk_1" />
+        <AssociationConnector Association="KMECareModel.ltc_consultcallback_ibfk_1" />
+        <AssociationConnector Association="KMECareModel.ltc_costgroupdtl_ibfk_1" />
+        <AssociationConnector Association="KMECareModel.ltc_fixedcost_ibfk_1" />
+        <AssociationConnector Association="KMECareModel.ltc_drugrecord_ibfk_1" />
+        <AssociationConnector Association="KMECareModel.ltc_org_ibfk_1" />
+        <AssociationConnector Association="KMECareModel.ltc_handoverdtl_ibfk_1" />
+        <AssociationConnector Association="KMECareModel.ltc_infectionsympotm_ibfk_1" />
+        <AssociationConnector Association="KMECareModel.ltc_labexamrec_ibfk_1" />
+        <AssociationConnector Association="KMECareModel.ltc_ipdreg_ibfk_1" />
+        <AssociationConnector Association="KMECareModel.ltc_ipdregout_ibfk_1" />
+        <AssociationConnector Association="KMECareModel.ltc_leavehosp_ibfk_1" />
+        <AssociationConnector Association="KMECareModel.PK_NCIDEDUCTION_LEAVE" />
+        <AssociationConnector Association="KMECareModel.ltc_lookover_ibfk_1" />
+        <AssociationConnector Association="KMECareModel.ltc_materialrecord_ibfk_1" />
+        <AssociationConnector Association="KMECareModel.ltc_measuredrecord_ibfk_1" />
+        <AssociationConnector Association="KMECareModel.ltc_visitprescription_ibfk_2" />
+        <AssociationConnector Association="KMECareModel.PK_NCIEVL" />
+        <AssociationConnector Association="KMECareModel.ltc_nscplactivity_ibfk_1" />
+        <AssociationConnector Association="KMECareModel.ltc_nscplgoal_ibfk_1" />
+        <AssociationConnector Association="KMECareModel.ltc_servicerecord_ibfk_1" />
+        <AssociationConnector Association="KMECareModel.ltc_orgroom_ibfk_1" />
+        <AssociationConnector Association="KMECareModel.ltc_painbodypart_ibfk_1" />
+        <AssociationConnector Association="KMECareModel.ltc_precharge_ibfk_1" />
+        <AssociationConnector Association="KMECareModel.ltc_proposaldisscussrec_ibfk_1" />
+        <AssociationConnector Association="KMECareModel.ltc_regdiseasehis_ibfk_1" />
+        <AssociationConnector Association="KMECareModel.ltc_regdiseasehisdtl_ibfk_1" />
+        <AssociationConnector Association="KMECareModel.ltc_residentbalancerefund_ibfk_1" />
+        <AssociationConnector Association="KMECareModel.ltc_scenario_item_ibfk_1" />
+        <AssociationConnector Association="KMECareModel.ltc_scenario_item_option_ibfk_1" />
+        <AssociationConnector Association="KMECareModel.ltc_visitdept_ibfk_1" />
+        <AssociationConnector Association="KMECareModel.ltc_visitdoctor_ibfk_2" />
+        <AssociationConnector Association="KMECareModel.ltc_visitprescription_ibfk_1" />
+        <AssociationConnector Association="KMECareModel.ltc_visitdoctor_ibfk_1" />
+        <AssociationConnector Association="KMECareModel.PK_WORK_SUBITEM" />
+        <AssociationConnector Association="KMECareModel.nci_agency_ibfk_1" />
+        <AssociationConnector Association="KMECareModel.nci_agencystaff_ibfk_2" />
+        <AssociationConnector Association="KMECareModel.nci_agencystaff_ibfk_1" />
+        <AssociationConnector Association="KMECareModel.ncia_caretypecondition_ibfk_1" />
+        <AssociationConnector Association="KMECareModel.nci_codedtl_ibfk_1" />
+        <AssociationConnector Association="KMECareModel.nci_government_ibfk_1" />
+        <AssociationConnector Association="KMECareModel.nci_government_ibfk_2" />
+        <AssociationConnector Association="KMECareModel.nci_governmentstaff_ibfk_2" />
+        <AssociationConnector Association="KMECareModel.nci_insurancecompany_ibfk_1" />
+        <AssociationConnector Association="KMECareModel.nci_nursinghome_ibfk_1" />
+        <AssociationConnector Association="KMECareModel.nci_governmentstaff_ibfk_1" />
+        <AssociationConnector Association="KMECareModel.nci_insurancecompanystaff_ibfk_2" />
+        <AssociationConnector Association="KMECareModel.nci_insurancecompanystaff_ibfk_1" />
+        <AssociationConnector Association="KMECareModel.nci_role_module_ibfk_1" />
+        <AssociationConnector Association="KMECareModel.nci_nursinghomestaff_ibfk_2" />
+        <AssociationConnector Association="KMECareModel.ncia_appcert_ibfk_3" />
+        <AssociationConnector Association="KMECareModel.ncia_caretypecondition_ibfk_2" />
+        <AssociationConnector Association="KMECareModel.ncia_nsappcertrate_ibfk_1" />
+        <AssociationConnector Association="KMECareModel.ncia_nsapphosprate_ibfk_1" />
+        <AssociationConnector Association="KMECareModel.nci_nursinghomestaff_ibfk_1" />
+        <AssociationConnector Association="KMECareModel.nci_role_module_ibfk_2" />
+        <AssociationConnector Association="KMECareModel.nci_user_ibfk_1" />
+        <AssociationConnector Association="KMECareModel.ncia_agencyasstrecorddetail_ibfk_1" />
+        <AssociationConnector Association="KMECareModel.ncia_appcert_ibfk_1" />
+        <AssociationConnector Association="KMECareModel.ncia_appcert_applicant" />
+        <AssociationConnector Association="KMECareModel.ncia_appcert_ibfk_2" />
+        <AssociationConnector Association="KMECareModel.ncia_apphosp_ibfk_1" />
+        <AssociationConnector Association="KMECareModel.ncia_apphosp_applicant" />
+        <AssociationConnector Association="KMECareModel.PK_NCI_DEDUCTION" />
+        <AssociationConnector Association="KMECareModel.ncia_nursinghomeasstrecorddetail_ibfk_1" />
+        <AssociationConnector Association="KMECareModel.ncip_ncipaygrant_ibfk_1" />
+        <AssociationConnector Association="KMECareModel.ncip_nsmonfee_ibfk_1" />
+        <AssociationConnector Association="KMECareModel.ncip_residentmonfee_ibfk_1" />
+        <AssociationConnector Association="KMECareModel.ncip_residentmonfeedtl_ibfk_1" />
+        <AssociationConnector Association="KMECareModel.ncip_servicedeposit_ibfk_1" />
+        <AssociationConnector Association="KMECareModel.tsg_answer_ibfk_1" />
+        <AssociationConnector Association="KMECareModel.tsg_answerdtl_ibfk_1" />
+        <AssociationConnector Association="KMECareModel.tsg_question_ibfk_1" />
+        <AssociationConnector Association="KMECareModel.LTC_ROLEMODULES" />
+        <AssociationConnector Association="KMECareModel.LTC_USERORG" />
+        <AssociationConnector Association="KMECareModel.LTC_USERROLES" />
+        <AssociationConnector Association="KMECareModel.NCI_NS_CARETYPE" />
+        <AssociationConnector Association="KMECareModel.NCIA_CARETYPECONDITION_APPCERT" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

@@ -1,0 +1,58 @@
+﻿<div class="row">
+    <div id="content" class="col-lg-12">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="page-header">
+                    <ul class="breadcrumb">
+                        <li>
+                            <i class="fa fa-home"></i>
+                            <a href="/">首页</a>
+                        </li>
+                        <li>结算单打印</li>
+                    </ul>
+
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-12">
+            <div class="col-sm-2">
+                <div class="box border primary">
+                    <div class="box-title">
+                        <h4>
+                            <i class="fa fa-bars"></i>住民信息
+                        </h4>
+                    </div>
+                    <div class="box-body">
+                        <resident-card feeno={{FeeNo}} callback="txtResidentIDChange(resident)" />
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-10">
+                <div class="box border primary">
+                    <div class="box-title">
+                        <h4><i class="fa fa-search"></i>查询条件</h4>
+                    </div>
+                    <div class="box-body">                        
+                        <form class="form-horizontal" role="form">
+                            <div class="form-group">
+                                <label class="col-sm-1 control-label">开始月份</label>
+                                <div class="col-sm-2">
+                                    <input type="text" class="form-control" ng-model="beginDate" date-picker date-fmt="yyyy-MM">
+                                </div>
+                                <label class="col-sm-1 control-label">结束月份</label>
+                                <div class="col-sm-2">
+                                    <input type="text" class="form-control" ng-model="endDate" date-picker date-fmt="yyyy-MM">
+                                </div>
+                                <div class="col-sm-1">
+                                    <input type="button" class="form-control btn btn-primary" ng-click="Print()" value="打印">
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            </div>
+        </div>
+    </div>
+</div>

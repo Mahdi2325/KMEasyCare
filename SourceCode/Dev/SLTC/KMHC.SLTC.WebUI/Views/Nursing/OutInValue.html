@@ -1,0 +1,186 @@
+<div class="row">
+    <div id="content" class="col-lg-12">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="page-header">
+                    <ul class="breadcrumb">
+                        <li>
+                            <i class="fa fa-home"></i>
+                            <a href="/">首页</a>
+                        </li>
+                        <li>输出入量</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="box border primary">
+                    <div class="box-title">
+                        <h4><i class="fa fa-search"></i>查询条件</h4>
+                    </div>
+                    <div class="box-body">
+                        <form class="form-horizontal" role="form" novalidate>
+                            <div class="form-group">
+                                <label class="col-sm-1 control-label">依区域房间筛选</label>
+                                <div class="col-sm-2">
+                                    <select ng-model="Floor" class="form-control" ng-options="item.FloorName for item in Data.floors track by item.FloorId" ng-change="getFloor(Floor.FloorId)">
+                                        <option></option>
+                                    </select>
+                                </div>
+                                <div class="col-sm-2">
+                                    <select ng-model="Room" class="form-control" ng-options="item.RoomName as item.RoomName for item in Data.rooms">
+                                        <option></option>
+                                    </select>
+                                </div>
+                                <div class="col-sm-1">
+                                    <button class="btn btn-primary" ng-click="loadViews(1)">查询</button>
+                                </div>
+
+                                <label class="col-sm-1 control-label">服务时间</label>
+                                <div class="col-sm-2">
+                                    <input class="form-control" type="text" ng-model="Data.ServiceDate" ca-date-time-picker max="0" />
+                                </div>
+                                <div class="col-sm-1">
+                                    <button class="btn btn-primary" ng-click="changeDate()">校准时间</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <!-- BOX -->
+                <div class="box border primary">
+                    <div class="box-title">
+                        <h4><i class="fa fa-table"></i>输入量</h4>
+                    </div>
+                    <form class="form-horizontal" role="form" name="formIn" novalidate>
+                        <table class="table table-bordered" id="editInTable">
+                            <thead>
+                                <tr>
+                                    <th style="width:8%">个案姓名</th>
+                                    <th style="width:8%">居住区域</th>
+                                    <th style="width:8%">居住房间</th>
+                                    <th style="width:15%">日期<span class="required">*</span></th>
+                                    <th style="width:10%">注射量(c.c.)<span class="required">*</span></th>
+                                    <th style="width:10%">途径</th>
+                                    <th style="width:10%">记录人员</th>
+                                    <th style="width:10%">班别<span class="required">*</span></th>
+                                    <th style="width:8%">新增本笔</th>
+                                    <th style="width:10%"><i class="fa fa-bars"></i> 操作</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr ng-repeat="info in Data.InList">
+                                    <td>{{info.Name}}</td>
+                                    <td>{{info.FloorName}}</td>
+                                    <td>{{info.RoomName}}</td>
+                                    <td><input type="text" ng-model="info.RecDate" class="form-control" ca-date-time-picker max="0" /></td>
+                                    <td><input type="number" ng-model="info.InValue" class="form-control" min="1" ng-maxlength="9" /></td>
+                                    <td><select ng-model="info.InType" class="form-control" select-code="F00.003"></select></td>
+                                    <td><input-staff value="{{info.RecordBy}}" callback="staffSelected(item, info)" /></td>
+                                    <td><select ng-model="info.ClassType" class="form-control" select-code="F00.002"></select></td>
+                                    <td class="text-left">
+                                        <input type="checkbox" class="uniform" value="T" ng-model="info.CheckType">是
+                                    </td>
+                                    <td>
+                                        <div class="btn-group btn-group-xs" role="group" aria-label="...">
+                                            <a class="btn btn-info" role="button" ui-sref="OutInValueList({feeNo:info.FeeNo})"><i class="fa fa-table"></i>查看记录</a>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </form>
+                </div>
+                <!-- /BOX -->
+                <!--按钮-->
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="pull-right">
+                            <button class="btn btn-primary" ng-disabled="!isModify(Data.InList) || Data.InList==null || (Data.InList!=null && Data.InList.length==0) || formIn.$invalid" ng-click="SaveIn(2)">输入量保存</button>
+                        </div>
+                    </div>
+                </div>
+                <!--按钮-->
+                <br />
+                <!-- BOX -->
+                <div class="box border primary">
+                    <div class="box-title">
+                        <h4><i class="fa fa-table"></i>排放量</h4>
+                    </div>
+                    <form class="form-horizontal" role="form" name="formOut" novalidate>
+                        <table class="table table-bordered" id="editOutTable">
+                            <thead>
+                                <tr>
+                                    <th style="width:8%">个案姓名</th>
+                                    <th style="width:8%">居住区域</th>
+                                    <th style="width:8%">居住房间</th>
+                                    <th style="width:15%">日期<span class="required">*</span></th>
+                                    <th style="width:10%">排放量(c.c.)<span class="required">*</span></th>
+                                    <th style="width:10%">类型</th>
+                                    <th style="width:10%">记录人员</th>
+                                    <th style="width:10%">班别<span class="required">*</span></th>
+                                    <th style="width:8%">新增本笔</th>
+                                    <th style="width:10%"><i class="fa fa-bars"></i> 操作</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr ng-repeat="out in Data.OutList">
+                                    <td>{{out.Name}}</td>
+                                    <td>{{out.FloorName}}</td>
+                                    <td>{{out.RoomName}}</td>
+                                    <td><input type="text" ng-model="out.RecDate" class="form-control" ca-date-time-picker max="0" /></td>
+                                    <td><input type="number" ng-model="out.OutValue" class="form-control" min="1" /></td>
+                                    <td><select ng-model="out.OutType" class="form-control" select-code="F00.004"></select></td>
+                                    <td><input-staff value="{{out.RecordBy}}" callback="staffSelected(item, out)" /></td>
+                                    <td><select ng-model="out.ClassType" class="form-control" select-code="F00.002"></select></td>
+                                    <td class="text-left">
+                                        <input type="checkbox" class="uniform" value="T" ng-model="out.CheckType">是
+                                    </td>
+                                    <td>
+                                        <div class="btn-group btn-group-xs" role="group" aria-label="...">
+                                            <a class="btn btn-info" role="button" ui-sref="OutInValueList({feeNo:out.FeeNo})"><i class="fa fa-table"></i>查看记录</a>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </form>
+                </div>
+                <!-- /BOX -->
+                <!--按钮-->
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="pull-right">
+                            <button class="btn btn-primary" ng-disabled="!isModify(Data.OutList) || Data.OutList==null || (Data.OutList!=null && Data.OutList.length==0) || formOut.$invalid" ng-click="SaveOut(3)">输出量保存</button>
+                        </div>
+                    </div>
+                </div>
+                <!--按钮-->
+            </div>
+
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    $("#editInTable").on('change', function () {
+        if (event.srcElement.type != "checkbox") {
+            var ele = angular.element(event.srcElement).closest('tr');
+            var scope = ele.scope();
+            scope.info.CheckType = true;
+        }
+    });
+    $("#editOutTable").on('change', function() {
+        if (event.srcElement.type != "checkbox") {
+            var ele = angular.element(event.srcElement).closest('tr');
+            var scope = ele.scope();
+            scope.out.CheckType = true;
+        }
+    });
+</script>

@@ -1,0 +1,419 @@
+<!--营养评估单-->
+<div class="row">
+    <div id="content" class="col-md-12">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="page-header">
+                    <!-- BREADCRUMBS -->
+                    <ul class="breadcrumb">
+                        <li>
+                            <i class="fa fa-home"></i>
+                            <a href="/">首页</a>
+                        </li>
+
+                        <li>营养评估单</li>
+                    </ul>
+
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-12">
+                <div class="col-sm-2">
+                    <div class="box border primary">
+                        <div class="box-title">
+                            <h4>
+                                <i class="fa fa-bars">住民信息</i>
+                            </h4>
+                        </div>
+                        <div class="box-body">
+                            <resident-card feeno={{FeeNo}} callback="residentSelected(resident)" />
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-10">
+                    <div class="box border primary">
+                        <div class="box-title">
+                            <h4><i class="fa fa-columns"></i><span class="hidden-inline-mobile">营养评估单</span></h4>
+                        </div>
+                        <div class="box-body">
+                            <div class="tabbable header-tabs">
+                                <ul class="nav nav-tabs">
+                                    <!--<li><a href="#box_tab3" data-toggle="tab"><i class="fa fa-laptop"></i> <span class="hidden-inline-mobile">临床检查</span></a></li>-->
+                                    <li ng-click="changeHW()"><a href="#box_tab2" data-toggle="tab"><i class="fa fa-calendar-o"></i> <span class="hidden-inline-mobile">体位测量</span></a></li>
+                                    <li class="active" ng-click="changeDiag()"><a href="#box_tab1" data-toggle="tab"><i class="fa fa-circle-o"></i> <span class="hidden-inline-mobile">疾病诊断</span></a></li>
+                                </ul>
+                                <div class="tab-content">
+
+
+
+                                    <!--<div class="tab-pane fade" id="box_tab3">
+
+                                    </div>-->
+                                    <div class="tab-pane fade" id="box_tab2">
+                                        <div class="panel-body">
+                                            <form class="form-horizontal" name="seForm" role="form">
+                                                <div class="form-group">
+                                                    <p style="font-family:'Microsoft YaHei'">
+                                                        身体质量指数(BMI)=目前体重(kg)/身高(m)2&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;理想体重(公斤)＝22×身高2(m)2±10%
+                                                    </p>
+                                                    <p>
+                                                        (BMI值：过轻<18.5 正常＝18.5~23.9 过重=24~26.9 轻度肥胖=27~29.9 中度=30~34.9 重度>=35)
+                                                    </p>
+                                                    <p>
+                                                        截肢後理想体重=身高×22×(1-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;%)
+                                                    </p>
+                                                    <p>
+                                                        <div style="float:left;">
+                                                            身高计算&nbsp;
+                                                        </div>
+                                                        <div style="float:left;">
+                                                            <div style="float:left;">
+                                                                <div style="float:left;">
+                                                                    1.膝长估测：&nbsp;
+                                                                </div>
+                                                                <div style="float:left;">
+                                                                    ♂：85.1+1.73×膝高度-0.11×年龄
+                                                                    <br /> ♀：91.45+1.53×膝高度-0.16×年龄
+                                                                </div>
+                                                            </div>
+                                                            <div style="clear:both;">
+                                                                2.手臂估测:单手水平伸直，由胸骨中央线至手食指距离×2
+                                                            </div>
+                                                        </div>
+                                                    </p>
+                                                </div>
+                                                <legend></legend>
+                                                <div class="form-group">
+                                                    <label class="col-sm-1 control-label">入院身高</label>
+                                                    <div class="col-sm-2">
+                                                        <div class="input-group">
+                                                            <input class="form-control ng-pristine ng-untouched ng-valid" name="身高" type="text" ng-model="Height" readonly>
+                                                            <!--<input class="form-control ng-pristine ng-untouched ng-valid" name="身高" type="text" ng-model="Data.UnPlan.ThisHeight" readonly>-->
+                                                            <div class="input-group-addon">cm</div>
+                                                        </div>
+                                                    </div>
+                                                    <!--20161203 Bob 隐藏膝长，身高，入院体重从基本资料带出 理想体重根据身高计算得出-->
+                                                    <label class="col-sm-1 control-label" ng-show="false">膝长</label>
+                                                    <div class="col-sm-2" ng-show="false">
+                                                        <div class="input-group">
+                                                            <input class="form-control ng-pristine ng-untouched ng-valid" name="膝长" type="text" ng-model="Data.UnPlan.KneeLen" readonly>
+                                                            <div class="input-group-addon">cm</div>
+                                                        </div>
+                                                    </div>
+                                                    <label class="col-sm-1 control-label">入院体重</label>
+                                                    <div class="col-sm-2">
+                                                        <div class="input-group">
+                                                            <input class="form-control ng-pristine ng-untouched ng-valid" name="入院体重" type="text" ng-model="Weight" readonly>
+                                                            <div class="input-group-addon">kg</div>
+                                                        </div>
+                                                    </div>
+                                                    <label class="col-sm-1 control-label">理想体重</label>
+                                                    <div class="col-sm-2">
+                                                        <div class="input-group">
+                                                            <input class="form-control ng-pristine ng-untouched ng-valid" name="理想体重" type="text" ng-model="iDealWeight" readonly>
+                                                            <div class="input-group-addon">kg</div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="panel panel-default">
+                                                    <div class="panel-body">
+
+
+                                                        <div class="form-group col-md-12">
+                                                            <label class="col-sm-1 control-label">开始日期</label>
+                                                            <div class="col-md-2"><input class="form-control" type="text" ng-model="EvalDate1" ca-date-picker ng-change="checkEvalDate1()" /></div>
+                                                            <label class="col-sm-1 control-label">结束日期</label>
+                                                            <div class="col-md-2">
+                                                                <input class="form-control" type="text" ng-model="EvalDate2" ca-date-picker ng-change="checkEvalDate2()" />
+                                                            </div>
+                                                            <div class="col-md-2">
+                                                                <input type="button" value="查询" ng-click="queryData()" class="btn btn-primary" />
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group col-md-6">
+                                                            <legend>体重测量</legend>
+                                                            <table class="table table-striped">
+                                                                <thead>
+                                                                    <tr>
+
+                                                                        <th>日期</th>
+                                                                        <th>体重</th>
+                                                                        <th>BMI</th>
+                                                                    </tr>
+                                                                </thead>
+                                                                <tbody>
+                                                                    <tr ng-repeat="unplanlist in Data.UnPlans">
+
+                                                                        <td>{{unplanlist.ThisRecDate | dateFormat}}</td>
+                                                                        <td>{{unplanlist.ThisWeight}}</td>
+                                                                        <td>{{unplanlist.BMI}}</td>
+                                                                    </tr>
+
+                                                                </tbody>
+                                                            </table>
+
+                                                        </div>
+                                                        <div class="form-group col-md-6">
+                                                            <legend>生化检查</legend>
+                                                            <table class="table table-striped">
+                                                                <thead>
+                                                                    <tr>
+                                                                        <th class="col-md-1">检测日期</th>
+                                                                        <!--<th class="col-md-1">SMA</th>
+                                                                        <th class="col-md-1">CBC</th>
+                                                                        <th class="col-md-1">U/A</th>-->
+                                                                        <th class="col-md-2">项目名称</th>
+                                                                    </tr>
+                                                                </thead>
+                                                                <tbody>
+                                                                    <tr ng-repeat="unplanlist in Data.Biochemistry">
+
+                                                                        <td>{{unplanlist.EvalDate | dateFormat}}</td>
+                                                                        <!--<td>{{unplanlist.ThisThisWeight}}</td>
+                                                                        <td>{{unplanlist.BMI}}</td>
+                                                                        <td>{{unplanlist.ThisThisWeight}}</td>-->
+
+
+                                                                        <td>
+                                                                            {{unplanlist.ItemName}}
+                                                                        </td>
+                                                                    </tr>
+
+                                                                </tbody>
+                                                            </table>
+
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+
+                                    <div class="tab-pane fade active in" id="box_tab1">
+                                        <div class="panel-body">
+                                            <form class="form-horizontal" name="neForm" role="form" novalidate>
+                                                <legend>基本信息</legend>
+                                                <div class="panel panel-default">
+                                                    <div class="panel-body">
+                                                        <div class="form-group">
+                                                            <label class="col-sm-1 control-label">姓名:</label>
+                                                            <div class="col-sm-2">
+
+                                                                <label class="control-label">{{currentResident.Name}}</label>
+                                                            </div>
+                                                            <label class="col-sm-1 control-label">生日:</label>
+                                                            <div class="col-sm-2">
+
+                                                                <label class="control-label">{{currentResident.BirthDay | dateFormat}}</label>
+                                                            </div>
+                                                            <label class="col-sm-1 control-label">年龄:</label>
+                                                            <div class="col-sm-2">
+                                                                <label class="control-label">{{Age}}</label>
+
+                                                            </div>
+                                                            <label class="col-sm-1 control-label">性别:</label>
+                                                            <div class="col-sm-2">
+                                                                <label class="control-label">
+                                                                    <span select-code="A00.001" select-value="{{currentResident.Sex}}"></span>
+                                                                </label>
+
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label class="col-sm-1 control-label">住民编号:</label>
+                                                            <div class="col-sm-2">
+                                                                <label class="control-label">{{currentResident.ResidengNo}}</label>
+
+                                                            </div>
+                                                            <label class="col-sm-1 control-label">床号:</label>
+                                                            <div class="col-sm-2">
+                                                                <label class="control-label">{{currentResident.BedNo}}</label>
+
+                                                            </div>
+                                                            <label class="col-sm-1 control-label">入院日期:</label>
+                                                            <div class="col-sm-2">
+                                                                <label class="control-label">{{currentResident.InDate | dateFormat}}</label>
+
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <legend>疾病诊断</legend>
+                                                <div class="panel panel-default">
+                                                    <div class="panel-body">
+                                                        <div class="form-group">
+                                                            <label class="col-sm-1 control-label">疾病诊断<span class="required">*</span></label>
+                                                            <div class="col-sm-9">
+                                                                <input type="text" class="form-control ng-pristine ng-valid ng-scope ng-valid-maxlength ng-touched" ng-model="currentItem.DISEASEDIAG" ng-maxlength="200" select-items="诊断别" name="疾病诊断" required>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <legend>临床检查</legend>
+                                                <div class="panel panel-default">
+                                                    <div class="panel-body">
+
+                                                        <div class="form-group">
+                                                            <label class="col-sm-1 control-label">咀嚼困难</label>
+                                                            <div class="col-sm-3">
+                                                                <select class="form-control" name="咀嚼困难" id="CHEWDIFFCULT" ng-model="currentItem.CHEWDIFFCULT" select-code="L03.001" ng-maxlength="100"></select>
+                                                            </div>
+                                                            <label class="col-sm-1 control-label">吞咽能力</label>
+                                                            <div class="col-sm-3">
+                                                                <select class="form-control" name="吞咽能力" id="SWALLOWABILITY" ng-model="currentItem.SWALLOWABILITY" select-code="L00.004" ng-maxlength="100"></select>
+                                                            </div>
+                                                            <label class="col-sm-1 control-label">进食型式</label>
+                                                            <div class="col-sm-3">
+                                                                <select class="form-control" name="进食型式" id="EATPATTERN" ng-model="currentItem.EATPATTERN" select-code="L03.003" ng-maxlength="100"></select>
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label class="col-sm-1 control-label">肠胃问题</label>
+                                                            <div class="col-sm-11">
+                                                                <input class="form-control" name="肠胃问题" id="DIGESTIONPROBLEM" ng-model="currentItem.DIGESTIONPROBLEM" edit select-multiple-value="L03.004" ng-maxlength="100">
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label class="col-sm-1 control-label">食物禁忌</label>
+                                                            <div class="col-sm-11">
+
+                                                                <input class="form-control" name="食物禁忌" id="FOODTABOO" ng-model="currentItem.FOODTABOO" edit select-multiple-value="L03.005" ng-maxlength="100">
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label class="col-sm-1 control-label">活动能力</label>
+                                                            <div class="col-sm-3">
+
+                                                                <select class="form-control" name="活动能力" id="ACTIVITYABILITY" ng-model="currentItem.ACTIVITYABILITY" edit select-code="L03.006" ng-maxlength="100"></select>
+                                                            </div>
+                                                            <label class="col-sm-1 control-label">压疮</label>
+                                                            <div class="col-sm-3">
+                                                                <input class="form-control" name="压疮" id="PRESSURESORE" ng-model="currentItem.PRESSURESORE" edit select-multiple-value="L03.007" ng-maxlength="100">
+                                                            </div>
+                                                            <label class="col-sm-1 control-label">水肿</label>
+                                                            <div class="col-sm-3">
+                                                                <input class="form-control" name="水肿" id="EDEMA" ng-model="currentItem.EDEMA" edit select-multiple-value="L03.008" ng-maxlength="100">
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label class="col-sm-1 control-label">目前饮食</label>
+                                                            <div class="col-sm-11">
+                                                                <!--<input class="form-control" name="目前饮食" id="CURRENTDIET" ng-model="currentItem.CURRENTDIET" edit select-multiple-value="L03.009" ng-maxlength="100">-->
+                                                                <input class="form-control" name="目前饮食" id="CURRENTDIET" ng-model="currentItem.CURRENTDIET" select-items="目前饮食" ng-maxlength="100">
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label class="col-sm-1 control-label">食物摄取</label>
+                                                            <div class="col-sm-11">
+                                                                <!--<input class="form-control" name="食物摄取" id="EATAMOUNT" ng-model="currentItem.EATAMOUNT" edit select-multiple-value="L03.010" ng-maxlength="100">-->
+                                                                <input class="form-control" name="食物摄取" id="EATAMOUNT" ng-model="currentItem.EATAMOUNT" select-items="食物摄取" ng-maxlength="100">
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label class="col-sm-1 control-label">水</label>
+                                                            <div class="col-sm-11">
+                                                                <!--<input class="form-control" name="水" id="WATER" ng-model="currentItem.WATER" edit select-multiple-value="L03.011" ng-maxlength="100" />-->
+                                                                <input class="form-control" name="水" id="WATER" ng-model="currentItem.WATER" select-items="每天喝水量" ng-maxlength="100" />
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label class="col-sm-1 control-label">营养补充剂</label>
+                                                            <div class="col-sm-5">
+                                                                <input class="form-control" name="营养补充剂" id="SUPPLEMENTS" ng-model="currentItem.SUPPLEMENTS" ng-maxlength="100" />
+                                                            </div>
+                                                            <label class="col-sm-1 control-label">零食或点心</label>
+                                                            <div class="col-sm-5">
+                                                                <input class="form-control" name="零食或点心" id="selDietPattern" ng-model="currentItem.SNACK" ng-maxlength="100" />
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="form-group">
+
+                                                    <div class="col-sm-offset-6">
+                                                        <button class="btn btn-primary" ng-show="buttonShow" ng-click="saveNutritionEval(currentItem)">保存</button>&nbsp;
+                                                        <button class="btn btn-primary" ng-show="buttonShow" ng-disabled="subsidyForm.$invalid" ng-click="resetNutritionEval(currentItem)">重置</button>
+                                                    </div>
+                                                </div>
+                                            </form>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="box border primary" ng-show="NutrHisFlag">
+                        <div class="box-title">
+                            <h4>
+                                <i class="fa fa-table"></i>营养评估历次资料
+                            </h4>
+                        </div>
+                        <div class="box-body">
+                            <ui-data-table options="options">
+
+                                <table id="tbEvalList" class="table table-striped table-bordered table-hover table-handler">
+                                    <tr>
+                                        <th>评估日期</th>
+                                        <th>疾病诊断</th>
+                                        <!--<th>咀嚼困难</th>
+                                        <th>吞咽能力</th>
+                                        <th>进食型式</th>
+                                        <th>肠胃问题</th>
+                                        <th>食物禁忌</th>
+                                        <th>活动能力</th>
+                                        <th>压疮</th>
+                                        <th>水肿</th>
+                                        <th>目前饮食</th>
+                                        <th>食物摄取</th>
+                                        <th>水</th>
+                                        <th>营养补充剂</th>
+                                        <th>零食或点心</th>-->
+                                        <th class="col-md-1"><i class="fa fa-bars"></i>操作</</th>
+                                    </tr>
+                                    <tr ng-repeat="item in Data.NeList">
+                                        <td>{{item.EVALDATE | dateFormat}}</td>
+                                        <td>{{item.DISEASEDIAG}}</td>
+                                        <!--<td>{{item.CHEWDIFFCULT}}</td>
+                                        <th>{{item.SWALLOWABILITY}}</th>
+                                        <td>{{item.EATPATTERN}}</td>
+                                        <td>{{item.DIGESTIONPROBLEM}}</td>
+                                        <td>{{item.FOODTABOO}}</td>
+                                        <td>{{item.ACTIVITYABILITY}}</td>
+                                        <td>{{item.PRESSURESORE}}</td>
+                                        <td>{{item.EDEMA}}</td>
+                                        <td>{{item.CURRENTDIET}}</td>
+                                        <td>{{item.EATAMOUNT}}</td>
+                                        <td>{{item.WATER}}</td>
+                                        <td>{{item.SUPPLEMENTS}}</td>
+                                        <td>{{item.SNACK}}</td>-->
+                                        <td>
+                                            <div class="btn-group btn-group-xs" role="group" aria-label="...">
+                                                <button class="btn btn-info" ng-click="rowSelect(item)"><i class="fa fa-pencil"></i>编辑</button>
+                                                <a class="btn btn-primary" role="button" data-toggle="modal" ng-click="deleteNutritionEval(item)"><i class="fa fa-times"></i>删除</a>
+                                                <a class="btn btn-warning" role="button" data-toggle="modal" ng-click="PrintPreview(item)"><i class="fa fa-times"></i>打印</a>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </ui-data-table>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <script>
+        $(".datepicker").datepicker({
+            dateFormat: "yy-mm-dd",
+            changeMonth: true,
+            changeYear: true
+        });
+    </script>
+

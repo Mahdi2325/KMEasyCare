@@ -1,0 +1,261 @@
+<style type="text/css">
+    .mgb5 {
+        margin-bottom: 5px;
+    }
+
+    .mgb10 {
+        margin-bottom: 10px;
+    }
+
+    .mgr5 {
+        margin-right: 5px;
+    }
+
+    .left {
+        float: left;
+    }
+
+    .right {
+        float: right;
+    }
+
+    .width80 {
+        width: 80%;
+    }
+       .width100 {
+        width: 100%;
+    }
+    .width25 {
+        width: 25%;
+    }
+
+    .center {
+        text-align: center;
+    }
+
+    .underline {
+        text-decoration: underline;
+    }
+
+    .clearBoth {
+        clear: both;
+    }
+
+    .table-Style {
+        padding: 0px;
+        margin: 0px;
+        width: 100%;
+    }
+</style>
+
+<div class="row">
+    <div class="col-sm-12">
+        <table class="table table-Style  table-bordered">
+            <tbody>
+                <tr ng-repeat="item in scenarioList">
+                    <td><label class="control-label">{{item.CategoryName}}</label> </td>
+                    <td>
+                        <table class="table-Style table-bordered">
+                            <thead>
+                                <tr>
+                                    <th class="center">托养人的病症及存在的问题</th>
+                                    <th class="center">患病时间</th>
+                                    <th class="center">初步结论</th>
+                                    <th class="center">可能出现的问题</th>
+                                    <th class="center">是否治愈</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr ng-repeat="subItem in item.ScenarioItem">
+                                    <td class="width25">
+                                        <div>
+                                            <div class="left mgr5">
+                                                <div class="left mgr5">
+                                                    <label class="checkbox-inline mgb10"><input type="checkbox" ng-model="subItem.IsCheck" ng-click="checkEvent(item,subItem)">{{subItem.ItemName}}</label>
+                                                </div>
+                                                <div class="left mgr5" ng-if="subItem.ScenarioItemOption.length>0">
+                                                    <div class="left mgr5">
+                                                        <label class="checkbox-inline mgb10">(</label>
+                                                    </div>
+                                                    <div class="left mgr5" ng-repeat="option in subItem.ScenarioItemOption">
+                                                        <label class="checkbox-inline mgb10" ng-disabled="subItem.IsShowOption"><input type="checkbox" ng-click="checkOptionEvent(subItem,option)" ng-model="option.IsCheck" ng-disabled="subItem.IsShowOption">{{option.OptionName}}</label>
+                                                    </div>
+                                                    <div class="left mgr5">
+                                                        <label class="checkbox-inline mgb10">)</label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td><input class="form-control input-sm" type="text" ng-model="subItem.SickTime" ng-disabled="subItem.IsShowInput" ng-show="subItem.GroupId==0" ca-date-picker /></td>
+                                    <td><input class="form-control input-sm" type="text" ng-model="subItem.OrgiTreatmentHos" maxlength="50" ng-disabled="subItem.IsShowInput" ng-show="subItem.GroupId==0" select-items="{{item.CategoryName}}初步结论" /></td>
+                                    <td><input class="form-control input-sm" type="text" ng-model="subItem.ExpectTransferTo" maxlength="50" ng-disabled="subItem.IsShowInput" ng-show="subItem.GroupId==0" select-items="{{item.CategoryName}}可能出现的问题" /></td>
+                                    <td class="center"><label class="checkbox-inline mgb10" ng-show="subItem.GroupId==0"><input type="checkbox" ng-model="subItem.HaveCure" ng-disabled="subItem.IsShowInput" ng-show="subItem.GroupId==0">已治癒</label></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </td>
+                </tr>
+                <tr>
+                    <td><label class="control-label">其他(手填)</label></td>
+                    <td>
+                        <table class="table-Style table-bordered">
+                            <thead>
+                                <tr>
+                                    <th class="center">托养人的病症及存在的问题<span class="required">*</span></th>
+                                    <th class="center">患病时间</th>
+                                    <th class="center">初步结论</th>
+                                    <th class="center">可能出现的问题</th>
+                                    <th class="center">是否治愈</th>
+                                    <th class="center">操作</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr ng-repeat="item in otherItems">
+                                    <td class="center mgb10">{{item.OtherItemName}}</td>
+                                    <td class="center mgb10">{{item.SickTime | dateFormat}}</td>
+                                    <td class="center mgb10">{{item.OrgiTreatmentHos}}</td>
+                                    <td class="center mgb10">{{item.ExpectTransferTo}}</td>
+                                    <td class="center mgb10">{{item.HaveCure?'已治癒':'未治癒'}}</td>
+                                    <td class="center">
+                                        <div class="btn-group btn-group-xs" role="group" aria-label="...">
+                                            <a class="btn caption" role="button" ng-click="editOtherItem(item)"><i class="fa fa-pencil"></i>编辑</a>
+                                            <a class="btn caption" role="button" ng-click="deleteOtherItem(item)"><i class="fa fa-times"></i>删除</a>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                            <tfoot>
+                                <tr>
+                                    <td><input class="form-control input-sm" maxlength="20" ng-model="editItem.OtherItemName" type="text" /></td>
+                                    <td><input class="form-control input-sm" ng-model="editItem.SickTime" type="text" ca-date-picker /></td>
+                                    <td><input class="form-control input-sm" maxlength="50" ng-model="editItem.OrgiTreatmentHos" type="text" /></td>
+                                    <td><input class="form-control input-sm" maxlength="50"  ng-model="editItem.ExpectTransferTo" type="text"></td>
+                                    <td class="center"><label class="checkbox-inline mgb10"><input type="checkbox" ng-model="editItem.HaveCure">已治愈</label></td>
+                                    <td class="center">
+                                        <div class="btn-group btn-group-xs" role="group" aria-label="...">
+                                            <a class="btn caption" role="button" ng-click="saveOtherItem(editItem)"><i class="fa fa-save"></i>保存</a>
+                                        </div>
+                                    </td>
+
+                                </tr>
+                            </tfoot>
+                        </table>
+                    </td>
+
+                </tr>
+                <tr>
+                    <td><label class="control-label">传染疾病史</label></td>
+                    <td><input type="text" class="form-control" ng-model="person.InfecFlag" ng-maxlength="2000" select-items="传染疾病状况" /></td>
+                </tr>
+                <tr>
+                    <td><label class="control-label">家族病史</label></td>
+                    <td><select class="form-control" ng-model="person.FamilyHistory" select-code="A00.040"></select></td>
+                </tr>
+                <tr>
+                    <td><label class="control-label">手术</label></td>
+                    <td>
+                        <div class="left">
+                            <label class="checkbox-inline mgb10 left"><input type="checkbox" ng-model="chooseItem.fHaveOperation" ng-click="checkedChange('Operation',false)">无</label>
+                            <label class="checkbox-inline mgb10 left"><input type="checkbox" ng-model="chooseItem.tHaveOperation" ng-click="checkedChange('Operation',true)">有：&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
+                        </div>
+                        <div class="left width80">
+                            <input type="text" class="form-control" ng-disabled="!currentItem.HaveOperation" ng-maxlength="100" ng-model="currentItem.Operation" />
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td><label class="control-label">过敏</label></td>
+                    <td>
+                        <div class="mgb10">
+                            <div class="left mgb10">
+                                <label class="checkbox-inline mgb10 left"><input type="checkbox" ng-model="chooseItem.fHaveDrugAllergy" ng-click="checkedChange('DrugAllergy',false)">无</label>
+                                <label class="checkbox-inline mgb10 left"><input type="checkbox" ng-model="chooseItem.tHaveDrugAllergy" ng-click="checkedChange('DrugAllergy',true)">有药物：</label>
+                            </div>
+                            <div class="left mgb10 width80">
+                                <input type="text" class="form-control" ng-disabled="!currentItem.HaveDrugAllergy" ng-maxlength="100" ng-model="currentItem.DrugAllergy" />
+                            </div>
+                        </div>
+                        <div class="clearBoth mgb10">
+                            <div class="left mgb10">
+                                <label class="checkbox-inline mgb10 left"><input type="checkbox" ng-model="chooseItem.fHaveFoodAllergy" ng-click="checkedChange('FoodAllergy',false)">无</label>
+                                <label class="checkbox-inline mgb10 left"><input type="checkbox" ng-model="chooseItem.tHaveFoodAllergy" ng-click="checkedChange('FoodAllergy',true)">有食物：</label>
+                            </div>
+                            <div class="left mgb10 width80">
+                                <input type="text" class="form-control" ng-disabled="!currentItem.HaveFoodAllergy" ng-maxlength="100" ng-model="currentItem.FoodAllergy" />
+                            </div>
+                        </div>
+                        <div class="clearBoth mgb10">
+                            <div class="left">
+                                <label class="checkbox-inline mgb10 left"><input type="checkbox" ng-model="chooseItem.fHaveTransfusion" ng-click="checkedChange('Transfusion',false)">无</label>
+                                <label class="checkbox-inline mgb10 left"><input type="checkbox" ng-model="chooseItem.tHaveTransfusion" ng-click="checkedChange('Transfusion',true)">有输血</label>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td><label class="control-label">治疗医院</label></td>
+                    <td>
+                        <div class="mgb10">
+                            <div class="left mgb10">
+                                <label class="checkbox-inline mgb10 left">原就医及领药医院：</label>
+                            </div>
+                            <div class="left mgb10 width80">
+                                <input type="text" class="form-control" ng-model="currentItem.OrigMedicalHos" />
+                            </div>
+                        </div>
+                        <div class="clearBoth mgb10">
+                            <div class="left mgb10">
+                                <label class="checkbox-inline mgb10 left">紧急转介：</label>
+                            </div>
+                            <div class="left mgb10">
+                                <input type="text" class="form-control" ng-model="currentItem.EmergencyTransTo" />
+                            </div>
+                            <div class="left mgb10">
+                                <label class="checkbox-inline mgb10 left">：</label>
+                                <label class="checkbox-inline mgb10 left"><input type="checkbox" ng-model="chooseItem.tIsAgreeTransfer" ng-click="checkedChange('IsAgreeTransfer',true)">同意</label>
+                                <label class="checkbox-inline mgb10 left"><input type="checkbox" ng-model="chooseItem.fIsAgreeTransfer" ng-click="checkedChange('IsAgreeTransfer',false)">不同意</label>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td><label class="control-label">过去药物</label></td>
+                    <td>
+                        <div class="mgb10">
+                            <div class="left mgb10">
+                                <label class="checkbox-inline mgb10 left"><input type="checkbox" ng-model="chooseItem.cMedicalHis">中药</label>
+                                <label class="checkbox-inline mgb10 left"><input type="checkbox" ng-model="chooseItem.eMedicalHis">西药</label>
+                            </div>
+                        </div>
+                        <div class="clearBoth mgb10">
+                            <div class="left mgb10">
+                                <label class="checkbox-inline mgb10 left"><input type="checkbox" ng-model="chooseItem.onTime">按时服药</label>
+                                <label class="checkbox-inline mgb10 left"><input type="checkbox" ng-model="chooseItem.notByDose">未依剂量服用</label>
+                                <label class="checkbox-inline mgb10 left"><input type="checkbox" ng-model="chooseItem.goOn">断续服用</label>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td><label class="control-label">主要诊断</label></td>
+                    <td>
+                        <div class="mgb10">
+                            <textarea class="form-control" rows="5" ng-model="person.DiseaseDiag"></textarea>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td><label class="control-label">其他</label></td>
+                    <td>
+                        <div class="mgb10">
+                            <textarea class="form-control" rows="5" ng-model="currentItem.Others"></textarea>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+</div>
+

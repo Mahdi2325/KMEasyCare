@@ -1,0 +1,113 @@
+<style type="text/css">
+    .report-item {
+        display: block;
+        color: #555555;
+        text-decoration: none;
+        text-overflow: ellipsis;
+    }
+    .report-item:hover {
+        display: block;
+        color: #555555;
+        text-decoration: none;
+        text-overflow: ellipsis;
+    }
+    .report-item:link {
+        display: block;
+        color: #555555;
+        text-decoration: none;
+        text-overflow: ellipsis;
+    }
+    .report-item.active {
+        color: #fff;
+        background: #5e87b0;
+    }
+</style>
+<div class="row">
+    <div id="content" class="col-md-12">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="page-header">
+                    <!-- BREADCRUMBS -->
+                    <ul class="breadcrumb">
+                        <li>
+                            <i class="fa fa-home"></i>
+                            <a href="/">首页</a>
+                        </li>
+                        <li>
+                            报表管理
+                        </li>
+                    </ul>
+                    <!-- /BREADCRUMBS -->
+                    <div class="clearfix"></div>
+                    
+                </div>
+            </div>
+        </div>
+        <div class="row" ng-controller="reportManageCtrl">
+            <div class="col-sm-2">
+                <div class="box border primary">
+                    <div class="box-title">
+                        <h4>
+                            <i class="fa fa-bars">住民信息</i>
+                        </h4>
+                    </div>
+                    <div class="box-body">
+                        <resident-card feeno={{FeeNo}} callback="residentSelected(resident)" />
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-10">
+                <div class="box border primary">
+                    <div class="box-title">
+                        <h4>
+                            <i class="fa fa-bars"></i>打印报表
+                        </h4>
+                    </div>
+                    <div class="well well-sm center" style="margin: 0">
+                        <div class="btn-group btn-group-sm" role="group" aria-label="...">
+                            <a class="btn btn-primary" role="button" ng-click="setTime(1);">昨天</a>
+                            <a class="btn btn-primary" role="button" ng-click="setTime(2);">今天</a>
+                            <a class="btn btn-primary" role="button" ng-click="setTime(3);">明天</a>
+                            <a class="btn btn-primary" role="button" ng-click="setTime(4);">上周</a>
+                            <a class="btn btn-primary" role="button" ng-click="setTime(5);">本周</a>
+                            <a class="btn btn-primary" role="button" ng-click="setTime(6);">下周</a>
+                            <a class="btn btn-primary" role="button" ng-click="setTime(7);">上月</a>
+                            <a class="btn btn-primary" role="button" ng-click="setTime(8);">本月</a>
+                            <a class="btn btn-primary" role="button" ng-click="setTime(9);">下月</a>
+                            <a class="btn btn-primary" role="button" ng-click="setTime(10);">去年</a>
+                            <a class="btn btn-primary" role="button" ng-click="setTime(11);">今年</a>
+                        </div>
+                    </div>
+                    <div class="well well-sm form-horizontal" style="margin: 0">
+                        <div class="form-group">
+                            <label class="col-sm-1 control-label">开始日期</label>
+                            <div class="col-sm-2">
+                                <input class="form-control input-sm" ng-model="startDate" ca-date-picker />
+                            </div>
+                            <label class="col-sm-1 control-label">结束日期</label>
+                            <div class="col-sm-2">
+                                <input class="form-control input-sm" ng-model="endDate" ca-date-picker/>
+                            </div>
+                            <label class="col-sm-1 control-label" id="warningInfo"></label>
+                            <a href="#" class="btn btn-primary btn-sm col-sm-offset-4 col-sm-2" role="button" ng-click="executeRecort()">确定</a>
+                        </div>
+                    </div>
+                    <div class="box-body form-horizontal">
+                        <div ng-repeat="report in reportList">
+                            <div class="form-group">
+                                <h4>{{MajorName(report.MajorType)}}</h4>
+                                <div class="col-sm-3 separator" style="border-top-color: #507aa4 !important; margin-top: 0; margin-bottom: 10px; "></div>
+                            </div>
+                            <div class="form-group" style="padding-left:20px">
+                                <div class="col-sm-3" ng-repeat="item in report.Items">
+                                    <a class="report-item{{active(item.Code)}}" href="javascript:;" ng-click="clickRecort(item)">{{item.Name}}</a>
+                                </div>
+                            </div>
+                            <br />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

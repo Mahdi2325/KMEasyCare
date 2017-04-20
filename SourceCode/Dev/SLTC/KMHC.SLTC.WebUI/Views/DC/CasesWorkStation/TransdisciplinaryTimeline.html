@@ -1,0 +1,408 @@
+
+<!--<meta  content="width=device-width, initial-scale=1.0" />-->
+<style type="text/css">
+        /*.content {
+        background-color: white;
+        margin-top: 0;
+        min-height: 800px;
+        border-left: 1px solid #cdd2d2;
+        padding-bottom: 30px;
+    }*/
+
+        .control-element {
+            float: left;
+            padding-left: 15px;
+            font-size: large;
+        }
+
+        .timeline-group-header {
+            float: left;
+            width: 10%;
+            padding-right: 15px;
+            padding-left: 15px;
+            position: relative;
+            min-height: 1px;
+            font-weight: bolder;
+        }
+
+        .timeline-group-content {
+            float: left;
+            width: 70%;
+            padding-right: 15px;
+            padding-left: 15px;
+            position: relative;
+            min-height: 1px;
+        }
+
+        .timeline-group-content-lable {
+            width: 100%;
+            position: relative;
+        }
+
+
+        .timeline-group-div {
+            padding: 10px 0px;
+        }
+
+        .timeline-task-text {
+            font-size: 18px;
+            font-family: 'Microsoft YaHei';
+            font-weight: 100;
+        }
+
+        .timeline-hack-border {
+            border-bottom: 1px solid #d6d6d6;
+        }
+
+        .timeline-table-title {
+            color: #3dc7a1;
+        }
+
+    .timeline-table-tr-title {
+        font-size: 16px;
+        color: #9a9a9a;
+    }
+
+    .timeline-table-tr-content {
+        font-size: 14px;
+        color: #9a9a9a;
+    }
+    .timeline-left-top-image {
+        position: relative;
+    }
+    .timeline-left-top-date {
+        position: absolute;
+        left: 5px;
+        bottom: 5px;
+        color: white;
+        font-size: 22px;
+    }
+
+</style>
+
+<link href="../../../Scripts/plantimeline/style.css" rel="stylesheet" />
+<link href="../../../Scripts/plantimeline/tablestyle.css" rel="stylesheet" />
+
+<link href="../../../Scripts/plantimeline/css/slider.css" rel="stylesheet" />
+
+<link href="../../../Scripts/plantimeline/css/light.css" rel="stylesheet" />
+<!--<link href="../../../Scripts/plantimeline/css/columns.css" rel="stylesheet" />
+<link href="../../../Scripts/plantimeline/css/widgets.css" rel="stylesheet" />
+<link href="../../../Scripts/plantimeline/css/light.css" rel="stylesheet" />-->
+
+<!--<link href="../../../Scripts/plantimeline/css/responsive.css" rel="stylesheet" />-->
+<!--<link rel="stylesheet" type="text/css" href="css/responsive.css" />-->
+<!--[if IE 8]>
+<link href="../../../Scripts/plantimeline/css/style_IE.css" rel="stylesheet" />
+<![endif]-->
+<script src="../../../Scripts/plantimeline/js/ie.html5.js"></script>
+
+<!-- JQUERY -->
+<!--<script src="../../../Content/CloudAdmin/js/jquery/jquery-2.0.3.min.js"></script>-->
+
+<script src="../../../Scripts/plantimeline/js/jquery.easing.1.3.js"></script>
+<script src="../../../Scripts/plantimeline/js/jquery.cycle.js"></script>
+
+<script src="../../../Scripts/plantimeline/js/jquery.timeline.min.js"></script>
+
+
+
+
+
+
+<div class="row">
+    <div id="content" class="col-md-12">
+        <div class="row">
+
+            <div class="col-md-2" style="padding-right:15px">
+                <resident-list feeno={{FeeNo}} callback="residentSelected(resident)" />
+            </div>
+            <div class="col-md-10" style="padding-left:15px">
+                <div class="row" style="height:60px;background-color:#f7f7f7;  border-bottom:solid 1px #d6d6d6; ">
+                    <div style="height: 60px;width:130px; background-color: #3dc7a1;text-align:center">
+                        <label style="line-height:60px;font-size:large;color:white">时间轴</label>
+                    </div>
+                </div>
+                <div class="row" style="padding:26px 0px">
+
+                    <form class="form-horizontal" role="form">
+                        <label class="control-label control-element" style="color:#b6b6b6">开始日期</label>
+                        <div class="control-element">
+                            <input type="text" class="form-control" ng-model="StartDate" ng-change="ChangeDate('start')" ca-date-picker>
+                        </div>
+                        <label class="control-label control-element" style="color:#b6b6b6">结束日期</label>
+                        <div class="control-element">
+                            <input type="text" class="form-control " ng-change="ChangeDate('end')" ng-model="EndDate" ca-date-picker>
+                        </div>
+                        <div class="control-element">
+                            <input type="button" class=" form-control btn btn-primary" onclick="Search(1)" value="社工时间轴">
+                        </div>
+                        <div class="control-element">
+                            <input type="button" class=" form-control btn btn-default" onclick="Search(2)" value="护理时间轴">
+                        </div>
+                        <div style="padding-top:50px">
+
+                        </div>
+                    </form>
+
+                </div>
+                <div class="row">
+                    <input type="hidden" id="feeNo" ng-model="FeeNo" />
+                    <input type="hidden" id="startDate" ng-model="StartDate" />
+                    <input type="hidden" id="endDate" ng-model="EndDate" />
+                    <input type="hidden" id="timeClass" />
+
+                    <div id="timelineContainer">
+                        <div id="timeline" class="timelineLight tl">
+
+
+                            <div style=" " class="item" data-id="2016/6/21" data-description="查看...">
+                                <div class="timeline-left-top-image">
+                                    <img src="../../../Scripts/plantimeline/images/thumbnails/1.png" />
+                                    <div class="timeline-left-top-date">6月4日</div>
+                                </div>
+                                <table style="margin: auto; width: 100%" id="hor-minimalist-a">
+                                    <thead>
+                                        <tr>
+                                            <th scope="col">评估结果</th>
+                                            <th scope="col"></th>
+                                            <th scope="col"></th>
+                                            <th scope="col"></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr align="left">
+                                            <td class="timeline-table-tr-title">ADL:</td>
+                                            <td class="timeline-table-tr-content"></td>
+                                        </tr>
+                                        <tr align="left">
+                                            <td class="timeline-table-tr-title">MMSE:</td>
+                                            <td class="timeline-table-tr-content">尚未评估</td>
+                                        </tr>
+                                        <tr align="left">
+                                            <td class="timeline-table-tr-title">ADL:</td>
+                                            <td class="timeline-table-tr-content">10分</td>
+                                        </tr>
+                                        <tr align="left">
+                                            <td class="timeline-table-tr-title">MMSE:</td>
+                                            <td class="timeline-table-tr-content">尚未评估</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                                <div class="read_more" data-id="2016/6/21">更多...</div>
+                            </div>
+                            <div class="item_open" data-id="2016/6/21">
+                              
+                                <div class="timeline_open_content">
+                                    <div>
+                                        <table id="hor-minimalist-b" style="margin: auto;  width: 100%">
+                                            <thead>
+                                                <tr style="background-color:#5e87b0">
+                                                    <th style="min-width:20%" scope="col">护理诊断</th>
+                                                    <th style="min-width:80%" scope="col">措施</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td>排尿型态改变:排尿困难、尿失禁、感染</td>
+                                                    <td>个案或照顾者能了解并解除环境上的障碍,教导不要把所有注意力集中在排空膀胱问题上，试着放松自己</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>体温过高</td>
+                                                    <td></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>体温过高</td>
+                                                    <td></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>体温过高</td>
+                                                    <td></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>体温过高</td>
+                                                    <td></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>腹泻</td>
+                                                    <td></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>体温过高</td>
+                                                    <td></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>体温过高</td>
+                                                    <td>移除过多衣物、毯子，以促进热散失</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+
+
+
+
+
+
+
+                        </div> <!-- /END TIMELINE -->
+                    </div>
+
+
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+</div>
+
+
+
+
+
+
+
+<script type="text/javascript">
+    $(document).ready(function () {
+
+    });
+
+
+    function Search(tag) {
+        var feeNo = $('#feeNo').val();
+        if (feeNo == '') {
+            alert("请先在住民列表中选择住民！");
+            return;
+        }
+        var startDate = $('#startDate').val();
+        var endDate = $('#endDate').val();
+        $('#timelineContainer').empty();
+        $('#timelineContainer').append('<div id="timeline" class="timelineLight tl"> </div>');
+        var option1 = {
+            url: "/DC_Report/Timeline",
+            type: 'Post',
+            cache: false,
+            async: false,
+            dataType: 'json',
+            data: { feeNo: feeNo, name: '', startDate: startDate, endDate: endDate, tag: tag }, //发送服务器数据
+            success: function (res) {  //成功事件
+                var Data = res.data;
+                var htmlStr = '';
+                $.each(Data.TimelineContainer, function (index, container) {
+                    var Timeline = container.Timeline;
+                    if (container.Tag == 2) {//护理
+                        for (var i = 0; i < Timeline.length; i++) {
+                            Timeline[i].ADLSCORE = Timeline[i].ADLSCORE === null ? "尚未评估" : Timeline[i].ADLSCORE;
+                            Timeline[i].MMSESCOR = Timeline[i].MMSESCORE === null ? "尚未评估" : Timeline[i].MMSESCORE;
+                            Timeline[i].GODSSCORE = Timeline[i].GODSSCORE === null ? "尚未评估" : Timeline[i].GODSSCORE;
+                            Timeline[i].IADLSCORE = Timeline[i].IADLSCORE === null ? "尚未评估" : Timeline[i].IADLSCORE;
+                            htmlStr += ' <div style="" class="item" data-id="' + Timeline[i].StartDate + '" data-description="查看...">';
+                            htmlStr += ' <div class="timeline-left-top-image">';
+                            htmlStr += '<img src="../../../Scripts/plantimeline/images/thumbnails/' + GetPic(i, container.Tag).small + '" />';
+                            htmlStr += '  <div class="timeline-left-top-date">' + Timeline[i].Month + '月' + Timeline[i].Day + '日</div></div>';
+                            htmlStr += ' <table style="margin: auto; width: 100%" id="hor-minimalist-a"> <thead> <tr>';
+                            htmlStr += ' <th scope="col">' + Timeline[i].Title + '</th>';
+                            htmlStr += '<th scope="col"></th> <th scope="col"></th><th scope="col"></th> </tr></thead>';
+                            htmlStr += '  <tbody> <tr align="left">  <td class="timeline-table-tr-title">ADL:</td> <td class="timeline-table-tr-content">' + Timeline[i].ADLSCORE + '</td>';
+                            htmlStr += '   </tr> <tr align="left"><td class="timeline-table-tr-title">MMSE:</td> <td class="timeline-table-tr-content">' + Timeline[i].MMSESCOR + '</td> ';
+                            htmlStr += '  </tr> <tr align="left">  <td class="timeline-table-tr-title">GDS:</td>  <td class="timeline-table-tr-content">' + Timeline[i].GODSSCORE + '</td> </tr> ';
+                            htmlStr += '<tr align="left">  <td class="timeline-table-tr-title">IADL:</td>   <td class="timeline-table-tr-content">' + Timeline[i].IADLSCORE + '</td>   </tr> </tbody> </table>';
+                            htmlStr += '<div class="read_more" data-id="' + Timeline[i].StartDate + '">更多...</div> </div>';
+                            //item_open
+                            htmlStr += '  <div class="item_open" data-id="' + Timeline[i].StartDate + '">';
+
+                            htmlStr += '    <div class="timeline_open_content">';
+                            htmlStr += '   <div> <table id="hor-minimalist-b" style="margin: auto; width: 490px"> <thead> <tr style="background-color:' + GetPic(i, container.Tag).color + '">';
+                            htmlStr += '  <th style="min-width:20%" scope="col">' + Timeline[i].Header1 + '</th>';
+                            htmlStr += '  <th style="min-width:80%" scope="col">' + Timeline[i].Header2 + '</th>';
+                            htmlStr += '    </tr> </thead> <tbody>';
+                            for (var j = 0; j < Timeline[i].Plan.length; j++) {
+                                htmlStr += '    <tr>  <td>' + Timeline[i].Plan[j].QUESTIONTYPE + ' </td>   <td>' + Timeline[i].Plan[j].ACTIVITY.join(',') + '</td>  </tr>'
+                            }
+                            htmlStr += ' </tbody> </table></div> </div></div>';
+                        }
+                    } else if (container.Tag == 1) {
+                        for (var i = 0; i < Timeline.length; i++) {
+                            htmlStr += ' <div style="" class="item" data-id="' + Timeline[i].StartDate + '" data-description="查看...">';
+                            htmlStr += ' <div class="timeline-left-top-image">';
+                            htmlStr += '<img src="../../../Scripts/plantimeline/images/thumbnails/' + GetPic(i, container.Tag).small + '" />';
+                            htmlStr += '  <div class="timeline-left-top-date">' + Timeline[i].Month + '月' + Timeline[i].Day + '日</div></div>';
+                            htmlStr += ' <table style="margin: auto; width: 100%" id="hor-minimalist-a"> <thead> <tr>';
+                            //添加需求类别与项目
+                            htmlStr += ' <th style="width: 50%" scope="col">' + Timeline[i].Title + '</th><th scope="col">' + Timeline[i].Title1 + '</th>';
+                            htmlStr += ' </tr></thead> <tbody>';
+                            //添加需求类别与项目
+                            for (var j = 0; j < Timeline[i].Plan.length; j++) {
+                                htmlStr += '<tr align="left">  <td class="timeline-table-tr-title">' + Timeline[i].Plan[j].QUESTIONTYPE + '</td> <td class="timeline-table-tr-content">' + Timeline[i].Plan[j].CPDIA + '</td></tr>'
+                            }
+                            htmlStr += ' </tbody> </table>';
+                            htmlStr += '<div class="read_more" data-id="' + Timeline[i].StartDate + '">更多...</div> </div>';
+                            //item_open
+                            htmlStr += '  <div class="item_open" data-id="' + Timeline[i].StartDate + '">';
+                            htmlStr += '    <div class="timeline_open_content">';
+                            htmlStr += '   <div> <table id="hor-minimalist-b" style="margin: auto; width: 490px"> <thead> <tr style="background-color:' + GetPic(i, container.Tag).color + '">';
+                            htmlStr += '  <th style="width:30%" scope="col">' + Timeline[i].Header1 + '</th>';
+                            htmlStr += '  <th style="width:70%" scope="col">' + Timeline[i].Header2 + '</th>';
+                            htmlStr += '    </tr> </thead> <tbody>';
+                            //问题描述与介入方式
+                            for (var j = 0; j < Timeline[i].Plan.length; j++) {
+                                htmlStr += '    <tr>  <td style="width:30%;word-wrap:break-word;word-break:break-all;">' + Timeline[i].Plan[j].QUESTIONDESC + ' </td>   <td style="width:70%;word-wrap:break-word;word-break:break-all;">' + Timeline[i].Plan[j].ACTIVITY.join(',') + '</td>  </tr>'
+                            }
+                            htmlStr += ' </tbody> </table></div> </div></div>';
+                        }
+                    }
+             
+                })
+
+                $(".timelineLight").append(htmlStr);              
+                $('.timelineLight').timeline({
+                    openTriggerClass: '.read_more',
+                    startItem: Data.StartDate
+                        
+                });
+                $("#scroller .items").cycle({
+                    fx: 'scrollUp'
+                });              
+            
+            },
+            error: function (XMLHttpRequest, textStatus, errorThrown) { //发送失败事件
+                alert(textStatus);
+            }
+        };
+        $.ajax(option1);
+    };
+
+    //var nurPic = [{ small: 'n1.png', large: 'n1W.png' }, { small: 'n2.png', large: 'n2W.png' }];
+    //var swPic = [{ small: 's1.png', large: 's1W.png' }, { small: 's2.png', large: 's2W.png' }];
+    var Pic = [{ small: '1.png', color: '#5e87b0' }, { small: '2.png', color: '#3dc7a1' }, { small: '3.png', color: '#53aaab' }, { small: '4.png', color: '#6eb070' }, { small: '5.png', color: '#6d68af' }, { small: '6.png', color: '#5e87b0' }];
+
+    function GetPic(index, tag) {
+            var len = Pic.length;
+            var i = index % len;
+            return Pic[i];
+    }
+
+    function Clean() {
+        if ($("#timeClass").val() == 'timelineLight1') {
+            $("#timeline").removeClass('timelineLight1');
+            $("#timeline").addClass('timelineLight2');
+            $("#timeClass").val('timelineLight2');
+        } else {
+            $("#timeline").removeClass('timelineLight2');
+            $("#timeline").addClass('timelineLight1');
+            $("#timeClass").val('timelineLight1');
+        }
+        var timelineClass = $("#timeClass").val();
+        $('.' + timelineClass).empty();
+        $('.timeline_line').empty();
+    }
+
+
+
+
+
+</script>
+

@@ -1,0 +1,178 @@
+<div class="row">
+    <div id="content" class="col-md-12">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="page-header">
+                    <!-- BREADCRUMBS -->
+                    <ul class="breadcrumb">
+                        <li>
+                            <i class="fa fa-home"></i>
+                            <a href="/">首页</a>
+                        </li>
+
+                        <li>生活记录</li>
+                    </ul>
+                    <!-- /BREADCRUMBS -->
+
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="box border primary">
+                    <div class="box-title">
+                        <h4><i class="fa fa-search"></i>依区域房间筛选</h4>
+                    </div>
+                    <div class="box-body container-fluid">
+                        <form class="form-horizontal" role="form" novalidate>
+                            <div class="form-group">
+                                <div class="col-md-1 text-right">
+                                    <label for="sltFloor" class="control-label">楼层</label>
+                                </div>
+                                <div class="col-md-2">
+                                    <select id="sltFloor" ng-model="Data.FloorName" class="form-control" ng-options="item.FloorId as item.FloorName for item in Data.floors">
+                                        <option></option>
+                                    </select>
+
+                                </div>
+                                <div class="col-md-1 text-right">
+                                    <label for="sltRoom" class="control-label">居住房间</label>
+                                </div>
+                                <div class="col-md-2">
+                                    <select id="sltRoom" ng-model="Data.RoomName" class="form-control" ng-options="item.RoomNo as item.RoomName for item in Data.rooms">
+                                        <option></option>
+                                    </select>
+                                </div>
+                                <div class="col-md-1">
+                                    <button class="btn btn-primary" ng-click="loadLifeRecord()">查询</button>
+                                </div>
+                                <div class="col-md-1 text-right">
+                                    <label for="sltRoom" class="control-label">服务时间</label>
+                                </div>
+                                <div class="col-md-2">
+                                    <input id="txtServiceDate" class="form-control" type="text" ng-model="currentDate" ca-date-time-picker required />
+                                </div>
+                                <div class="col-md-2">
+                                    <button class="btn btn-primary" ng-click="setDate()">校准时间</button>
+                                </div>
+                            </div>
+                        </form>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="box border primary">
+                    <div class="box-title">
+                        <h4><i class="fa fa-table"></i>生活记录批量输入</h4>
+                        <div class="tools hidden-xs">
+
+                            <!--<a href="#box-config" data-toggle="modal" class="config">
+                                <i class="fa fa-cog"></i>
+                            </a>-->
+                            <a class="reload" href="javascript:;" ca-reload>
+                                <i class="fa fa-refresh"></i>
+                            </a>
+                            <a href="javascript:;" class="collapse" ca-collapse>
+                                <i class="fa fa-chevron-up"></i>
+                            </a>
+                            <a class="remove" href="javascript:;" ca-remove>
+                                <i class="fa fa-times"></i>
+                            </a>
+
+                        </div>
+                    </div>
+                    <div class="box-body">
+                        <form class="form-horizontal" role="form" name="lform" novalidate>
+                            <!--<ui-data-table options="options">-->
+                            <table class="table table-bordered" id="editTable">
+                                <thead>
+                                    <tr>
+                                        <th style="width: 60px">个案姓名</th>
+                                        <th style="width: 60px">居住区域</th>
+                                        <th style="width: 60px">居住房间</th>
+                                        <th style="width: 160px">日期<span class="required">*</span></th>
+                                        <th style="width: 100px">填写人员</th>
+                                        <th style="width: 60px">体温</th>
+                                        <th style="width: 160px">上午活动</th>
+                                        <th style="width: 160px">下午活动</th>
+                                        <th style="width: 180px">特殊事件记录</th>
+                                        <th style="width:60px">新增本笔</th>
+                                        <th style="width:100px">操作</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr ng-repeat="info in Data.List">
+                                        <td>{{info.Name}}</td>
+                                        <td>{{info.FloorName}}</td>
+                                        <td>{{info.RoomName}}</td>
+                                        <td>
+                                            <input type="text" checktype="info.CheckType" ng-model="info.RecordDate" class="form-control" kmca-date-time-picker required />
+                                        </td>
+                                        <td>
+                                            <input-staff callback="staffSelected(item,info)" ng-model="info.RecordBy" value="{{info.RecordBy}}" placeholder="输入编号,姓名" required=true />
+                                            <!--<input type="text" value="" class="form-control" placeholder="输入编号,姓名" required />-->
+                                        </td>
+                                        <td>
+                                            <div class="input-group temp">
+                                                <input id="txt_Bodytemp" ng-blur="checkNum(info)" name="txt_Bodytemp" ng-model="info.BodyTemp" class="form-control" ng-minlength="0" ng-maxlength="40" required />
+                                                <div class="input-group-addon">℃</div>
+                                            </div>
+                                        </td>
+
+                                        <td style="font-family:">
+                                            <!--<select class="form-control" ng-model="info.AmActivity" select-code="A00.400">
+                                                <option></option>
+                                            </select></td>-->
+                                            <!--<input type="text" class="form-control list" ng-model="info.AmActivity" eidt select-multiple-value="A00.400" />-->
+                                            <input type="text" class="form-control list" ng-model="info.AmActivity" select-items="上午活动" />
+                                        <td>
+                                            <!--<select class="form-control" ng-model="info.PmActivity" select-code="A00.401">
+                                                <option></option>
+                                            </select>-->
+                                            <!--<input type="text" name="pmatt" class="form-control" ng-model="info.PmActivity" eidt select-multiple-value="A00.401" />-->
+                                            <input type="text" name="pmatt" class="form-control" ng-model="info.PmActivity" select-items="下午活动" />
+                                        </td>
+                                        <td>
+                                            <select class="form-control" ng-model="info.Comments" select-code="A00.402">
+                                                <option></option>
+                                            </select>
+                                        </td>
+                                        <td>
+                                            <input type="checkbox"  class="uniform" value="T" ng-model="info.CheckType">是
+                                        </td>
+                                        <td>
+                                            <div class="btn-group btn-group-xs" role="group" aria-label="...">
+                                                <a class="btn btn-info" role="button" ui-sref="LifeRecordsHistory({id:info.FeeNo})"><i class="fa fa-table"></i>  查看记录</a>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </tbody>
+
+                            </table>
+                            <!--</ui-data-table>-->
+                            <div id="pager"></div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row text-right">
+            <div class="col-md-12">
+                <button class="btn btn-primary" ng-click="saveLifeRecord()">保存</button>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    //$("#editTable").on('change', function () {
+    //    var ele = angular.element(event.srcElement).closest('tr');
+    //    var scope = ele.scope();
+    //    scope.info.CheckType = true;
+    //})
+
+
+</script>
+

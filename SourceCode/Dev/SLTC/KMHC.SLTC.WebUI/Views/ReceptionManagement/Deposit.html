@@ -1,0 +1,24 @@
+﻿<form class="form-horizontal" name="form1"  novalidate>
+    <div class="form-group">
+        <label class="col-sm-2 control-label">选择预订床位</label>
+        <div class="col-sm-10">
+            <km-look-up title="床位" single="true" empty-button-show="true" is-can-choose="[{key:'BedStatus',value:'Empty'}]" ng-model="Data.ReservationBed" input-show="true" item-property="{key:'BedNo',name:'BedNo'}" factory-name="bedRes" search-params="{Code:'keyWords',Text:'请输入楼层或房间号查询'}" col-list="[{Code:'BedNo',Name:'床位号'},{Code:'BedStatus',Name:'状态',Format:'dic',dicCode:'J00.002'},{Code:'FloorName',Name:'所在楼层'},{Code:'RoomName',Name:'所在房间'},{Code:'BedType',Name:'床位型态',Format:'dic',dicCode:'J00.003'},{Code:'BedKind',Name:'病床种类',Format:'dic',dicCode:'J00.004'},{Code:'ResidentName',Name:'姓名'}]"></km-look-up>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-sm-2 control-label">订金缴退</label>
+        <div class="col-sm-10">
+            <div class="form-group">
+                <label class="col-lg-offset-1  radio-inline "><input type="radio" value="{{$parent.enum.earnestStatus.UnPain}}" name="EarnestStatus" ng-model="Data.EarnestStatus" />未交订金</label>
+                <label class="col-lg-offset-1  radio-inline "><input type="radio" value="{{$parent.enum.earnestStatus.Paid}}" name="EarnestStatus" ng-model="Data.EarnestStatus" />已交订金</label>
+                <label class="col-lg-offset-1  radio-inline "><input type="radio" value="{{$parent.enum.earnestStatus.Returned}}" name="EarnestStatus" ng-model="Data.EarnestStatus" />已退订金</label>
+            </div>
+        </div>
+    </div>
+    <div class="form-group center">
+        <div class="col-sm-offset-3 col-sm-6">
+            <input type="button" class="btn btn-info" ng-click="submit()" value="保存" />
+            <input type="button" class="btn btn-default" ng-click="hide()" value="取消" />
+        </div>
+    </div>
+</form>

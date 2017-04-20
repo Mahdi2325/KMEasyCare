@@ -1,0 +1,77 @@
+<div id="content" class="col-lg-12">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="page-header">
+                <ul class="breadcrumb">
+                    <li>
+                        <i class="fa fa-home"></i>
+                        <a href="/">首页</a>
+                    </li>
+                    <li>社工定期处遇评估历史记录</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <!-- BOX -->
+            <div class="box border primary">
+                <div class="box-title">
+                    <h4><i class="fa fa-table"></i>定期评估处遇历史记录</h4>
+                    <div class="tools hidden-xs">
+                        <a href="#box-config" data-toggle="modal" class="config">
+                            <i class="fa fa-cog"></i>
+                        </a>
+                        <a class="reload" href="javascript:;" ca-reload>
+                            <i class="fa fa-refresh"></i>
+                        </a>
+                        <a href="javascript:;" class="collapse" ca-collapse>
+                            <i class="fa fa-chevron-up"></i>
+                        </a>
+                        <a class="remove" href="javascript:;" ca-remove>
+                            <i class="fa fa-times"></i>
+                        </a>
+                    </div>
+                </div>
+                <div class="box-body">
+                    <table id="datatable1"   class="table table-striped table-bordered table-hover table-handler">
+                        <thead>
+                            <tr>
+                                <th>评估日期</th>
+                                <th>评估人员</th>
+                                <th>主要问题</th>
+                                <th>家庭问题</th>
+                                <th>社会资源评估</th>
+                                <th>处遇计划</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="person in Data.persons" on-finish-repeat-render>
+                                
+                                <td>{{person.EvalDate}}</td>
+                                <td>{{person.EvaluateBy}}</td>
+                                <td>{{person.KeyQuestion}}</td>
+                                <td>【家庭系统评估】:{{person.FamilySubSystem}}<br/>【个案对家庭的功能或角色】{{person.FamilyFunRole}}<br/>【家属对个案之期待及支持度评估】:{{person.FamilySupport}}<br />【家庭经济能力评估】{{person.FamilyFinancial}}</td>
+                                <td>{{person.SocialFormalResource}}</td>
+                                <td>{{person.RelativesDiscuss}}</td>
+                            </tr>
+                        </tbody>
+                        <tfoot>
+                            <tr>
+                                <th>评估日期</th>
+                                <th>评估人员</th>
+                                <th>主要问题</th>
+                                <th>家庭问题</th>
+                                <th>社会资源评估</th>
+                                <th>处遇计划</th>
+                            </tr>
+                        </tfoot>
+                    </table>
+                   
+                </div>
+
+            </div>
+            <!-- /BOX -->
+        </div>
+    </div>
+</div>

@@ -1,0 +1,39 @@
+-------------增加政府代码------------------------------------------------------
+ALTER TABLE `LTC_ORG`
+ADD COLUMN `GOVID`  varchar(50) NULL COMMENT '政府ID 用于对应结算区间' AFTER `NSNO`;
+
+
+
+----------------------资格申请 增加 APPLICANTID-------------------------------
+ALTER TABLE `NCIA_APPCERT`
+ADD COLUMN `APPLICANTID`  varchar(32) NULL COMMENT '申请人申请信息ID' AFTER `APPCERTID`;
+
+--------------------- 添加外键------------------------------------------
+
+ALTER TABLE `NCIA_APPCERT` ADD CONSTRAINT `ncia_appcert_applicant` FOREIGN KEY (`APPLICANTID`) REFERENCES `NCIA_APPLICANT` (`APPLICANTID`) ON DELETE RESTRICT ON UPDATE RESTRICT;
+
+
+----------------------入院申请 增加 APPLICANTID-------------------------------
+ALTER TABLE `NCIA_APPHOSP`
+ADD COLUMN `APPLICANTID`  varchar(32) NULL COMMENT '申请人基本资料ID' AFTER `APPCERTID`;
+
+--------------------------历史数据处理----------------------------------------
+update NCIA_APPCERT C ,NCIA_APPLICANT A  SET C.APPLICANTID=A.APPLICANTID WHERE C.IDNO=A.IDNO ;
+
+--------------------- 添加外键------------------------------------------
+
+ALTER TABLE `NCIA_APPHOSP` ADD CONSTRAINT `ncia_apphosp_applicant` FOREIGN KEY (`APPLICANTID`) REFERENCES `NCIA_APPLICANT` (`APPLICANTID`) ON DELETE RESTRICT ON UPDATE RESTRICT;
+
+
+
+
+
+
+--------------------------历史数据处理----------------------------------------
+update NCIA_APPHOSP H ,NCIA_APPLICANT A  SET H.APPLICANTID=A.APPLICANTID WHERE H.IDNO=A.IDNO   ;
+
+
+
+-------------------------账单月------------------------
+ALTER TABLE `LTC_BILLV2`
+ADD COLUMN `BILLMONTH`  varchar(7) NULL COMMENT '账单月' AFTER `BILLPAYID`;

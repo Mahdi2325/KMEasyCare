@@ -1,0 +1,272 @@
+﻿<div class="row">
+    <div class="col-sm-12">
+                <div class="box border primary">
+                    <div class="box-title">
+                        <h4><i class="fa fa-table"></i>历史退费账单</h4>
+                    </div>
+                    <div class="box-body">
+                        <ui-data-table options="options">
+                            <table class="table table-striped table-bordered">
+                                <thead>
+                                    <tr>
+                                        <th>账单号</th>
+                                        <th>退费号</th>
+                                        <th>护理险项目总费用</th>
+                                        <th>报销费用</th>
+                                        <th>个人自负</th>
+                                        <th>自费费用</th>
+                                        <th>结算开始日</th>
+                                        <th>结算结束日</th>
+                                        <th>住院天数</th>
+                                        <th>账单生成人</th>
+                                        <th>状态</th>
+                                        <th>经办人</th>
+                                        <th><i class="fa fa-bars"></i>操作</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr ng-repeat="billRefundRec in billRefundRecs">
+                                        <td>{{billRefundRec.BillId}}</td>
+                                        <td>{{billRefundRec.ReFundRecordId}}</td>
+                                        <td>{{billRefundRec.NCIItemTotalCost}}</td>
+                                        <td>{{billRefundRec.NCIPay}}</td>
+                                        <td>{{billRefundRec.NCIItemSelfPay}}</td>
+                                        <td>{{billRefundRec.SelfPay}}</td>
+                                        <td>{{billRefundRec.BalanceStartTime | dateFormat}}</td>
+                                        <td>{{billRefundRec.BalanceEndTime | dateFormat}}</td>
+                                        <td>{{billRefundRec.HospDay}}</td>
+                                        <td>{{billRefundRec.BilleName}}</td>
+                                        <td>{{billRefundRec.Status | ChargeRecordStatusFormat}}</td>
+                                        <td>{{billRefundRec.RefundeName}}</td>
+                                        <td>
+                                            <div class="btn-group btn-group-xs" role="group" aria-label="...">
+                                                <a class="btn btn-primary" role="button" data-toggle="modal" data-target="#modalDetail" ng-click="showBillRefundsList(billRefundRec)"><i class="fa fa-search"></i>查看详细</a>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </ui-data-table>
+                    </div>
+                </div>
+            </div>
+</div>
+
+<!--账单明细-->
+<div id="modalDetail" class="modal fade" tabindex="-1" aria-labelledby="modalPayDetailLabel" role="dialog" data-target=".bs-example-modal-lg">
+    <div class="modal-dialog bs-example-modal-lg" role="document" style="width: 60%">
+        <div class="modal-content modal-lg">
+            <div class="modal-header bg-success">
+                <button type="button" id="billClose" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">
+                    退费详细
+                </h4>
+            </div>
+
+            <div class="modal-body">
+                <div class="box border primary">
+                    <div class="box-title">
+                        <h4><i class="fa fa-bars"></i>退费记录</h4>
+                    </div>
+                    <div class="box-body">
+                        <form class="form-horizontal" role="form" name="formPay" autocomplete="off" novalidate>
+                            <div class="form-group">
+                                <label for="txtCREATETIME" class="col-sm-1 control-label">退费时间</label>
+                                <div class="col-sm-3">
+                                    <input id="txtCREATETIME" class="form-control datepicker" type="text" ng-model="BillRufundRecsDTLs.REFUNDTIME" ca-date-time-picker readonly>
+                                </div>
+                                <label for="txtEMPNAME" class="col-sm-1 control-label">经办人</label>
+                                <div class="col-sm-3">
+                                    <input id="txtEMPNAME" class="form-control" type="text" ng-model="BillRufundRecsDTLs.EMPNAME" readonly>
+                                </div>
+                                <label for="txtNCIITEMTOTALCOST" class="col-sm-1 control-label">自费总金额</label>
+                                <div class="col-sm-3">
+                                    <input id="txtSELFPAY" class="form-control" ng-model="BillRufundRecsDTLs.SELFPAY" ng-disabled="true" readonly>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="txtNCIITEMTOTALCOST" class="col-sm-1 control-label">护理险总金额</label>
+                                <div class="col-sm-3">
+                                    <input id="txtNCIITEMTOTALCOST" class="form-control" ng-model="BillRufundRecsDTLs.NCIITEMTOTALCOST" ng-disabled="true" readonly>
+                                </div>
+                                <label for="txtNCIPAY" class="col-sm-1 control-label">可报销金额</label>
+                                <div class="col-sm-3">
+                                    <input id="txtNCIPAY" class="form-control" ng-model="BillRufundRecsDTLs.NCIPAY" ng-disabled="true" readonly>
+                                </div>
+                                <label for="txtNCIITEMSELFPAY" class="col-sm-1 control-label">个人自负</label>
+                                <div class="col-sm-3">
+                                    <input id="txtNCIITEMSELFPAY" class="form-control" ng-model="BillRufundRecsDTLs.NCIITEMSELFPAY" ng-disabled="true" readonly>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="txtPAYER" class="col-sm-1 control-label">收款人</label>
+                                <div class="col-sm-3">
+                                    <input id="txtPAYER" class="form-control" ng-model="BillRufundRecsDTLs.RECEIVER" ng-disabled="true" readonly>
+                                </div>
+                                <label for="txtPAYMENTTYPE" class="col-sm-1 control-label">收款方式</label>
+                                <div class="col-sm-3">
+                                    <input id="txtPAYMENTTYPE" class="form-control" ng-model="RefundPaymentType" ng-disabled="true" readonly>
+                                </div>
+                                <label for="txtACCOUNTBALANCEPAY" class="col-sm-1 control-label">实退金额</label>
+                                <div class="col-sm-3">
+                                    <input id="txtACCOUNTBALANCEPAY" class="form-control" ng-model="BillRufundRecsDTLs.REFUNDAMOUNT" ng-disabled="true" readonly>
+                                </div>
+                            </div>
+                            <div class="form-group">
+
+                                <!--<label for="txtNEWBILLID" class="col-sm-1 control-label">重生账单号</label>
+                                <div class="col-sm-3">
+                                    <input id="txtNEWBILLID" class="form-control" ng-model="BillRufundRecsDTLs.NEWBILLID" ng-disabled="true" readonly>
+                                </div>-->
+
+                                <label for="txtREFUNDREASON" class="col-sm-1 control-label">退款原因</label>
+                                <div class="col-sm-3">
+                                    <textarea id="txtREFUNDREASON" class="form-control" rows="3" name="退款原因" ng-disabled="true" ng-model="BillRufundRecsDTLs.REFUNDREASON"></textarea>
+                                </div>
+                                <label for="txtCOMMENT" class="col-sm-1 control-label">备注</label>
+                                <div class="col-sm-3">
+                                    <textarea id="txtCOMMENT" class="form-control" rows="3" name="备注" ng-disabled="true" ng-model="BillRufundRecsDTLs.COMMENT"></textarea>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+            <div class="modal-body">
+                <div class="box border primary">
+                    <div class="box-title">
+                        <h4><i class="fa fa-table"></i>退费账单明细</h4>
+                    </div>
+                    <div class="box-body">
+                        <table class="table table-striped table-bordered table-hover table-handler">
+                            <thead>
+                                <tr>
+                                    <th class="col-sm-1" style="text-align:center;">账单号</th>
+                                    <th class="col-sm-1" style="text-align:center;">医保码</th>
+                                    <th class="col-sm-1" style="text-align:center;">院内码</th>
+                                    <th class="col-sm-1" style="text-align:center;">中文名</th>
+                                    <th class="col-sm-1" style="text-align:center;">费用类别</th>
+                                    <th class="col-sm-1" style="text-align:center">护理险否</th>
+                                    <th class="col-sm-1" style="text-align:center">计价单位</th>
+                                    <th class="col-sm-1" style="text-align:center">单价</th>
+                                    <th class="col-sm-1" style="text-align:center">计价数量</th>
+                                    <th class="col-sm-1" style="text-align:center">总价</th>
+                                    
+                                    <th class="col-sm-1" style="text-align:center">退款否</th>
+                                    <!--<th class="col-sm-1" style="text-align:center">创建人</th>-->
+                                    <th class="col-sm-1" style="text-align:center">创建时间</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr ng-repeat="item in BillRufundsDTLs">
+                                    <td style="text-align:center;">{{item.BILLID}}</td>
+                                    <td style="text-align:center;">{{item.MCDRUGCODE}}</td>
+                                    <td style="text-align:center;">{{item.NSDRUGCODE}}</td>
+                                    <td style="text-align:center;">{{item.CNNAME}}</td>
+                                    <td style="text-align:center;">{{item.CHARGETYPEID | ChargeTypeId}}</td>
+                                    <td style="text-align:center;">{{item.ISNCIITEM==true ?'是' : '否'}}</td>
+                                    <td style="text-align:center;">{{item.UNITS}}</td>
+                                    <td style="text-align:center;">{{item.UNITPRICE}}</td>
+                                    <td style="text-align:center;">{{item.COUNT}}</td>
+                                    <td style="text-align:center;">{{item.COST}}</td>
+                                    <td style="text-align:center;">{{item.ISREFUNDRECORD==true ?'是' : '否'}}</td>
+                                    <!--<td style="text-align:center;">{{item.OPERATOR}}</td>-->
+                                    <td style="text-align:center;">{{item.CREATETIME | date:'yyyy-MM-dd HH:mm:ss'}}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer center" style="margin-top:0px;">
+                <button type="button" class="btn btn-primary" ng-click="cancel()" id="disabledcheck" data-dismiss="modal">取消</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--账单退费记录-->
+<div class="modal fade" id="modalChargeRec" tabindex="-1" role="dialog" aria-labelledby="modalBedLabel" data-target=".bs-example-modal-lg">
+    <div class="modal-dialog bs-example-modal-lg" role="document" style="width: 80%;">
+        <div class="modal-content modal-lg">
+                <div class="modal-header bg-success">
+                    <button type="button" id="billClose" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel">
+                        退费记录
+                    </h4>
+                </div>
+                <div class="modal-body">
+                    <div class="box border primary">
+                        <div class="box-title">
+                            <h4><i class="fa fa-bars"></i>退费记录明细</h4>
+                        </div>
+                        <div class="box-body">
+                            <form class="form-horizontal" role="form" name="formPay" autocomplete="off" novalidate>
+                                <div class="form-group">
+                                    <label for="txtCREATETIME" class="col-sm-1 control-label">退费时间</label>
+                                    <div class="col-sm-3">
+                                        <input id="txtCREATETIME" class="form-control datepicker" type="text" ng-model="BillRufundRecsDTLs.REFUNDTIME" ca-date-time-picker readonly>
+                                    </div>
+                                    <label for="txtEMPNAME" class="col-sm-1 control-label">经办人</label>
+                                    <div class="col-sm-3">
+                                        <input id="txtEMPNAME" class="form-control" type="text" ng-model="BillRufundRecsDTLs.EMPNAME" readonly>
+                                    </div>
+                                    <label for="txtREFUNDREASON" class="col-sm-1 control-label">退款原因</label>
+                                    <div class="col-sm-3">
+                                        <input id="txtREFUNDREASON" class="form-control" type="text" ng-model="BillRufundRecsDTLs.REFUNDREASON" readonly>
+                                    </div>
+
+                                </div>
+                                <div class="form-group">
+                                    <label for="txtNCIITEMTOTALCOST" class="col-sm-1 control-label">护理险总金额</label>
+                                    <div class="col-sm-3">
+                                        <input id="txtNCIITEMTOTALCOST" class="form-control" ng-model="BillRufundRecsDTLs.NCIITEMTOTALCOST" ng-disabled="true" readonly>
+                                    </div>
+                                    <div class="col-sm-3">
+                                        <input id="txtSELFPAY" class="form-control" ng-model="BillRufundRecsDTLs.SELFPAY" ng-disabled="true" readonly>
+                                    </div>
+                                    <label for="txtNCIITEMSELFPAY" class="col-sm-1 control-label">个人自负</label>
+                                    <div class="col-sm-3">
+                                        <input id="txtNCIITEMSELFPAY" class="form-control" ng-model="BillRufundRecsDTLs.NCIITEMSELFPAY" ng-disabled="true" readonly>
+                                    </div>
+                                    <label for="txtACCOUNTBALANCEPAY" class="col-sm-1 control-label">账户金额</label>
+                                    <div class="col-sm-3">
+                                        <input id="txtACCOUNTBALANCEPAY" class="form-control" ng-model="BillRufundRecsDTLs.ACCOUNTBALANCEPAY" ng-disabled="true" readonly>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="txtNCIPAY" class="col-sm-1 control-label">可报销金额</label>
+                                    <div class="col-sm-3">
+                                        <input id="txtNCIPAY" class="form-control" ng-model="BillRufundRecsDTLs.NCIPAY" ng-disabled="true" readonly>
+                                    </div>
+                                    <label for="txtPAYER" class="col-sm-1 control-label">收款人</label>
+                                    <div class="col-sm-3">
+                                        <input id="txtPAYER" class="form-control" ng-model="BillRufundRecsDTLs.PAYER" ng-disabled="true" readonly>
+                                    </div>
+                                    <label for="txtPAYMENTTYPE" class="col-sm-1 control-label">收款方式</label>
+                                    <div class="col-sm-3">
+                                        <input id="txtPAYMENTTYPE" class="form-control" ng-model="RefundPaymentType" ng-disabled="true" readonly>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="txtNEWBILLID" class="col-sm-1 control-label">重新生成账单号</label>
+                                    <div class="col-sm-3">
+                                        <input id="txtNEWBILLID" class="form-control" ng-model="BillRufundRecsDTLs.NEWBILLID" ng-disabled="true" readonly>
+                                    </div>
+
+                                    <label for="txtCOMMENT" class="col-sm-1 control-label">备注</label>
+                                    <div class="col-sm-3">
+                                        <textarea id="txtCOMMENT" class="form-control" rows="3" name="备注" ng-model="BillRufundRecsDTLs.COMMENT" readonly></textarea>
+                                    </div>
+                                </div>
+                        </form>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer center" style="margin-top:0px;">
+                    <button type="button" class="btn btn-primary" ng-click="close()" id="disabledcheck" data-dismiss="modal">取消</button>
+                </div>
+            </div>
+    </div>
+</div>

@@ -1,0 +1,160 @@
+<div class="row" ng-controller="serviceResidentListCtrl">
+    <div id="content" class="col-lg-12">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="page-header">
+                    <ul class="breadcrumb">
+                        <li>
+                            <i class="fa fa-home"></i>
+                            <a href="/">首页</a>
+                        </li>
+                        <li>住民列表</li>
+                    </ul>
+                    <!--<div class="description">下面显示您服务的所有住民</div>-->
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="box border primary">
+                    <div class="box-title">
+                        <h4><i class="fa fa-search"></i>查询条件</h4>
+                    </div>
+                    <div class="box-body">
+                        <form class="form-horizontal" role="form" name="form1" novalidate>
+                            <div class="form-group">
+                                <div class="col-md-1 text-right">
+                                    <label for="sltFloor" class="control-label">楼层</label>
+                                </div>
+                                <div class="col-md-2">
+                                    <select id="sltFloor" ng-model="Data.FloorName" class="form-control" ng-options="item.FloorId as item.FloorName for item in Data.floors">
+                                        <option></option>
+                                    </select>
+
+                                </div>
+                                <div class="col-md-1 text-right">
+                                    <label for="sltRoom" class="control-label">居住房间</label>
+                                </div>
+                                <div class="col-md-2">
+                                    <select id="sltRoom" ng-model="Data.RoomName" class="form-control" ng-options="item.RoomNo as item.RoomName for item in Data.rooms">
+                                        <option></option>
+                                    </select>
+                                </div>
+                                <div class="col-md-1 text-right">
+                                    <label class="control-label">住民姓名</label>
+                                </div>
+                                <div class="col-md-2">
+                                    <input type="text" class="form-control" ng-model="keyword" placeholder="请输入住民姓名">
+                                </div>
+                                <div class="col-md-1">
+                                    <button class="btn btn-primary" ng-click="search()">查询</button>
+                                </div>
+
+                                <div class="col-md-1">
+                                    <button class="btn btn-default" ng-click="ChangeDisplayMode()">{{displayModeName}}</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+
+                <div class="box border primary">
+                    <div class="box-title">
+                        <h4><i class="fa fa-table"></i>住民信息</h4>
+                        <div class="tools">
+
+                        </div>
+                    </div>
+
+                    <div class="box-body clear-fix" ng-show="displayMode == 'grid'">
+                        <div id="filter-items" class="row isotope mt20">
+                            <div class="col-sm-3 col-md-1-5 design item mb15" ng-repeat="item in residents">
+                                <!--<div class="filter-content">
+                                    <img ng-src="{{(item.PhotoPath != null && item.PhotoPath != '') ? item.PhotoPath : '/Images/0.png'}}" alt="" class="img-responsive img-fluid" style="width:377.5px;"/>
+                                    <div class="image-content">
+                                        <h4>{{item.Name}}</h4>
+                                        <p class="hidden-xs hidden-sm">
+                                            床号:{{item.BedNo}}
+                                        </p>
+                                        <a ng-click="edit(item)" class="btn btn-sm btn-warning colorbox-button" href="">详细情况</a>
+                                    </div>
+                                </div>-->
+                                <div class="fl filter-content-L">
+                                    <div class="filter-content" style="cursor: pointer;" ng-click="edit(item)">
+                                        <img ng-src="{{(item.PhotoPath != null && item.PhotoPath != '') ? item.PhotoPath : item.Sex=='M'?'/Images/man.png':item.Sex=='F'? '/Images/women.png':'/Images/othersex.png'}}" alt="" class="img-responsive img-fluid" onerror="this.src = '/Images/0.png';this.onerror = null" />
+                                        <div class="filter-tit center" style="cursor: pointer;" ng-click="edit(item)">
+                                            <a href="/angular/HealthRecords/{{item.FeeNo}}">健康档案</a>
+                                        </div>
+
+                                    </div>
+                                </div>
+                                <div class="fr image-content-R">
+                                    <div class="image-content">
+                                        <p>姓名：{{item.Name}}</p>
+                                        <p>年龄：{{item.Birthdate|ageFormat}}</p>
+                                        <p>性别：<span select-code="A00.001" select-value="{{item.Sex}}"></span></p>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div class="col-sm-3 col-md-1-5 item-add">
+                                <div class="fl filter-content-L w50">
+                                    <div class="filter-content">
+                                        <div class="img-add">
+                                            <a href="/angular/regResident"><img src="/Images/ADD.png" /></a>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                           
+                        </div>
+                        <div id="pager"></div>
+                    </div>
+
+                    <div class="box-body" ng-show="displayMode == 'list'">
+                        <ui-data-table options="options">
+                            <table class="table table-striped table-bordered table-hover table-handler">
+                                <thead>
+                                    <tr>
+                                        <th class="col-md-2">身份证号</th>
+                                        <th class="col-md-2">姓名</th>
+                                        <th class="col-md-1">性别</th>
+                                        <th class="col-md-1">年龄</th>
+                                        <th class="col-md-1">类型</th>
+                                        <th class="col-md-1">身份</th>
+                                        <th class="col-md-2">入住日期</th>
+                                        <th class="col-md-2"><i class="fa fa-bars"></i> 操作</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr ng-repeat="item in Persons">
+                                        <td>{{item.IdNo}}</td>
+                                        <td>{{item.Name}}</td>
+                                        <td><span select-code="A00.001" select-value="{{item.Sex}}"></span></td>
+                                        <td>{{item.Birthdate | ageFormat}}</td>
+                                        <td><span select-code="A00.051" select-value="{{item.RsType}}"></span></td>
+                                        <td><span select-code="A00.052" select-value="{{item.RsStatus}}"></span></td>
+                                        <td>{{item.InDate | dateFormat}}</td>
+                                        <td>
+                                            <div class="btn-group btn-group-xs" role="group" aria-label="...">
+                                                <a ng-click="edit(item)" class="btn btn-info" href=""><i class="fa fa-pencil"></i>编辑</a>
+                                                <a ng-click="HealthRec(item)" class="btn btn-info" href=""><i class="fa fa-code-fork"></i>健康档案</a>
+                                                <a class="btn btn-primary" role="button" data-toggle="modal" ng-click="delete(item.RegNo)"><i class="fa fa-times"></i>删除</a>
+                                                <a class="btn btn-warning" role="button" ng-click="Print(item)"><i class="fa fa-print"></i>打印</a>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </ui-data-table>
+                        <div id="pager" class="pull-right"></div>
+                    </div>
+                    
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>

@@ -1,0 +1,264 @@
+﻿<div class="row">
+    <div id="content" class="col-lg-12">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="page-header">
+                    <ul class="breadcrumb">
+                        <li>
+                            <i class="fa fa-home"></i>
+                            <a href="/">首页</a>
+                        </li>
+                        <li>批价作业</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="col-sm-2">
+                    <div class="box border primary">
+                        <div class="box-title">
+                            <h4>
+                                <i class="fa fa-bars"></i>住民信息
+                            </h4>
+                        </div>
+                        <div class="box-body">
+                            <resident-card feeno={{FeeNo}} callback="residentSelected(resident)" />
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-10">
+                        <div class="box border primary">
+                            <div class="box-title">
+                                <h4>
+                                    <i class="fa fa-bars"></i>批价项目
+                                </h4>
+                            </div>
+                            <div class="box-body">
+                                <form class="form-horizontal" role="form" novalidate>
+                                    <div class="form-group">
+                                        <div class="col-sm-12">
+
+                                            <div class="panel panel-default">
+                                                <div class="panel-body">
+                                                    <div class="tabbable">
+                                                        <ul class="nav nav-tabs">
+                                                            <li class="active"><a href="#tab_1_3" data-toggle="tab">服务项目</a></li>
+                                                            <li class=""><a href="#tab_1_1" data-toggle="tab">药品</a></li>
+                                                            <li class=""><a href="#tab_1_2" data-toggle="tab">耗材</a></li>
+
+                                                        </ul>
+                                                        <div class="tab-content">
+                                                            <div class="tab-pane fade" id="tab_1_1">
+                                                                <div class="panel panel-default">
+                                                                    <div class="panel-heading">
+                                                                        药品
+                                                                    </div>
+                                                                    <div class="panel-body">
+                                                                        <div class="form-group">
+                                                                            <div class="col-md-6">
+                                                                                <km-look-up title="药品列表" button-name="添加药品" pre-open="checkRes()" callback="selectedDrugs(item)" item-property="{key:'DrugId',name:'CNName'}" factory-name="chargeItemNSDrugRes" search-options-params="{status:0}" search-params="{Code:'keyWord',Text:'药品名称'}" col-list="[{Code:'CNName',Name:'药品名称'},{Code:'MCDrugCode',Name:'医保编号'},{Code:'NSDrugCode',Name:'院内编号'},{Code:'Spec',Name:'规格'},{Code:'Units',Name:'单位'},{Code:'UnitPrice',Name:'单价'}]"></km-look-up>
+                                                                            </div>
+                                                                        </div>
+                                                                        <table class="table table-striped table-bordered table-hover">
+                                                                            <thead>
+                                                                                <tr>
+                                                                                    <th>#</th>
+                                                                                    <th>中文名称</th>
+                                                                                    <th>医保编号</th>
+                                                                                    <th>院内编号</th>
+                                                                                    <th>规格</th>
+                                                                                    <th>转换比</th>
+                                                                                    <th>开药数量</th>
+                                                                                    <th>开药单位</th>
+                                                                                    <th>计价数量</th>
+                                                                                    <th>计价单位</th>
+                                                                                    <th>单价</th>
+                                                                                    <th>总价</th>
+                                                                                    <th>账单时间</th>
+                                                                                    <th><i class="fa fa-bars"></i>操作</th>
+                                                                                </tr>
+                                                                            </thead>
+                                                                            <tbody>
+                                                                                <tr ng-repeat="drug in drugList">
+                                                                                    <td>{{$index + 1}}</td>
+                                                                                    <td style="word-break: break-all;word-wrap: break-word;">{{drug.CNName}}</td>
+                                                                                    <td style="word-break: break-all;word-wrap: break-word;">{{drug.MCDrugCode}}</td>
+                                                                                    <td style="word-break: break-all;word-wrap: break-word;">{{drug.NSDrugCode}}</td>
+                                                                                    <td style="word-break: break-all;word-wrap: break-word;">{{drug.Spec}}</td>
+                                                                                    <td style="word-break: break-all;word-wrap: break-word;">{{drug.ConversionRatio}}</td>
+                                                                                    <td><input class="form-control" name="第{{$index+1}}行药品数量" type="number" ng-pattern="/^(0|[1-9]\d{0,15})(\.\d{0,2})?$/" ng-model="drug.FEEITEMCOUNT" ng-change="chargeDrugItemCount(drug)" required /></td>
+                                                                                    <td style="word-break: break-all;word-wrap: break-word;">{{drug.PrescribeUnits}}</td>
+                                                                                    <td style="word-break: break-all;word-wrap: break-word;">{{drug.Qty}}</td>
+                                                                                    <td style="word-break: break-all;word-wrap: break-word;">{{drug.Units}}</td>
+                                                                                    <td style="word-break: break-all;word-wrap: break-word;">{{drug.UnitPrice}}</td>
+                                                                                    <td style="word-break: break-all;word-wrap: break-word;">{{drug.COST}}</td>
+                                                                                    <td style="word-break: break-all;word-wrap: break-word;"><input class="form-control input-sm" ng-model="drug.TakeTime" ca-date-time-picker /></td>
+                                                                                    <td>
+                                                                                        <div class="btn-group btn-group-xs" role="group" aria-label="...">
+                                                                                            <a class="btn btn-primary" ng-click="deleteDrugItem(drug)"><i class="fa fa-times"></i>删除</a>
+                                                                                        </div>
+                                                                                    </td>
+                                                                                </tr>
+                                                                            </tbody>
+                                                                        </table>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="tab-pane fade" id="tab_1_2">
+                                                                <div class="panel panel-default">
+                                                                    <div class="panel-heading">
+                                                                        耗材
+                                                                    </div>
+                                                                    <div class="panel-body">
+                                                                        <div class="form-group">
+                                                                            <div class="col-md-6">
+                                                                                <km-look-up title="耗材列表" button-name="添加耗材" pre-open="checkRes()" callback="selectedMats(item)" item-property="{key:'MaterialId',name:'MaterialName'}" factory-name="chargeItemNSMaterialRes" search-options-params="{status:0}" search-params="{Code:'keyWord',Text:'耗材名称'}" col-list="[{Code:'MaterialName',Name:'耗材名称'},{Code:'MCMaterialCode',Name:'医保编号'},{Code:'NSMaterialCode',Name:'院内编号'},{Code:'Units',Name:'单位'},{Code:'Spec',Name:'规格'},{Code:'UnitPrice',Name:'单价'}]"></km-look-up>
+                                                                            </div>
+                                                                        </div>
+                                                                        <table class="table table-striped table-bordered table-hover">
+                                                                            <thead>
+                                                                                <tr>
+                                                                                    <th class="col-sm-1">#</th>
+                                                                                    <th class="col-sm-1">耗材名称</th>
+                                                                                    <th class="col-sm-1">医保编号</th>
+                                                                                    <th class="col-sm-1">院内编号</th>
+                                                                                    <th class="col-sm-1">规格</th>
+                                                                                    <th class="col-sm-1">计价单位</th>
+                                                                                    <th class="col-sm-1">单价</th>
+                                                                                    <th class="col-sm-1">计价数量</th>
+                                                                                    <th class="col-sm-1">总价</th>
+                                                                                    <th class="col-sm-1">账单时间</th>
+                                                                                    <th class="col-sm-1"><i class="fa fa-bars"></i> 操作</th>
+                                                                                </tr>
+                                                                            </thead>
+                                                                            <tbody>
+                                                                                <tr ng-repeat="mat in matList">
+                                                                                    <td>{{$index + 1}}</td>
+                                                                                    <td style="word-break: break-all;word-wrap: break-word;">{{mat.MaterialName}}</td>
+                                                                                    <td style="word-break: break-all;word-wrap: break-word;">{{mat.MCMaterialCode}}</td>
+                                                                                    <td style="word-break: break-all;word-wrap: break-word;">{{mat.NSMaterialCode}}</td>
+                                                                                    <td style="word-break: break-all;word-wrap: break-word;">{{mat.Spec}}</td>
+                                                                                    <td style="word-break: break-all;word-wrap: break-word;">{{mat.Units}}</td>
+                                                                                    <td style="word-break: break-all;word-wrap: break-word;">{{mat.UnitPrice}}</td>
+                                                                                    <td><input class="form-control" name="第{{$index+1}}行耗材数量" ng-model="mat.FEEITEMCOUNT" ng-change="chargeMatItemCount(mat)" required /></td>
+                                                                                    <td style="word-break: break-all;word-wrap: break-word;">{{mat.COST}}</td>
+                                                                                    <td style="word-break: break-all;word-wrap: break-word;"><input class="form-control input-sm" ng-model="mat.TakeTime" ca-date-time-picker /></td>
+                                                                                    <td>
+                                                                                        <div class="btn-group btn-group-xs" role="group" aria-label="...">
+                                                                                            <a class="btn btn-primary" ng-click="deleteMatItem(mat)"><i class="fa fa-times"></i>删除</a>
+                                                                                        </div>
+                                                                                    </td>
+                                                                                </tr>
+                                                                            </tbody>
+                                                                        </table>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="tab-pane fade  active in" id="tab_1_3">
+                                                                <div class="panel panel-default">
+                                                                    <div class="panel-heading">
+                                                                        服务项目
+                                                                    </div>
+                                                                    <div class="panel-body">
+                                                                        <div class="form-group">
+                                                                            <div class="col-md-6">
+                                                                                <km-look-up title="服务项目列表" button-name="添加服务项目" pre-open="checkRes()" callback="selectedSers(item)" item-property="{key:'ServiceId',name:'ServiceName'}" factory-name="chargeItemNSServiceRes" search-options-params="{status:0}" search-params="{Code:'keyWord',Text:'服务项目名称'}" col-list="[{Code:'ServiceName',Name:'服务项目名称'},{Code:'MCServiceCode',Name:'医保编号'},{Code:'NSServiceCode',Name:'院内编号'},{Code:'Units',Name:'单位'},{Code:'UnitPrice',Name:'单价'}]"></km-look-up>
+                                                                            </div>
+                                                                        </div>
+                                                                        <table class="table table-striped table-bordered table-hover">
+                                                                            <thead>
+                                                                                <tr>
+                                                                                    <th class="col-sm-1">#</th>
+                                                                                    <th class="col-sm-1">服务项目名称</th>
+                                                                                    <th class="col-sm-1">医保编号</th>
+                                                                                    <th class="col-sm-1">院内编号</th>
+                                                                                    <th class="col-sm-1">计价单位</th>
+                                                                                    <th class="col-sm-1">单价</th>
+                                                                                    <th class="col-sm-1">计价数量</th>
+                                                                                    <th class="col-sm-1">总价</th>
+                                                                                    <th class="col-sm-1">账单时间</th>
+                                                                                    <th class="col-sm-1"><i class="fa fa-bars"></i> 操作</th>
+                                                                                </tr>
+                                                                            </thead>
+                                                                            <tbody>
+                                                                                <tr ng-repeat="ser in serList">
+                                                                                    <td>{{$index + 1}}</td>
+                                                                                    <td style="word-break: break-all;word-wrap: break-word;">{{ser.ServiceName}}</td>
+                                                                                    <td style="word-break: break-all;word-wrap: break-word;">{{ser.MCServiceCode}}</td>
+                                                                                    <td style="word-break: break-all;word-wrap: break-word;">{{ser.NSServiceCode}}</td>
+                                                                                    <td style="word-break: break-all;word-wrap: break-word;">{{ser.Units}}</td>
+                                                                                    <td style="word-break: break-all;word-wrap: break-word;">{{ser.UnitPrice}}</td>
+                                                                                    <td><input class="form-control" name="第{{$index+1}}行服务项目数量"  ng-model="ser.FEEITEMCOUNT" ng-change="chargeSerItemCount(ser)" required /></td>
+                                                                                    <td style="word-break: break-all;word-wrap: break-word;">{{ser.COST}}</td>
+                                                                                    <td style="word-break: break-all;word-wrap: break-word;"><input class="form-control input-sm" ng-model="ser.TakeTime" ca-date-time-picker /></td>
+                                                                                    <td>
+                                                                                        <div class="btn-group btn-group-xs" role="group" aria-label="...">
+                                                                                            <a class="btn btn-primary" ng-click="deleteSerItem(ser)"><i class="fa fa-times"></i>删除</a>
+                                                                                        </div>
+                                                                                    </td>
+                                                                                </tr>
+                                                                            </tbody>
+                                                                        </table>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="text-right">
+                                                        <a class="btn btn-primary" role="button" ng-click="save()">保存</a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                        <div class="box border primary">
+                                <div class="box-title">
+                                    <h4>
+                                        <i class="fa fa-table"></i>批价历史记录
+                                    </h4>
+                                </div>
+                                <div class="box-body">
+                                    <ui-data-table options="options">
+                                        <table id="datatable1" class="table table-striped table-bordered table-hover table-handler">
+                                            <thead>
+                                                <tr>
+                                                    <th>名称</th>
+                                                    <th>类别</th>
+                                                    <th>计价单位</th>
+                                                    <th>单价</th>
+                                                    <th>计价数量</th>
+                                                    <th>总价</th>
+                                                    <th>账单时间</th>
+                                                    <th>状态</th>
+                                                    <th><i class="fa fa-bars"></i> 操作</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr ng-repeat="item in Data.costEntry">
+                                                    <td>{{item.Name}}</td>
+                                                    <td>{{item.RecordType | recordTypeName}}</td>
+                                                    <td>{{item.Units}}</td>
+                                                    <td>{{item.Unitprice}}</td>
+                                                    <td>{{item.Qty}}</td>
+                                                    <td>{{item.Cost}}</td>
+                                                    <td>{{item.TakeTime | timeFormat}}</td>
+                                                    <th>{{item.Status | ChargeRecordStatusFormat}}</th>
+                                                    <td class="btn-group btn-group-xs" style="text-align:center;width:150px;">
+                                                        <a class="btn btn-info" role="button" ng-click="getRecordDetail(item.Id,item.RecordType)"><i class="fa fa-search"></i>查看详细</a>
+                                                        <a class="btn btn-primary" role="button" ng-click="deleteItem(item)"><i class="fa fa-times"></i>删除</a>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </ui-data-table>
+                                </div>
+                            </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

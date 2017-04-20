@@ -1,0 +1,424 @@
+<!--自带药品列表-->
+<style type="text/css">
+    .comboText {
+        font-size: 14px;
+        line-height: 1.428571429;
+        color: #555555;
+        vertical-align: middle;
+        background-color: #ffffff;
+        background-image: none;
+        border: 1px solid #cccccc;
+        border-radius: 4px;
+        -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+        box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+        -webkit-transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+        transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+    }
+</style>
+
+<div class="row" ng-show="displayMode == 'list'">
+    <div id="content" class="col-md-12">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="page-header">
+
+                    <ul class="breadcrumb">
+                        <li>
+                            <i class="fa fa-home"></i>
+                            <a href="/">首页</a>
+                        </li>
+                        <li>
+                            自带药品
+                        </li>
+                    </ul>
+                    <div class="clearfix"></div>
+
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="col-sm-2">
+                    <div class="box border primary">
+                        <div class="box-title">
+                            <h4>
+                                <i class="fa fa-bars"></i>住民信息
+                            </h4>
+                        </div>
+                        <div class="box-body">
+                            <resident-card feeno={{FeeNo}} callback="residentSelected(resident)" />
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-10">
+                    <div class="box border primary">
+                        <div class="box-title">
+                            <h4><i class="fa fa-table"></i>自带药品记录</h4>
+                        </div>
+                        <div class="box-body">
+                            <div class="col-lg-offset-11">
+                                <div>
+                                    <button class="btn btn-primary" ng-show="buttonShow" ng-click="openWin()">新增资料</button>
+                                </div>
+                            </div>
+
+                            <ui-data-table options="options">
+                                <table class="table table-striped table-bordered table-hover">
+
+                                    <thead>
+                                        <tr role="row">
+                                            <th>序号</th>
+                                            <th>担保人</th>
+                                            <th>收药人</th>
+                                            <th>收药时间</th>
+                                            <th>原因</th>
+                                            <th class="center"><i class="fa fa-bars"></i>操作</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody role="alert" aria-live="polite" aria-relevant="all">
+                                        <tr ng-repeat="ownDrugRec in Data.OwnDrugRecList">
+                                            <td>{{$index + 1}}</td>
+                                            <td>{{ownDrugRec.SponsorName}}</td>
+                                            <td>{{ownDrugRec.OpertorName}}</td>
+                                            <td>{{ownDrugRec.OpertorTime | timeFormat}}</td>
+                                            <td>{{ownDrugRec.Reason}}</td>
+                                            <td class="center">
+                                                <div class="btn-group btn-group-xs" role="group" aria-label="...">
+                                                    <button class="btn btn-info" ng-click="openWin(ownDrugRec)"><i class="fa fa-pencil"></i>编辑</button>
+                                                    <a class="btn btn-primary" role="button" data-toggle="modal" ng-click="deleteItem(ownDrugRec)"><i class="fa fa-pencil"></i>删除</a>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </ui-data-table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<div class="row" ng-show="displayMode == 'edit'">
+    <div id="content" class="col-md-12">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="page-header">
+                    <ul class="breadcrumb">
+                        <li>
+                            <i class="fa fa-home"></i>
+                            <a href="/">首页</a>
+                        </li>
+                        <li><a href="#" ng-click="cancelOwnDrugRec()"> 自带药品</a></li>
+                        <li>
+                            编辑自带药品
+                        </li>
+                    </ul>
+                    <div class="clearfix"></div>
+
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="box border primary">
+                    <div class="box-title">
+                        <h4>
+                            <i class="fa fa-bars"></i>编辑自带药品
+                        </h4>
+                    </div>
+                    <div class="box-body">
+                        <form class="form-horizontal" role="form" name="vrForm" novalidate>
+                            <div class="form-group">
+                                <label class="col-sm-1 control-label input-sm">收药时间<span class="required">*</span></label>
+                                <div class="col-sm-2">
+                                    <input class="form-control input-sm" name="收药时间" ng-model="currentItem.OpertorTime" ca-date-time-picker required />
+                                </div>
+
+                                <label class="col-sm-1 control-label">收药人员<span class="required">*</span></label>
+                                <div class="col-sm-2">
+                                    <input-staff id="txtRecordNameBy" name="收药人员" callback="staffSelected(item)" value="{{currentItem.OpertorName}}" required/>
+                                </div>
+
+                                <label for="txtPayor" class="col-sm-1 control-label">担保人<span class="required">*</span></label>
+                                <div class="col-sm-3">
+                                    <div style="position:relative;">
+                                        <span style="margin-left:200px;width:18px;overflow:hidden;">
+                                            <select class="comboText" style="width:218px;margin-left:-200px;height:34px; padding-left:10px;" id="txtPayor" ng-model="currentItem.SponsorName" name="担保人">
+                                                <option ng-repeat="item in Data.ContactList" value="{{item.Name}}" kinship="{{item.Kinship}}" contrel="{{item.Contrel}}">{{item.Name}}</option>
+                                            </select>
+                                        </span><input name="担保人" ng-maxlength="20" class="comboText" ng-model="currentItem.SponsorName" style="width:200px;position:absolute;left:0px; padding-left:10px; height:34px;" required>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-1 control-label">自带原因<span class="required">*</span></label>
+                                <div class="col-sm-8">
+                                    <textarea class="form-control input-sm" name="自带原因" rows="2" ng-model="currentItem.Reason" ng-maxlength="100" required></textarea>
+                                </div>
+                            </div>
+                            <div class="panel panel-default">
+                                <div class="panel-heading">
+                                    输入药品
+                                </div>
+                                <div class="panel-body">
+                                    <div class="form-group">
+                                        <div class="col-md-6">
+                                            <button class="btn btn-default" ng-click="openWin_vdr()">
+                                                <span class="glyphicon glyphicon-pencil">新增药品</span>
+                                            </button>
+                                        </div>
+                                        <div class="col-md-6" style="text-align:right">
+                                        </div>
+                                    </div>
+                                    <ui-data-table options="optionsDtl">
+                                        <table class="table table-striped table-bordered table-hover">
+                                            <thead>
+                                                <tr>
+                                                    <th>序号</th>
+                                                    <th>医保编码</th>
+                                                    <th>院内编码</th>
+                                                    <th>药品名称</th>
+                                                    <th>批号</th>
+                                                    <th>单位</th>
+                                                    <th>数量</th>
+                                                    <th>生产厂家</th>
+                                                    <th>备注</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr ng-repeat="ownDrugDtl in Data.OwnDrugDtlList">
+                                                    <td>{{$index + 1}}</td>
+                                                    <td style="word-break: break-all;word-wrap: break-word;">{{ownDrugDtl.MCDrugCode}}</td>
+                                                    <td style="word-break: break-all;word-wrap: break-word;">{{ownDrugDtl.NSDrugCode}}</td>
+                                                    <td style="word-break: break-all;word-wrap: break-word;">{{ownDrugDtl.CNName}}</td>
+                                                    <td style="word-break: break-all;word-wrap: break-word;">{{ownDrugDtl.BatchNo}}</td>
+                                                    <td style="word-break: break-all;word-wrap: break-word;">{{ownDrugDtl.Units}}</td>
+                                                    <td style="word-break: break-all;word-wrap: break-word;">{{ownDrugDtl.Qty}}</td>
+                                                    <td style="word-break: break-all;word-wrap: break-word;">{{ownDrugDtl.Manufacturer}}</td>
+                                                    <td style="word-break: break-all;word-wrap: break-word;">{{ownDrugDtl.Comment}}</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                        </ui-data-table>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="center">
+                                    <div class="btn-group btn-group-sm" role="group" aria-label="...">
+                                        <button class="btn btn-primary" type="submit" ng-click="saveOwnDrugDec(currentItem)">保存</button>
+                                        <button class="btn btn-default" type="button" ng-click="cancelOwnDrugRec()">取消</button>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="NsDrugModal" tabindex="-1" role="dialog" aria-labelledby="modalBedLabel" data-target=".bs-example-modal-lg">
+    <div class="modal-dialog bs-example-modal-lg" role="document" style="width:72%;">
+        <div class="modal-content modal-lg">
+            <div class="modal-header bg-success">
+                <button type="button" id="NsDrugClose" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">
+                    新增药品
+                </h4>
+            </div>
+            <div class="modal-body">
+                <div class="box border primary">
+                    <div class="box-title"><h4>选择药品</h4></div>
+                    <div class="box-body">
+                        <div class="row" style="padding-left:5px;padding-right:5px;">
+                            <div class="col-sm-8">
+                                <div class="form-group">
+                                    <div class="input-group col-md-11">
+                                        <input class="form-control ng-pristine ng-untouched ng-valid input-sm" id="Keyword" type="text" placeholder="请输入[药名名称/医保编码/院内编码/拼音码]进行查询" ng-model="keyword">
+                                        <span class="input-group-btn">
+                                            <a class="btn btn-primary search btn-sm" ng-click="searchNsDrug()"><i class="fa fa-search"></i>查询</a>
+                                        </span>
+                                    </div>
+                                </div>
+                                <div class="dataTables_wrapper form-inline" id="datatable2_wrapper" role="grid">
+                                    <ui-data-table options="optionsNsDrug">
+                                        <div style="height:250px; overflow-y:scroll">
+                                            <table class="datatable table table-striped table-bordered table-hover dataTable" id="datatable2" aria-describedby="datatable2_info" border="0" cellspacing="0" cellpadding="0">
+                                                <thead>
+                                                    <tr role="row">
+                                                        <th>药品名称</th>
+                                                        <th>剂型</th>
+                                                        <th>规格</th>
+                                                        <th>生产厂家</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody role="alert" aria-live="polite" aria-relevant="all">
+                                                    <tr ng-repeat="nsDrug in Data.NsDrugList" ng-click="rowSelect(nsDrug)">
+                                                        <td><span ng-bind="nsDrug.CNName"></span></td>
+                                                        <td><span ng-bind="nsDrug.Form"></span></td>
+                                                        <td><span ng-bind="nsDrug.Spec"></span></td>
+                                                        <td><span ng-bind="nsDrug.Manufacturer"></span></td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </ui-data-table>
+                                </div>
+                            </div>
+                            <div class="col-sm-4">
+                                <div class="panel panel-default">
+                                    <div class="panel-heading">药物信息</div>
+                                    <div class="panel panel-body">
+                                        <div class="form-horizontal" style="text-align:left">
+                                            <div class="form-group">
+                                                            <label class="col-sm-12 control-label" style="text-align:left;color:InactiveCaptionText">
+                                                                药品名称:
+                                                                <span style="font-weight:normal;font-family:'Microsoft YaHei';color:black">
+                                                                    {{nsDrug.CNName}}
+                                                                </span>
+                                                            </label>
+                                                        </div>
+                                            <div class="form-group">
+                                                <label class="col-sm-12 control-label" style="text-align:left;color:InactiveCaptionText">
+                                                    规格:<span style="font-weight:normal;font-family:'Microsoft YaHei';color:black">
+                                                        {{nsDrug.Spec}}
+                                                    </span>
+                                                </label>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-sm-12 control-label" style="text-align:left;color:InactiveCaptionText">
+                                                    生产厂家:<span style="font-weight:normal;font-family:'Microsoft YaHei';color:black">
+                                                        {{nsDrug.Manufacturer}}
+                                                    </span>
+                                                </label>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label class="col-sm-12 control-label" style="text-align:left;color:InactiveCaptionText">
+                                                    用药途径:
+                                                    <span style="font-weight:normal;font-family:'Microsoft YaHei';color:black">
+                                                        {{nsDrug.DrugUsageMode}}
+                                                    </span>
+                                                </label>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-sm-12 control-label" style="text-align:left;color:InactiveCaptionText">
+                                                    用法用量:
+                                                    <span style="font-weight:normal;font-family:'Microsoft YaHei';color:black">
+                                                        {{nsDrug.DrugUsage}}
+                                                    </span>
+                                                </label>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-sm-12 control-label" style="text-align:left;color:InactiveCaptionText">
+                                                    注意事项:
+                                                    <span style="font-weight:normal;font-family:'Microsoft YaHei';color:black">
+                                                        {{nsDrug.Attention}}
+                                                    </span>
+                                                </label>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-sm-12 control-label" style="text-align:left;color:InactiveCaptionText">
+                                                    老年人注意事项:
+                                                    <span style="font-weight:normal;font-family:'Microsoft YaHei';color:black">
+                                                        {{nsDrug.AttentionOldMan}}
+                                                    </span>
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                        <div>
+
+                            <form novalidate name="medForm">
+                                <div class="panel panel-default">
+                                    <div class="panel-heading" style="font-weight:bold">药品其他信息</div>
+                                    <div class="panel panel-body">
+                                        <div class="form-horizontal" style="text-align:left">
+                                            <div class="form-group">
+                                                <label class="col-md-1 control-label">单位<span class="required">*</span></label>
+                                                <div class="col-md-1">
+                                                    <input class="form-control input-sm" name="单位" ng-model="nsDrug.Units" required maxlength="10" />
+                                                </div>
+                                                <label class="col-md-1 control-label">数量<span class="required">*</span></label>
+                                                <div class="col-md-1">
+                                                    <input class="form-control input-sm" name="数量" ng-model="nsDrug.Qty" type="number" ng-pattern="/^(0|[1-9]\d{0,15})(\.\d{0,2})?$/" maxlength="18" required/>
+                                                </div>
+                                                <label class="col-md-1 control-label">批号<span class="required">*</span></label>
+                                                <div class="col-md-1">
+                                                    <input class="form-control input-sm" name="批号" ng-model="nsDrug.BatchNo" required maxlength="50" />
+                                                </div>
+                                                <label class="col-md-1 control-label">备注</label>
+                                                <div class="col-md-3">
+                                                    <input class="form-control input-sm" name="备注" ng-model="nsDrug.Comment"/>
+                                                </div>
+                                                <div class="col-md-2 right">
+                                                    <a href="javascript:;" class="btn btn-primary btn-sm" ng-click="addOwnDrugDtl(nsDrug)" ng-init="editName='确定添加'">
+                                                        {{editName}}
+                                                    </a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                            <div style="height:200px; overflow-y:scroll">
+                                <table class="table table-striped table-bordered table-hover">
+                                    <thead>
+                                        <tr>
+                                            <th>序号</th>
+                                            <th>医保编码</th>
+                                            <th>院内编码</th>
+                                            <th>药品名称</th>
+                                            <th>批号</th>
+                                            <th>单位</th>
+                                            <th>数量</th>
+                                            <th>生产厂家</th>
+                                            <th>备注</th>
+                                            <th><i class="fa fa-bars center"></i>操作</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr ng-repeat="preOwnDrugDtl in Data.PreOwnDrugDtlList">
+                                            <td>{{$index + 1}}</td>
+                                            <td style="word-break: break-all;word-wrap: break-word;">{{preOwnDrugDtl.MCDrugCode}}</td>
+                                            <td style="word-break: break-all;word-wrap: break-word;">{{preOwnDrugDtl.NSDrugCode}}</td>
+                                            <td style="word-break: break-all;word-wrap: break-word;">{{preOwnDrugDtl.CNName}}</td>
+                                            <td style="word-break: break-all;word-wrap: break-word;">{{preOwnDrugDtl.BatchNo}}</td>
+                                            <td style="word-break: break-all;word-wrap: break-word;">{{preOwnDrugDtl.Units}}</td>
+                                            <td style="word-break: break-all;word-wrap: break-word;">{{preOwnDrugDtl.Qty}}</td>
+                                            <td style="word-break: break-all;word-wrap: break-word;">{{preOwnDrugDtl.Manufacturer}}</td>
+                                            <td style="word-break: break-all;word-wrap: break-word;">{{preOwnDrugDtl.Comment}}</td>
+                                            <td>
+                                                <div class="btn-group btn-group-xs center" role="group" aria-label="...">
+                                                    <a class="btn btn-default" role="button" ng-click="editOwnDrugPre(preOwnDrugDtl)">编辑</a>
+                                                    <a class="btn btn-default" role="button" ng-click="deleteOwnDrugPre(preOwnDrugDtl)">删除</a>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer center">
+                <button type="button" class="btn btn-primary" ng-click="savePreOwnDrugDtl()">确认</button>
+                <button type="button" class="btn btn-default" ng-click="closeWin()">关闭</button>
+            </div>
+        </div>
+    </div>
+</div>

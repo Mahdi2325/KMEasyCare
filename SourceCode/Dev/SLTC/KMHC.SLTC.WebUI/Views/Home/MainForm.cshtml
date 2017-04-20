@@ -1,0 +1,131 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <meta charset="utf-8">
+    <title>长期护理险管理系统 | 主页</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1, user-scalable=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <!-- STYLESHEETS --><!--[if lt IE 9]><script src="js/flot/excanvas.min.js"></script><script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script><script src="http://css3-mediaqueries-js.googlecode.com/svn/trunk/css3-mediaqueries.js"></script><![endif]-->
+    <link rel="stylesheet" type="text/css" href="../../Content/CloudAdmin/css/cloud-admin.css">
+    <link rel="stylesheet" type="text/css" href="../../Content/CloudAdmin/css/themes/default.css" id="skin-switcher">
+    <link rel="stylesheet" type="text/css" href="../../Content/CloudAdmin/css/responsive.css">
+
+    <link href="../Content/CloudAdmin/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+    <!-- DATE RANGE PICKER -->
+    <link rel="stylesheet" type="text/css" href="../../Content/CloudAdmin/js/bootstrap-daterangepicker/daterangepicker-bs3.css" />
+    <!-- JQUERY UI-->
+    <link rel="stylesheet" type="text/css" href="../../Content/CloudAdmin/js/jquery-ui-1.10.3.custom/css/custom-theme/jquery-ui-1.10.3.custom.min.css" />
+    <!-- BOOTSTRAP SWITCH -->
+    <link rel="stylesheet" type="text/css" href="../../Content/CloudAdmin/js/bootstrap-switch/bootstrap-switch.min.css" />
+    <!-- FLAGS -->
+    <link rel="stylesheet" type="text/css" href="../../Content/CloudAdmin/css/flags/flags.min.css" />
+    <!-- MainForm -->
+    <link rel="stylesheet" type="text/css" href="../../Content/MainForm/mainform.css" />
+
+</head>
+<body class="mainbody">
+    <div class="row" style="top:10%;left:86%;position:absolute">
+        <a href="/Home/DashBoard" style="text-decoration:none;border:none">
+            <table>
+                <tr style="cursor:pointer">
+                    <td style="font-size:20pt;color:#fff">智能仪表盘</td>
+                    <td><img src="~/Images/arrow-right.png" /></td>
+                </tr>
+            </table>
+        </a>
+    </div>
+    <!-- PAGE -->
+    <!-- BOX-->
+    <div class="mainBox">
+        <!-- ROW1 ui-sref="Ipdregout" -->
+        <div class="btn-toolbar box-body center ">
+            <div class="btn btn-grey mainBtn11 ">
+                <a href="/Home/Index"><img src="../../Images/院民后台.png" alt="" /><br><label class="mainlabel">院民後台</label></a>
+            </div>
+            <div class="btn btn-grey mainBtn12">
+                <a href="/angular/EvaluateAdd/-1"><img src="../../Images/社工评估.png" alt="" /><br><label class="mainlabel">社工评估</label></a>
+            </div>
+            <div class="btn btn-grey mainBtn13">
+                <a href="/angular/EvaluationList/4/巴氏量表"><img src="../../Images/护理评估.png" alt="" /><br><label class="mainlabel">护理评估</label></a>
+            </div>
+            <div class="btn btn-grey mainBtn14 ">
+                <a href="/angular/CarePlanList"><img src="../../Images/住民照护.png" alt="" /><br><label class="mainlabel">照护计划</label></a>
+            </div>
+        </div>
+        <!-- /ROW1 -->
+        <!-- ROW2 -->
+        <div class="btn-toolbar box-body center">
+            <div class="btn btn-grey mainBtn21 ">
+                <a href="/angular/UnPlanIpd"><img src="../../Images/院民行政.png" alt="" /><br><label class="mainlabel">指标管理</label></a>
+            </div>
+            <div class="btn btn-grey mainBtn22 ">
+                <a href="/angular/ShiftWork"><img src="../../Images/工作照会.png" alt="" /><br><label class="mainlabel">工作照会</label></a>
+            </div>
+            <div class="btn btn-grey mainBtn23 ">
+                <a href="/angular/VitalSigns"><img src="../../Images/生命体征.png" alt="" /><br><label class="mainlabel">生命体征</label></a>
+            </div>
+            <div class="btn btn-grey mainBtn24 ">
+                <a href="/angular/OutInValue"><img src="../../Images/输出入量.png" alt="" /><br><label class="mainlabel">输出入量</label></a>
+            </div>
+        </div>
+        <!-- /ROW2 -->
+        <!-- ROW3 -->
+        <div class="btn-toolbar box-body center">
+            <div class="btn btn-grey mainBtn31 ">
+                <a href="/angular/GroupActivityList"><img src="../../Images/团体活动.png" alt="" /><br><label class="mainlabel">团体活动</label></a>
+            </div>
+            <div class="btn btn-grey mainBtn32 ">
+                <a href="/angular/NursingRecord/Record"><img src="../../Images/护理记录与交班.png" alt="" /><br><label class="mainlabel">护理记录与交班</label></a>
+            </div>
+            <div class="btn btn-grey mainBtn33 ">
+                <a href="/angular/CarePlanList"><img src="../../Images/查询跨专业工作.png" alt="" /><br><label class="mainlabel">查询跨专业工作</label></a>
+            </div>
+            <div class="btn btn-grey mainBtn34 ">
+                <a href="/angular/goodsList"><img src="../../Images/耗材明细输入.png" alt="" /><br><label class="mainlabel">耗材管理</label></a>
+            </div>
+            <div class="btn btn-grey mainBtn35 ">
+                <a href="/angular/NurseDailyReportList"><img src="../../Images/日报表.png" alt="" /><br><label class="mainlabel">日报表</label></a>
+            </div>
+        </div>
+        @*<div>
+                <a ><span class="sub-menu-text">仪表盘</span></a>
+            </div>*@
+        <!-- /ROW3 -->
+
+    </div><!-- /BOX -->
+    <!--/PAGE -->
+    <!-- JAVASCRIPTS -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <!-- JQUERY -->
+    <script src="../../Content/CloudAdmin/js/jquery/jquery-2.0.3.min.js"></script>
+    <!-- JQUERY UI-->
+    <script src="../../Content/CloudAdmin/js/jquery-ui-1.10.3.custom/js/jquery-ui-1.10.3.custom.min.js"></script>
+    <!-- BOOTSTRAP -->
+    <script src="../../Content/CloudAdmin/bootstrap-dist/js/bootstrap.min.js"></script>
+    <!-- DATE RANGE PICKER -->
+    <script src="../../Content/CloudAdmin/js/bootstrap-daterangepicker/moment.min.js"></script>
+
+    <script src="../../Content/CloudAdmin/js/bootstrap-daterangepicker/daterangepicker.min.js"></script>
+    <!-- SLIMSCROLL -->
+    <script type="text/javascript" src="../../Content/CloudAdmin/js/jQuery-slimScroll-1.3.0/jquery.slimscroll.min.js"></script>
+    <script type="text/javascript" src="../../Content/CloudAdmin/js/jQuery-slimScroll-1.3.0/slimScrollHorizontal.min.js"></script>
+    <!-- BLOCK UI -->
+    <script type="text/javascript" src="../../Content/CloudAdmin/js/jQuery-BlockUI/jquery.blockUI.min.js"></script>
+    <!-- ONHOVER -->
+    <script type="text/javascript" src="../../Content/CloudAdmin/js/bootstrap-onhover/twitter-bootstrap-hover-dropdown.min.js"></script>
+    <!-- BOOTSTRAP SWITCH -->
+    <script type="text/javascript" src="../../Content/CloudAdmin/js/bootstrap-switch/bootstrap-switch.min.js"></script>
+    <!-- COOKIE -->
+    <script type="text/javascript" src="../../Content/CloudAdmin/js/jQuery-Cookie/jquery.cookie.min.js"></script>
+    <!-- CUSTOM SCRIPT -->
+    <script src="../../Content/CloudAdmin/js/script.js"></script>
+    <!-- /JAVASCRIPTS -->
+</body>
+</html>
+

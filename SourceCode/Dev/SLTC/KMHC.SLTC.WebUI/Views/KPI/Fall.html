@@ -1,0 +1,278 @@
+<div class="row">
+    <div id="content" class="col-lg-12">
+        <!--标题-->
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="page-header">
+                    <ul class="breadcrumb">
+                        <li>
+                            <i class="fa fa-home"></i>
+                            <a href="/">首页</a>
+                        </li>
+                        <li>
+                            跌倒
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <!--标题-->
+
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="col-sm-2">
+                    <div class="box border primary">
+                        <div class="box-title">
+                            <h4>
+                                <i class="fa fa-bars"></i>住民信息
+                            </h4>
+                        </div>
+                        <div class="box-body">
+                            <resident-card feeno={{FeeNo}} callback="residentSelected(resident)" />
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-10">
+                    <div class="box border primary">
+                        <div class="box-title">
+                            <h4>
+                                <i class="fa fa-bars"></i>跌倒处理记录
+                            </h4>
+                        </div>
+                        <div class="box-body">
+                            <form class="form-horizontal" role="form" name="FallForm" novalidate>
+                                <fieldset>
+                                    <legend>事件发生时情形</legend>
+
+                                    <div class="well">
+                                        <div class="form-group">
+                                            <label class="col-sm-1 control-label">在场人员<span class="required">*</span></label>
+                                            <div class="col-sm-2">
+                                                <input-staff id="txtRecordBy" callback="staffSelected(item,'RecordBy')" value="{{currentItem.RecordBy}}" required="true" />
+                                                <!--<select class="form-control" id="selRecordBy" ng-model="currentItem.RecordBy" select-code="K00.016"></select>-->
+                                            </div>
+
+                                            <label class="col-sm-1 control-label">发生地点</label>
+                                            <div class="col-sm-2">
+                                                <select class="form-control" id="selClassType" ng-model="currentItem.EventAddress" select-code="K00.017"></select>
+                                            </div>
+
+                                            <label class="col-sm-1 control-label">发生时间</label>
+                                            <div class="col-sm-2">
+                                                <input class="form-control datepicker" type="text" ng-model="currentItem.EventDate" ca-date-time-picker>
+                                            </div>
+
+                                            <label class="col-sm-1 control-label">事件类别</label>
+                                            <div class="col-sm-2">
+                                                <select class="form-control" id="selEventType" ng-model="currentItem.EventType" select-code="K00.018"></select>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-sm-1 control-label">事件伤害分级</label>
+                                            <div class="col-sm-2">
+                                                <select class="form-control" id="selEventDegree" ng-model="currentItem.EventDegree" select-code="K00.021"></select>
+                                            </div>
+
+                                            <label class="col-sm-1 control-label">事件导因</label>
+                                            <div class="col-sm-2">
+                                                <input id="txt_EventCause" name="事件导因" type="text" ng-model="currentItem.EventCause" class="form-control" select-items="事件导因" ng-maxlength="200" />
+                                            </div>
+                                            <label class="col-sm-1 control-label">意识状态</label>
+                                            <div class="col-sm-2">
+                                                <select class="form-control" id="selConsciousState" ng-model="currentItem.ConsciousState" select-code="K00.019"></select>
+                                            </div>
+
+                                            <label class="col-sm-1 control-label">情绪状态</label>
+                                            <div class="col-sm-2">
+                                                <select class="form-control" id="selEmotionalState" ng-model="currentItem.EmotionalState" select-code="K00.020"></select>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-sm-1 control-label">出现征兆</label>
+                                            <div class="col-sm-2">
+                                                <input id="txt_Signs" name="出现徵兆" type="text" ng-model="currentItem.Signs" class="form-control" select-items="发生前征兆" ng-maxlength="50" />
+                                            </div>
+                                            <label class="col-sm-1 control-label">事件说明</label>
+                                            <div class="col-sm-8">
+                                                <textarea id="txt_EventDesc" rows="2" name="事件说明" type="text" ng-model="currentItem.EventDesc" class="form-control" ng-maxlength="200" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                </fieldset>
+                                <fieldset>
+                                    <legend>事件发生后处理</legend>
+                                    <div class="well">
+                                        <div class="form-group">
+                                            <label class="col-sm-1 control-label">处理人员<span class="required">*</span></label>
+                                            <div class="col-sm-2">
+                                                <input-staff id="txtSettleBy" callback="staffSelected(item,'SettleBy')" value="{{currentItem.SettleBy}}" required="true" />
+                                                <!--<select class="form-control" id="selSettleBy" ng-model="currentItem.SettleBy" select-code="K00.016"></select>-->
+                                            </div>
+
+                                            <label class="col-sm-1 control-label">送医时间</label>
+                                            <div class="col-sm-2">
+                                                <input class="form-control datepicker" name="送医时间" type="text" ng-model="currentItem.VisitDocDate" ca-date-time-picker>
+                                            </div>
+
+                                            <label class="col-sm-1 control-label">医院名称</label>
+                                            <div class="col-sm-2">
+                                                <select class="form-control" id="selHospName" ng-model="currentItem.HospName" select-code="K00.026"></select>
+                                            </div>
+
+                                            <label class="col-sm-1 control-label">通知对象</label>
+                                            <div class="col-sm-2">
+                                                <input id="txt_NotifyPeople" name="通知对象" type="text" ng-model="currentItem.NotifyPeople" class="form-control" select-items="立即通知者" ng-maxlength="100" />
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-sm-2 checkbox-inline"><input type="checkbox" name="需通报主管机构" class="uniform" ng-model="currentItem.NotifyGovFlag" /> 需通报主管机构</label>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-sm-1 control-label">通报日期</label>
+                                            <div class="col-sm-2">
+                                                <input class="form-control datepicker" name="通报日期" type="text" ng-model="currentItem.NotifyDate" ca-date-time-picker>
+                                            </div>
+
+                                            <label class="col-sm-1 control-label">意识状态</label>
+                                            <div class="col-sm-2">
+                                                <select class="form-control" id="selConsciousState_a" ng-model="currentItem.ConsciousState_a" select-code="K00.019"></select>
+                                            </div>
+
+                                            <label class="col-sm-1 control-label">情绪状态</label>
+                                            <div class="col-sm-2">
+                                                <select class="form-control" id="selEmotionState_a" ng-model="currentItem.EmotionState_a" select-code="K00.020"></select>
+                                            </div>
+
+                                            <label class="col-sm-1 control-label">处理结果</label>
+                                            <div class="col-sm-2">
+                                                <select class="form-control" id="selSettleResult" ng-model="currentItem.SettleResult" select-code="K00.022"></select>
+                                            </div>
+
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-sm-1 control-label">后续处理说明</label>
+                                            <div class="col-sm-2">
+                                                <textarea rows="1" id="txt_FollowUpInstructions" name="后续处理说明" type="text" ng-model="currentItem.FollowUpInstructions" class="form-control" select-items="后续处理说明" ng-maxlength="200" />
+                                            </div>
+                                            <label class="col-sm-1 control-label">医疗争议</label>
+                                            <div class="col-sm-2">
+                                                <select class="form-control" id="selMedicalDispute" ng-model="currentItem.MedicalDispute" select-code="K00.023"></select>
+                                            </div>
+
+                                            <label class="col-sm-1 control-label">导致影响</label>
+                                            <div class="col-sm-2">
+                                                <select class="form-control" id="selAffects" ng-model="currentItem.Affects" select-code="K00.024"></select>
+                                            </div>
+
+                                            <label class="col-sm-1 control-label">影响说明</label>
+                                            <div class="col-sm-2">
+                                                <input id="txt_AffectsDesc" name="影响说明" type="text" ng-model="currentItem.AffectsDesc" class="form-control" ng-maxlength="200" />
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-sm-1 control-label">检讨改善</label>
+                                            <div class="col-sm-11">
+                                                <textarea rows="2" id="txt_Improvement" name=" 检讨改善" type="text" ng-model="currentItem.Improvement" class="form-control" select-items="检讨改善方案" ng-maxlength="200" />
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-sm-1 control-label">备注</label>
+                                            <div class="col-sm-11">
+                                                <textarea rows="1" class="form-control" id="txt_Description" name="备注" ng-model="currentItem.Description" ng-maxlength="200" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                </fieldset>
+                                <div class="well">
+                                    <div class="form-group">
+                                        <div class="col-sm-6">
+                                            <img class="img-responsive img-fluid" ng-src="{{(currentItem.Pict1 != null && currentItem.Pict1 != '') ? currentItem.Pict1 : '/Images/0.png'}}"
+                                                 style="height: 160px; vertical-align: central; width: 100%;" />
+                                            <div>
+                                                <div style="padding: 5px;" id="EventPathPickerOne">选择事件照片1</div>
+                                            </div>
+                                            <div class="form-group" style="padding-left: 5px;">
+                                                <button class="btn btn-primary" ng-click="clear('EventOnePath')">清除</button>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <img class="img-responsive img-fluid" ng-src="{{(currentItem.Pict2 != null && currentItem.Pict2 != '') ? currentItem.Pict2 : '/Images/0.png'}}"
+                                                 style="height: 160px; vertical-align: central; width: 100%;" />
+                                            <div>
+                                                <div style="padding: 5px;" id="EventPathPickerTwo">选择事件照片1</div>
+                                            </div>
+                                            <div class="form-group" style="padding-left: 5px;">
+                                                <button class="btn btn-primary" ng-click="clear('EventTwoPath')">清除</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-sm-offset-1 col-sm-11">
+                                        <button class="btn btn-primary" type="submit" ng-show="buttonShow" ng-click="saveFallEdit(currentItem)">保存</button>
+                                        <button class="btn btn-primary" ng-show="buttonShow" ng-click="currentItem = {}">重置</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+
+                    <div class="box border primary">
+                        <div class="box-title">
+                            <h4>
+                                <i class="fa fa-table"></i>跌倒列表
+                            </h4>
+                        </div>
+                        <div class="box-body">
+                            <ui-data-table options="options">
+                                <table class="table table-striped table-bordered table-hover table-handler">
+                                    <thead>
+                                        <tr>
+                                            <th>#</th>
+                                            <th>事件发生时间</th>
+                                            <th>问题类别</th>
+                                            <th>事件分级</th>
+                                            <th>当时在场人员</th>
+                                            <th>发生地点</th>
+                                            <th>处理人员</th>
+                                            <th>医院名称</th>
+                                            <th>送医时间</th>
+                                            <th>检讨改善</th>
+                                            <th><i class="fa fa-bars"></i> 操作</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr ng-repeat="item in Data.fallList">
+                                            <td>{{$index + 1}}</td>
+                                            <td>{{item.EventDate | dateFormat}}</td>
+                                            <td><span select-code="K00.018" select-value="{{item.EventType}}"></span></td>
+                                            <td><span select-code="K00.021" select-value="{{item.EventDegree}}"></span></td>
+                                            <td>{{item.RecordNameBy}}</td>
+                                            <td><span select-code="K00.017" select-value="{{item.EventAddress}}"></span></td>
+                                            <td>{{item.SettleNameBy}}</td>
+                                            <td><span select-code="K00.026" select-value="{{item.HospName}}">></span></td>
+                                            <td>{{item.VisitDocDate | dateFormat}}</td>
+
+                                            <td style="word-break: break-all; word-wrap: break-word;">
+                                                <label style="font-weight:normal;" title="{{item.Improvement}}" style="display: block;">{{item.Improvement.length>15?item.Improvement.substring(0,15)+"...":item.Improvement}}</label>
+                                            </td>
+                                            <!--<td>
+                                                {{item.Improvement}}
+                                            </td>-->
+                                            <td>
+                                                <div class="btn-group btn-group-xs" role="group" aria-label="...">
+                                                    <a class="btn btn-info" role="button" ng-click="rowSelect(item)"><i class="fa fa-pencil"></i>编辑</a>
+                                                    <a class="btn btn-primary" role="button" ng-click="deleteItem(item)"><i class="fa fa-times"></i>删除</a>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </ui-data-table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

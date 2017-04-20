@@ -1,0 +1,87 @@
+
+<div class="container-fluid" ng-controller="bedModalCtr">
+    <div class="row-fluid">
+        <div class="col-md-12">
+            <div class="form-group">
+                <div class="input-group col-md-10">
+                    <input type="text" class="form-control" ng-model="keyword" placeholder="请输入楼层或房间号">
+                    <span class="input-group-btn">
+                        <a class="btn btn-primary" ng-click="search()"><i class="icon-search"></i>搜索</a>
+                    </span>
+                </div>
+            </div>
+            <div class="box border primary">
+                <div class="box-title">
+                    <h4><i class="fa fa-table"></i>床位信息</h4>
+                    <div class="tools">
+                        <a href="javascript:;" class="reload" ca-reload ng-click="reload()">
+                            <i class="fa fa-refresh"></i>
+                        </a>
+                        <a href="javascript:;" class="collapse" ca-collapse>
+                            <i class="fa fa-chevron-up"></i>
+                        </a>
+                    </div>
+                </div>
+                <div class="box-body">
+                    <table class="table  table-bordered ">
+                        <thead>
+                            <tr>
+                                <!--<th>编号</th>-->
+                                <th>状态</th>
+                                <th>所在楼层</th>
+                                <th>所在房间</th>
+                                <th>床号</th>
+                                <!--<th>所属科别</th>-->
+                                <th>床位型态</th>
+                                <!--<th>病床形态</th>-->
+                                <th>病床种类</th>
+                                <th>姓名</th>
+                                <th>性别</th>
+                                <th>年龄</th>
+                                <th>语言</th>
+                                <th>星座</th>
+                                <th>宗教</th>
+                                <th>血型</th>
+                                <th>婚姻状况</th>
+                                <th>管制标识</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="item in Data.beds" ng-class="{'modal-disable':item.BedStatus!='Empty'}" ng-click="rowClick(item)">
+
+                                <!--<td>{{item.BedNo}}</td>-->
+                                <td><span select-code="J00.002" select-value="{{item.BedStatus}}"></span></td>
+                                <!--<td>{{item.OrgId}}</td>-->
+                                <td>{{item.FloorName}}</td>
+                                <td>{{item.RoomName}}</td>
+                                <td>{{item.BedNo}}</td>
+                                <!--<td>{{Dic.DeptNos.toText(item.DeptNo)}}</td>-->
+                                <td><span select-code="J00.003" select-value="{{item.BedType}}"></span></td>
+                                <!--<td><span select-code="J00.003" select-value="{{item.BedType}}"></span></td>-->
+                                <td><span select-code="J00.004" select-value="{{item.BedKind}}"></span></td>
+                                <td>{{item.ResidentName}}</td>
+                                <td><span select-code="A00.001" select-value="{{item.Sex}}"></span></td>
+                                <td>{{item.Age}}</td>
+                                <td>{{item.Language}}</td>
+                                <td><span select-code="A00.046" select-value="{{item.Constellations}}"></span></td>
+                                <td><span select-code="A00.008" select-value="{{item.Religioncode}}"></span></td>
+                                <td><span select-code="A00.014" select-value="{{item.Bloodtype}}"></span></td>
+                                <td><span select-code="A00.011" select-value="{{item.Merryflag}}"></span></td>
+                                <td>{{item.Language?"是":"否"}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <div class="pull-right">
+                        <ul class="pagination">
+                            <li ng-repeat="item in PageIndexRender">
+                                <a href="#" ng-click="changePage(item)">{{item.Name}}</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+

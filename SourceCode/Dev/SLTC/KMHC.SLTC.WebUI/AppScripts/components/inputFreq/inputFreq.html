@@ -1,0 +1,20 @@
+<div >
+    <input class="form-control" type="text" ng-model="searchWords" ng-change="change()" placeholder="输入关键字" ng-blur="blur()" ng-focus="focus()" ng-keydown="keydown()" ng-required={{required}} />
+    <table class="table table-hover table-bordered input-select" ng-show="showList">
+        <thead>
+            <tr role="row">
+                <th>频率代码</th>
+                <th>使用时间</th>
+                <th>用法</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="item in items | filter:filterItems" ng-click="rowClick(item)">
+                <td>{{item.FREQNO}} | {{item.FREQNAME}} </td>
+                <td>{{item.FREQTIME}}</td>
+                <td>{{item.FREQDAY}}天{{item.FREQQTY}}次</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+

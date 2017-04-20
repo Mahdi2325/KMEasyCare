@@ -1,0 +1,1250 @@
+﻿<style type="text/css">
+    .tabtitle {
+        font-size: 14px;
+        font-weight: 200;
+        color: #0094ff;
+        text-align: center;
+    }
+
+    .tabcontent {
+        width: 150px;
+        display: inline-block;
+        clear: both;
+    }
+
+        .tabcontent .divimg {
+            float: left;
+        }
+
+
+            .tabcontent .divimg .contentimg {
+                width: 80px;
+                height: 80px;
+            }
+
+        .tabcontent .contentdivdep {
+            float: right;
+        }
+
+            .tabcontent .contentdivdep .contetnum {
+                font-size: 30px;
+                font-weight: 500;
+            }
+
+    .contentjilu {
+        font-size: 14px;
+        font-weight: 200;
+        color: #0094ff;
+        white-space: nowrap;
+    }
+
+    .description {
+        float: left;
+    }
+
+    .side {
+        text-align: center;
+        vertical-align: middle;
+        height: 185px;
+        padding-top: 55px;
+        background-color: #edecec;
+        font-weight: 600;
+    }
+
+    .detaileddes {
+        padding-left: 40px;
+        padding-top: 10px;
+        font-size: 16px;
+    }
+
+    .visualization {
+        height: 75px;
+        background-color: #4ed8eb;
+        color: #fff;
+        padding-left: 10px;
+        padding-top: 5px;
+        text-align: center;
+        vertical-align: middle;
+        margin-right: 10px;
+    }
+
+    .datetime {
+        font-size: 16px;
+        font-weight: 500;
+        color: #0094ff;
+        white-space: nowrap;
+        float: right;
+    }
+
+    .datetime1 {
+        font-size: 16px;
+        font-weight: 500;
+        color: #0094ff;
+        white-space: nowrap;
+    }
+
+    .hyperlink {
+        text-align: center;
+        font-size: 14px;
+        height: 120px;
+        padding-top: 22px;
+    }
+
+        .hyperlink a {
+            text-decoration: none;
+            cursor: pointer;
+        }
+</style>
+
+
+<div class="row">
+    <div id="content" class="col-lg-12">
+        <!--标题-->
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="page-header">
+                    <ul class="breadcrumb">
+                        <li>
+                            <i class="fa fa-home"></i>
+                            <a href="/">首页</a>
+                        </li>
+                        <li>健康档案</li>
+                    </ul>
+
+                </div>
+            </div>
+        </div>
+        <!--标题-->
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="col-sm-2">
+                    <div class="box border primary">
+                        <div class="box-title">
+                            <h4>
+                                <i class="fa fa-bars"></i>住民信息
+                            </h4>
+                        </div>
+                        <div class="box-body">
+                            <resident-card feeno={{FeeNo}} callback="residentSelected(resident)" />
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-10">
+                    <div class="tabbable header-tabs lineTab">
+                        <ul class="nav nav-tabs">
+                            <li class="active">
+                                <a href="#box_tab1" data-toggle="tab" ng-click="show('1')">
+                                    <p class="tabtitle">量测数据</p><br />
+                                    <div class="tabcontent">
+                                        <div class="divimg">
+                                            <img class="contentimg" src="../../Images/Measurement.png" />
+                                        </div>
+                                        <div class="contentdivdep">
+                                            <p>
+                                                <span class="contetnum">{{data.TotalRecordsNum}}</span>
+                                                <span class="contentjilu">记录</span>
+                                            </p>
+                                        </div>
+                                        <div class="description">
+                                            <br />
+                                            <p>
+                                                <span class="contentjilu">最近,</span><span>{{data.GeneralDescriptionInfo}}</span>
+                                            </p>
+                                        </div>
+                                    </div>
+                                </a>
+                            </li>
+                            <li ng-show="false">
+                                <a href="#box_tab5" data-toggle="tab" ng-click="show('2')">
+                                    <p class="tabtitle">用药记录</p><br />
+                                    <div class="tabcontent">
+                                        <div class="divimg">
+                                            <img class="contentimg" src="../../Images/Medicationrecord.png" />
+                                        </div>
+                                        <div class="contentdivdep">
+                                            <p>
+                                                <span class="contetnum">{{data1.TotalRecordsNum}}</span>
+                                                <span class="contentjilu">记录</span>
+                                            </p>
+                                        </div>
+                                        <div class="description">
+                                            <br />
+                                            <p>
+                                                <span class="contentjilu">最近,</span><span>{{data1.GeneralDescriptionInfo}}</span>
+                                            </p>
+                                        </div>
+                                    </div>
+                                </a>
+                            </li>
+
+                            <li>
+                                <a href="#box_tab2" data-toggle="tab" ng-click="show('5')">
+                                    <p class="tabtitle">用药记录</p><br />
+                                    <div class="tabcontent">
+                                        <div class="divimg">
+                                            <img class="contentimg" src="../../Images/Medicationrecord.png" />
+                                        </div>
+                                        <div class="contentdivdep">
+                                            <p>
+                                                <span class="contetnum">{{data5.TotalRecordsNum}}</span>
+                                                <span class="contentjilu">记录</span>
+                                            </p>
+                                        </div>
+                                        <div class="description">
+                                            <br />
+                                            <p>
+                                                <span class="contentjilu">最近,</span><span>{{data5.GeneralDescriptionInfo}}</span>
+                                            </p>
+                                        </div>
+                                    </div>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#box_tab3" data-toggle="tab" ng-click="show('3')">
+                                    <p class="tabtitle">体检记录</p><br />
+                                    <div class="tabcontent">
+                                        <div class="divimg">
+                                            <img class="contentimg" src="../../Images/Physicalrecords.png" />
+                                        </div>
+                                        <div class="contentdivdep">
+                                            <p>
+                                                <span class="contetnum">{{data2.TotalRecordsNum}}</span>
+                                                <span class="contentjilu">记录</span>
+                                            </p>
+                                        </div>
+                                        <div class="description">
+                                            <br />
+                                            <p>
+                                                <span class="contentjilu">最近,</span><span>{{data2.GeneralDescriptionInfo}}</span>
+                                            </p>
+                                        </div>
+                                    </div>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#box_tab4" data-toggle="tab" ng-click="show('4')">
+                                    <p class="tabtitle">评估记录</p><br />
+                                    <div class="tabcontent">
+                                        <div class="divimg">
+                                            <img class="contentimg" src="../../Images/Evaluationrecord.png" />
+                                        </div>
+                                        <div class="contentdivdep">
+                                            <p>
+                                                <span class="contetnum">{{data3.TotalRecordsNum}}</span>
+                                                <span class="contentjilu">记录</span>
+                                            </p>
+                                        </div>
+                                        <div class="description">
+                                            <br />
+                                            <p>
+                                                <span class="contentjilu">最近,</span><span>{{data3.GeneralDescriptionInfo}}</span>
+                                            </p>
+                                        </div>
+                                    </div>
+                                </a>
+                            </li>
+                        </ul>
+
+                        <div class="tab-content" style="padding-top:30px;">
+                            <div class="tab-pane fade active in" id="box_tab1">
+                                <div class="panel-body" ng-show="divshow">
+                                    <div class="row">
+                                        <div class=" col-md-12">
+                                            <div class="col-md-6">
+                                                <div class="col-md-12" style="padding-top:30px;">
+                                                    <div class="col-md-2 center">
+                                                        <img src="../../Images/bodytemp.png" />
+                                                        <h4>体温</h4>
+                                                    </div>
+                                                    <div class="col-md-10">
+                                                        <div class="col-md-12">
+                                                            <div class="col-md-12" style="font-size:16px;" ng-show="btshow0">
+                                                                最近一次体温量测结果： <span ng-style="bodyTemp.Description =='正常' ? {color:'bloack'} : {color:'red'}">{{bodyTemp.Description}}</span>。本月共量测体温{{bodyTemp.TotalRecordNum}}次。正常次数{{bodyTemp.NormalRecordNum}}次，超出正常值范围次数<span ng-style="bodyTemp.ExceededRecordNum <= 0 ? {color:'bloack'} : {color:'red'}"> {{bodyTemp.ExceededRecordNum}}</span> 次。
+                                                            </div>
+                                                            <div class="col-md-12" style="font-size:16px;" ng-show="!btshow0">
+                                                                未查询到有效的体温量测记录！
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-12" style="padding-top:15px;">
+                                                            <div class="col-md-6" ng-show="btshow0"><span style="font-size:30px; font-weight:500;color:#0094ff">{{bodyTemp.MeaSuredValue}}</span><span style="font-size:18px;">℃</span></div>
+                                                            <div class="col-md-6" ng-show="!btshow0"><span style="font-size:30px; font-weight:500;color:#0094ff">{{nullValue}}</span><span style="font-size:18px;">℃</span></div>
+                                                        </div>
+                                                        <div class="col-md-12" style="padding-top:15px;">
+                                                            <div class="col-md-3">
+                                                                <a class="btn btn-info hyperlinkdetail" role="button" ng-click="lookDetail('001','体温','℃')">查看记录</a>
+                                                            </div>
+                                                            <div class="col-md-3">
+                                                                <a class="btn btn-info hyperlinkdetail" role="button" ng-click="insertRecord('001','体温','℃')">新增体温记录</a>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-12" style="padding-top:15px;">
+                                                            <div class="col-md-offset-8">
+                                                                <p class="datetime1" ng-show="btshow0">{{bodyTemp.MeaSureTime |   date:'yyyy-MM-dd'}}</p>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-12" style="padding-top:30px;">
+                                                    <div class="col-md-2 center">
+                                                        <img src="../../Images/pulse.png" />
+                                                        <h4>脉搏</h4>
+                                                    </div>
+                                                    <div class="col-md-10">
+                                                        <div class="col-md-12">
+                                                            <div class="col-md-12" style="font-size:16px;" ng-show="btshow1">
+                                                                最近一次脉搏量测结果： <span ng-style="pulse.Description =='正常' ? {color:'bloack'} : {color:'red'}">{{pulse.Description}}</span>。本月共量测脉搏{{pulse.TotalRecordNum}}次。正常次数{{pulse.NormalRecordNum}}次，超出正常值范围次数<span ng-style="pulse.ExceededRecordNum <= 0 ? {color:'bloack'} : {color:'red'}"> {{pulse.ExceededRecordNum}}</span> 次。
+                                                            </div>
+                                                            <div class="col-md-12" style="font-size:16px;" ng-show="!btshow1">
+                                                                未查询到有效的脉搏量测记录！
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-12" style="padding-top:15px;">
+                                                            <div class="col-md-6" ng-show="btshow1"><span style="font-size:30px; font-weight:500;color:#0094ff">{{pulse.MeaSuredValue}}</span><span style="font-size:18px;">次/Min</span></div>
+                                                            <div class="col-md-6" ng-show="!btshow1"><span style="font-size:30px; font-weight:500;color:#0094ff">{{nullValue}}</span><span style="font-size:18px;">次/Min</span></div>
+                                                        </div>
+                                                        <div class="col-md-12" style="padding-top:15px;">
+                                                            <div class="col-md-3">
+                                                                <a class="btn btn-info hyperlinkdetail" role="button" ng-click="lookDetail('002','脉搏','次/Min')">查看记录</a>
+                                                            </div>
+                                                            <div class="col-md-3">
+                                                                <a class="btn btn-info hyperlinkdetail" role="button" ng-click="insertRecord('002','脉搏','次/Min')">新增脉搏记录</a>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-12" style="padding-top:15px;">
+                                                            <div class="col-md-offset-8">
+                                                                <p class="datetime1" ng-show="btshow1">{{pulse.MeaSureTime |   date:'yyyy-MM-dd'}}</p>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-12" style="padding-top:30px;">
+                                                    <div class="col-md-2 center">
+                                                        <img src="../../Images/Breathe.png" />
+                                                        <h4>呼吸</h4>
+                                                    </div>
+                                                    <div class="col-md-10">
+                                                        <div class="col-md-12">
+                                                            <div class="col-md-12" style="font-size:16px;" ng-show="btshow2">
+                                                                最近一次呼吸量测结果： <span ng-style="breathe.Description =='正常' ? {color:'bloack'} : {color:'red'}">{{breathe.Description}}</span>。本月共量测呼吸{{breathe.TotalRecordNum}}次。正常次数{{breathe.NormalRecordNum}}次，超出正常值范围次数<span ng-style="breathe.ExceededRecordNum <= 0 ? {color:'bloack'} : {color:'red'}"> {{breathe.ExceededRecordNum}}</span> 次。
+                                                            </div>
+                                                            <div class="col-md-12" style="font-size:16px;" ng-show="!btshow2">
+                                                                未查询到有效的呼吸量测记录！
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-12" style="padding-top:15px;">
+                                                            <div class="col-md-6" ng-show="btshow2"><span style="font-size:30px; font-weight:500;color:#0094ff">{{breathe.MeaSuredValue}}</span><span style="font-size:18px;">次/Min</span></div>
+                                                            <div class="col-md-6" ng-show="!btshow2"><span style="font-size:30px; font-weight:500;color:#0094ff">{{nullValue}}</span><span style="font-size:18px;">次/Min</span></div>
+                                                        </div>
+                                                        <div class="col-md-12" style="padding-top:15px;">
+                                                            <div class="col-md-3">
+                                                                <a class="btn btn-info hyperlinkdetail" role="button" ng-click="lookDetail('003','呼吸','次/Min')">查看记录</a>
+                                                            </div>
+                                                            <div class="col-md-3">
+                                                                <a class="btn btn-info hyperlinkdetail" role="button" ng-click="insertRecord('003','呼吸','次/Min')">新增呼吸记录</a>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-12" style="padding-top:15px;">
+                                                            <div class="col-md-offset-8">
+                                                                <p class="datetime1" ng-show="btshow2">{{breathe.MeaSureTime |   date:'yyyy-MM-dd'}}</p>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="col-md-12" style="padding-top:30px;">
+                                                    <div class="col-md-2 center">
+                                                        <img src="../../Images/bloodpre.png" />
+                                                        <h4>血压</h4>
+                                                    </div>
+                                                    <div class="col-md-10">
+                                                        <div class="col-md-12">
+                                                            <div class="col-md-12" style="font-size:16px;" ng-show="btshow7">
+                                                                最近一次血压量测结果： <span ng-style="Description =='正常' ? {color:'bloack'} : {color:'red'}">{{Description}}</span>。本月共量测血压{{dbp.TotalRecordNum + sbp.TotalRecordNum}}次。正常次数{{dbp.NormalRecordNum + sbp.NormalRecordNum}}次，超出正常值范围次数<span ng-style="dbp.ExceededRecordNum + sbp.ExceededRecordNum  <= 0 ? {color:'bloack'} : {color:'red'}"> {{dbp.ExceededRecordNum + sbp.ExceededRecordNum}}</span> 次。
+                                                            </div>
+                                                            <div class="col-md-12" style="font-size:16px;" ng-show="!btshow7">
+                                                                未查询到有效的血压量测记录！
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-12" style="padding-top:15px;">
+                                                            <div class="col-md-6" ng-show="btshow3">
+                                                                <div class="col-md-4">
+                                                                    <span style="font-size:30px; font-weight:500;color:#0094ff">
+                                                                        {{sbp.MeaSuredValue}}
+                                                                    </span>
+                                                                </div>
+                                                                <div class="col-md-6">
+                                                                    <span style="font-size:12px;">收缩压</span>
+                                                                    <br />
+                                                                    <span style="font-size:18px; word-wrap:break-word;">mmHg</span>
+                                                                </div>
+                                                            </div>
+
+                                                            <div class="col-md-6" ng-show="!btshow3">
+                                                                <div class="col-md-4">
+                                                                    <span style="font-size:30px; font-weight:500;color:#0094ff">
+                                                                        {{nullValue}}
+                                                                    </span>
+                                                                </div>
+                                                                <div class="col-md-6">
+                                                                    <span style="font-size:12px;">收缩压</span>
+                                                                    <br />
+                                                                    <span style="font-size:18px; word-wrap:break-word;">mmHg</span>
+                                                                </div>
+                                                            </div>
+
+                                                            <div class="col-md-6" ng-show="btshow4">
+                                                                <div class="col-md-4">
+                                                                    <span style="font-size:30px; font-weight:500;color:#0094ff">
+                                                                        {{dbp.MeaSuredValue}}
+                                                                    </span>
+                                                                </div>
+                                                                <div class="col-md-6">
+                                                                    <span style="font-size:12px;">舒张压</span>
+                                                                    <br />
+                                                                    <span style="font-size:18px; word-wrap:break-word;">mmHg</span>
+                                                                </div>
+                                                            </div>
+
+                                                            <div class="col-md-6" ng-show="!btshow4">
+                                                                <div class="col-md-4">
+                                                                    <span style="font-size:30px; font-weight:500;color:#0094ff">
+                                                                        {{nullValue}}
+                                                                    </span>
+                                                                </div>
+                                                                <div class="col-md-6">
+                                                                    <span style="font-size:12px;">舒张压</span>
+                                                                    <br />
+                                                                    <span style="font-size:18px; word-wrap:break-word;">mmHg</span>
+                                                                </div>
+                                                            </div>
+                                                         </div>
+                                                        <div class="col-md-12" style="padding-top:15px;">
+                                                            <div class="col-md-3">
+                                                                <a class="btn btn-info hyperlinkdetail" role="button" ng-click="lookDetail('004','血压','mmHg')">查看记录</a>
+                                                            </div>
+                                                            <div class="col-md-3">
+                                                                <a class="btn btn-info hyperlinkdetail" role="button" ng-click="insertRecord1('004','血压','mmHg')">新增血压记录</a>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                    <div class="col-md-12" style="padding-top:15px;">
+                                                        <div class="col-md-offset-8">
+                                                            <p class="datetime1" ng-show="btshow4">{{dbp.MeaSureTime |   date:'yyyy-MM-dd'}}</p>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-12" style="padding-top:30px;">
+                                                        <div class="col-md-2 center">
+                                                            <img src="../../Images/weight.png" />
+                                                            <h4>体重</h4>
+                                                        </div>
+                                                        <div class="col-md-10">
+                                                            <div class="col-md-12">
+                                                                <div class="col-md-12" style="font-size:16px;" ng-show="btshow5">
+                                                                    最近一次体重量测结果： <span ng-style="weight.Description =='正常' ? {color:'bloack'} : {color:'red'}">{{weight.Description}}</span>。本月共量测体重{{weight.TotalRecordNum}}次。正常次数{{weight.NormalRecordNum}}次，超出正常值范围次数<span ng-style="weight.ExceededRecordNum <= 0 ? {color:'bloack'} : {color:'red'}"> {{weight.ExceededRecordNum}}</span> 次。
+                                                                </div>
+                                                                <div class="col-md-12" style="font-size:16px;" ng-show="!btshow5">
+                                                                    未查询到有效的体重量测记录！
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-md-12" style="padding-top:15px;">
+                                                                <div class="col-md-6" ng-show="btshow5"><span style="font-size:30px; font-weight:500;color:#0094ff">{{weight.MeaSuredValue}}</span><span style="font-size:18px;">kg</span></div>
+                                                                <div class="col-md-6" ng-show="!btshow5"><span style="font-size:30px; font-weight:500;color:#0094ff">{{nullValue}}</span><span style="font-size:18px;">kg</span></div>
+                                                            </div>
+                                                            <div class="col-md-12" style="padding-top:15px;">
+                                                                <div class="col-md-3">
+                                                                    <a class="btn btn-info hyperlinkdetail" role="button" ng-click="lookunDetail('体重')">查看记录</a>
+                                                                </div>
+                                                                <div class="col-md-3">
+                                                                    <a class="btn btn-info hyperlinkdetail" role="button" ng-click="insertweightRecord('体重')">新增体重记录</a>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-12" style="padding-top:15px;">
+                                                            <div class="col-md-offset-8">
+                                                                <p class="datetime1" ng-show="btshow5">{{weight.MeaSureTime |   date:'yyyy-MM-dd'}}</p>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-12" style="padding-top:30px;">
+                                                        <div class="col-md-2 center">
+                                                            <img src="../../Images/bloodsugar.png" />
+                                                            <h4>血糖</h4>
+                                                        </div>
+                                                        <div class="col-md-10">
+                                                            <div class="col-md-12">
+                                                                <div class="col-md-12" style="font-size:16px;" ng-show="btshow6">
+                                                                    最近一次血糖量测结果： <span ng-style="bloodSugar.Description =='正常' ? {color:'bloack'} : {color:'red'}">{{bloodSugar.Description}}</span>。本月共量测血糖{{bloodSugar.TotalRecordNum}}次。正常次数{{bloodSugar.NormalRecordNum}}次，超出正常值范围次数<span ng-style="bloodSugar.ExceededRecordNum <= 0 ? {color:'bloack'} : {color:'red'}"> {{bloodSugar.ExceededRecordNum}}</span> 次。
+                                                                </div>
+                                                                <div class="col-md-12" style="font-size:16px;" ng-show="!btshow6">
+                                                                    未查询到有效的血糖量测记录！
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-md-12" style="padding-top:15px;">
+                                                                <div class="col-md-6" ng-show="btshow6">
+                                                                  <span style="font-size:30px; font-weight:500;color:#0094ff">{{bloodSugar.MeaSuredValue}}</span>
+                                                                  <span style="font-size:18px;">mg/dl</span>
+                                                                </div>
+                                                                <div class="col-md-6" ng-show="!btshow6"><span style="font-size:30px; font-weight:500;color:#0094ff">{{nullValue}}</span><span style="font-size:18px;">mg/dl</span></div>
+                                                            </div>
+                                                            <div class="col-md-12" style="padding-top:15px;">
+                                                                <div class="col-md-3">
+                                                                    <a class="btn btn-info hyperlinkdetail" role="button" ng-click="lookDetail('006','血糖','mg/dl')">查看记录</a>
+                                                                </div>
+                                                                <div class="col-md-3">
+                                                                    <a class="btn btn-info hyperlinkdetail" role="button" ng-click="insetxt('血糖')">新增血糖记录</a>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-12" style="padding-top:15px;">
+                                                            <div class="col-md-offset-8">
+                                                                <p class="datetime1" ng-show="btshow6">{{bloodSugar.MeaSureTime |   date:'yyyy-MM-dd'}}</p>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="tab-pane fade" id="box_tab2">
+                                <div class="panel-body">
+                                    <div class="box border primary">
+                                        <div class="box-title">
+                                            <h4>
+                                                <i class="fa fa-search"></i>查询条件
+                                            </h4>
+                                        </div>
+                                        <div class="box-body">
+                                            <form class="form-horizontal" role="form" name="docCheckfrom">
+                                                <div class="form-group">
+                                                    <label class="col-sm-2 control-label">用药开始时间</label>
+                                                    <div class="col-sm-2">
+                                                        <input id="medrecStartDate" class="form-control datepicker" type="text" ng-model="recStartDate" ca-date-picker />
+                                                    </div>
+                                                    <label class="col-sm-2 control-label">用药结束时间</label>
+                                                    <div class="col-sm-2">
+                                                        <input id="medrectxtEndDate" class="form-control datepicker" type="text" ng-model="recEndDate" ca-date-picker />
+                                                    </div>
+                                                    <div class="col-sm-1">
+                                                        <a class="btn btn-primary" ng-click="medrecsearch()"><i class="icon-search"></i>查询</a>
+                                                    </div>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+
+
+                                    <div class="box border primary">
+                                        <div class="box-title">
+                                            <h4>
+                                                <i class="fa fa-table"></i>用药记录
+                                            </h4>
+                                        </div>
+                                        <div class="box-body">
+                                            <ui-data-table options="medrecoptions">
+                                                <table class="table table-striped table-bordered table-hover table-handler">
+                                                    <thead>
+                                                        <tr>
+                                                            <th>#</th>
+                                                            <th>药品名称</th>
+                                                            <th>剂型</th>
+                                                            <th>单位</th>
+                                                            <th>时间</th>
+                                                            <th>是否是护理险项目</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <tr ng-repeat="item in Data.MedReccordList">
+                                                            <td>{{$index+1}}</td>
+                                                            <td>{{item.CnName}}</td>
+                                                            <td>{{item.Form}}</td>
+                                                            <td>{{item.Units}}</td>
+                                                            <td>{{item.TakeTime | date:'yyyy-MM-dd'}}</td>
+                                                            <td>{{item.IsNciItem?"是":"否"}}</td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </ui-data-table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="tab-pane fade" id="box_tab5" ng-show="false">
+                                <div class="panel-body">
+                                    <div class="box border primary">
+                                        <div class="box-title">
+                                            <h4>
+                                                <i class="fa fa-search"></i>查询条件
+                                            </h4>
+                                        </div>
+                                        <div class="box-body">
+                                            <form class="form-horizontal" role="form" name="docCheckfrom">
+                                                <div class="form-group">
+                                                    <label class="col-sm-2 control-label">用药开始时间</label>
+                                                    <div class="col-sm-2">
+                                                        <input id="txtStartDate" class="form-control datepicker" type="text" ng-model="StartDate" ca-date-picker />
+                                                    </div>
+                                                    <label class="col-sm-2 control-label">用药结束时间</label>
+                                                    <div class="col-sm-2">
+                                                        <input id="txtEndDate" class="form-control datepicker" type="text" ng-model="EndDate" ca-date-picker />
+                                                    </div>
+                                                    <div class="col-sm-1">
+                                                        <a class="btn btn-primary" ng-click="medsearch()"><i class="icon-search"></i>查询</a>
+                                                    </div>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+
+
+                                    <div class="box border primary">
+                                        <div class="box-title">
+                                            <h4>
+                                                <i class="fa fa-table"></i>用药记录
+                                            </h4>
+                                        </div>
+                                        <div class="box-body">
+                                            <ui-data-table options="medoptions">
+                                                <table class="table table-striped table-bordered table-hover table-handler">
+                                                    <thead>
+                                                        <tr>
+                                                            <th>#</th>
+                                                            <th>药品名称</th>
+                                                            <th>每次颗数</th>
+                                                            <th>每颗剂量单位</th>
+                                                            <th>每日次数</th>
+                                                            <th>服用方式</th>
+                                                            <th>处方开始日</th>
+                                                            <th>处方签期限</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <tr ng-repeat="item in Data.MedicationRecordList">
+                                                            <td>{{$index+1}}</td>
+                                                            <td>{{item.CnName}}({{item.EngName}})</td>
+                                                            <td>{{item.Qty}}</td>
+                                                            <td>{{item.TakeQty}}</td>
+                                                            <td>{{item.Freq}}</td>
+                                                            <td>{{item.Freqday}}天{{item.Freqqty}}次</td>
+                                                            <td>{{item.StartDate | dateFormat}}</td>
+                                                            <td>{{item.EndDate | dateFormat}}</td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </ui-data-table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="tab-pane fade" id="box_tab3">
+                                <div class="panel-body">
+                                    <div class="box border primary">
+                                        <div class="box-title">
+                                            <h4>
+                                                <i class="fa fa-table"></i>体检历史记录
+                                            </h4>
+                                        </div>
+                                        <div class="box-body">
+                                            <ui-data-table options="bioptions">
+                                                <table class="table table-striped table-bordered table-hover table-handler">
+                                                    <thead>
+                                                        <tr>
+                                                            <th>检查日期</th>
+
+                                                            <th>病况</th>
+                                                            <th>检查结果</th>
+                                                            <th><i class="fa fa-user"></i>检查人员</th>
+                                                            <th><i class="fa fa-bars"></i> 操作</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+
+                                                        <tr ng-repeat="referrals in Data.item">
+                                                            <td>{{referrals.CHECKDATE|date:'yyyy-MM-dd'}}</td>
+                                                            <td style="word-break: break-all;word-wrap: break-word;">{{referrals.DISEASEDESC}}</td>
+                                                            <td style="word-break: break-all;word-wrap: break-word;">{{referrals.CHECKRESULTS}}</td>
+                                                            <td>
+                                                                <div class="DivSelect width10">
+                                                                    <select class="SelectList width12" disabled="disabled" ng-model="referrals.RECORDBY" ng-options="item.EmpNo as item.EmpName for item in names"></select>
+                                                                </div>
+                                                            </td>
+                                                            <td>
+
+                                                                <div class="btn-group btn-group-xs" role="group" aria-label="...">
+                                                                    <a class="btn btn-info" role="button" ng-click="lookBiochemistryList(referrals.CheckRecdtl)"><i class="fa fa-pencil"></i>查看详情</a>
+                                                                </div>
+                                                            </td>
+                                                        </tr>
+                                                    </tbody>
+
+                                                </table>
+                                            </ui-data-table>
+                                        </div>
+                                        <div id="pager" class="pull-right"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="tab-pane fade" id="box_tab4">
+                                <div class="panel-body">
+                                    <div class="panel-body">
+                                        <div class="row">
+                                            <div class=" col-md-12">
+                                                <div class="col-md-6">
+                                                    <div class=" col-md-12">
+                                                        <div class="col-md-1 side">
+                                                            <h4>ADL评估</h4>
+                                                        </div>
+                                                        <div class="col-md-8" style="float:left; height:201.7px;">
+                                                            <div class="col-md-12 detaileddes">
+                                                                当前住民ADL评估次数：{{data3.ADLEvaluation.TotalRecordNum}}次
+                                                            </div>
+                                                            <div class="col-md-12 detaileddes">
+                                                                <div class="col-md-4 visualization">总分： {{data3.ADLEvaluation.TotalRecordNum==0?"未知":data3.ADLEvaluation.SCORE}}分</div>
+                                                                <div class="col-md-4 visualization">结果： {{data3.ADLEvaluation.TotalRecordNum==0?"未知":data3.ADLEvaluation.ENVRESULTS}}</div>
+                                                            </div>
+                                                            <div class="col-md-12 detaileddes">
+                                                                <p class="datetime">{{data3.ADLEvaluation.TotalRecordNum==0?"":data3.ADLEvaluation.EVALUATEBY}}</p>
+                                                            </div>
+                                                            <div class="col-md-12 detaileddes">
+                                                                <p class="datetime">{{data3.ADLEvaluation.TotalRecordNum==0?"":data3.ADLEvaluation.EVALDATE | date:'yyyy-MM-dd'}}</p>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-3">
+                                                            <div class="col-md-12 hyperlink">
+                                                                <a class="hyperlinkdetail" ng-click="lookEvalDetail('4')">历史记录</a>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class=" col-md-12">
+                                                        <div class="col-md-1 side">
+                                                            <h4>
+                                                                MM
+                                                                <br />
+                                                                SE<br />
+                                                                评估
+                                                            </h4>
+                                                        </div>
+                                                        <div class="col-md-8" style="float:left; height:201.7px;">
+                                                            <div class="col-md-12 detaileddes">
+                                                                当前住民MMSE评估次数：{{data3.MMSEEvaluation.TotalRecordNum}}次
+                                                            </div>
+                                                            <div class="col-md-12 detaileddes">
+                                                                <div class="col-md-4 visualization">总分： {{data3.MMSEEvaluation.TotalRecordNum==0?"未知":data3.MMSEEvaluation.SCORE}}分</div>
+                                                                <div class="col-md-4 visualization">结果： {{data3.MMSEEvaluation.TotalRecordNum==0?"未知":data3.MMSEEvaluation.ENVRESULTS}}</div>
+                                                            </div>
+                                                            <div class="col-md-12 detaileddes">
+                                                                <p class="datetime">{{data3.MMSEEvaluation.TotalRecordNum==0?"":data3.MMSEEvaluation.EVALUATEBY}}</p>
+                                                            </div>
+                                                            <div class="col-md-12 detaileddes">
+                                                                <p class="datetime">{{data3.MMSEEvaluation.TotalRecordNum==0?"":data3.MMSEEvaluation.EVALDATE | date:'yyyy-MM-dd'}}</p>
+                                                            </div>
+
+                                                        </div>
+                                                        <div class="col-md-3">
+                                                            <div class="col-md-12 hyperlink">
+                                                                <a class="hyperlinkdetail" ng-click="lookEvalDetail('5')">历史记录</a>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class=" col-md-12">
+                                                        <div class="col-md-1 side">
+                                                            <h4>
+                                                                IA
+                                                                <br />
+                                                                DL
+                                                                <br />
+                                                                评估
+                                                            </h4>
+                                                        </div>
+                                                        <div class="col-md-8" style="float:left; height:201.7px;">
+                                                            <div class="col-md-12 detaileddes">
+                                                                当前住民IADL评估次数：{{data3.IADLEvaluation.TotalRecordNum}}次
+                                                            </div>
+                                                            <div class="col-md-12 detaileddes">
+                                                                <div class="col-md-4 visualization">总分： {{data3.IADLEvaluation.TotalRecordNum==0?"未知":data3.IADLEvaluation.SCORE}}分</div>
+                                                                <div class="col-md-4 visualization">结果： {{data3.IADLEvaluation.TotalRecordNum==0?"未知":data3.IADLEvaluation.ENVRESULTS}}</div>
+                                                            </div>
+                                                            <div class="col-md-12 detaileddes">
+                                                                <p class="datetime">{{data3.IADLEvaluation.TotalRecordNum==0?"":data3.IADLEvaluation.EVALUATEBY}}</p>
+                                                            </div>
+                                                            <div class="col-md-12 detaileddes">
+                                                                <p class="datetime">{{data3.IADLEvaluation.TotalRecordNum==0?"":data3.IADLEvaluation.EVALDATE | date:'yyyy-MM-dd'}}</p>
+                                                            </div>
+
+                                                        </div>
+                                                        <div class="col-md-3">
+                                                            <div class="col-md-12 hyperlink">
+                                                                <a class="hyperlinkdetail" ng-click="lookEvalDetail('7')">历史记录</a>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class=" col-md-12">
+                                                        <div class="col-md-1 side">
+                                                            <h4>压疮评估</h4>
+                                                        </div>
+                                                        <div class="col-md-8" style="float:left; height:201.7px;">
+                                                            <div class="col-md-12 detaileddes">
+                                                                当前住民压疮评估次数：{{data3.SoreEvaluation.TotalRecordNum}}次
+                                                            </div>
+                                                            <div class="col-md-12 detaileddes">
+                                                                <div class="col-md-4 visualization">总分： {{data3.SoreEvaluation.TotalRecordNum==0?"未知":data3.SoreEvaluation.SCORE}}分</div>
+                                                                <div class="col-md-4 visualization">结果： {{data3.SoreEvaluation.TotalRecordNum==0?"未知":data3.SoreEvaluation.ENVRESULTS}}</div>
+                                                            </div>
+                                                            <div class="col-md-12 detaileddes">
+                                                                <p class="datetime">{{data3.SoreEvaluation.TotalRecordNum==0?"":data3.SoreEvaluation.EVALUATEBY}}</p>
+                                                            </div>
+                                                            <div class="col-md-12 detaileddes">
+                                                                <p class="datetime">{{data3.SoreEvaluation.TotalRecordNum==0?"":data3.SoreEvaluation.EVALDATE | date:'yyyy-MM-dd'}}</p>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-3">
+                                                            <div class="col-md-12 hyperlink">
+                                                                <a class="hyperlinkdetail" ng-click="lookEvalDetail('10')">历史记录</a>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class=" col-md-12">
+                                                        <div class="col-md-1 side">
+                                                            <h4>跌倒评估</h4>
+                                                        </div>
+                                                        <div class="col-md-8" style="float:left; height:201.7px;">
+                                                            <div class="col-md-12 detaileddes">
+                                                                当前住民跌倒评估次数：{{data3.FallEvaluation.TotalRecordNum}}次
+                                                            </div>
+                                                            <div class="col-md-12 detaileddes">
+                                                                <div class="col-md-4 visualization">总分： {{data3.FallEvaluation.TotalRecordNum==0?"未知":data3.FallEvaluation.SCORE}}分</div>
+                                                                <div class="col-md-4 visualization">结果： {{data3.FallEvaluation.TotalRecordNum==0?"未知":data3.FallEvaluation.ENVRESULTS}}</div>
+                                                            </div>
+                                                            <div class="col-md-12 detaileddes">
+                                                                <p class="datetime">{{data3.FallEvaluation.TotalRecordNum==0?"":data3.FallEvaluation.EVALUATEBY}}</p>
+                                                            </div>
+                                                            <div class="col-md-12 detaileddes">
+                                                                <p class="datetime">{{data3.FallEvaluation.TotalRecordNum==0?"":data3.FallEvaluation.EVALDATE | date:'yyyy-MM-dd'}}</p>
+                                                            </div>
+
+                                                        </div>
+                                                        <div class="col-md-3">
+                                                            <div class="col-md-12 hyperlink">
+                                                                <a class="hyperlinkdetail" ng-click="lookEvalDetail('11')">历史记录</a>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Modal -->
+    <div class="modal fade" id="lookDetail" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog bs-example-modal-lg" role="document" style="width: 60%">
+            <div class="modal-content modal-lg">
+                <div class="modal-header bg-success">
+                    <button type="button" id="billClose" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel">
+                        {{codeName}}
+                    </h4>
+                </div>
+                <div class="modal-body">
+                    <ui-data-table options="options">
+                        <table class="table table-striped table-bordered table-hover table-handler">
+                            <thead>
+                                <tr>
+                                    <th>量测项目名称</th>
+                                    <th>量测值</th>
+                                    <th>量测时间</th>
+                                    <th>量测描述</th>
+                                    <th>量测人</th>
+                                    <th>来源</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr ng-repeat="item in HealthRecordList">
+                                    <td>{{item.RecordName}}</td>
+                                    <td>{{item.MeaSuredValue}}{{unit}}</td>
+                                    <td>{{item.MeaSureTime | date:'yyyy-MM-dd' }}</td>
+                                    <td>{{item.Description}}</td>
+                                    <td>{{item.Empname}}</td>
+                                    <td>{{item.Source=="PC"?"电脑":"移动端"}}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </ui-data-table>
+                    <div class="modal-footer center">
+                        <button type="button" class="btn btn-primary" data-dismiss="modal">取消</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="lookunDetail" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog bs-example-modal-lg" role="document" style="width: 60%">
+            <div class="modal-content modal-lg">
+                <div class="modal-header bg-success">
+                    <button type="button" id="billClose" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel">
+                        {{codeName}}
+                    </h4>
+                </div>
+                <div class="modal-body">
+                    <ui-data-table options="unoptions">
+                        <table class="table table-striped table-bordered table-hover table-handler">
+                            <thead>
+                                <tr>
+                                    <th>量测项目名称</th>
+                                    <th>量测值</th>
+                                    <th>量测时间</th>
+                                    <th>量测描述</th>
+                                    <th>量测人</th>
+                                    <th>来源</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr ng-repeat="item in UnPlans">
+                                    <td>体重/身高</td>
+                                    <td>{{item.ThisWeight}}KG / {{item.ThisHeight}}CM</td>
+                                    <td>{{item.ThisRecDate | date:'yyyy-MM-dd'}}</td>
+                                    <td>{{item.BMIResults}}</td>
+                                    <td>{{item.RecordNameBy}}</td>
+                                    <td>非计划减重</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </ui-data-table>
+                    <div class="modal-footer center">
+                        <button type="button" class="btn btn-primary" data-dismiss="modal">取消</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="insertRecord" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog bs-example-modal-lg" role="document" style="width: 45%">
+            <div class="modal-content modal-lg">
+                <div class="modal-header bg-success">
+                    <button type="button" id="billClose" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel">
+                        新增{{codeName}}记录
+                    </h4>
+                </div>
+                <div class="modal-body">
+                    <form role="form" class="form-horizontal" name="formRecord" novalidate>
+                        <div class="form-group center">
+                            <label class="col-sm-2 control-label">{{codeName}}量测时间<span class="required">*</span></label>
+                            <div class="col-sm-8">
+                                <input id="txtOccurDate" class="form-control datepicker" name="量测时间" ng-model="MeaSuredRecord.MeaSureTime" required ca-date-time-picker>
+                            </div>
+                        </div>
+                        <div class="form-group center">
+                            <label class="col-sm-2 control-label">{{codeName}}量测值<span class="required">*</span></label>
+                            <div class="col-sm-8">
+                                <input type="text" class="form-control" ng-model="MeaSuredRecord.MeaSuredValue" ng-blur="checkValue()" required />
+                            </div>
+                        </div>
+                        <div class="form-group center">
+                            <label class="col-sm-2 control-label">描述</label>
+                            <div class="col-sm-8">
+                                <input type="text" class="form-control" ng-model="MeaSuredRecord.Description" ng-disabled="true" />
+                            </div>
+                        </div>
+                        <div class="form-group center">
+                            <label class="col-sm-2 control-label">量测人员</label>
+                            <div class="col-sm-8">
+                                <input-staff callback="staffSelected(item,1)" value="{{MeaSuredRecord.MeaSuredPerson}}" />
+                            </div>
+                        </div>
+
+                        <input type="text" class="form-control" ng-model="MeaSuredRecord.MeasureItemCode" ng-show="false" />
+
+                        <div class="modal-footer center">
+                            <button class="btn btn-primary" ng-click="save()">保存</button>
+                            <button type="button" class="btn btn-primary" data-dismiss="modal">取消</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="insertxueyaRecord" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog bs-example-modal-lg" role="document" style="width: 45%">
+            <div class="modal-content modal-lg">
+                <div class="modal-header bg-success">
+                    <button type="button" id="billClose" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel">
+                        新增{{codeName}}记录
+                    </h4>
+                </div>
+                <div class="modal-body">
+                    <form role="form" class="form-horizontal" name="formxyRecord" novalidate>
+                        <div class="form-group center">
+                            <label class="col-sm-2 control-label">{{codeName}}量测时间<span class="required">*</span></label>
+                            <div class="col-sm-8">
+                                <input id="txtOccurDate" class="form-control datepicker" name="量测时间" ng-model="MeaSuredRecord.MeaSureTime" required ca-date-time-picker>
+                            </div>
+                        </div>
+                        <div class="form-group center">
+                            <label class="col-sm-2 control-label">血压(收缩压)量测值<span class="required">*</span></label>
+                            <div class="col-sm-8">
+                                <input type="text" class="form-control" ng-model="MeaSuredRecord.MeaSuredValue1" ng-blur="checkValue1()" required />
+                            </div>
+                        </div>
+                        <div class="form-group center">
+                            <label class="col-sm-2 control-label">描述</label>
+                            <div class="col-sm-8">
+                                <input type="text" class="form-control" ng-model="MeaSuredRecord.Description1" ng-disabled="true" />
+                            </div>
+                        </div>
+                        <div class="form-group center">
+                            <label class="col-sm-2 control-label">血压(舒张压)量测值<span class="required">*</span></label>
+                            <div class="col-sm-8">
+                                <input type="text" class="form-control" ng-model="MeaSuredRecord.MeaSuredValue2" ng-blur="checkValue2()" required />
+                            </div>
+                        </div>
+                        <div class="form-group center">
+                            <label class="col-sm-2 control-label">描述</label>
+                            <div class="col-sm-8">
+                                <input type="text" class="form-control" ng-model="MeaSuredRecord.Description2" ng-disabled="true" />
+                            </div>
+                        </div>
+                        <div class="form-group center">
+                            <label class="col-sm-2 control-label">量测人员</label>
+                            <div class="col-sm-8">
+                                <input-staff callback="staffSelected(item,1)" value="{{MeaSuredRecord.MeaSuredPerson}}" />
+                            </div>
+                        </div>
+
+                        <input type="text" class="form-control" ng-model="MeaSuredRecord.MeasureItemCode" ng-show="false" />
+
+                        <div class="modal-footer center">
+                            <button class="btn btn-primary" ng-click="savexueya()">保存</button>
+                            <button type="button" class="btn btn-primary" data-dismiss="modal">取消</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="insertxuetangRecord" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog bs-example-modal-lg" role="document" style="width: 45%">
+            <div class="modal-content modal-lg">
+                <div class="modal-header bg-success">
+                    <button type="button" id="billClose" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel">
+                        新增{{codeName}}记录
+                    </h4>
+                </div>
+                <div class="modal-body">
+                    <form role="form" class="form-horizontal" name="formxuetangRecord" novalidate>
+                        <div class="form-group center">
+                            <label class="col-sm-2 control-label">{{codeName}}量测时间<span class="required">*</span></label>
+                            <div class="col-sm-8">
+                                <input id="txtOccurDate" class="form-control datepicker" name="量测时间" ng-model="MeaSuredRecord.MeaSureTime" required ca-date-time-picker>
+                            </div>
+                        </div>
+                        <div class="form-group center">
+                            <label class="col-sm-2 control-label">血糖类型<span class="required">*</span></label>
+                            <div class="col-sm-8">
+                                <select ng-model="BSType" class="form-control" select-code="F00.001" ng-change="changebs()"></select>
+                            </div>
+                        </div>
+
+                        <div class="form-group center">
+                            <label class="col-sm-2 control-label">血糖量测值<span class="required">*</span></label>
+                            <div class="col-sm-8">
+                                <input type="text" class="form-control" ng-model="MeaSuredRecord.MeaSuredValue" ng-blur="checkValue3()" required />
+                            </div>
+                        </div>
+                        <div class="form-group center">
+                            <label class="col-sm-2 control-label">描述</label>
+                            <div class="col-sm-8">
+                                <input type="text" class="form-control" ng-model="MeaSuredRecord.Description" ng-disabled="true" />
+                            </div>
+                        </div>
+                        <div class="form-group center">
+                            <label class="col-sm-2 control-label">量测人员</label>
+                            <div class="col-sm-8">
+                                <input-staff callback="staffSelected(item,1)" value="{{MeaSuredRecord.MeaSuredPerson}}" />
+                            </div>
+                        </div>
+
+                        <input type="text" class="form-control" ng-model="MeaSuredRecord.MeasureItemCode" ng-show="false" />
+
+                        <div class="modal-footer center">
+                            <button class="btn btn-primary" ng-click="savexuetang()">保存</button>
+                            <button type="button" class="btn btn-primary" data-dismiss="modal">取消</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="insertweightRecord" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog bs-example-modal-lg" role="document" style="width: 45%">
+            <div class="modal-content modal-lg">
+                <div class="modal-header bg-success">
+                    <button type="button" id="billClose" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel">
+                        新增{{codeName}}记录
+                    </h4>
+                </div>
+                <div class="modal-body">
+                    <form role="form" class="form-horizontal" name="formweightRecord" novalidate>
+                        <div class="form-group center">
+                            <label class="col-sm-2 control-label">{{codeName}}量测时间<span class="required">*</span></label>
+                            <div class="col-sm-8">
+                                <input id="txtOccurDate" class="form-control datepicker" name="量测时间" ng-model="currentItem.ThisRecDate" required ca-date-time-picker>
+                            </div>
+                        </div>
+
+                        <div class="form-group center">
+                            <label class="col-sm-2 control-label">体重量测值<span class="required">*</span></label>
+                            <div class="col-sm-8">
+                                <div class="input-group">
+                                    <input type="number" name="体重" class="form-control" placeholder=" 输入本次体重信息" ng-model="currentItem.ThisWeight" required ng-blur="getBMI()" ng-pattern="/^[0-9].*$/" />
+                                    <div class="input-group-addon">kg</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group center">
+                            <label class="col-sm-2 control-label">身高量测值<span class="required">*</span></label>
+                            <div class="col-sm-8">
+                                <div class="input-group">
+                                    <input type="number" name="身高" class="form-control" placeholder="输入本次身高信息" ng-model="currentItem.ThisHeight" required ng-blur="getBMI()" ng-pattern="/^[0-9].*$/" />
+                                    <div class="input-group-addon">cm</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group center">
+                            <label class="col-sm-2 control-label">BMI指数</label>
+                            <div class="col-sm-8">
+                                <div class="input-group">
+                                    <input type="text" class="form-control" ng-model="currentItem.BMI" readonly="readonly">
+                                    <div class="input-group-addon">
+                                        kg/m<sup>2</sup>
+                                    </div>
+                                    <input type="text" class="form-control" ng-model="currentItem.BMIResults" readonly="readonly">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group center">
+                            <label class="col-sm-2 control-label">记录人员</label>
+                            <div class="col-sm-8">
+                                <input-staff callback="staffSelected(item,0)" value="{{currentItem.RecordBy}}" />
+                            </div>
+                        </div>
+                        <div class="modal-footer center">
+                            <button class="btn btn-primary" ng-click="saveweight()">保存</button>
+                            <button type="button" class="btn btn-primary" data-dismiss="modal">取消</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="CheckRecdtlRecord" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog bs-example-modal-lg" role="document" style="width: 60%">
+            <div class="modal-content modal-lg">
+                <div class="modal-header bg-success">
+                    <button type="button" id="billClose" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel">
+                        体检检查项目详情
+                    </h4>
+                </div>
+                <div class="modal-body">
+                    <div class="box border primary">
+                        <div class="box-title">
+                            <h4>
+                                <i class="fa fa-bars"></i>生化检查项目
+                            </h4>
+                        </div>
+                        <div class="box-body">
+                            <table class="table table-striped table-bordered table-hover table-handler">
+                                <thead>
+                                    <tr>
+                                        <th>#</th>
+                                        <th>检查类型</th>
+                                        <th>检查项目</th>
+                                        <th>检查结果</th>
+                                        <th>说明</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr ng-repeat="CheckRecdtl in tt">
+                                        <td>{{$index + 1}}</td>
+                                        <td>
+                                            <select ng-model="CheckRecdtl.CHECKTYPE" disabled="disabled" class="form-control" ng-options="CheckRecdtl.GROUPCODE as CheckRecdtl.GROUPNAME for CheckRecdtl in CheckCode"></select>
+                                        </td>
+                                        <td>
+                                            <select ng-model="CheckRecdtl.CHECKITEM" disabled="disabled" class="form-control" ng-options="CheckRecdtl.ITEMCODE as CheckRecdtl.ITEMNAME for CheckRecdtl in produceitem"></select>
+                                        </td>
+                                        <td style="word-break: break-all;word-wrap: break-word;"><span>{{CheckRecdtl.CHECKRESULTS}}</span></td>
+                                        <td style="word-break: break-all;word-wrap: break-word;"><span>{{CheckRecdtl.DESCRIPTION}}</span></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="EvModalDetail" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog bs-example-modal-lg" role="document" style="width: 60%">
+            <div class="modal-content modal-lg">
+                <div class="modal-header bg-success">
+                    <button type="button" id="billClose" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel">
+                        评估记录
+                    </h4>
+                </div>
+                <div class="modal-body">
+                    <div class="box border primary">
+                        <div class="box-title">
+                            <h4><i class="fa fa-table"></i>评估历史纪录</h4>
+                        </div>
+                        <div class="box-body">
+                            <ui-data-table options="evoptions">
+                                <table id="tbEvalList" class="table table-striped table-bordered table-hover ">
+                                    <thead>
+                                        <tr>
+                                            <th>编号</th>
+                                            <th>评估日期</th>
+                                            <th>评估人员</th>
+                                            <th>总分</th>
+                                            <th>评估结果</th>
+                                            <th>下次评估日期</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr ng-repeat="item in QuestionList">
+                                            <td>{{item.RECORDID}}</td>
+                                            <td>{{item.EVALDATE | date:'yyyy-MM-dd'}}</td>
+                                            <td>{{item.EVALUATEBY}}</td>
+                                            <td>{{item.SCORE}}</td>
+                                            <td>{{item.ENVRESULTS}}</td>
+                                            <td>{{item.NEXTEVALDATE | date:'yyyy-MM-dd'}}</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </ui-data-table>
+                        </div>
+                        <div id="pager" class="pull-right"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>

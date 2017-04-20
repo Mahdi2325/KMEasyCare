@@ -1,0 +1,961 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{3A0737CE-99B6-429F-9B11-85B49FAD1DE2}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>KMHC.SLTC.Persistence</RootNamespace>
+    <AssemblyName>KMHC.SLTC.Persistence</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="DencryptKey">
+      <HintPath>..\..\ThirdPartyLib\DencryptKey.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.0.0\lib\net45\EntityFramework.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="EntityFramework.Extended">
+      <HintPath>..\..\ThirdPartyLib\EntityFramework.Extended.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.0.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="MySql.Data, Version=6.9.8.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL">
+      <HintPath>..\packages\MySql.Data.6.9.8\lib\net45\MySql.Data.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="MySql.Data.Entity.EF6, Version=6.9.8.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL">
+      <HintPath>..\packages\MySql.Data.Entity.6.9.8\lib\net45\MySql.Data.Entity.EF6.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="CARE_PLANACTIVITY.cs">
+      <DependentUpon>MysqlDataContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CARE_PLANCHECKPOINT.cs">
+      <DependentUpon>MysqlDataContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CARE_PLANDATA.cs">
+      <DependentUpon>MysqlDataContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CARE_PLANEVAL.cs">
+      <DependentUpon>MysqlDataContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CARE_PLANFOCUS.cs">
+      <DependentUpon>MysqlDataContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CARE_PLANGOAL.cs">
+      <DependentUpon>MysqlDataContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CARE_PLANPROBLEM.cs">
+      <DependentUpon>MysqlDataContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CARE_PLANREASON.cs">
+      <DependentUpon>MysqlDataContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CARE_PLANTRAIN.cs">
+      <DependentUpon>MysqlDataContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CHECKITEM.cs">
+      <DependentUpon>MysqlDataContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CHECKTEMPLATE.cs">
+      <DependentUpon>MysqlDataContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CHECKTEMPLATEITEM.cs">
+      <DependentUpon>MysqlDataContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DC_ABNORMALEMOTIONREC.cs">
+      <DependentUpon>MysqlDataContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DC_ASSESSVALUE.cs">
+      <DependentUpon>MysqlDataContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DC_CAREPLANACTIVITY.cs">
+      <DependentUpon>MysqlDataContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DC_CAREPLANDATA.cs">
+      <DependentUpon>MysqlDataContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DC_CAREPLANEVAL.cs">
+      <DependentUpon>MysqlDataContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DC_CAREPLANGOAL.cs">
+      <DependentUpon>MysqlDataContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DC_CAREPLANPROBLEM.cs">
+      <DependentUpon>MysqlDataContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DC_CAREPLANREASON.cs">
+      <DependentUpon>MysqlDataContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DC_COMMDTL.cs">
+      <DependentUpon>MysqlDataContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DC_COMMFILE.cs">
+      <DependentUpon>MysqlDataContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DC_DAYLIFECAREDTL.cs">
+      <DependentUpon>MysqlDataContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DC_DAYLIFECAREREC.cs">
+      <DependentUpon>MysqlDataContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DC_EVALQUESTION.cs">
+      <DependentUpon>MysqlDataContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DC_EVALQUESTIONRESULT.cs">
+      <DependentUpon>MysqlDataContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DC_IPDREG.cs">
+      <DependentUpon>MysqlDataContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DC_LIFEHISTORY.cs">
+      <DependentUpon>MysqlDataContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DC_MULTITEAMCAREPLAN.cs">
+      <DependentUpon>MysqlDataContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DC_MULTITEAMCAREPLANEVAL.cs">
+      <DependentUpon>MysqlDataContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DC_MULTITEAMCAREPLANREC.cs">
+      <DependentUpon>MysqlDataContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DC_NOTE.cs">
+      <DependentUpon>MysqlDataContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DC_NSCPLACTIVITY.cs">
+      <DependentUpon>MysqlDataContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DC_NSCPLGOAL.cs">
+      <DependentUpon>MysqlDataContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DC_NURSEINGLIFECAREDTL.cs">
+      <DependentUpon>MysqlDataContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DC_NURSEINGLIFECAREREC.cs">
+      <DependentUpon>MysqlDataContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DC_NURSEINGPLANEVAL.cs">
+      <DependentUpon>MysqlDataContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DC_QUESTION.cs">
+      <DependentUpon>MysqlDataContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DC_QUESTIONITEM.cs">
+      <DependentUpon>MysqlDataContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DC_QUESTIONVALUE.cs">
+      <DependentUpon>MysqlDataContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DC_REFERRALLISTS.cs">
+      <DependentUpon>MysqlDataContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DC_REGACTIVITYREQUESTEVAL.cs">
+      <DependentUpon>MysqlDataContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DC_REGBASEINFOLIST.cs">
+      <DependentUpon>MysqlDataContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DC_REGCASECAREPLAN.cs">
+      <DependentUpon>MysqlDataContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DC_REGCASECAREPLANREC.cs">
+      <DependentUpon>MysqlDataContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DC_REGCHECKRECORD.cs">
+      <DependentUpon>MysqlDataContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DC_REGCHECKRECORDDATA.cs">
+      <DependentUpon>MysqlDataContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DC_REGCPL.cs">
+      <DependentUpon>MysqlDataContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DC_REGDAYLIFE.cs">
+      <DependentUpon>MysqlDataContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DC_REGEVALQUESTION.cs">
+      <DependentUpon>MysqlDataContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DC_REGFILE.cs">
+      <DependentUpon>MysqlDataContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DC_REGLIFEQUALITYEVAL.cs">
+      <DependentUpon>MysqlDataContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DC_REGMEDICINE.cs">
+      <DependentUpon>MysqlDataContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DC_REGNOTERECORD.cs">
+      <DependentUpon>MysqlDataContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DC_REGNURSINGDIAG.cs">
+      <DependentUpon>MysqlDataContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DC_REGQUESTIONDATA.cs">
+      <DependentUpon>MysqlDataContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DC_REGQUESTIONEVALREC.cs">
+      <DependentUpon>MysqlDataContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DC_REGVISITRECORD.cs">
+      <DependentUpon>MysqlDataContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DC_SWREGEVALPLAN.cs">
+      <DependentUpon>MysqlDataContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DC_TASKGOALSSTRATEGY.cs">
+      <DependentUpon>MysqlDataContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DC_TASKREMIND.cs">
+      <DependentUpon>MysqlDataContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DC_TEAMACTIVITY.cs">
+      <DependentUpon>MysqlDataContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DC_TEAMACTIVITYDTL.cs">
+      <DependentUpon>MysqlDataContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="LTC_ACTIVEPERIOD.cs">
+      <DependentUpon>MysqlDataContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="LTC_ACTIVEPERIOD_HIST.cs">
+      <DependentUpon>MysqlDataContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="LTC_AFFAIRSHANDOVER.cs">
+      <DependentUpon>MysqlDataContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="LTC_ASSESSVALUE.cs">
+      <DependentUpon>MysqlDataContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="LTC_ASSIGNTASK.cs">
+      <DependentUpon>MysqlDataContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="LTC_BEDBASIC.cs">
+      <DependentUpon>MysqlDataContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="LTC_BEDSORECHGREC.cs">
+      <DependentUpon>MysqlDataContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="LTC_BEDSOREREC.cs">
+      <DependentUpon>MysqlDataContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="LTC_BEDTRANSFER.cs">
+      <DependentUpon>MysqlDataContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="LTC_BILL.cs">
+      <DependentUpon>MysqlDataContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="LTC_BILLV2.cs">
+      <DependentUpon>MysqlDataContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="LTC_BILLV2PAY.cs">
+      <DependentUpon>MysqlDataContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="LTC_CAREDEMANDEVAL.cs">
+      <DependentUpon>MysqlDataContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="LTC_CARERSVRREC.cs">
+      <DependentUpon>MysqlDataContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="LTC_CHARGEGROUP.cs">
+      <DependentUpon>MysqlDataContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="LTC_CHARGEGROUP_CHARGEITEM.cs">
+      <DependentUpon>MysqlDataContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="LTC_CHARGEGROUP_CHARGERECORD.cs">
+      <DependentUpon>MysqlDataContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="LTC_CHARGEGROUP_RESIDENT.cs">
+      <DependentUpon>MysqlDataContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="LTC_CHECKGROUP.cs">
+      <DependentUpon>MysqlDataContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="LTC_CHECKITEM.cs">
+      <DependentUpon>MysqlDataContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="LTC_CHECKREC.cs">
+      <DependentUpon>MysqlDataContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="LTC_CHECKRECDTL.cs">
+      <DependentUpon>MysqlDataContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="LTC_CHECKTYPE.cs">
+      <DependentUpon>MysqlDataContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="LTC_CODEDTL_REF.cs">
+      <DependentUpon>MysqlDataContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="LTC_CODEFILE_REF.cs">
+      <DependentUpon>MysqlDataContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="LTC_COMMFILE.cs">
+      <DependentUpon>MysqlDataContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="LTC_COMPLAINREC.cs">
+      <DependentUpon>MysqlDataContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="LTC_CONSTRAINSBEVAL.cs">
+      <DependentUpon>MysqlDataContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="LTC_CONSTRAINTREC.cs">
+      <DependentUpon>MysqlDataContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="LTC_CONSULTCALLBACK.cs">
+      <DependentUpon>MysqlDataContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="LTC_CONSULTREC.cs">
+      <DependentUpon>MysqlDataContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="LTC_COSTDTL.cs">
+      <DependentUpon>MysqlDataContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="LTC_COSTGROUP.cs">
+      <DependentUpon>MysqlDataContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="LTC_COSTGROUPDTL.cs">
+      <DependentUpon>MysqlDataContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="LTC_COSTITEM.cs">
+      <DependentUpon>MysqlDataContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="LTC_DEPTFILE.cs">
+      <DependentUpon>MysqlDataContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="LTC_DOCTORCHECKREC.cs">
+      <DependentUpon>MysqlDataContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="LTC_DOCTOREVALREC.cs">
+      <DependentUpon>MysqlDataContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="LTC_DRGFREQREF.cs">
+      <DependentUpon>MysqlDataContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="LTC_DRUGRECORD.cs">
+      <DependentUpon>MysqlDataContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="LTC_EMPFILE.cs">
+      <DependentUpon>MysqlDataContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="LTC_FALLINCIDENTEVENT.cs">
+      <DependentUpon>MysqlDataContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="LTC_FAMILYDISCUSSREC.cs">
+      <DependentUpon>MysqlDataContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="LTC_FEERECORD.cs">
+      <DependentUpon>MysqlDataContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="LTC_FIXEDCOST.cs">
+      <DependentUpon>MysqlDataContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="LTC_FSTREGREC.cs">
+      <DependentUpon>MysqlDataContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="LTC_GOODS.cs">
+      <DependentUpon>MysqlDataContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="LTC_GOODSLOAN.cs">
+      <DependentUpon>MysqlDataContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="LTC_GOODSSALE.cs">
+      <DependentUpon>MysqlDataContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="LTC_GROUP.cs">
+      <DependentUpon>MysqlDataContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="LTC_GROUPACTIVITYREC.cs">
+      <DependentUpon>MysqlDataContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="LTC_HANDOVERDTL.cs">
+      <DependentUpon>MysqlDataContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="LTC_HANDOVERRECORD.cs">
+      <DependentUpon>MysqlDataContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="LTC_HOMECARESUPERVISE.cs">
+      <DependentUpon>MysqlDataContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="LTC_HOMECARESVRREC.cs">
+      <DependentUpon>MysqlDataContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="LTC_ICD9_DISEASE.cs">
+      <DependentUpon>MysqlDataContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="LTC_INFECTIONIND.cs">
+      <DependentUpon>MysqlDataContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="LTC_INFECTIONITEM.cs">
+      <DependentUpon>MysqlDataContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="LTC_INFECTIONSYMPOTM.cs">
+      <DependentUpon>MysqlDataContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="LTC_INSULININJECT.cs">
+      <DependentUpon>MysqlDataContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="LTC_INVALUE.cs">
+      <DependentUpon>MysqlDataContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="LTC_IPDCLOSECASE.cs">
+      <DependentUpon>MysqlDataContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="LTC_IPDORDER.cs">
+      <DependentUpon>MysqlDataContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="LTC_IPDORDERPOSTREC.cs">
+      <DependentUpon>MysqlDataContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="LTC_IPDREG.cs">
+      <DependentUpon>MysqlDataContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="LTC_IPDREGOUT.cs">
+      <DependentUpon>MysqlDataContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="LTC_IPDVERIFY.cs">
+      <DependentUpon>MysqlDataContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="LTC_LABEXAMREC.cs">
+      <DependentUpon>MysqlDataContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="LTC_LEAVEHOSP.cs">
+      <DependentUpon>MysqlDataContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="LTC_LIFERECORDS.cs">
+      <DependentUpon>MysqlDataContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="LTC_LOG.cs">
+      <DependentUpon>MysqlDataContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="LTC_LOOKOVER.cs">
+      <DependentUpon>MysqlDataContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="LTC_MAKERITEM.cs">
+      <DependentUpon>MysqlDataContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="LTC_MAKERITEMLIMITED.cs">
+      <DependentUpon>MysqlDataContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="LTC_MAKERITEMLIMITEDVALUE.cs">
+      <DependentUpon>MysqlDataContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="LTC_MANUFACTURE.cs">
+      <DependentUpon>MysqlDataContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="LTC_MATERIALRECORD.cs">
+      <DependentUpon>MysqlDataContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="LTC_MATHNUMBER.cs">
+      <DependentUpon>MysqlDataContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="LTC_MEASUREDRECORD.cs">
+      <DependentUpon>MysqlDataContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="LTC_MEASUREITEM.cs">
+      <DependentUpon>MysqlDataContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="LTC_MEDICINE.cs">
+      <DependentUpon>MysqlDataContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="LTC_MODULES.cs">
+      <DependentUpon>MysqlDataContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="LTC_MONTHLYPAYBILLRECORD.cs">
+      <DependentUpon>MysqlDataContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="LTC_MONTHLYPAYLIMIT.cs">
+      <DependentUpon>MysqlDataContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="LTC_NCIDEDUCTION.cs">
+      <DependentUpon>MysqlDataContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="LTC_NCIEVALUATE.cs">
+      <DependentUpon>MysqlDataContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="LTC_NCIEVALUATEDTL.cs">
+      <DependentUpon>MysqlDataContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="LTC_NCIFINANCIALMONTH.cs">
+      <DependentUpon>MysqlDataContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="LTC_NCISUPERVISE.cs">
+      <DependentUpon>MysqlDataContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="LTC_NEWREGENVADAPTATION.cs">
+      <DependentUpon>MysqlDataContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="LTC_NEWRESIDENTENVREC.cs">
+      <DependentUpon>MysqlDataContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="LTC_NOTIFICATION.cs">
+      <DependentUpon>MysqlDataContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="LTC_NSCPL.cs">
+      <DependentUpon>MysqlDataContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="LTC_NSCPLACTIVITY.cs">
+      <DependentUpon>MysqlDataContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="LTC_NSCPLGOAL.cs">
+      <DependentUpon>MysqlDataContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="LTC_NSDRUG.cs">
+      <DependentUpon>MysqlDataContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="LTC_NSMEDICALMATERIAL.cs">
+      <DependentUpon>MysqlDataContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="LTC_NSSERVICE.cs">
+      <DependentUpon>MysqlDataContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="LTC_NURSERPTTPR.cs">
+      <DependentUpon>MysqlDataContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="LTC_NURSINGHANDOVER.cs">
+      <DependentUpon>MysqlDataContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="LTC_NURSINGREC.cs">
+      <DependentUpon>MysqlDataContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="LTC_NUTRTION72EVAL.cs">
+      <DependentUpon>MysqlDataContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="LTC_NUTRTIONCAREREC.cs">
+      <DependentUpon>MysqlDataContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="LTC_NUTRTIONEVAL.cs">
+      <DependentUpon>MysqlDataContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="LTC_ORG.cs">
+      <DependentUpon>MysqlDataContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="LTC_ORGFLOOR.cs">
+      <DependentUpon>MysqlDataContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="LTC_ORGROOM.cs">
+      <DependentUpon>MysqlDataContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="LTC_OUTVALUE.cs">
+      <DependentUpon>MysqlDataContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="LTC_OWNDRUGDTL.cs">
+      <DependentUpon>MysqlDataContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="LTC_OWNDRUGREC.cs">
+      <DependentUpon>MysqlDataContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="LTC_PAINBODYPART.cs">
+      <DependentUpon>MysqlDataContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="LTC_PAINEVALREC.cs">
+      <DependentUpon>MysqlDataContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="LTC_PAYBILL.cs">
+      <DependentUpon>MysqlDataContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="LTC_PHARMACISTEVAL.cs">
+      <DependentUpon>MysqlDataContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="LTC_PINMONEY.cs">
+      <DependentUpon>MysqlDataContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="LTC_PIPELINE.cs">
+      <DependentUpon>MysqlDataContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="LTC_PIPELINEEVAL.cs">
+      <DependentUpon>MysqlDataContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="LTC_PIPELINEREC.cs">
+      <DependentUpon>MysqlDataContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="LTC_PRECHARGE.cs">
+      <DependentUpon>MysqlDataContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="LTC_PREIPD.cs">
+      <DependentUpon>MysqlDataContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="LTC_PROPOSALDISSCUSS.cs">
+      <DependentUpon>MysqlDataContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="LTC_PROPOSALDISSCUSSREC.cs">
+      <DependentUpon>MysqlDataContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="LTC_PUSHTOKEN.cs">
+      <DependentUpon>MysqlDataContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="LTC_QUESTION.cs">
+      <DependentUpon>MysqlDataContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="LTC_QUESTIONRESULTS.cs">
+      <DependentUpon>MysqlDataContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="LTC_RECEIPTS.cs">
+      <DependentUpon>MysqlDataContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="LTC_REFERRALREC.cs">
+      <DependentUpon>MysqlDataContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="LTC_REFUND.cs">
+      <DependentUpon>MysqlDataContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="LTC_REGACTIVITYREQUEVAL.cs">
+      <DependentUpon>MysqlDataContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="LTC_REGATTACHFILE.cs">
+      <DependentUpon>MysqlDataContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="LTC_REGDEMAND.cs">
+      <DependentUpon>MysqlDataContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="LTC_REGDISEASEHIS.cs">
+      <DependentUpon>MysqlDataContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="LTC_REGDISEASEHISDTL.cs">
+      <DependentUpon>MysqlDataContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="LTC_REGEVALUATE.cs">
+      <DependentUpon>MysqlDataContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="LTC_REGFILE.cs">
+      <DependentUpon>MysqlDataContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="LTC_REGHEALTH.cs">
+      <DependentUpon>MysqlDataContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="LTC_REGINSDTL.cs">
+      <DependentUpon>MysqlDataContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="LTC_REGNCIINFO.cs">
+      <DependentUpon>MysqlDataContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="LTC_REGQUESTION.cs">
+      <DependentUpon>MysqlDataContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="LTC_REGQUESTIONDATA.cs">
+      <DependentUpon>MysqlDataContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="LTC_REGRELATION.cs">
+      <DependentUpon>MysqlDataContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="LTC_REGRELATIONDTL.cs">
+      <DependentUpon>MysqlDataContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="LTC_REHABILITREC.cs">
+      <DependentUpon>MysqlDataContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="LTC_RESIDENTBALANCE.cs">
+      <DependentUpon>MysqlDataContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="LTC_RESIDENTBALANCEREFUND.cs">
+      <DependentUpon>MysqlDataContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="LTC_RESOURCELINKREC.cs">
+      <DependentUpon>MysqlDataContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="LTC_ROLES.cs">
+      <DependentUpon>MysqlDataContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="LTC_SCENARIO.cs">
+      <DependentUpon>MysqlDataContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="LTC_SCENARIO_ITEM.cs">
+      <DependentUpon>MysqlDataContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="LTC_SCENARIO_ITEM_OPTION.cs">
+      <DependentUpon>MysqlDataContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="LTC_SERVICERECORD.cs">
+      <DependentUpon>MysqlDataContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="LTC_SUBSIDYREC.cs">
+      <DependentUpon>MysqlDataContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="LTC_SYMPOTMITEM.cs">
+      <DependentUpon>MysqlDataContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="LTC_TRANSFERVISIT.cs">
+      <DependentUpon>MysqlDataContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="LTC_UNPLANEDIPD.cs">
+      <DependentUpon>MysqlDataContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="LTC_UNPLANWEIGHTIND.cs">
+      <DependentUpon>MysqlDataContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="LTC_USERS.cs">
+      <DependentUpon>MysqlDataContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="LTC_VACCINEINJECT.cs">
+      <DependentUpon>MysqlDataContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="LTC_VISITDEPT.cs">
+      <DependentUpon>MysqlDataContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="LTC_VISITDOCRECORDS.cs">
+      <DependentUpon>MysqlDataContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="LTC_VISITDOCTOR.cs">
+      <DependentUpon>MysqlDataContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="LTC_VISITHOSPITAL.cs">
+      <DependentUpon>MysqlDataContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="LTC_VISITPRESCRIPTION.cs">
+      <DependentUpon>MysqlDataContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="LTC_VITALSIGN.cs">
+      <DependentUpon>MysqlDataContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="LTC_WORKITEM.cs">
+      <DependentUpon>MysqlDataContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="LTC_WORKSUBITEM.cs">
+      <DependentUpon>MysqlDataContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="LTC_ZIPFILE.cs">
+      <DependentUpon>MysqlDataContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="MysqlDataContext.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>MysqlDataContext.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="MysqlDataContext.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>MysqlDataContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="MysqlDataContext.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>MysqlDataContext.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="NCIA_AGENCYASSTRECORD.cs">
+      <DependentUpon>MysqlDataContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="NCIA_AGENCYASSTRECORDDETAIL.cs">
+      <DependentUpon>MysqlDataContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="NCIA_APPCERT.cs">
+      <DependentUpon>MysqlDataContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="NCIA_APPHOSP.cs">
+      <DependentUpon>MysqlDataContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="NCIA_APPLICANT.cs">
+      <DependentUpon>MysqlDataContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="NCIA_APPLICANTHISTORY.cs">
+      <DependentUpon>MysqlDataContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="NCIA_CARETYPECONDITION.cs">
+      <DependentUpon>MysqlDataContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="NCIA_DEDUCTION.cs">
+      <DependentUpon>MysqlDataContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="NCIA_NSAPPCERTRATE.cs">
+      <DependentUpon>MysqlDataContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="NCIA_NSAPPHOSPRATE.cs">
+      <DependentUpon>MysqlDataContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="NCIA_NURSINGHOMEASSTRECORD.cs">
+      <DependentUpon>MysqlDataContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="NCIA_NURSINGHOMEASSTRECORDDETAIL.cs">
+      <DependentUpon>MysqlDataContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="NCIP_NCIPAYGRANT.cs">
+      <DependentUpon>MysqlDataContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="NCIP_NSMONFEE.cs">
+      <DependentUpon>MysqlDataContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="NCIP_RESIDENTMONFEE.cs">
+      <DependentUpon>MysqlDataContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="NCIP_RESIDENTMONFEEDTL.cs">
+      <DependentUpon>MysqlDataContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="NCIP_SERVICEDEPOSIT.cs">
+      <DependentUpon>MysqlDataContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="NCIP_SERVICEDEPOSITGRANT.cs">
+      <DependentUpon>MysqlDataContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="NCI_AGENCY.cs">
+      <DependentUpon>MysqlDataContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="NCI_AGENCYSTAFF.cs">
+      <DependentUpon>MysqlDataContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="NCI_CARETYPE.cs">
+      <DependentUpon>MysqlDataContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="NCI_CODEDTL.cs">
+      <DependentUpon>MysqlDataContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="NCI_CODEFILE.cs">
+      <DependentUpon>MysqlDataContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="NCI_COMMFILE.cs">
+      <DependentUpon>MysqlDataContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="NCI_DRUG.cs">
+      <DependentUpon>MysqlDataContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="NCI_DRUGBAK.cs">
+      <DependentUpon>MysqlDataContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="NCI_ERRORCODE.cs">
+      <DependentUpon>MysqlDataContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="NCI_GOVERNMENT.cs">
+      <DependentUpon>MysqlDataContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="NCI_GOVERNMENTLEVEL.cs">
+      <DependentUpon>MysqlDataContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="NCI_GOVERNMENTSTAFF.cs">
+      <DependentUpon>MysqlDataContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="NCI_INSURANCECOMPANY.cs">
+      <DependentUpon>MysqlDataContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="NCI_INSURANCECOMPANYSTAFF.cs">
+      <DependentUpon>MysqlDataContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="NCI_LOCATIONCODE.cs">
+      <DependentUpon>MysqlDataContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="NCI_MEDICALMATERIAL.cs">
+      <DependentUpon>MysqlDataContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="NCI_MEDICALMATERIALBAK.cs">
+      <DependentUpon>MysqlDataContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="NCI_MODULES.cs">
+      <DependentUpon>MysqlDataContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="NCI_NURSINGHOME.cs">
+      <DependentUpon>MysqlDataContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="NCI_NURSINGHOMESTAFF.cs">
+      <DependentUpon>MysqlDataContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="NCI_ROLE.cs">
+      <DependentUpon>MysqlDataContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="NCI_ROLE_MODULE.cs">
+      <DependentUpon>MysqlDataContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="NCI_SERVICE.cs">
+      <DependentUpon>MysqlDataContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="NCI_SERVICEBAK.cs">
+      <DependentUpon>MysqlDataContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="NCI_SUPERVISE.cs">
+      <DependentUpon>MysqlDataContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="NCI_USER.cs">
+      <DependentUpon>MysqlDataContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SYS_CODERULE.cs">
+      <DependentUpon>MysqlDataContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SYS_REPORT.cs">
+      <DependentUpon>MysqlDataContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="TSG_ANSWER.cs">
+      <DependentUpon>MysqlDataContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="TSG_ANSWERDTL.cs">
+      <DependentUpon>MysqlDataContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="TSG_CATEGORY.cs">
+      <DependentUpon>MysqlDataContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="TSG_QUESTION.cs">
+      <DependentUpon>MysqlDataContext.tt</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.Config">
+      <SubType>Designer</SubType>
+    </None>
+    <EntityDeploy Include="MysqlDataContext.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>MysqlDataContext.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <None Include="MysqlDataContext.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>MysqlDataContext.edmx</DependentUpon>
+      <LastGenOutput>MysqlDataContext.Context.cs</LastGenOutput>
+    </None>
+    <None Include="MysqlDataContext.edmx.diagram">
+      <DependentUpon>MysqlDataContext.edmx</DependentUpon>
+    </None>
+    <None Include="MysqlDataContext.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>MysqlDataContext.edmx</DependentUpon>
+      <LastGenOutput>MysqlDataContext.cs</LastGenOutput>
+    </None>
+    <None Include="packages.config">
+      <SubType>Designer</SubType>
+    </None>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

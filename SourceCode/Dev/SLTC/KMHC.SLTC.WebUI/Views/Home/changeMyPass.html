@@ -1,0 +1,23 @@
+<form name="changePass_form" ng-submit="change()" novalidate>
+    <div class="form-group">
+        <input placeholder="旧密码" class="form-control" type="password" name="oldPass_input" ng-required="true"
+               ng-model="oldPass" maxlength="100" tabindex='2002'/>
+    </div>
+    <div class="form-group">
+        <input placeholder="新密码" class="form-control" type="password" name="newPass1_input" ng-required="true"
+               ng-model="newPass1" maxlength="100" tabindex='2003'/>
+    </div>
+    <div class="form-group">
+        <input PLACEHOLDER="新密码" class="form-control" type="password" name="newPass2_input" ng-required="true"
+               ng-model="newPass2" maxlength="100" tabindex='2004'/>
+    </div>
+  
+    <div class="form-group form-control-static row">
+        <div class="col-sm-8">
+            <span ng-show="errorMessage" class="text-danger"><i class="fa fa-exclamation-triangle"></i> {{errorMessage}}</span>
+        </div>
+        <div class="col-sm-4 text-right">
+            <button id="btnLogin" type="submit"  class="btn btn-primary" tabindex="2005">修改</button>
+        </div>
+    </div>
+</form>

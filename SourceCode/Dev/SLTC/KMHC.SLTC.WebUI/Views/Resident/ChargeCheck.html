@@ -1,0 +1,156 @@
+<form class="form-horizontal" role="form" ng-submit="saveContact()">
+    <input type="hidden" ng-model="Detail.ResidentId">
+    <input type="hidden" ng-model="Detail.id">
+    <div class="panel panel-default">
+        <div class="panel-heading">政府补助信息</div>
+        <div class="panel-body">
+            <div class="form-group">
+                <label class="col-sm-1 control-label" for="txtSubsidiesAmount">补助额</label>
+                <div class="col-sm-4">
+                    <input id="txtSubsidiesAmount" class="form-control" type="text" ng-model="Detail.SubsidiesAmount">
+                </div>
+                <label for="selectSubsidiesCalculation" class="col-sm-2 control-label">补助额计算方式</label>
+                <div class="col-sm-4">
+                    <select class="form-control" id="selectSubsidiesCalculation" ng-model="Detail.SubsidiesCalculation" ng-options="x.Value as x.Name for x in Dic.SubCal"></select>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-1 control-label" for="selectSubsidiesUnit">补助单位</label>
+                <div class="col-sm-4">
+                    <select class="form-control" id="selectSubsidiesUnit" ng-model="Detail.SubsidiesUnit" ng-options="x.Value as x.Name for x in Dic.SubUnit"></select>
+                </div>
+                <label for="txtSubsidiesDueDate" class="col-sm-2 control-label">补助到期日</label>
+                <div class="col-sm-4">
+                    <input id="txtSubsidiesDueDate" class="form-control" type="text" ng-model="Detail.SubsidiesDueDate" ca-date-picker >
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-1 control-label" for="txtApplicationNO">申请(转介)文号</label>
+                <div class="col-sm-3">
+                    <input id="txtApplicationNO" class="form-control" type="text" ng-model="Detail.ApplicationNO">
+                </div>
+                <label for="txtApplicationDate" class="col-sm-1 control-label">申请日期</label>
+                <div class="col-sm-3">
+                    <input id="txtApplicationDate" class="form-control datepicker" type="text" ng-model="Detail.ApplicationDate" ca-date-picker>
+                </div>
+                <label for="selectChargeRatio" class="col-sm-1 control-label">费用比例</label>
+                <div class="col-sm-3">
+                    <select class="form-control" id="selectChargeRatio" ng-model="Detail.ChargeRatio" ng-options="x.Value as x.Name for x in Dic.Ratio"></select>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-1 control-label" for="txtSubsidiesCheckNO">补助核备文号</label>
+                <div class="col-sm-3">
+                    <input id="txtSubsidiesCheckNO" class="form-control" type="text" ng-model="Detail.SubsidiesCheckNO">
+                </div>
+                <label for="txtCheckDate" class="col-sm-1 control-label">核备日期</label>
+                <div class="col-sm-3">
+                    <input id="txtCheckDate" class="form-control datepicker" type="text" ng-model="Detail.CheckDate" ca-date-picker >
+                </div>
+                <label for="selectSubsidiesQualification" class="col-sm-1 control-label">补助资格</label>
+                <div class="col-sm-3">
+                    <select class="form-control" id="selectSubsidiesQualification" ng-model="Detail.SubsidiesQualification" ng-options="x.Value as x.Name for x in Dic.SubQua"></select>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="panel panel-default">
+        <div class="panel-heading">个人零用金保管情形</div>
+        <div class="panel-body">
+            <div class="form-group">
+                <label class="col-sm-1 control-label" for="txtAllowanceBank">零用金银行</label>
+                <div class="col-sm-3">
+                    <input id="txtAllowanceBank" class="form-control" type="text" ng-model="Detail.AllowanceBank">
+                </div>
+                <label for="txtBankAccount" class="col-sm-1 control-label">银行帐号</label>
+                <div class="col-sm-3">
+                    <input id="txtBankAccount" class="form-control" type="text" ng-model="Detail.BankAccount">
+                </div>
+                <label for="txtOtherAccount" class="col-sm-1 control-label">其他帐户</label>
+                <div class="col-sm-3">
+                    <input id="txtOtherAccount" class="form-control" type="text" ng-model="Detail.OtherAccount">
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-1 control-label" for="txtAllowanceBalance">零用金结余</label>
+                <div class="col-sm-3">
+                    <input id="txtAllowanceBalance" class="form-control" type="text" ng-model="Detail.AllowanceBalance">
+                </div>
+                <button class="btn btn-primary">查询结余金额</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="panel panel-default">
+        <div class="panel-heading">个案派案</div>
+        <div class="panel-body">
+            <div class="form-group">
+                <label class="col-sm-1 control-label" for="txtCaseAdmin">个案管理员</label>
+                <div class="col-sm-3">
+                    <input id="txtCaseAdmin" class="form-control" type="text" ng-model="Detail.CaseAdmin">
+                </div>
+                <label for="txtFulltimeNurse" class="col-sm-1 control-label">专责护理人员</label>
+                <div class="col-sm-3">
+                    <input id="txtFulltimeNurse" class="form-control datepicker" type="text" ng-model="Detail.FulltimeNurse">
+                </div>
+                <label for="txtFulltimeServer" class="col-sm-1 control-label">专责照服员</label>
+                <div class="col-sm-3">
+                    <input id="txtFulltimeServer" class="form-control datepicker" type="text" ng-model="Detail.FulltimeServer">
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-1 control-label" for="txtAgencyCaseAdmin">代理个管员</label>
+                <div class="col-sm-3">
+                    <input id="txtAgencyCaseAdmin" class="form-control" type="text" ng-model="Detail.AgencyCaseAdmin">
+                </div>
+                <label for="txtAgencyNurse" class="col-sm-1 control-label">代理护理人员</label>
+                <div class="col-sm-3">
+                    <input id="txtAgencyNurse" class="form-control datepicker" type="text" ng-model="Detail.AgencyNurse">
+                </div>
+                <label for="txtAgencyServer" class="col-sm-1 control-label">代理照服员</label>
+                <div class="col-sm-3">
+                    <input id="txtAgencyServer" class="form-control datepicker" type="text" ng-model="Detail.AgencyServer">
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="panel panel-default">
+        <div class="panel-heading">主管审核</div>
+        <div class="panel-body">
+            <div class="form-group">
+                <label class="col-sm-1 control-label" for="txtSupervisor">组长/督导</label>
+                <div class="col-sm-3">
+                    <input id="txtSupervisor" class="form-control" type="text" ng-model="Detail.Supervisor">
+                </div>
+                <label for="txtSupCheckStatus" class="col-sm-1 control-label">审核状态</label>
+                <div class="col-sm-3">
+                    <input id="txtSupCheckStatus" class="form-control" type="text" ng-model="Detail.SupCheckStatus">
+                </div>
+                <label for="txtSupCheckOpinion" class="col-sm-1 control-label">审核意见</label>
+                <div class="col-sm-3">
+                    <textarea class="form-control" id="txtSupCheckOpinion" rows="2" ng-model="Detail.SupCheckOpinion"></textarea>
+                    <!--<input id="txtSupCheckOpinion" class="form-control" type="text" ng-model="Detail.SupCheckOpinion">-->
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-1 control-label" for="checkDirector">主任/主管</label>
+                <div class="col-sm-3">
+                    <input id="txtDirector" class="form-control" type="text" ng-model="Detail.Director">
+                </div>
+                <label for="txtDirCheckStatus" class="col-sm-1 control-label">审核状态</label>
+                <div class="col-sm-3">
+                    <input id="txtDirCheckStatus" class="form-control" type="text" ng-model="Detail.DirCheckStatus">
+                </div>
+                <label for="txtDirCheckOpinion" class="col-sm-1 control-label">审核意见</label>
+                <div class="col-sm-3">
+                    <textarea class="form-control" id="txtDirCheckOpinion" rows="2" ng-model="Detail.DirCheckOpinion"></textarea>
+                    <!--<input id="txtDirCheckOpinione" class="form-control" type="text" ng-model="Detail.DirCheckOpinion">-->
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+

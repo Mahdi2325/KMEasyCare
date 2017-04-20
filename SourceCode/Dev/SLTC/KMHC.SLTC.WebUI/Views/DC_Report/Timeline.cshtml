@@ -1,0 +1,47 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>照顾计划-Timeline</title>
+
+    <!-- The default timeline stylesheet -->
+    <link href="~/Scripts/timeline/assets/css/styles.css" rel="stylesheet" />
+    @*<link rel="stylesheet" href="assets/css/timeline.css" />*@
+    <!-- Our customizations to the theme -->
+    @*<link rel="stylesheet" href="assets/css/styles.css" />*@
+    <link href="~/Scripts/timeline/assets/css/timeline.css" rel="stylesheet" />
+
+
+    <!--[if lt IE 9]>
+      <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+</head>
+
+<body>
+    <input type="hidden" id="dataPath" value="@ViewBag.Url" />
+    <div id="timeline">
+        <!-- Timeline.js will genereate the markup here -->
+    </div>
+
+    <!-- JavaScript includes - jQuery, turn.js and our own script.js -->
+    @*<script src="http://code.jquery.com/jquery-1.7.1.min.js"></script>*@
+    <script src="~/Scripts/timeline/assets/js/jquery-1.7.1.min.js"></script>
+    <!--<script src="assets/js/timeline-min.js"></script>-->
+    <script src="../../Scripts/timeline/assets/js/timeline-min.js"></script>
+    <!--<script src="assets/js/script.js"></script>-->
+    @*<script src="../../Scripts/timeline/assets/js/script.js"></script>*@
+    <script type="text/javascript">
+        $(function () {
+            var timeline = new VMM.Timeline();
+            timeline.init("/Scripts/timeline/data/" + $('#dataPath').val() + ".txt");
+        });
+    </script>
+</body>
+</html>
+

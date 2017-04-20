@@ -1,0 +1,142 @@
+<style type="text/css">
+    .am-scrollable-horizontal {
+        width: 100%;
+        overflow-y: hidden;
+        overflow-x: auto;
+        -ms-overflow-style: -ms-autohiding-scrollbar;
+        -webkit-overflow-scrolling: touch;
+    }
+
+    .am-scrollable-vertical {
+        height: 240px;
+        overflow-y: scroll;
+        -webkit-overflow-scrolling: touch;
+        resize: vertical;
+    }
+</style>
+<div class="row">
+    <div class="row">
+        <div id="content" class="col-lg-12">
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="page-header">
+                        <ul class="breadcrumb">
+                            <li>
+                                <i class="fa fa-home"></i>
+                                <a href="/">首页</a>
+                            </li>
+                            <li>
+                                报表列表清单
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="box border primary">
+                        <div class="box-title">
+                            <h4><i class="fa fa-table"></i>报表预览</h4>
+                        </div>
+                        <div class="box-body">
+                            <div class="panel panel-default">
+                                <div class="panel-body">
+                                    <table class="table table-striped table-bordered table-hover table-handler">
+                                        <tbody>
+                                        <tr>
+                                            <td><a href="/api/Report/P19给药记录单" target="_blank">给药记录单</a></td>
+                                            <td><a href="/api/Report/H50约束" target="_blank">约束</a></td>
+                                            <td><a href="/api/Report/H20非计划住院" target="_blank">非计划住院</a></td>
+                                            <td><a href="/angular/Report/ActivityAssessment" target="_blank">ActivityAssessment</a></td>
+                                            <td><a href="api/Report/H76压疮风险评估?feeNo=7" target="_blank">压疮风险评估</a></td>
+                                            <td><a href="/api/Report/H49院内感染指标统计表" target="_blank">院内感染指标统计表</a></td>
+                                            <td><a href="/api/Report/H77跌倒危险因子评估" target="_blank">跌倒危险因子评估</a></td>
+                                        </tr>
+                                        <tr>
+                                            <td><a href="/Report/Preview?templateName=PrsSoreReport" target="_blank">压疮风险评估</a></td>
+                                            <td><a href="/Report/Preview?templateName=ColeScaleReport" target="_blank">柯氏评估</a></td>
+                                            <td><a href="/Report/Preview?templateName=InfectionReport" target="_blank">院内感染指标统计表</a></td>
+                                            <td><a href="/Report/Preview?templateName=H32Report" target="_blank">社工服务记录表</a></td>
+                                            <td><a href="/Report/Preview?templateName=MMSEReport" target="_blank">MMSE失智量表</a></td>
+                                            <td><a href="/Report/Preview?templateName=ADLReport" target="_blank">ADL巴氏量表</a></td>
+                                            <td><a href="/Report/Preview?templateName=IADLReport" target="_blank">IADL表</a></td>
+                                        </tr>
+                                        <tr>
+                                            <td><a href="/Report/Preview?templateName=P21Report" target="_blank">非计划性转至急性医院住院月统计表</a></td>
+                                            <td><a href="/Report/Preview?templateName=P22Report" target="_blank">非计划性转至急性医院住院月统计表</a></td>
+                                            <td><a href="/Report/Preview?templateName=P23Report" target="_blank">医疗照顾相关感染指标月统计表</a></td>
+                                            <td><a href="/Report/Preview?templateName=P13Report" target="_blank">社工定期处遇评估表</a></td>
+                                            <td><a href="/Report/Preview?templateName=P10Report" target="_blank">跌倒危险因子评估</a></td>
+                                            <td><a href="/Report/Preview?templateName=P11Report" target="_blank">约束月统计表</a></td>
+                                            <td><a href="/Report/Preview?templateName=P12Report" target="_blank">忧郁量表</a></td>
+                                        </tr>
+                                        <tr>
+                                            <td><a href="/Report/Preview?templateName=P14Report" target="_blank">社工服务记录</a></td>
+                                            <td><a href="/Report/Preview?templateName=P15Report" target="_blank">个案日常生活记录</a></td>
+                                            <td><a href="/Report/Preview?templateName=SPMSQReport" target="_blank">SPMSQ简易心智量表</a></td>
+                                            <td><a href="/Report/Preview?templateName=P17Report" target="_blank">护理计划</a></td>
+                                            <td><a href="/Report/Preview?templateName=P18Report" target="_blank">护理记录</a></td>
+                                            <td><a href="" target="_blank"></a></td>
+                                            <td><a href="" target="_blank"></a></td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="box border primary">
+                        <div class="box-title">
+                            <h4><i class="fa fa-table"></i>报表导出</h4>
+                        </div>
+                        <div class="box-body">
+                            <div class="panel panel-default">
+                                <div class="panel-body">
+                                    <table class="table table-striped table-bordered table-hover table-handler">
+                                        <tbody>
+                                            <tr>
+                                                <td><a href="/Report/Export?templateName=PrsSoreReport" target="_blank">压疮风险评估</a></td>
+                                                <td><a href="/Report/Export?templateName=ColeScaleReport" target="_blank">柯氏评估</a></td>
+                                                <td><a href="/Report/Export?templateName=InfectionReport" target="_blank">院内感染指标统计表</a></td>
+                                                <td><a href="/Report/Export?templateName=H32Report" target="_blank">社工服务记录表</a></td>
+                                                <td><a href="/Report/Export?templateName=MMSEReport" target="_blank">MMSE失智量表</a></td>
+                                                <td><a href="/Report/Export?templateName=ADLReport" target="_blank">ADL巴氏量表</a></td>
+                                                <td><a href="/Report/Export?templateName=IADLReport" target="_blank">IADL表</a></td>
+                                            </tr>
+                                            <tr>
+                                                <td><a href="/Report/Export?templateName=P21Report" target="_blank">非计划性转至急性医院住院月统计表</a></td>
+                                                <td><a href="/Report/Export?templateName=P22Report" target="_blank">非计划性转至急性医院住院月统计表</a></td>
+                                                <td><a href="/Report/Export?templateName=P23Report" target="_blank">医疗照顾相关感染指标月统计表</a></td>
+                                                <td><a href="/Report/Export?templateName=P13Report" target="_blank">社工定期处遇评估表</a></td>
+                                                <td><a href="/Report/Export?templateName=P10Report" target="_blank">跌倒危险因子评估</a></td>
+                                                <td><a href="/Report/Export?templateName=P11Report" target="_blank">约束月统计表</a></td>
+                                                <td><a href="/Report/Export?templateName=P12Report" target="_blank">忧郁量表</a></td>
+                                            </tr>
+                                            <tr>
+                                                <td><a href="/Report/Export?templateName=P14Report" target="_blank">社工服务记录</a></td>
+                                                <td><a href="/Report/Export?templateName=P15Report" target="_blank">个案日常生活记录</a></td>
+                                                <td><a href="/Report/Export?templateName=SPMSQReport" target="_blank">SPMSQ简易心智量表</a></td>
+                                                <td><a href="/Report/Export?templateName=P17Report" target="_blank">护理计划</a></td>
+                                                <td><a href="/Report/Export?templateName=P18Report" target="_blank">护理记录</a></td>
+                                                <td><a href="" target="_blank"></a></td>
+                                                <td><a href="" target="_blank"></a></td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+           
+        </div>
+    </div>
+
+</div>

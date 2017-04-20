@@ -1,0 +1,402 @@
+<div class="row">
+    <div id="content" class="col-lg-12">
+        <!--标题-->
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="page-header">
+                    <ul class="breadcrumb">
+                        <li>
+                            <i class="fa fa-home"></i>
+                            <a href="/">首页</a>
+                        </li>
+                        <li>指标管理</li>
+                    </ul>
+                    
+                </div>
+            </div>
+        </div>
+        <!--标题-->
+        <div class="row">
+            <div class="col-sm-2">
+                <div class="box border primary">
+                    <div class="box-title">
+                        <h4>
+                            <i class="fa fa-bars"></i>住民信息
+                        </h4>
+                    </div>
+                    <div class="box-body">
+                        <resident-card feeno={{FeeNo}} callback="residentSelected(resident)" />
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-sm-10">
+                <div class="box border primary">
+                    <div class="box-title">
+                        <h4>
+                            <i class="fa fa-bars"></i>感染处理记录
+                        </h4>
+                    </div>
+                    <div class="box-body">
+                        <div class="tabbable header-tabs">
+                            <ul class="nav nav-tabs" id="tabResident">
+                                <li><a href="#CureInfo" data-toggle="tab"><i class="fa fa-medkit"></i> <span class="hidden-inline-mobile">治疗情形</span></a></li>
+                                <li class="active"><a href="#InfectionInfo" data-toggle="tab"><i class="fa fa-book"></i> <span class="hidden-inline-mobile">感染情形</span></a></li>
+                            </ul>
+                            <ui-data-table options="infectionsOptions">
+                                <table class="table table-striped table-bordered table-hover table-handler">
+                                    <thead>
+                                        <tr>
+                                            <th>#</th>
+                                            <th>感染类型</th>
+                                            <th>感染日期</th>
+                                            <th>填写人员</th>
+                                            <th>填写日期</th>
+                                            <th>分类统计</th>
+                                            <th><i class="fa fa-bars"></i> 操作</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr ng-repeat="item in Data.infections" ng-class="{true: 'ng-scope active', false: 'ng-scope'}[item.SeqNo==currentItem.SeqNo]">
+                                            <td>{{$index + 1}}</td>
+                                            <td>{{item.IfcType|codeText:'K00.001'}}</td>
+                                            <td>{{item.IfcDate | dateFormat}}</td>
+                                            <td>{{item.RecordNameBy}}</td>
+                                            <td>{{item.RecDate | dateFormat}}</td>
+                                            <td>{{item.Category |codeText:'K00.002'}}</td>
+                                            <td>
+                                                <div class="btn-group btn-group-xs" role="group" aria-label="...">
+                                                    <a class="btn btn-info" role="button" ng-click="rowSelect(item)"><i class="fa fa-pencil"></i>编辑</a>
+                                                    <a class="btn btn-primary" role="button" ng-click="deleteItem(item)"><i class="fa fa-times"></i>删除</a>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </ui-data-table>
+                            <div id="pager" class="pull-right"></div>
+                            <br />
+                            <div class="tab-content">
+                                <div id="InfectionInfo" class="tab-pane active">
+                                    <form class="form-horizontal" role="form" name="unPlanfrom" ng-submit="saveEdit(currentItem)" novalidate>
+                                        <fieldset>
+                                            <legend>发现收案</legend>
+                                            <div class="well">
+                                                <div class="form-group">
+                                                    <label class="col-sm-1 control-label">感染类型<span class="required">*</span></label>
+                                                    <div class="col-sm-2">
+                                                        <select class="form-control" ng-model="currentItem.IfcType" select-code="K00.001"></select>
+                                                    </div>
+                                                    <label class="col-sm-1 control-label">感染日期</label>
+                                                    <div class="col-sm-2">
+                                                        <input class="form-control datepicker" type="text" ng-model="currentItem.IfcDate" ca-date-picker>
+                                                    </div>
+                                                    <div class="col-lg-offset-1 col-sm-5">
+                                                        <label class="checkbox-inline" id="checkH72Flag"><input type="checkbox" class="uniform" ng-model="currentItem.H72Flag">入住72小时後发生</label>
+                                                        <label class="checkbox-inline" id="checkCatheterFlag"><input type="checkbox" class="uniform" ng-model="currentItem.CatheterFlag">感染时有使用导尿管</label>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="col-sm-1 control-label">填写人员</label>
+                                                    <div class="col-sm-2">
+                                                        <input-staff callback="staffSelected(item)" value="{{currentItem.RecordBy}}" />
+                                                        <!--<input class="form-control" type="text" ng-model="currentItem.RecordBy">-->
+                                                    </div>
+                                                    <label class="col-sm-1 control-label">填写日期</label>
+                                                    <div class="col-sm-2">
+                                                        <input class="form-control datepicker" type="text" ng-model="currentItem.RecDate" ca-date-picker>
+                                                    </div>
+                                                    <div class="col-lg-offset-1 col-sm-5">
+                                                        <label class="checkbox-inline" id="checkIfcFlag"><input type="checkbox" class="uniform" ng-model="currentItem.IfcFlag">达到感染标准(左侧两项都有才列入指标)</label>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="col-sm-1 control-label">分类统计</label>
+                                                    <div class="col-sm-2">
+                                                        <select class="form-control" ng-model="currentItem.Category" select-code="K00.002"></select>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                        </fieldset>
+
+                                        <fieldset>
+                                            <legend>感染项目</legend>
+                                            <div class="form-group">
+                                                <div class="col-sm-2">
+                                                    <button class="btn btn-primary" type="button" ng-show="buttonShow" data-toggle="modal" ng-click="infectOpen({})">增加感染项目</button>
+                                                </div>
+                                                <label class="col-sm-offset-7 col-sm-1 control-label">项目积分</label>
+                                                <div class="col-sm-2">
+                                                    <input class="form-control" type="text" ng-model="currentItem.ItemScore" readonly="readonly">
+                                                </div>
+                                            </div>
+
+                                            <div class="box-body">
+                                                <ui-data-table options="symInfoListOptions">
+                                                    <table class="table table-striped table-bordered table-hover table-handler">
+                                                        <thead>
+                                                            <tr>
+                                                                <th>#</th>
+                                                                <th>感染项目编号</th>
+                                                                <th>感染项目</th>
+                                                                <th>感染症状</th>
+                                                                <th>出现日期</th>
+                                                                <th><i class="fa fa-bars"></i> 操作</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            <tr ng-repeat="item in currentItem.symInfoList">
+                                                                <td>{{$index + 1}}</td>
+                                                                <td>{{item.ItemNo}}</td>
+                                                                <td>{{item.ItemName}}</td>
+                                                                <td>{{showSympotm(item.Sympotm)}}</td>
+                                                                <td>{{item.OccurDate | dateFormat}}</td>
+                                                                <td>
+                                                                    <div class="btn-group btn-group-xs" role="group" aria-label="...">
+                                                                        <a class="btn btn-info" role="button" ng-click="infectOpen(item)"><i class="fa fa-pencil"></i>编辑</a>
+                                                                        <a class="btn btn-primary" role="button" ng-click="deleteIfcSym(item)"><i class="fa fa-times"></i>删除</a>
+                                                                    </div>
+                                                                </td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </ui-data-table>
+                                                <div id="pager1" class="pull-right"></div>
+                                            </div>
+                                        </fieldset>
+
+                                        <div class="form-group">
+                                            <div class="form-group">
+                                                <div class="center">
+                                                    <button class="btn btn-primary" type="submit" ng-show="buttonShow">保存</button>
+                                                    <button class="btn btn-primary" type="reset" ng-show="buttonShow" ng-click="currentItem = {}">重置</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </form>
+
+                                </div>
+                                <div id="CureInfo" class="tab-pane">
+                                    <form class="form-horizontal" role="form" name="unPlanfrom2" ng-submit="saveEdit(currentItem)">
+                                        <fieldset>
+                                            <legend>隔离情形</legend>
+                                            <div class="well">
+                                                <div class="form-group">
+                                                    <label class="col-sm-1 control-label">隔离方式</label>
+                                                    <div class="col-sm-2">
+                                                        <select class="form-control" ng-model="currentItem.SecType" select-code="K00.003"></select>
+                                                    </div>
+                                                    <label class="col-sm-1 control-label">隔离日期</label>
+                                                    <div class="col-sm-2">
+                                                        <input class="form-control datepicker" type="text" ng-model="currentItem.SecStartDate" ca-date-picker />
+                                                    </div>
+                                                    <label class="col-sm-1 control-label">结束日期</label>
+                                                    <div class="col-sm-2">
+                                                        <input class="form-control datepicker" type="text" ng-model="currentItem.SecEndDate" ca-date-picker />
+                                                    </div>
+                                                    <label class="col-sm-1 control-label">天数</label>
+                                                    <div class="col-sm-2">
+                                                        <input class="form-control" name="天数" type="number" ng-model="currentItem.SecDays">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </fieldset>
+                                        <fieldset>
+                                            <legend>诊断与治疗</legend>
+                                            <div class="well">
+                                                <div class="form-group">
+                                                    <label class="col-sm-1 control-label">诊断征象及症状</label>
+                                                    <div class="col-sm-5">
+                                                        <textarea class="form-control" name="诊断征象及症状" rows="3" ng-model="currentItem.ClinicalSymptom" ng-maxlength="200"></textarea>
+                                                    </div>
+                                                    <label class="col-sm-1 control-label">医师诊断</label>
+                                                    <div class="col-sm-5">
+                                                        <textarea class="form-control" name="医师诊断" rows="3" ng-model="currentItem.DoctorDiag" ng-maxlength="200"></textarea>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="col-sm-1 control-label">使用抗生素</label>
+                                                    <div class="col-sm-6">
+                                                        <label class="checkbox-inline" id="checkB3AntiFlag"><input type="checkbox" class="uniform" ng-model="currentItem.B3AntiFlag">感染前三天有使用抗生素</label>
+                                                        <label class="checkbox-inline" id="checkAntiteratFlag"><input type="checkbox" class="uniform" ng-model="currentItem.AntitreatFlag">有接受抗生素治疗，种类：</label>
+                                                    </div>
+                                                    <div class="col-sm-5">
+                                                        <input class="form-control" type="text" ng-model="currentItem.AntitreatType">
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="col-sm-1 control-label">检讨改善</label>
+                                                    <div class="col-sm-5">
+                                                        <textarea class="form-control" name="检讨改善" rows="3" ng-model="currentItem.Improvement" ng-maxlength="200"></textarea>
+                                                    </div>
+                                                    <label class="col-sm-1 control-label">备注</label>
+                                                    <div class="col-sm-5">
+                                                        <textarea class="form-control" name="备注" rows="3" ng-model="currentItem.Description" ng-maxlength="200"></textarea>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </fieldset>
+                                        <fieldset>
+                                            <legend>检体送检情形</legend>
+                                            <div class="form-group">
+                                                <div class="col-sm-2">
+                                                    <button class="btn btn-primary" type="button" ng-show="buttonShow" data-toggle="modal" ng-click="examOpen({})">新增检体情形</button>
+                                                </div>
+                                            </div>
+                                            <div class="box-body">
+                                                <ui-data-table options="labExamListOptions">
+                                                    <table class="table table-striped table-bordered table-hover table-handler">
+                                                        <thead>
+                                                            <tr>
+                                                                <th>#</th>
+                                                                <th>检验单位</th>
+                                                                <th>检体种类</th>
+                                                                <th>送检日期</th>
+                                                                <th>报告回复日期</th>
+                                                                <th>培养菌种</th>
+                                                                <th>检验结果</th>
+                                                                <th><i class="fa fa-bars"></i> 操作</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            <tr ng-repeat="item in currentItem.labExamList">
+                                                                <td>{{$index + 1}}</td>
+                                                                <td><span select-code="K00.004" select-value="{{item.Unit}}"></span></td>
+                                                                <td><span select-code="K00.005" select-value="{{item.ExamType}}"></span></td>
+                                                                <td>{{item.ExamDate | dateFormat}}</td>
+                                                                <td>{{item.RptDate | dateFormat}}</td>
+                                                                <td><span select-code="K00.006" select-value="{{item.Fungus}}"></span></td>
+                                                                <td><span select-code="K00.007" select-value="{{item.ExamResults}}"></span></td>
+                                                                <td>
+                                                                    <div class="btn-group btn-group-xs" role="group" aria-label="...">
+                                                                        <a class="btn btn-info" role="button" ng-click="examOpen(item)"><i class="fa fa-pencil"></i>编辑</a>
+                                                                        <a class="btn btn-primary" role="button" ng-click="deleteLabExam(item)"><i class="fa fa-times"></i>删除</a>
+                                                                    </div>
+                                                                </td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </ui-data-table>
+                                                <div id="pager2" class="pull-right"></div>
+                                            </div>
+                                        </fieldset>
+                                        <div class="form-group">
+                                            <div class="form-group">
+                                                <div class="center">
+                                                    <button class="btn btn-primary" type="submit" ng-show="buttonShow">保存</button>
+                                                    <button class="btn btn-primary" type="reset" ng-show="buttonShow" ng-click="currentItem = {}">重置</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--新增感染项目Modal-->
+    <div id="IfcSymModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="IfcSymModalLabel" data-target=".bs-example-modal-lg" style="top: 200px;">
+        <div class="modal-dialog" style="width: 800px;">
+            <div class="modal-content">
+                <div class="modal-header bg-success">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">  &times; </button>
+                    <h4 class="modal-title" id="modalPastDiseaseLabel">感染项目编辑</h4>
+                </div>
+                <div class="modal-body">
+                    <form name="ifcform" ng-submit="saveIfcSym()" class="form-horizontal">
+                        <div class="form-horizontal">
+                            <div class="form-group">
+                                <label class="control-label col-md-3">感染项目<span class="required">*</span></label>
+                                <div class="col-md-8">
+                                    <select class="col-sm-12 form-control" ng-model="currentItem.SymInfo.ItemNo" ng-options="item.ItemCode as item.ItemName for item in Dic.InfectionList" ng-change="ItemChange(currentItem.SymInfo)" required></select>
+                                    <!--<input type="text" class="form-control" ng-model="currentItem.SymInfo.ItemName" placeholder="选择项目" required />-->
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-md-3">症状<span class="required">*</span></label>
+                                <div class="col-md-8">
+                                    <select class="col-sm-12 form-control" ng-model="currentItem.SymInfo.Sympotm" ng-options="t.Id as t.SympotmName for t in Dic.SymptomList" required></select>
+                                    <!--<textarea class="form-control" rows="3" ng-model="currentItem.SymInfo.Sympotm"></textarea>-->
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-md-3">出现时间</label>
+                                <div class="col-md-8">
+                                    <input class="form-control" type="text" ng-model="currentItem.SymInfo.OccurDate" ca-date-picker>
+                                </div>
+                            </div>
+                        </div>
+                        <input type="hidden" ng-model="currentItem.SymInfo.ItemNo" placeholder="" />
+                        <div class="modal-footer">
+                            <button class="btn btn-primary" type="submit">保存</button>
+                            <button type="button" class="btn btn-primary" data-dismiss="modal">关闭</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--新增送医情形Modal-->
+    <div id="LabExamModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="LabExamModalLabel" data-target=".bs-example-modal-lg" style="top: 200px;">
+        <div class="modal-dialog" style="width: 800px;">
+            <div class="modal-content">
+                <div class="modal-header bg-success">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">  &times; </button>
+                    <h4 class="modal-title" id="modalPastDiseaseLabel">检体送检情形编辑</h4>
+                </div>
+                <div class="modal-body">
+                    <form name="examform" ng-submit="saveLabExam()" class="form-horizontal">
+                        <div class="form-horizontal">
+                            <div class="form-group">
+                                <label class="control-label col-md-2">检验单位<span class="required">*</span></label>
+                                <div class="col-md-4">
+                                    <select class="form-control" ng-model="currentItem.ExamInfo.Unit" select-code="K00.004" required></select>
+                                </div>
+                                <label class="control-label col-md-2">检体种类<span class="required">*</span></label>
+                                <div class="col-md-4">
+                                    <select class="form-control" ng-model="currentItem.ExamInfo.ExamType" select-code="K00.005" required></select>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="control-label col-md-2">送检日期</label>
+                                <div class="col-md-4">
+                                    <input class="form-control" type="text" ng-model="currentItem.ExamInfo.ExamDate" ca-date-picker />
+                                </div>
+                                <label class="control-label col-md-2">报告回复日期</label>
+                                <div class="col-md-4">
+                                    <input class="form-control" type="text" ng-model="currentItem.ExamInfo.RptDate" ca-date-picker />
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="control-label col-md-2">培养菌种<span class="required">*</span></label>
+                                <div class="col-md-4">
+                                    <select class="form-control" ng-model="currentItem.ExamInfo.Fungus" select-code="K00.006" required></select>
+                                </div>
+                                <label class="control-label col-md-2">检验结果<span class="required">*</span></label>
+                                <div class="col-md-4">
+                                    <select class="form-control" ng-model="currentItem.ExamInfo.ExamResults" select-code="K00.007" required></select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button class="btn btn-primary" type="submit" ng-disabled="examform.$invalid">保存</button>
+                            <button type="button" class="btn btn-primary" data-dismiss="modal">关闭</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+

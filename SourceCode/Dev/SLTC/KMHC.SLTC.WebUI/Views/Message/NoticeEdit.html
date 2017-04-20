@@ -1,0 +1,50 @@
+    <div class="row">
+        <div id="content" class="col-lg-12">
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="page-header">
+                        <ul class="breadcrumb">
+                            <li>
+                                <i class="fa fa-home"></i>
+                                <a href="/">首页</a>
+                            </li>
+                            <li>
+                                <a ui-sref="Notice">院内公告</a>
+                            </li>
+                            <li>公告编辑</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="box border primary">
+                        <div class="box-title">
+                            <h4><i class="fa fa-bars"></i>公告编辑</h4>
+                        </div>
+                        <div class="box-body">
+                            <form class="form-horizontal" name="form1" ng-submit="submit()" novalidate>
+                                <div class="form-group">
+                                    <label class="col-sm-1 control-label">标题<span class="required">*</span></label>
+                                    <div class="col-sm-11">
+                                        <input type="text" name="Subjects" class="form-control" ng-model="Data.Subjects" required ng-maxlength="200"/>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-sm-11 col-lg-offset-1">
+                                        <textarea class="keditor"  ng-model="info.content" data-config="config" cols="30" rows="10" ng-maxlength="65535"></textarea>
+                                    </div>
+                                </div>
+                                <div class="form-group center">
+                                    <input type="submit" class="btn btn-primary" ng-disabled="form1.$invalid" value="保存" />
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+

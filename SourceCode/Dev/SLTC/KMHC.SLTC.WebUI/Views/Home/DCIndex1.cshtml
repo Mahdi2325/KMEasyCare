@@ -1,0 +1,314 @@
+﻿@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html ng-app="sltcApp">
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <meta charset="utf-8">
+    <title>DC</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1, user-scalable=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <base href="/">
+    <link rel="stylesheet" type="text/css" href="/Content/CloudAdmin/css/cloud-admin.css">
+    <link rel="stylesheet" type="text/css" href="/Content/CloudAdmin/css/themes/default.css" id="skin-switcher">
+    <link rel="stylesheet" type="text/css" href="/Content/CloudAdmin/css/responsive.css">
+    <link href="/Content/CloudAdmin/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+    <!-- STYLESHEETS --><!--[if lt IE 9]><script src="js/flot/excanvas.min.js"></script><script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script><script src="http://css3-mediaqueries-js.googlecode.com/svn/trunk/css3-mediaqueries.js"></script><![endif]-->
+    @Styles.Render("~/Content/Index/css")
+    <!-- uploadify -->
+    <link href="/Content/uploadify/uploadify.css" rel="stylesheet" />
+</head>
+<body>
+    <!-- HEADER -->
+    <header class="navbar clearfix" id="header">
+        <div class="container" ng-controller="dc_msgListCtr">
+            <div class="navbar-brand">
+                <!-- COMPANY LOGO -->
+                <a>SLTC</a>
+                <a href="#">
+                    <img src="/Images/dclogo.png" alt="STLC Logo" class="img-responsive" height="30" width="120">
+                </a>
+                <!-- /COMPANY LOGO -->
+                <!-- TEAM STATUS FOR MOBILE -->
+                <div class="visible-xs">
+                    <a href="#" class="team-status-toggle switcher btn dropdown-toggle">
+                        <i class="fa fa-users"></i>
+                    </a>
+                </div>
+                <!-- /TEAM STATUS FOR MOBILE -->
+                <!-- SIDEBAR COLLAPSE -->
+                <div id="sidebar-collapse" class="sidebar-collapse btn">
+                    <i class="fa fa-bars"
+                       data-icon1="fa fa-bars"
+                       data-icon2="fa fa-bars"></i>
+                </div>
+                <!-- /SIDEBAR COLLAPSE -->
+            </div>
+            <!-- BEGIN TOP NAVIGATION MENU -->
+            <ul class="nav navbar-nav pull-right">
+                <!-- BEGIN NOTIFICATION DROPDOWN -->
+                <li class="dropdown" id="header-notification">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                        <i class="fa fa-bell"></i>
+                        <span class="badge">@ViewBag.Notifications.Count</span>
+                    </a>
+                    <ul class="dropdown-menu notification">
+                        <li class="dropdown-title">
+                            <span><i class="fa fa-bell"></i> @ViewBag.Notifications.Count 提醒</span>
+                        </li>
+                        @foreach (var notification in ViewBag.Notifications)
+                        {
+                            <li>
+                                <a href="@notification.Url">
+                                    <span class="label label-@notification.InfoLevel"><i class="fa fa-user"></i></span>
+                                    <span class="body">
+                                        <span class="message">@notification.Content</span>
+                                        <span class="time">
+                                            <i class="fa fa-clock-o"></i>
+                                            <span>@notification.TimeRange</span>
+                                        </span>
+                                    </span>
+                                </a>
+                            </li>
+                        }
+                        <li class="footer">
+                            <a href="#">See all notifications <i class="fa fa-arrow-circle-right"></i></a>
+                        </li>
+                    </ul>
+                </li>
+                <!-- END NOTIFICATION DROPDOWN -->
+                <!-- BEGIN INBOX DROPDOWN -->
+                <li class="dropdown" id="header-message">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                        <i class="fa fa-envelope"></i>
+                        <span class="badge">{{Data.Msgs.length}}</span>
+                    </a>
+                    <ul class="dropdown-menu inbox">
+                        <li class="dropdown-title">
+                            <span><i class="fa fa-envelope-o"></i> {{Data.Msgs.length}}工作任务</span>
+                            <span class="compose pull-right tip-right" title="添加工作交接" ui-sref="AdminHandovers"> <i class="fa fa-pencil-square-o"></i></span>
+                        </li>
+
+                        <li ng-repeat="item in Data.Msgs">
+                            <a href="#">
+                                @*<img src="{{item.FromImgUrl}}" alt="" />*@
+                                <span class="body">
+                                    <span class="from">{{item.DelivererName}}</span>
+                                    <span class="message">
+                                        {{item.DelivererContent}}
+                                    </span>
+                                    <span class="time">
+                                        <i class="fa fa-clock-o"></i>
+                                        <span>{{item.DelivererDate}}</span>
+                                    </span>
+                                </span>
+                            </a>
+                        </li>
+                        <li class="footer">
+                            <a href="#">查看所有工作任务<i class="fa fa-arrow-circle-right"></i></a>
+                        </li>
+                    </ul>
+                </li>
+                <!-- END INBOX DROPDOWN -->
+                <!-- BEGIN TODO DROPDOWN -->
+                <li class="dropdown" id="header-tasks">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                        <i class="fa fa-tasks"></i>
+                        <span class="badge">@ViewBag.Tasks.Count</span>
+                    </a>
+                    <ul class="dropdown-menu tasks">
+                        <li class="dropdown-title">
+                            <span><i class="fa fa-check"></i> @ViewBag.Tasks.Count 任务正在进行中</span>
+                        </li>
+                        @foreach (var task in ViewBag.Tasks)
+                        {
+                            <li>
+                                <a href="#">
+                                    <span class="header clearfix">
+                                        <span class="pull-left">@task.Name</span>
+                                        <span class="pull-right">@task.Progress%</span>
+                                    </span>
+                                    <div class="progress">
+                                        <div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="@task.Progress" aria-valuemin="0" aria-valuemax="100" style="width: 60%;">
+                                            <span class="sr-only">@task.Progress % Complete</span>
+                                        </div>
+                                    </div>
+                                </a>
+                            </li>
+                        }
+                        <li class="footer">
+                            <a href="#">See all tasks <i class="fa fa-arrow-circle-right"></i></a>
+                        </li>
+                    </ul>
+                </li>
+                <!-- END TODO DROPDOWN -->
+                <!-- BEGIN USER LOGIN DROPDOWN -->
+                <li class="dropdown user" id="header-user">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                        <img alt="" src="/Images/@ViewBag.User.ImgUrl" />
+                        <span class="username">@ViewBag.User.RealName</span>
+                        <i class="fa fa-angle-down"></i>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li><a href="#"><i class="fa fa-user"></i> 我的个人资料</a></li>
+                        <li><a href="#"><i class="fa fa-cog"></i> 账号设置</a></li>
+                        <li><a href="#"><i class="fa fa-eye"></i> 隐私设置</a></li>
+                        <li><a href="#"><i class=" fa fa-power-off"></i> 退出</a></li>
+                    </ul>
+                </li>
+                <!-- END USER LOGIN DROPDOWN -->
+            </ul>
+            <!-- END TOP NAVIGATION MENU -->
+        </div>
+    </header>
+    <!-- PAGE -->
+    <section id="page">
+        <!-- SIDEBAR -->
+        <div id="sidebar" class="sidebar" ng-controller="dc_menuCtr">
+            <div class="sidebar-menu nav-collapse">
+                <div class="divide-20"></div>
+                <!-- SEARCH BAR -->
+                <div id="search-bar">
+                    <input class="search" type="text" placeholder="Search"><i class="fa fa-search search-icon"></i>
+                </div>
+                <!-- /SEARCH BAR -->
+                <!-- SIDEBAR MENU -->
+                <ul>
+                    <li class="">
+                        <a href="/dc/DCIndex" class="">
+                            <i class="fa fa-bookmark-o fa-fw"></i> <span class="menu-text">首页</span>
+                        </a>
+                    </li>
+                    <li class="has-sub open">
+                        <a href="javascript:;" class="">
+                            <i class="fa fa-bookmark-o fa-fw"></i> <span class="menu-text">社工</span>
+                            <span class="arrow open"></span>
+                        </a>
+                        <ul class="sub" style="display: block">
+                            <li link="/dc/SocialNavigate/"><a class="" href="/dc/SocialNavigate/"><span class="sub-menu-text">快捷导航</span></a></li>
+                            <li link="/dc/IpdregIn/"><a class="" href="/dc/IpdregIn/"><span class="sub-menu-text">收案作业</span></a></li>
+                            <li link="/dc/PersonBasicInfor/"><a class="" href="/dc/PersonBasicInfor/"><span class="sub-menu-text">个案基本资料</span></a></li>
+                            <li link="/dc/PersonLifeHistory/"><a class="" href="/dc/PersonLifeHistory/"><span class="sub-menu-text">个案生活史</span></a></li>
+                            <li link="/dc/OneDayLife/"><a class="" href="/dc/OneDayLife/"><span class="sub-menu-text">一天的生活</span></a></li>
+                            <li link="/dc/SocialEval/"><a class="" href="/dc/SocialEval/"><span class="sub-menu-text">社工个案评估及处於计划表</span></a></li>
+                            <li link="/dc/RegLifeQualityEval/"><a class="" href="/dc/RegLifeQualityEval/"><span class="sub-menu-text">家庭照顾者生活品质评估问卷</span></a></li>
+                            <li link="/dc/RegQuestionEvalRec/"><a class="" href="/dc/RegQuestionEvalRec/"><span class="sub-menu-text/">受托长辈适应程度评估表</span></a></li>
+                            <li link="/dc/PersonReferral/"><a class="" href="/dc/PersonReferral/"><span class="sub-menu-text">个案转介单</span></a></li>
+                            <li link="/dc/IpdregOut/"><a class="" href="/dc/IpdregOut/"><span class="sub-menu-text">个案结案表</span></a></li>
+                        </ul>
+                    </li>
+                    <li class="has-sub">
+                        <a href="javascript:;" class="">
+                            <i class="fa fa-bookmark-o fa-fw"></i> <span class="menu-text">护理</span>
+                            <span class="arrow"></span>
+                        </a>
+                        <ul class="sub">
+                            <li link="/dc/NurseCareNavigate/"><a class="" href="/dc/NurseCareNavigate/"><span class="sub-menu-text">快捷导航</span></a></li>
+                            <li link="/dc/DCNurseRequirementEval/"><a class="" href="/dc/DCNurseRequirementEval/"><span class="sub-menu-text">护理需求评估及照顾计划表</span></a></li>
+                            <li link="/dc/DCRegNursingDiag/"><a class="" href="/dc/DCRegNursingDiag/"><span class=" sub-menu-text">个案护理诊断一览表</span></a></li>
+                            <li link="/dc/DCAdjuvantTherapy/"><a class="" href="/dc/DCAdjuvantTherapy/"><span class="sub-menu-text">个别化活动需求评估及计划表</span></a></li>
+                            <li link="/dc/DCBasicDataArrangement/"><a class="" href="/dc/DCBasicDataArrangement/"><span class="sub-menu-text">个别基本资料汇整表</span></a></li>
+                            <li link="/dc/DCregMedcine/"><a class="" href="/dc/DCregMedcine/"><span class="sub-menu-text">个案药品管理</span></a></li>
+                        </ul>
+                    </li>
+                    <li class="has-sub">
+                        <a href="javascript:;" class="">
+                            <i class="fa fa-bookmark-o fa-fw"></i> <span class="menu-text">跨专业</span>
+                            <span class="arrow"></span>
+                        </a>
+                        <ul class="sub">
+                            <li><a class="" href="/dc/CrossSpecialNavigate/"><span class="sub-menu-text">快捷导航</span></a></li>
+                            <li><a class="" href="/dc/NurseCareLifeService/"><span class="sub-menu-text">护理及生活照顾服务纪录表</span></a></li>
+
+                            <li><a class="" href="/dc/DCDayLifeCare/"><span class="sub-menu-text">日常生活照顾记录表</span></a></li>
+
+                            <li><a class="" href="/dc/DCProblemBehavior/"><span class="sub-menu-text">问题行为与异情绪记录表</span></a></li>
+                            <li><a class="" href="/dc/DCProfessionalteam/"><span class="sub-menu-text">跨专业团队服务计划表</span></a></li>
+
+                            <li><a class="" href="/dc/DCCareplan/"><span class="sub-menu-text">照顾计划表</span></a></li>
+
+
+                            <li><a class="" href="/dc/DCProfessionalteamS2/"><span class="sub-menu-text">跨专业团队服务计划表2</span></a></li>
+
+
+                        </ul>
+                    </li>
+                    <li class="has-sub">
+                        <a href="javascript:;" class="">
+                            <i class="fa fa-bookmark-o fa-fw"></i><span class="sub-menu-text">系统管理</span>
+                            <span class="arrow"></span>
+                        </a>
+                        <ul class="sub">
+                            <li class=""><a class="" href="/dc/GroupList"><span class="sub-menu-text">集团管理</span></a></li>
+                            <li class=""><a class=""><span class="sub-menu-text">机构管理</span></a></li>
+                            <li class=""><a class="" href="#"><span class="sub-menu-text">区域管理</span></a></li>
+                            <li class=""><a class="" href="#"><span class="sub-menu-text">员工管理</span></a></li>
+                            <li class=""><a class="" href="#"><span class="sub-menu-text">用户管理</span></a></li>
+                            @*<li class=""><a class="" ui-sref="RoleList" href=""><span class="sub-menu-text">角色管理</span></a></li>
+                            <li class="active"><a class="" ui-sref="CodeList" href=""><span class="sub-menu-text">字典管理</span></a></li>*@
+                            @*<li class=""><a class="" ui-sref="DeptList" href=""><span class="sub-menu-text">科室管理</span></a></li>*@
+                            <li><a class="" href="/dc/demo1/1"><span class="sub-menu-text">Demo1</span></a></li>
+                            @*<li><a class="" href="/dc/AssignTaskModal"><span class="sub-menu-text">AssignTaskModal</span></a></li>*@
+                        </ul>
+                    </li>
+                </ul>
+                <!-- /SIDEBAR MENU -->
+            </div>
+        </div>
+        <!-- /SIDEBAR -->
+        <div id="main-content">
+            <div class="container" ui-view>
+            </div>
+        </div>
+    </section>
+
+    @Scripts.Render("~/Content/Index/js")
+    @*<script src="/Scripts/webuploader.js"></script>*@
+    <script src="/Content/laydate/laydate.js"></script>
+    <!-- uploadify -->
+    <script src="/Content/uploadify/jquery.uploadify.min.js"></script>
+    <!-- CUSTOM SCRIPT -->
+    <script src="/Content/CloudAdmin/js/script.js"></script>
+    <script>
+        jQuery(document).ready(function () {
+            //$('#sidebar .sub li').each(function(){
+            //    $(this).click(function(){
+            //        $(this).addClass('active').siblings().removeClass("active");
+            //        $(this).closest('.has-sub').addClass('open').siblings().removeClass("open");
+            //        var id = $('.selectedCor td').eq(0).text();
+            //        var link = $(this).attr('link');
+            //        if (id != '') {
+            //            link=link + id;
+            //        }
+            //        if (link != '' && typeof(link)!= 'undefined') {
+            //            window.location.href = link;
+            //        }
+            //    });
+            //});
+            //$.ajax({
+            //    type: "GET",
+            //    url: "/api/module",
+            //    data: "roleId=0aca6362c5",
+            //    success: function (data) {
+
+            //    }
+
+            //});
+            //App.setPage("index");  //Set current page
+            App.init(); //Initialise plugins and elements
+        });
+
+        this.currentUser = { EmpNo: '@ViewBag.User.EmpNo', EmpName: '@ViewBag.User.RealName' };
+
+    </script>
+    <!-- /JAVASCRIPTS -->
+    @Scripts.Render("~/Scripts/angular")
+    @Scripts.Render("~/Scripts/AppCommon")
+    @Scripts.Render("~/Scripts/DC")
+
+</body>
+</html>
+
+

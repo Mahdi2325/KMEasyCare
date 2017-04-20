@@ -1,0 +1,213 @@
+
+<style type="text/css">
+    .comboText {
+        font-size: 14px;
+        line-height: 1.428571429;
+        color: #555555;
+        vertical-align: middle;
+        background-color: #ffffff;
+        background-image: none;
+        border: 1px solid #cccccc;
+        border-radius: 4px;
+        -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+        box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+        -webkit-transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+        transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+    }
+</style>
+<div class="row">
+    <div id="content" class="col-lg-12" ng-controller="regVisitRecCtrl">
+        <!--标题-->
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="page-header">
+                    <ul class="breadcrumb">
+                        <li>
+                            <i class="fa fa-home"></i>
+                            <a href="/">首页</a>
+                        </li>
+                        <li>住民访视</li>
+                    </ul>
+
+                </div>
+
+            </div>
+        </div>
+        <!--标题-->
+
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="col-sm-2">
+                    <div class="box border primary">
+                        <div class="box-title">
+                            <h4>
+                                <i class="fa fa-bars"></i>住民信息
+                            </h4>
+                        </div>
+                        <div class="box-body">
+                            <resident-card feeno={{FeeNo}} ipd_flag={{ipd}} callback="residentSelected(resident)" />
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-sm-10">
+                    <div class="box border primary">
+                        <div class="box-title">
+                            <h4>
+                                <i class="fa fa-bars"></i>访视记录
+                            </h4>
+                        </div>
+                        <div class="box-body">
+                            <form class="form-horizontal" role="form" name="visitfrom" ng-submit="saveEdit(currentItem)" novalidate>
+                                <div class="form-group">
+                                    <!--<label class="col-sm-1 control-label">探视编码</label>
+                                    <div class="col-sm-5">
+                                        <input type="text" class="form-control" placeholder="输入探视编码信息" ng-model="currentItem.FeeNo" required>
+                                    </div>-->
+                                    <!--<label class="col-sm-1 control-label">亲友姓名<span class="required">*</span></label>
+                                    <div class="col-sm-5">
+                                        <select class="form-control" id="selVisitorName" ng-model="currentItem.VisitorName" ng-change="change()" name="亲友姓名" required>
+                                            <option ng-repeat="item in Data.ContactList" value="{{item.Name}}" kinship="{{item.Kinship}}" contrel="{{item.Contrel}}">{{item.Name}}</option>
+                                        </select>
+                                    </div>-->
+
+                                    <label class="col-sm-1 control-label">亲友姓名</label>
+                                    <div class="col-sm-5" id="ContNamediv">
+                                        <div style="position:relative;">
+                                            <span id="spanwidth" style="width:18px;overflow:hidden;">
+                                                <select class="comboText" style="height:34px; padding-left:10px;" id="selVisitorName" ng-model="currentItem.VisitorName" name="亲友姓名" ng-change="change()">
+                                                    <option ng-repeat="item in Data.ContactList" value="{{item.Name}}" kinship="{{item.Kinship}}" contrel="{{item.Contrel}}">{{item.Name}}</option>
+                                                </select>
+                                            </span>
+                                            <input name="box" id="inputwidth" ng-maxlength="20" class="comboText" ng-model="currentItem.VisitorName" style="position:absolute;left:0px; padding-left:10px; height:34px;">
+                                        </div>
+                                    </div>
+
+                                    <label class="col-sm-1 control-label">探视时间<span class="required">*</span></label>
+                                    <div class="col-sm-5">
+                                        <div class="col-sm-5 row">
+                                            <input id="txtStartDate" class="form-control" type="text" name="探视开始时间" ng-model="currentItem.StartDate" ca-date-time-picker required style="margin-left:10px" />
+                                        </div>
+                                        <div class="col-sm-offset-1 col-sm-5 row">
+                                            <input id="txtEndDate" class="form-control" type="text" name="探视结束时间" ng-model="currentItem.EndDate" ng-change="ChangeNextEvalDate()" ca-date-time-picker  />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-1 control-label">探访方式<span class="required">*</span></label>
+                                    <div class="col-sm-5">
+                                        <select class="form-control" id="selVisitType" ng-model="currentItem.VisitType" select-code="A00.049" name="探访方式" required></select>
+                                    </div>
+                                    <label class="col-sm-1 control-label">称谓</label>
+                                    <div class="col-sm-5">
+                                        <select class="form-control" id="selRelTitle" ng-model="currentItem.Appellation" select-code="A00.030"></select>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-1 control-label">血缘关系</label>
+                                    <div class="col-sm-5">
+                                        <select class="form-control" id="selRelationship" ng-model="currentItem.BloodRelationShip" select-code="A00.031"></select>
+                                    </div>
+                                    <label class="col-sm-1 control-label">亲友性别</label>
+                                    <div class="col-sm-5">
+                                        <select class="form-control" id="selVitSex" ng-model="currentItem.VisitorSex" select-code="A00.001" name="亲友性别"></select>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-1 control-label">填写人员<span class="required">*</span></label>
+                                    <div class="col-sm-5">
+                                        <input-staff id="txtRecordBy" callback="staffSelected(item)" value="{{currentItem.RecordBy}}" required=true name="填写人员">
+                                    </div>
+
+                                    <label class="col-sm-1  control-label">亲友证件号</label>
+                                    <div class="col-sm-5">
+                                        <input class="form-control" id="vitIdNo" name="亲友证件号" ng-maxlength="18" ng-model="currentItem.VisitorIdNo" />
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-1 control-label">亲友单位</label>
+                                    <div class="col-sm-11">
+                                        <input class="form-control" id="vitCompany" ng-model="currentItem.VisitorCompany" ng-maxlength="20" />
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-1 control-label">互动说明</label>
+                                    <div class="col-sm-11">
+                                        <textarea class="form-control" rows="3" id="txtRemark" ng-model="currentItem.Description" select-items="互动说明" ng-maxlength="1000" name="互动说明"></textarea>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="col-sm-1 control-label">备注</label>
+                                    <div class="col-sm-11">
+                                        <input class="form-control" id="vitRemark" ng-model="currentItem.Remark" ng-maxlength="100" name="备注" />
+                                    </div>
+                                </div>
+
+                                    <div class="form-group">
+                                        <div class="text-right">
+                                            <button class="btn btn-primary" ng-disabled="!visitfrom.$valid" type="submit" ng-show="buttonShow">保存</button>
+                                            <button class="btn btn-primary" ng-show="buttonShow" type="reset" ng-click="currentItem = {}">重置</button>
+                                            <button class="btn btn-primary" ng-click="hrefVisitorInOutRec()">来访出入登记</button>
+                                        </div>
+                                    </div>
+                            </form>
+                        </div>
+
+                    </div>
+                    <div class="box border primary">
+                        <div class="box-title">
+                            <h4>
+                                <i class="fa fa-table"></i>访视记录列表
+                            </h4>
+                        </div>
+                        <div class="box-body">
+                            <ui-data-table options="options">
+                                <table class="table table-striped table-bordered table-hover table-handler">
+                                    <thead>
+                                        <tr>
+                                            <th>#</th>
+                                            <!--<th>编码</th>-->
+                                            <th>探访时间</th>
+                                            <th>探访方式</th>
+                                            <th>亲友姓名</th>
+                                            <th>亲友性别</th>
+                                            <th>亲友证件号</th>
+                                            <th>称谓</th>
+                                            <th>血缘关系</th>
+                                            <th>填写人员</th>
+                                            <th><i class="fa fa-bars"></i> 操作</th>
+                                        </tr>
+                                    </thead>
+
+                                    <tbody>
+                                        <tr ng-repeat="item in Data.RegVisitRecs">
+                                            <td>{{$index + 1}}</td>
+                                            <!--<td>{{item.FeeNo}}</td>-->
+                                            <td>{{item.StartDate|date:'yyyy-MM-dd HH:mm:ss'}}--{{item.EndDate|date:'yyyy-MM-dd HH:mm:ss'}}</td>
+                                            <td><span select-code="A00.049" select-value="{{item.VisitType}}"></span></td>
+                                            <td>{{item.VisitorName}}</td>
+                                            <td><span select-code="A00.001" select-value="{{item.VisitorSex}}"></span></td>
+                                            <td>{{item.VisitorIdNo}}</td>
+                                            <td><span select-code="A00.030" select-value="{{item.Appellation}}">></span></td>
+                                            <td><span select-code="A00.031" select-value="{{item.BloodRelationShip}}"></span></td>
+                                            <td>{{item.RecordByShow}}</td>
+                                            <td>
+                                                <div class="btn-group btn-group-xs" role="group" aria-label="...">
+                                                    <a class="btn btn-info" role="button" ng-click="rowSelect(item)"><i class="fa fa-pencil"></i>编辑</a>
+                                                    <a class="btn btn-primary" role="button" ng-click="deleteItem(item)"><i class="fa fa-times"></i>删除</a>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </ui-data-table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+

@@ -1,0 +1,94 @@
+<style type="text/css">
+    .selectedCor {
+        background-color: #dff8e7;
+    }
+
+    .resident-list-area {
+        min-width: 100px;
+        min-height: 400px;
+        max-height: 600px;
+        height: 100%;
+        overflow: auto;
+    }
+    .td-hide {
+        display: none;
+    }
+    .resident-tr:hover,
+    .resident-tr > td:hover {
+        background-color: #f5f5f5;
+    }
+</style>
+<div class="form-horizontal">
+    <div class="form-group">
+        <div class="col-sm-6">
+            <div class="form-group">
+                <img alt="" class="img-responsive img-fluid" src="{{currentResident.ImgUrl}}">
+            </div>
+        </div>
+        <div class="col-sm-6">
+            <div class="form-group">
+                <h4>{{currentResident.Name}}</h4>
+            </div>
+            <div class="form-group">
+                <div>性别:<span select-code="A00.001" select-value="{{currentResident.Sex}}"></span></div>
+            </div>
+            <div class="form-group">
+                <div>楼层:{{currentResident.FloorName}}</div>
+            </div>
+            <div class="form-group">
+                <div>床号:{{currentResident.BedNo}}</div>
+            </div>
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-sm-6">
+            <input type="radio" value="I" name="radStatus" ng-model="IpdFlag" ng-checked="true" />服务中
+        </div>
+        <div class="col-sm-6">
+            <input type="radio" value="O" name="radStatus" ng-model="IpdFlag" />已结案
+        </div>
+    </div>
+    <div class="form-group">
+        <input class="form-control" type="text" ng-model="Name" placeholder="姓名/编号/床位" />
+    </div>
+    <div class="form-group">
+        <select class="form-control" ng-model="FloorId" ng-options="item.FloorId as item.FloorName for item in floors">
+            <option value="">-- 请选择楼层 --</option>
+        </select>
+    </div>
+    <div style="margin-left: 0; margin-right: 0" class="resident-list-area">
+        <table class="table  table-handler " id="residentTb">
+            <thead>
+                <tr>
+                    <td class="td-hide"></td>
+                    <th class="col-sm-4">姓名</th>
+                    <th class="col-sm-4 sorting_asc" ng-init="bdesc=true" ng-click="rdesc=true;col='BedNo';desc=!desc;bdesc=!bdesc" ng-class="{true: 'sorting_asc', false: 'sorting_desc'}[bdesc]">床位</th>
+                    <th class="col-sm-4 sorting_asc" ng-init="rdesc=true" ng-click="bdesc=true;col='ResidengNo';desc=!desc;rdesc=!rdesc" ng-class="{true: 'sorting_asc', false: 'sorting_desc'}[rdesc]">编号</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="item in residents | filter:{IpdFlag:IpdFlag} | filter:{ResidentInfo:Name} | filter:{Floor:FilterFloorId} |orderBy:col:desc " ng-click="afterSelected(item)" onclick="selectTr(this)" class="resident-tr" ng-class="{selectedCor:item.FeeNo==colorId}">
+                    <td class="td-hide">{{item.FeeNo}}</td>
+                    <td>{{item.Name}}</td>
+                    <td>{{item.BedNo}}</td>
+                    <td>{{item.ResidengNo}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+<script type="text/javascript">
+    function setScroll(){
+        $(".resident-list-area").slimScroll({
+            height: 600,
+            alwaysVisible: false,
+            size: '4px',
+        });
+    }
+    setScroll();
+    $(window).on("resize",setScroll);
+    function selectTr(item) {
+        $('#residentTb tr').removeClass("selectedCor").addClass('resident-tr');
+        $(item).removeClass("resident-tr").addClass('selectedCor');
+    }
+</script>

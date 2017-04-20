@@ -1,0 +1,104 @@
+<div class="row" ng-controller="complainRecCtrl">
+    <div class="col-md-12">
+        <div class="box border primary">
+            <div class="box-title">
+                <h4>新增资源连接</h4>
+            </div>
+            <div class="box-body">
+                <div class="panel panel-default">
+                    <div class="panel-title">
+
+                    </div>
+                    <div class="panel-body">
+                        <form class="form-horizontal" ng-submit="saveEdit(currentItem)" role="form" novalidate>
+
+                            <div class="form-group">
+                                
+                                    <label for="selRecordBy" class="col-sm-1 control-label">处理人员</label>
+                                    <div class="col-sm-2">
+
+                                        <select class="form-control" id="selRecordBy" ng-model="currentItem.RecordBy" ng-options="Socialworkers.Value as Socialworkers.Name for Socialworkers in Dic.Socialworkers">
+                                            <option value="">-- 请选择 --</option>
+                                        </select>
+                                    </div>
+                                    <label for="dtContactDate" class="col-sm-1 control-label">申诉日期</label>
+                                    <div class="col-sm-2">
+                                        <input type="text" class="form-control datepicker" readonly id="dtRecDate" ng-model="currentItem.RecDate">
+                                    </div>
+                                    <label for="dtFinishDate" class="col-sm-1 control-label"></label>
+                                    <div class="col-sm-5">
+                                        
+                                    </div>
+
+                              
+                            </div>
+                            <div class="form-group">
+
+                                <label for="selType" class="col-sm-1 control-label">问题分类</label>
+                                <div class="col-sm-2">
+                                    <select class="form-control" id="selType" ng-model="currentItem.QuestionType" ng-options="QuestionCategory.Value as QuestionCategory.Name for QuestionCategory in Dic.QuestionCategory">
+                                        <option value="">-- 请选择 --</option>
+                                    </select>
+                                </div>
+                                <label for="selName" class="col-sm-1 control-label">申诉对象</label>
+                                <div class="col-sm-5">
+                                    <select class="form-control" id="selName" ng-model="currentItem.EmpNo" ng-options="Socialworkers.Value as Socialworkers.Name for Socialworkers in Dic.Socialworkers">
+                                        <option value="">-- 请选择 --</option>
+                                    </select>
+                                </div>
+                               
+                            </div>
+                            <div class="form-group">
+                                <label for="selName" class="col-sm-1 control-label">问题简述</label>
+                                <div class="col-sm-11">
+                                    <textarea class="form-control" rows="5" ng-model="currentItem.QuestionDesc"></textarea>
+                                </div>
+
+                            </div>
+                            <div class="form-group">
+                                <label for="selName" class="col-sm-1 control-label">处理结果</label>
+                                <div class="col-sm-2">
+                                    <select class="form-control" id="selName" ng-model="currentItem.Status" ng-options="ProcessRlt.Value as ProcessRlt.Name for ProcessRlt in Dic.ProcessRlt">
+                                        <option value="">-- 请选择 --</option>
+                                    </select>
+                                </div>
+                                <div class="col-sm-9"></div>
+                            </div>
+                            <div class="form-group">
+                                <label for="selName" class="col-sm-1 control-label">处理说明</label>
+                                <div class="col-sm-11">
+                                    <textarea class="form-control" rows="5" ng-model="currentItem.Results"></textarea>
+                                </div>
+
+                            </div>
+                            <div class="form-group">
+                                <label for="selName" class="col-sm-1 control-label">备注</label>
+                                <div class="col-sm-11">
+                                    <textarea class="form-control" rows="5" ng-model="currentItem.Description"></textarea>
+                                </div>
+
+                            </div>
+                            <div class="form-group">
+                                
+                                <div class="col-sm-offset-10">
+                                    <div class="btn-group btn-group-sm" role="group" aria-label="...">
+                                        <button class="btn btn-primary" type="submit">保存</button>&nbsp;<button type="button" class="btn btn-default" ng-click="cancelEdit()">取消</button>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    $(".datepicker").datepicker({
+        dateFormat: "yy-mm-dd",
+        changeMonth: true,
+        changeYear: true
+    });
+</script>

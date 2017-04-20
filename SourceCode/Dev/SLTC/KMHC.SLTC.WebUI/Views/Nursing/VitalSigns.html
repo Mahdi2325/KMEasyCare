@@ -1,0 +1,146 @@
+
+<div class="row">
+    <div id="content" class="col-lg-12">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="page-header">
+                    <ul class="breadcrumb">
+                        <li>
+                            <i class="fa fa-home"></i>
+                            <a href="/">首页</a>
+                        </li>
+                        <li>生命体征</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="box border primary">
+                    <div class="box-title">
+                        <h4><i class="fa fa-search"></i>查询条件</h4>
+                    </div>
+                    <div class="box-body">
+                        <form class="form-horizontal" role="form" novalidate>
+                            <div class="form-group">
+                                <label class="col-sm-1 control-label">依楼层房间筛选</label>
+                                <div class="col-sm-2">
+                                    <select ng-model="Floor" class="form-control" ng-options=" item.FloorName for item in Data.floors track by item.FloorId" ng-change="getFloor(Floor.FloorId)">
+                                        <option></option>
+                                    </select>
+                                </div>
+                                <div class="col-sm-2">
+                                    <select ng-model="Room" class="form-control" ng-options="item.RoomName as item.RoomName for item in rooms">
+                                        <option></option>
+                                    </select>
+                                </div>
+                                <div class="col-sm-1">
+                                    <button class="btn btn-primary" ng-click="loadVitalSigns()">查询</button>
+                                </div>
+
+                                <label class="col-sm-1 control-label">服务时间</label>
+                                <div class="col-sm-2">
+                                    <input class="form-control" type="text" ng-model="Data.ServiceDate" ca-date-time-picker />
+                                </div>
+                                <div class="col-sm-1">
+                                    <button class="btn btn-primary" ng-click="changeDate()">校准时间</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+        <div class="row">
+            <div class="col-md-12" >
+                <!-- BOX -->
+                <div class="box border primary">
+                    <div class="box-title">
+                        <h4><i class="fa fa-table"></i>生命体征批量输入</h4>
+                    </div>
+                    <form class="form-horizontal" role="form" name="form" novalidate>
+                        <!--<ui-data-table options="options">-->
+                        <table class="table table-bordered" id="editTable">
+                            <thead>
+                                <tr>
+                                    <th style="width:60px">个案姓名</th>
+                                    <th style="width:60px">居住楼层</th>
+                                    <th style="width:60px">居住房间</th>
+                                    <th style="width:180px">日期<span class="required">*</span></th>
+                                    <th style="width:80px">收缩压(mmHg)</th>
+                                    <th style="width:80px">舒张压(mmHg)</th>
+                                    <th style="width:80px">脉搏(次/Min)</th>
+                                    <th style="width:80px">体温(℃)</th>
+                                    <th style="width:80px">呼吸(次/Min)</th>
+                                    <th style="width:80px">血氧(%)</th>
+                                    <th style="width:80px">血糖(mg/dl)</th>
+                                    <th style="width:160px">血糖类型</th>
+                                    <th style="width:80px">疼痛强度0-10</th>
+                                    <th style="width:80px">大便次数</th>
+                                    <th style="width:80px">注射量(c.c.)</th>
+                                    <th style="width:80px">排放量(c.c.)</th>
+
+                                    <th style="width: 50px">新增本笔</th>
+                                    <th><i class="fa fa-bars"></i> 操作</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr ng-repeat="info in Data.List">
+                                    <td>{{info.Name}}</td>
+                                    <td>{{info.FloorName}}</td>
+                                    <td>{{info.RoomName}}</td>
+                                    <td><input type="text" ng-model="info.RecordDate" class="form-control" ca-date-time-picker max="0" /> </td>
+                                    <td><input type="text" ng-model="info.SBP" class="form-control" ng-pattern="/^[1-9][0-9]{0,2}$/" /></td>
+                                    <td><input type="text" ng-model="info.DBP" class="form-control" ng-pattern="/^[1-9][0-9]{0,2}$/" /></td>
+                                    <td><input type="text" ng-model="info.Pulse" class="form-control" ng-pattern="/^[1-9][0-9]{0,2}$/" /></td>
+                                    <td><input type="text" ng-model="info.Bodytemp" class="form-control" ng-pattern="/^([0-9]{1,2}|0)([.][0-9]{0,2})?$/" /></td>
+                                    <td><input type="text" ng-model="info.Breathe" class="form-control" ng-pattern="/^[1-9][0-9]{0,2}$/" /></td>
+                                    <td><input type="text" ng-model="info.Oxygen" class="form-control" ng-pattern="/^(100|[1-9][0-9]{0,1})$/" /></td>
+                                    <td><input type="text" ng-model="info.BloodSugar" class="form-control" ng-pattern="/^[1-9][0-9]{0,2}$/" /></td>
+                                    <td><select ng-model="info.BSType" class="form-control" select-code="F00.001"></select></td>
+                                    <td><input type="text" ng-model="info.Pain" class="form-control" ng-pattern="/^(10|[0-9]{0,1})$/" /></td>
+                                    <td><input type="text" ng-model="info.Bowels" class="form-control" ng-pattern="/^(0|[1-9][0-9]{0,2})$/" /></td>
+                                    <td><input type="number" ng-model="info.InValue" class="form-control" min="1" ng-maxlength="9" /></td>
+                                    <td><input type="number" ng-model="info.OutValue" class="form-control" min="1" /></td>
+                                    <td class="text-left">
+                                        <input type="checkbox" class="uniform" value="T" ng-model="info.CheckType">是
+                                    </td>
+                                    <td>
+                                        <div class="btn-group btn-group-xs" role="group" aria-label="...">
+                                            <a class="btn btn-info" role="button" ui-sref="VitalSignList({feeNo:info.FeeNo})"><i class="fa fa-table"></i>查看记录</a>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+
+                        </table>
+                        <!--</ui-data-table>-->
+                    </form>
+                </div>
+                <!-- /BOX -->
+            </div>
+
+        </div>
+
+        <!--按钮-->
+        <div class="row">
+            <div class="col-md-12">
+                <div class="pull-right">
+                    <button class="btn btn-primary" ng-disabled="!isModify(Data.List) || Data.List==null || (Data.List!=null && Data.List.length==0) || Data.List.length>0 && form.$invalid" ng-click="Save()">保存</button>
+                </div>
+            </div>
+        </div>
+        <!--按钮-->
+    </div>
+</div>
+<script type="text/javascript">
+    $("#editTable").on('change', function () {
+        if (event.srcElement.type != "checkbox") {
+            var ele = angular.element(event.srcElement).closest('tr');
+            var scope = ele.scope();
+            scope.info.CheckType = true;
+        }
+    })
+</script>

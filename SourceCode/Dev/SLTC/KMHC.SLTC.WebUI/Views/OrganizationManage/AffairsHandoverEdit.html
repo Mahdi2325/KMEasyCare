@@ -1,0 +1,104 @@
+<div class="row">
+    <div class="box-body">
+        <div id="content" class="col-lg-12">
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="page-header">
+                        <ul class="breadcrumb">
+                            <li>
+                                <i class="fa fa-home"></i>
+                                <a href="/">首页</a>
+                            </li>
+                            <li>
+                                <a href="/angular/AffairsHandoverList">行政交班</a>
+                            </li>
+                            <li>行政交班管理</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="box border primary">
+                        <div class="box-title">
+                            <h4><i class="fa fa-bars"></i>行政交班信息</h4>
+                        </div>
+                        <div class="box-body">
+                            <form class="form-horizontal" role="form" name="affhandRole" ng-submit="save()" novalidate>
+                                <div class="panel panel-default">
+                                    <div class="panel-heading">工作设定(交付者填写)</div>
+                                    <div class="panel-body">
+                                        <div class="form-group">
+                                            <label class="col-sm-1 control-label">交付者姓名<span class="required">*</span></label>
+                                            <div class="col-sm-2">
+                                                <input-staff callback="staffSelected(item,'RecordBy')" value="{{Data.RecordBy}}" required="true" />
+                                            </div>
+                                            <label class="col-sm-1 control-label">交付者帐号<span class="required">*</span></label>
+                                            <div class="col-sm-2">
+                                                <input class="form-control" type="text" ng-model="Data.RecordBy" readonly="readonly" required />
+                                            </div>
+                                            <label class="col-sm-1 control-label">交付日期<span class="required">*</span></label>
+                                            <div class="col-sm-2">
+                                                <input class="form-control datepicker" type="text" ng-model="Data.RecordDate" ca-date-time-picker required />
+                                            </div>
+                                            
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-sm-1 control-label">受托者姓名<span class="required">*</span></label>
+                                            <div class="col-sm-2">
+                                                <input-staff callback="staffSelected(item,'ExecuteBy')" value="{{Data.ExecuteBy}}" required="true" />
+                                            </div>
+                                            <label class="col-sm-1 control-label">受托者帐号<span class="required">*</span></label>
+                                            <div class="col-sm-2">
+                                                <input name="txt_ExecuteBy" ng-model="Data.ExecuteBy" class="form-control" readonly="readonly" required />
+                                            </div>
+                                            <label class="col-sm-1 control-label">应执行日期<span class="required">*</span></label>
+                                            <div class="col-sm-2">
+                                                <input class="form-control datepicker" type="text" ng-model="Data.ExecuteDate" ca-date-time-picker required />
+                                            </div>
+                                            <label class="col-sm-1 control-label">班别<span class="required">*</span></label>
+                                            <div class="col-sm-2">
+                                                <select class="form-control" ng-model="Data.ClassType" select-code="F00.002" required></select>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-sm-1 control-label">交付内容</label>
+                                            <div class="col-sm-11">
+                                                <textarea class="form-control" rows="3" ng-model="Data.Content" ng-maxlength="200"></textarea>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="panel panel-default">
+                                    <div class="panel-heading">工作管理(受托者填写)</div>
+                                    <div class="panel-body">
+                                        <div class="form-group">
+                                            <label class="col-sm-1 control-label">已完成</label>
+                                            <div class="col-sm-2">
+                                                <label class="checkbox-inline"><input type="checkbox" class="uniform" ng-model="Data.FinishFlag">是</label>
+                                            </div>
+                                            <label class="col-sm-1 control-label">完成日期</label>
+                                            <div class="col-sm-2">
+                                                <input class="form-control datepicker" type="text" ng-model="Data.FinishDate" ca-date-time-picker ng-disabled="!Data.FinishFlag">
+                                            </div>
+                                            <label class="col-sm-1 control-label">完成情形说明</label>
+                                            <div class="col-sm-5">
+                                                <textarea class="form-control" rows="3" ng-model="Data.UnFinishReason" ng-maxlength="200" ng-disabled="!Data.FinishFlag"></textarea>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                                <div class="form-group center">
+                                    <button class="btn btn-info btn-lg" type="submit" ng-disabled="affhandRole.$invalid">保存</button>
+                                    <button class="btn btn-grey btn-lg" ui-sref="AffairsHandoverList">取消</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

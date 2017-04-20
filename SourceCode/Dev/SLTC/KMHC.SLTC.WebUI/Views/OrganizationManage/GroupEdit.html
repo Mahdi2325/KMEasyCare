@@ -1,0 +1,51 @@
+<div class="row">
+    <div class="box-body">
+        <div id="content" class="col-lg-12">
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="page-header" ng-init="urlstr='GroupList'">
+                        <ul class="breadcrumb">
+                            <li>
+                                <i class="fa fa-home"></i>
+                                <a href="/">首页</a>
+                            </li>
+                            <li>
+                                <a ui-sref="{{urlstr}}">集团信息列表</a>
+                            </li>
+                            <li>集团信息管理</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="box border primary">
+                        <div class="box-title">
+                            <h4><i class="fa fa-bars"></i>集团信息</h4>
+                        </div>
+                        <div class="box-body">
+                            <form class="form-horizontal" name="formGroup" ng-submit="save()" novalidate>
+                                <div class="form-group">
+                                    <label class="col-sm-1 control-label">名称<span class="required">*</span></label>
+                                    <div class="col-sm-4">
+                                        <input id="RoleName" name="RoleName" type="text" class="form-control" ng-model="Data.Group.GroupName" ng-maxlength="100" placeholder="请输入集团名称" required />
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-1 control-label">地址</label>
+                                    <div class="col-sm-10">
+                                        <input class="form-control" name="Description" ng-model="Data.Group.Address" ng-maxlength="250" />
+                                    </div>
+                                </div>
+                                <div class="form-group center">
+                                    <button class="btn btn-info btn-lg" type="submit" ng-disabled="formGroup.$invalid">保存</button>
+                                    <button class="btn btn-grey btn-lg" ui-sref="GroupList">取消</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

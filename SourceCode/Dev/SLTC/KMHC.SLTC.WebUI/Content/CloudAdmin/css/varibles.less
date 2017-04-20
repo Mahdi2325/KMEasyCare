@@ -1,0 +1,660 @@
+/*common*/
+//sidebar child li padding
+
+@sidebar-child-li-padding:5px;
+@sidebar-width:200px;
+@box-border-radius:2px;
+.box-primary-shadow(@c){
+  -webkit-box-shadow: 0 0px 0px @c;
+  box-shadow: 0 0px 0px @c;
+}
+
+/*------------------------------default-----------------------------*/
+
+
+//themes bgcolor 主题背景颜色 页面右侧box
+@default-base-theme-bgcolor: #5e87b0;
+
+//页面 #page bgcolor
+@default-base-page-bgcolor: #f4f4f4;
+
+/*-----------------------------------------------------------------------------------*/
+/*	Sidebar 主界面左侧菜单 设置
+/*-----------------------------------------------------------------------------------*/
+
+
+
+//siderbar 背景色
+@default-sidebar-bgcolor:#f4f4f4;
+
+//siderbar ul 上边框
+@default-ul-border-top:#FFF;
+
+//siderbar ul sub ul 背景色
+@default-li-ul-sub-bgcolor:#e7e7e7;
+
+//siderbar sub ul li 左侧 线条
+@default-li-ul-line:#3b3b3b;
+
+//siderbar a字体颜色
+@default-li-a:#555;
+
+//siderbar ul 下边框
+@default-ul-border-bottom:@default-li-ul-sub-bgcolor;
+
+//siderbar ul li打开状态
+@default-li-has-sub-open-a-bgcolor:@default-ul-border-top;
+
+//siderbar ul li a上边框
+@default-li-has-sub-a-border-top:@default-li-ul-sub-bgcolor;
+
+//siderbar ul li a下边框
+@default-li-has-sub-a-border-bottom:@default-ul-border-top;
+
+//siderbar ul li hover
+@default-li-has-sub-hover-bgcolor:@default-li-has-sub-open-a-bgcolor;
+
+//siderbar ul sub ul上边框
+@default-li-ul-sub-border-top:@default-li-ul-sub-bgcolor;
+
+//siderbar ul sub ul li hover状态
+@default-li-ul-sub-li-hover-bgcolor:@default-sidebar-bgcolor;
+
+
+
+/*-----------------------------------------------------------------------------------*/
+/*	Navbar 界面顶部导航栏 设置
+/*-----------------------------------------------------------------------------------*/
+//导航栏背景色 默认继承主题色
+@default-nav-bar:@default-base-theme-bgcolor;
+
+//导航栏菜单hover状态
+@default-nav-bar-menu-hover:lighten(@default-nav-bar,10%);
+
+//当行下拉菜单项背景色 默认继承左侧sidebar
+@default-nav-bar-dropdown-item-bgcolor:@default-sidebar-bgcolor;
+
+//默认继承sidebar ul 上边框
+@default-nav-bar-dropdown-border-top:@default-ul-border-top;
+
+//默认继承sidebar ul 下边框
+@default-nav-bar-dropdown-border-bottom:@default-ul-border-bottom;
+
+//默认继承sidebar ul 上边框/open状态
+@default-nav-bar-dropdown-li-hover:@default-ul-border-top;
+
+
+
+/*-----------------------------------------------------------------------------------*/
+/*	Grids and Box 主界面右侧box 设置
+/*-----------------------------------------------------------------------------------*/
+//box 边框 默认使用主题
+//primary类的标准标题字体颜色
+@default-box-title-h4-primary:#FFF;
+
+@default-box-primary-border:@default-base-theme-bgcolor;
+
+//box 标题背景色 默认继承边框颜色
+@default-box-title-primary-bgcolor:@default-box-primary-border;
+
+//btn按钮标准 标题背景色 默认继承边框颜色
+@default-btn-primary:@default-box-primary-border;
+
+//btn按钮 badge颜色 默认使用主题
+@default-btn-primary-badge:@default-base-theme-bgcolor;
+
+//panel-primary-border-color
+@default-panel-primary-border:@default-btn-primary-badge;
+
+//panel-heading-border-color 默认继承panel
+@default-panel-heading-border-color:@default-panel-primary-border;
+
+//panel-heading-bg-color  默认继承panel-heading
+@default-panel-heading-bg-color:@default-panel-heading-border-color;
+
+//默认标题字体颜色 默认继承标准标题颜色
+@default-box-title-h4:@default-box-title-h4-primary;
+
+//primary类的标题右侧工具条颜色
+@default-box-title-tools-primary:#f4f4f4;
+
+
+
+
+/*--------------------earth--------------earth-----------earth-----------------earth------------*/
+
+//themes bgcolor 主题背景颜色 页面右侧box
+@earth-base-theme-bgcolor: #a37e58;
+
+//页面 #page bgcolor
+@earth-base-page-bgcolor: #cdbb99;
+
+
+//siderbar 背景色
+@earth-sidebar-bgcolor:#cdbb99;
+
+//siderbar ul 上边框
+@earth-ul-border-top:#d5c6aa ;
+
+//siderbar ul sub ul 背景色
+@earth-li-ul-sub-bgcolor:#c5b088;
+
+//siderbar sub ul li 左侧 线条
+@earth-li-ul-line:#453922;
+
+//siderbar a字体颜色
+@earth-li-a:#675533;
+
+//siderbar ul 下边框
+@earth-ul-border-bottom:@earth-li-ul-sub-bgcolor;
+
+//siderbar ul li打开状态
+@earth-li-has-sub-open-a-bgcolor:#e6ddcc;
+
+//siderbar ul li a上边框
+@earth-li-has-sub-a-border-top:@earth-li-ul-sub-bgcolor;
+
+//siderbar ul li a下边框
+@earth-li-has-sub-a-border-bottom:@earth-ul-border-top;
+
+//siderbar ul li hover
+@earth-li-has-sub-hover-bgcolor:@earth-li-has-sub-open-a-bgcolor;
+
+//siderbar ul sub ul上边框
+@earth-li-ul-sub-border-top:@earth-li-ul-sub-bgcolor;
+
+//siderbar ul sub ul li hover状态
+@earth-li-ul-sub-li-hover-bgcolor:@earth-sidebar-bgcolor;
+
+
+
+/*-----------------------------------------------------------------------------------*/
+/*	Navbar 界面顶部导航栏 设置
+/*-----------------------------------------------------------------------------------*/
+//导航栏背景色 默认继承主题色
+@earth-nav-bar:@earth-base-theme-bgcolor;
+
+//导航栏菜单hover状态
+@earth-nav-bar-menu-hover:lighten(@earth-nav-bar,10%);
+
+//当行下拉菜单项背景色 默认继承左侧sidebar
+@earth-nav-bar-dropdown-item-bgcolor:@earth-sidebar-bgcolor;
+
+//默认继承sidebar ul 上边框
+@earth-nav-bar-dropdown-border-top:@earth-ul-border-top;
+
+//默认继承sidebar ul 下边框
+@earth-nav-bar-dropdown-border-bottom:@earth-ul-border-bottom;
+
+//默认继承sidebar ul 上边框/open状态
+@earth-nav-bar-dropdown-li-hover:@earth-ul-border-top;
+
+
+
+/*-----------------------------------------------------------------------------------*/
+/*	Grids and Box 主界面右侧box 设置
+/*-----------------------------------------------------------------------------------*/
+//box 边框 默认使用主题
+//primary类的标准标题字体颜色
+@earth-box-title-h4-primary:#FFF;
+
+@earth-box-primary-border:lighten(@earth-base-theme-bgcolor,10%);
+
+//box 标题背景色 默认继承边框颜色
+@earth-box-title-primary-bgcolor:lighten(@earth-base-theme-bgcolor,10%);
+
+//btn按钮标准 标题背景色 默认继承边框颜色
+@earth-btn-primary:lighten(@earth-base-theme-bgcolor,10%);
+
+//btn按钮 badge颜色 默认使用主题
+@earth-btn-primary-badge:@earth-base-theme-bgcolor;
+
+//panel-primary-border-color
+@earth-panel-primary-border:@earth-btn-primary-badge;
+
+//panel-heading-border-color 默认继承panel
+@earth-panel-heading-border-color:@earth-panel-primary-border;
+
+//panel-heading-bg-color  默认继承panel-heading
+@earth-panel-heading-bg-color:@earth-panel-heading-border-color;
+
+//默认标题字体颜色 默认继承标准标题颜色
+@earth-box-title-h4:@earth-box-title-h4-primary;
+
+//primary类的标题右侧工具条颜色
+@earth-box-title-tools-primary:#f4f4f4;
+
+
+/*--------------------graphite--------------graphite-----------graphite-----------------graphite------------*/
+
+//themes bgcolor 主题背景颜色 页面右侧box
+@graphite-base-theme-bgcolor: #424242;
+
+//页面 #page bgcolor
+@graphite-base-page-bgcolor: #bcbcbc;
+
+
+//siderbar 背景色
+@graphite-sidebar-bgcolor:#bcbcbc;
+
+//siderbar ul 上边框
+@graphite-ul-border-top:#c9c9c9 ;
+
+//siderbar ul sub ul 背景色
+@graphite-li-ul-sub-bgcolor:#afafaf;
+
+//siderbar sub ul li 左侧 线条
+@graphite-li-ul-line:#3b3b3b;
+
+//siderbar a字体颜色
+@graphite-li-a:#555555;
+
+//siderbar ul 下边框
+@graphite-ul-border-bottom:@graphite-li-ul-sub-bgcolor;
+
+//siderbar ul li打开状态
+@graphite-li-has-sub-open-a-bgcolor:#e2e2e2;
+
+//siderbar ul li a上边框
+@graphite-li-has-sub-a-border-top:@graphite-li-ul-sub-bgcolor;
+
+//siderbar ul li a下边框
+@graphite-li-has-sub-a-border-bottom:@graphite-ul-border-top;
+
+//siderbar ul li hover
+@graphite-li-has-sub-hover-bgcolor:@graphite-li-has-sub-open-a-bgcolor;
+
+//siderbar ul sub ul上边框
+@graphite-li-ul-sub-border-top:@graphite-li-ul-sub-bgcolor;
+
+//siderbar ul sub ul li hover状态
+@graphite-li-ul-sub-li-hover-bgcolor:@graphite-sidebar-bgcolor;
+
+
+
+/*-----------------------------------------------------------------------------------*/
+/*	Navbar 界面顶部导航栏 设置
+/*-----------------------------------------------------------------------------------*/
+//导航栏背景色 默认继承主题色
+@graphite-nav-bar:@graphite-base-theme-bgcolor;
+
+//导航栏菜单hover状态
+@graphite-nav-bar-menu-hover:lighten(@graphite-nav-bar,10%);
+
+//当行下拉菜单项背景色 默认继承左侧sidebar
+@graphite-nav-bar-dropdown-item-bgcolor:@graphite-sidebar-bgcolor;
+
+//默认继承sidebar ul 上边框
+@graphite-nav-bar-dropdown-border-top:@graphite-ul-border-top;
+
+//默认继承sidebar ul 下边框
+@graphite-nav-bar-dropdown-border-bottom:@graphite-ul-border-bottom;
+
+//默认继承sidebar ul 上边框/open状态
+@graphite-nav-bar-dropdown-li-hover:@graphite-ul-border-top;
+
+
+
+/*-----------------------------------------------------------------------------------*/
+/*	Grids and Box 主界面右侧box 设置
+/*-----------------------------------------------------------------------------------*/
+//box 边框 默认使用主题
+//primary类的标准标题字体颜色
+@graphite-box-title-h4-primary:#FFF;
+
+@graphite-box-primary-border:lighten(@graphite-base-theme-bgcolor,10%);
+
+//box 标题背景色 默认继承边框颜色
+@graphite-box-title-primary-bgcolor:lighten(@graphite-base-theme-bgcolor,10%);
+
+//btn按钮标准 标题背景色 默认继承边框颜色
+@graphite-btn-primary:lighten(@graphite-base-theme-bgcolor,10%);
+
+//btn按钮 badge颜色 默认使用主题
+@graphite-btn-primary-badge:@graphite-base-theme-bgcolor;
+
+//panel-primary-border-color
+@graphite-panel-primary-border:@graphite-btn-primary-badge;
+
+//panel-heading-border-color 默认继承panel
+@graphite-panel-heading-border-color:@graphite-panel-primary-border;
+
+//panel-heading-bg-color  默认继承panel-heading
+@graphite-panel-heading-bg-color:@graphite-panel-heading-border-color;
+
+//默认标题字体颜色 默认继承标准标题颜色
+@graphite-box-title-h4:@graphite-box-title-h4-primary;
+
+//primary类的标题右侧工具条颜色
+@graphite-box-title-tools-primary:#f4f4f4;
+
+
+/*--------------------nature--------------nature-----------nature-----------------nature------------*/
+
+//themes bgcolor 主题背景颜色 页面右侧box
+@nature-base-theme-bgcolor: #8e9e82;
+
+//页面 #page bgcolor
+@nature-base-page-bgcolor: #caccb6;
+
+
+//siderbar 背景色
+@nature-sidebar-bgcolor:#caccb6;
+
+//siderbar ul 上边框
+@nature-ul-border-top:#d5d6c5 ;
+
+//siderbar ul sub ul 背景色
+@nature-li-ul-sub-bgcolor:#bfc2a7;
+
+//siderbar sub ul li 左侧 线条
+@nature-li-ul-line:#2e2f21;
+
+//siderbar a字体颜色
+@nature-li-a:#4b4d36;
+
+//siderbar ul 下边框
+@nature-ul-border-bottom:@nature-li-ul-sub-bgcolor;
+
+//siderbar ul li打开状态
+@nature-li-has-sub-open-a-bgcolor:#ebebe3;
+
+//siderbar ul li a上边框
+@nature-li-has-sub-a-border-top:@nature-li-ul-sub-bgcolor;
+
+//siderbar ul li a下边框
+@nature-li-has-sub-a-border-bottom:@nature-ul-border-top;
+
+//siderbar ul li hover
+@nature-li-has-sub-hover-bgcolor:@nature-li-has-sub-open-a-bgcolor;
+
+//siderbar ul sub ul上边框
+@nature-li-ul-sub-border-top:@nature-li-ul-sub-bgcolor;
+
+//siderbar ul sub ul li hover状态
+@nature-li-ul-sub-li-hover-bgcolor:@nature-sidebar-bgcolor;
+
+
+
+/*-----------------------------------------------------------------------------------*/
+/*	Navbar 界面顶部导航栏 设置
+/*-----------------------------------------------------------------------------------*/
+//导航栏背景色 默认继承主题色
+@nature-nav-bar:@nature-base-theme-bgcolor;
+
+//导航栏菜单hover状态
+@nature-nav-bar-menu-hover:lighten(@nature-nav-bar,10%);
+
+//当行下拉菜单项背景色 默认继承左侧sidebar
+@nature-nav-bar-dropdown-item-bgcolor:@nature-sidebar-bgcolor;
+
+//默认继承sidebar ul 上边框
+@nature-nav-bar-dropdown-border-top:@nature-ul-border-top;
+
+//默认继承sidebar ul 下边框
+@nature-nav-bar-dropdown-border-bottom:@nature-ul-border-bottom;
+
+//默认继承sidebar ul 上边框/open状态
+@nature-nav-bar-dropdown-li-hover:@nature-ul-border-top;
+
+
+
+/*-----------------------------------------------------------------------------------*/
+/*	Grids and Box 主界面右侧box 设置
+/*-----------------------------------------------------------------------------------*/
+//box 边框 默认使用主题
+//primary类的标准标题字体颜色
+@nature-box-title-h4-primary:#FFF;
+
+@nature-box-primary-border:lighten(@nature-base-theme-bgcolor,10%);
+
+//box 标题背景色 默认继承边框颜色
+@nature-box-title-primary-bgcolor:lighten(@nature-base-theme-bgcolor,10%);
+
+//btn按钮标准 标题背景色 默认继承边框颜色
+@nature-btn-primary:lighten(@nature-base-theme-bgcolor,10%);
+
+//btn按钮 badge颜色 默认使用主题
+@nature-btn-primary-badge:@nature-base-theme-bgcolor;
+
+//panel-primary-border-color
+@nature-panel-primary-border:@nature-btn-primary-badge;
+
+//panel-heading-border-color 默认继承panel
+@nature-panel-heading-border-color:@nature-panel-primary-border;
+
+//panel-heading-bg-color  默认继承panel-heading
+@nature-panel-heading-bg-color:@nature-panel-heading-border-color;
+
+//默认标题字体颜色 默认继承标准标题颜色
+@nature-box-title-h4:@nature-box-title-h4-primary;
+
+//primary类的标题右侧工具条颜色
+@nature-box-title-tools-primary:#f4f4f4;
+
+
+/*--------------------utopia--------------utopia-----------utopia-----------------utopia------------*/
+
+//themes bgcolor 主题背景颜色 页面右侧box
+@utopia-base-theme-bgcolor: #ecbe13;
+
+//页面 #page bgcolor
+@utopia-base-page-bgcolor: #6a6b5f;
+
+
+//siderbar 背景色
+@utopia-sidebar-bgcolor:#6a6b5f;
+
+//siderbar ul 上边框
+@utopia-ul-border-top:#77796b ;
+
+//siderbar ul sub ul 背景色
+@utopia-li-ul-sub-bgcolor:#5d5d53;
+
+//siderbar sub ul li 左侧 线条
+@utopia-li-ul-line:#e6e6e6;
+
+//siderbar a字体颜色
+@utopia-li-a:#ffffff;
+
+//siderbar ul 下边框
+@utopia-ul-border-bottom:@utopia-li-ul-sub-bgcolor;
+
+//siderbar ul li打开状态
+@utopia-li-has-sub-open-a-bgcolor:#919284;
+
+//siderbar ul li a上边框
+@utopia-li-has-sub-a-border-top:@utopia-li-ul-sub-bgcolor;
+
+//siderbar ul li a下边框
+@utopia-li-has-sub-a-border-bottom:@utopia-ul-border-top;
+
+//siderbar ul li hover
+@utopia-li-has-sub-hover-bgcolor:@utopia-li-has-sub-open-a-bgcolor;
+
+//siderbar ul sub ul上边框
+@utopia-li-ul-sub-border-top:@utopia-li-ul-sub-bgcolor;
+
+//siderbar ul sub ul li hover状态
+@utopia-li-ul-sub-li-hover-bgcolor:@utopia-sidebar-bgcolor;
+
+
+
+/*-----------------------------------------------------------------------------------*/
+/*	Navbar 界面顶部导航栏 设置
+/*-----------------------------------------------------------------------------------*/
+//导航栏背景色 默认继承主题色
+@utopia-nav-bar:@utopia-base-theme-bgcolor;
+
+//导航栏菜单hover状态
+@utopia-nav-bar-menu-hover:lighten(@utopia-nav-bar,10%);
+
+//当行下拉菜单项背景色 默认继承左侧sidebar
+@utopia-nav-bar-dropdown-item-bgcolor:@utopia-sidebar-bgcolor;
+
+//默认继承sidebar ul 上边框
+@utopia-nav-bar-dropdown-border-top:@utopia-ul-border-top;
+
+//默认继承sidebar ul 下边框
+@utopia-nav-bar-dropdown-border-bottom:@utopia-ul-border-bottom;
+
+//默认继承sidebar ul 上边框/open状态
+@utopia-nav-bar-dropdown-li-hover:@utopia-ul-border-top;
+
+
+
+/*-----------------------------------------------------------------------------------*/
+/*	Grids and Box 主界面右侧box 设置
+/*-----------------------------------------------------------------------------------*/
+//box 边框 默认使用主题
+//primary类的标准标题字体颜色
+@utopia-box-title-h4-primary:#FFF;
+
+@utopia-box-primary-border:lighten(@utopia-base-theme-bgcolor,10%);
+
+//box 标题背景色 默认继承边框颜色
+@utopia-box-title-primary-bgcolor:lighten(@utopia-base-theme-bgcolor,10%);
+
+//btn按钮标准 标题背景色 默认继承边框颜色
+@utopia-btn-primary:lighten(@utopia-base-theme-bgcolor,10%);
+
+//btn按钮 badge颜色 默认使用主题
+@utopia-btn-primary-badge:@utopia-base-theme-bgcolor;
+
+//panel-primary-border-color
+@utopia-panel-primary-border:@utopia-btn-primary-badge;
+
+//panel-heading-border-color 默认继承panel
+@utopia-panel-heading-border-color:@utopia-panel-primary-border;
+
+//panel-heading-bg-color  默认继承panel-heading
+@utopia-panel-heading-bg-color:@utopia-panel-heading-border-color;
+
+//默认标题字体颜色 默认继承标准标题颜色
+@utopia-box-title-h4:@utopia-box-title-h4-primary;
+
+//primary类的标题右侧工具条颜色
+@utopia-box-title-tools-primary:#f4f4f4;
+
+
+/*--------------------night--------------night-----------night-----------------night------------*/
+
+//themes bgcolor 主题背景颜色 页面右侧box
+@night-base-theme-bgcolor: #2d323d;
+
+//页面 #page bgcolor
+@night-base-page-bgcolor: #2d323d;
+
+
+//siderbar 背景色
+@night-sidebar-bgcolor:#2d323d;
+
+//siderbar ul 上边框
+@night-ul-border-top:#383e4c ;
+
+//siderbar ul sub ul 背景色
+@night-li-ul-sub-bgcolor:#22262e;
+
+//siderbar sub ul li 左侧 线条
+@night-li-ul-line:#b0b5c2;
+
+//siderbar a字体颜色
+@night-li-a:#cdd0d8;
+
+//siderbar ul 下边框
+@night-ul-border-bottom:@night-li-ul-sub-bgcolor;
+
+//siderbar ul li打开状态
+@night-li-has-sub-open-a-bgcolor:#4d5669;
+
+//siderbar ul li a上边框
+@night-li-has-sub-a-border-top:@night-li-ul-sub-bgcolor;
+
+//siderbar ul li a下边框
+@night-li-has-sub-a-border-bottom:@night-ul-border-top;
+
+//siderbar ul li hover
+@night-li-has-sub-hover-bgcolor:@night-li-has-sub-open-a-bgcolor;
+
+//siderbar ul sub ul上边框
+@night-li-ul-sub-border-top:@night-li-ul-sub-bgcolor;
+
+//siderbar ul sub ul li hover状态
+@night-li-ul-sub-li-hover-bgcolor:@night-sidebar-bgcolor;
+
+
+
+/*-----------------------------------------------------------------------------------*/
+/*	Navbar 界面顶部导航栏 设置
+/*-----------------------------------------------------------------------------------*/
+//导航栏背景色 默认继承主题色
+@night-nav-bar:@night-base-theme-bgcolor;
+
+//导航栏菜单hover状态
+@night-nav-bar-menu-hover:lighten(@night-nav-bar,10%);
+
+//当行下拉菜单项背景色 默认继承左侧sidebar
+@night-nav-bar-dropdown-item-bgcolor:@night-sidebar-bgcolor;
+
+//默认继承sidebar ul 上边框
+@night-nav-bar-dropdown-border-top:@night-ul-border-top;
+
+//默认继承sidebar ul 下边框
+@night-nav-bar-dropdown-border-bottom:@night-ul-border-bottom;
+
+//默认继承sidebar ul 上边框/open状态
+@night-nav-bar-dropdown-li-hover:@night-ul-border-top;
+
+
+
+/*-----------------------------------------------------------------------------------*/
+/*	Grids and Box 主界面右侧box 设置
+/*-----------------------------------------------------------------------------------*/
+//box 边框 默认使用主题
+//primary类的标准标题字体颜色
+@night-box-title-h4-primary:#FFF;
+
+@night-box-primary-border:lighten(@night-base-theme-bgcolor,10%);
+
+//box 标题背景色 默认继承边框颜色
+@night-box-title-primary-bgcolor:lighten(@night-base-theme-bgcolor,10%);
+
+//btn按钮标准 标题背景色 默认继承边框颜色
+@night-btn-primary:lighten(@night-base-theme-bgcolor,10%);
+
+//btn按钮 badge颜色 默认使用主题
+@night-btn-primary-badge:@night-base-theme-bgcolor;
+
+//panel-primary-border-color
+@night-panel-primary-border:@night-btn-primary-badge;
+
+//panel-heading-border-color 默认继承panel
+@night-panel-heading-border-color:@night-panel-primary-border;
+
+//panel-heading-bg-color  默认继承panel-heading
+@night-panel-heading-bg-color:@night-panel-heading-border-color;
+
+//默认标题字体颜色 默认继承标准标题颜色
+@night-box-title-h4:@night-box-title-h4-primary;
+
+//primary类的标题右侧工具条颜色
+@night-box-title-tools-primary:#f4f4f4;
+
+
+
+/*-----------------------------------------------------------------------------------*/
+/*	form-control-focus-border-color
+/*-----------------------------------------------------------------------------------*/
+
+//输入框获得焦点
+@form-control-border-focus:#4AAFE9;
+
+//input.ng-invalid.ng-dirty 设置不合法的文本域背景色
+@input-ng-invalid-ng-dirty:#eed3d7;
+
+
+/* Badges */
+@badge-green:#a8bc7b;
+@badge-orange:#f0ad4e;
+@badge-red:#d9534f;
+@badge-blue:#70afc4;

@@ -1,0 +1,85 @@
+﻿.floorBtn {
+    width: 100px;
+}
+
+.roomCanvas {
+    margin: 0 0 20px 15px;
+    overflow: hidden;
+    position: relative;
+    border-radius: 5px;
+    cursor: pointer;
+    background-color: ghostwhite;
+    padding: 5px;
+    width: 150px;
+    height: 71px;
+    float: left;
+}
+
+    .roomCanvas .content {
+        padding: 5px;
+    }
+
+.roomNo {
+    margin-bottom: 15px;
+}
+
+.bedStatus {
+    padding-right: 5px;
+    font-size: large;
+}
+
+.bedStatus-used {
+    color: red;
+}
+
+.bedStatus-empty {
+    color: green;
+}
+
+.bedStatus-subscribe {
+    color: yellow;
+}
+
+.bedStatus-disable {
+    color: green;
+}
+
+.staffCanvas {
+}
+
+    .staffCanvas .name {
+        font-size: larger;
+        margin-top: 5px;
+    }
+
+.bedCanvas {
+    background-color: ghostwhite;
+    border-bottom: 1px solid #d4d4d4;
+}
+
+    .bedCanvas .content {
+        padding: 5px;
+    }
+
+    .bedCanvas .bedNo {
+        padding-left: 5px;
+    }
+
+    .bedCanvas .photo {
+        width: 90px;
+        height: 96px;
+    }
+
+    .bedCanvas .name {
+        font-size: larger;
+        margin-bottom: 25px;
+        margin-top: 5px;
+    }
+
+    .bedCanvas .operation {
+        text-align: right;
+    }
+
+.row-noMargin {
+    margin: 0px;
+}

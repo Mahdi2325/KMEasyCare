@@ -1,0 +1,136 @@
+<style type="text/css">
+    .label-Style {
+        display: table-cell;
+        vertical-align: middle;
+        text-align: center;
+        margin-top: 0;
+        margin-bottom: 0;
+        padding-top: 7px;
+    }
+</style>
+
+<div class="row">
+    <div id="content" class="col-lg-12">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="page-header">
+                    <ul class="breadcrumb">
+                        <li>
+                            <i class="fa fa-home"></i>
+                            <a href="/">首页</a>
+                        </li>
+                        <li>来访出入登记</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="box border primary">
+                    <div class="box-title">
+                        <h4><i class="fa fa-search"></i>查询条件</h4>
+                    </div>
+                    <div class="box-body">
+                        <form class="form-horizontal" role="form" novalidate>
+                            <div class="form-group">
+                                
+                                <label class="col-md-1 control-label">来访日期区间</label>
+                                <div class="col-md-3">
+                                    <div class="col-md-5">
+                                        <input type="text" class="form-control" ng-model="StartDate" ca-date-picker ng-change="checksDate()" />
+                                    </div>
+                                    <div class="col-md-1">
+                                        <label class="label-Style">～</label>
+                                    </div>
+                                    <div class="col-md-5">
+                                        <input type="text" class="form-control" ng-model="EndDate" ca-date-picker ng-change="checkeDate()" />
+                                    </div>
+                                </div>
+
+                                <div class="col-md-1 text-right">
+                                    <label class="control-label">来宾姓名</label>
+                                </div>
+                                <div class="col-md-2">
+                                    <input type="text" class="form-control" ng-model="options.params.keyWord" placeholder="请输入来宾姓名">
+                                </div>
+                                <div class="col-md-1">
+                                    <button class="btn btn-primary" ng-click="searchInfo()">查询</button>
+                                </div>
+                                <div class="col-md-1">
+                                    <button class="btn btn-primary" ng-click="visitorRegister()">来宾登记</button>
+                                </div>
+                                <div class="col-md-1">
+                                    <button class="btn btn-primary" ng-click="visitResident()">访视登记</button>
+                                </div>
+                               
+                            </div>
+                        </form>
+                        <!--<div class="input-group col-md-10">
+                            <input type="text" class="form-control" ng-model="options.params.keyWord" placeholder="请输入住民姓名或者身份证号">
+                            <span class="input-group-btn">
+                                <a class="btn btn-primary" ng-click="searchInfo()"><i class="fa fa-search"></i>查询</a>
+                                <a class="btn btn-primary" ui-sref="Person.BasicInfo({id:0})" style="display: none"><i class="fa fa-plus"></i>新增</a>
+                            </span>
+                        </div>-->
+                    </div>
+                </div>
+
+                <div class="box border primary">
+                    <div class="box-title">
+                        <h4><i class="fa fa-table"></i>来宾出入信息</h4>
+                        <div class="tools">
+                            <a href="javascript:;" class="reload" ng-click="reload()">
+                                <!--<i class="fa fa-refresh"></i>-->
+                            </a>
+                            <a href="javascript:;" class="collapse" ca-collapse>
+                                <!--<i class="fa fa-print"></i>-->
+                            </a>
+                        </div>
+                    </div>
+                    <div class="box-body">
+                        <ui-data-table options="options">
+                            <table class="table table-striped table-bordered table-hover table-handler">
+                                <thead>
+                                    <tr>
+                                        <th class="col-md-2">来访时间</th>
+                                        <th class="col-md-1">来宾姓名</th>
+                                        <th class="col-md-1">来宾性别</th>
+                                        <th class="col-md-2">来宾证件号</th>
+                                        <th class="col-md-2">来宾单位</th>
+                                        <th class="col-md-1">被访人姓名</th>
+                                        <!--<th class="col-md-1">访问事由</th>-->
+                                        <th class="col-md-2">离去时间</th>
+                                        <!--<th class="col-md-1">备注</th>-->
+                                        <th class="col-md-2"><i class="fa fa-bars"></i> 操作</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr ng-repeat="item in Visitors">
+                                        <td>{{item.StartDate| timeFormat}}</td>
+                                        <td>{{item.VisitorName}}</td>
+                                        <td><span select-code="A00.001" select-value="{{item.VisitorSex}}"></span></td>    
+                                        <td>{{item.VisitorIdNo}}</td>
+                                        <td>{{item.VisitorCompany}}</td>
+                                        <td>{{item.Interviewee}}</td>
+                                        <!--<td>{{item.Description}}</td>-->
+                                        <td>{{item.EndDate | timeFormat}}</td>
+                                        <!--<td>{{item.Remark}}</td>-->
+                                        <td>
+                                            <div class="btn-group btn-group-xs" role="group" aria-label="...">
+                                                <a ng-click="edit(item)" class="btn btn-info" href=""><i class="fa fa-pencil"></i>编辑</a>
+                                                <a class="btn btn-primary" role="button" data-toggle="modal" ng-click="delete(item.Id)"><i class="fa fa-times"></i>删除</a>
+                                                <!--<a class="btn btn-warning" role="button"  ng-click="Print(item)"><i class="fa fa-print"></i>打印</a>-->
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </ui-data-table>
+                    </div>
+                    <div id="pager" class="pull-right"></div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>

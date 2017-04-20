@@ -1,0 +1,126 @@
+﻿<style>
+    #reportListTab>thead>tr>th,#reportListTab>tbody>tr>td,#reportListTab>tfoot>tr>td{
+        word-wrap: break-word;
+        word-break: break-all;
+        text-align: center;
+        vertical-align: middle;
+    }
+    #reportListTab>tbody>tr>td{
+        min-width: 100px;
+    }
+</style>
+<div class="row">
+    <div id="content" class="col-sm-12">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="page-header">
+                    <ul class="breadcrumb">
+                        <li>
+                            <i class="fa fa-home"></i>
+                            <a href={{homeUrl}}>首页</a>
+                        </li>
+                        <li>报表管理</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="box border primary">
+                    <div class="box-title">
+                        <h4><i class="fa fa-search"></i>查询条件</h4>
+                    </div>
+                    <form class="form-horizontal ng-pristine ng-valid" role="form">
+                        <div class="box-body">
+                            <div class="form-group">
+                                <label class="search-lable">开始月份</label>
+                                <input type="text" id="startDate" class="search-control search-input input-width-sm" ng-model="sDate" date-picker date-fmt="yyyy-MM" ng-change="checkstartTime()" />
+                                <label class="search-lable">结束月份</label>
+                                <input type="text" id="endDate" class="search-control search-input input-width-sm" ng-model="eDate" date-picker date-fmt="yyyy-MM" ng-change="checkstartTime()" />
+                                <label class="search-lable">报表名称</label>
+                                <select class="search-control search-input input-width-sm" ng-model="reportType">
+                                    <option value="" selected>请选择报表类型</option>
+                                    <option value="MonthFee">待遇核算表</option>
+                                </select>
+
+                                <div class="search-btn-div">
+                                    <a class="btn btn-primary btn-sm" ng-click="Search()"><i class="fa fa-search"></i> 查询</a>
+                                </div>
+                                    <a class="btn btn-primary btn-sm" ng-click="exportRecort()"><i class="glyphicon glyphicon-share"></i> 导出</a>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+
+                <div id="reportList" style="width: 100%;overflow-x: auto">
+                    <div ng-class="{true:'',false:'hide'}[showTab]">
+                        <ui-data-table options="options">
+                        <table class="table table-bordered" id="reportListTab"></table>
+                        </ui-data-table>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+
+</div>
+
+<script id="MonthFee" type="text/x-handlebars-template">
+    <thead>
+        <tr>
+            <th>序号</th>
+            <th>姓名</th>
+            <th>性别</th>
+            <th>身份证号</th>
+            <th>户籍地或工作单位</th>
+            <th>参保人员身份</th>
+            <th>所患病种</th>
+            <th>护理形式</th>
+            <th>鉴定时间</th>
+            <th>住院日期</th>
+            <th>出院日期</th>
+            <th>住院天数</th>
+            <th>医疗总费用（元）</th>
+            <th>报销标准（元/天）</th>
+            <th>报销金额（元）</th>
+        </tr>
+    </thead>
+    <tbody>
+        {{#each dataList}}
+        <tr>
+            <td>{{Index}}</td>
+            <td>{{Name}}</td>
+            <td>{{Sex}}</td>
+            <td>{{ResidentSSId}}</td>
+            <td>{{BrithPlace}}</td>
+            <td>{{RsStatus}}</td>
+            <td>{{DiseaseDiag}}</td>
+            <td>{{CareTypeId}}</td>
+            <td>{{prettifyDate EvaluationTime}}</td>
+            <td>{{prettifyDate InDate}}</td>
+            <td>{{prettifyDate OutDate}}</td>
+            <td>{{HospDay}}</td>
+            <td>{{TotalAmount}}</td>
+            <td>{{NCIPayLevel}}</td>
+            <td>{{NCIPay}}</td>
+        </tr>
+        {{/each}}
+    </tbody>
+    <tfoot>
+        <tr>
+            <td colspan="4">合计</td>
+            <td colspan="7"></td>
+            <td>{{tHospDay}}</td>
+            <td>{{tTotalAmount}}</td>
+            <td>&nbsp;</td>
+            <td>{{tNCIPay}}</td>
+        </tr>
+    </tfoot>
+
+</script>

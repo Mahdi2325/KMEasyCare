@@ -1,0 +1,191 @@
+<div class="row">
+    <div class="box-body">
+        <div id="content" class="col-lg-12">
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="page-header" ng-init="urlstr='UserList'">
+                        <ul class="breadcrumb">
+                            <li>
+                                <i class="fa fa-home"></i>
+                                <a href="/">首页</a>
+                            </li>
+                            <li>
+                                <a ui-sref="{{urlstr}}">用户信息列表</a>
+                            </li>
+                            <li>用户信息管理</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="box border primary">
+                        <div class="box-title">
+                            <h4><i class="fa fa-bars"></i>用户信息</h4>
+                        </div>
+                        <div class="box-body">
+                            <form class="form-horizontal" role="form" name="formUser" ng-submit="save()" novalidate>
+                                <div ng-hide="OrgISSelect" class="form-group">
+                                    <input class="form-control" style="display:none" ng-model="OrgISSelect" ng-maxlength="10" />
+
+                                </div>
+                                <div class="form-group">
+                                    <div ng-hide="OrgISSelect">
+                                        <input class="form-control" style="display:none" ng-model="OrgISSelect" ng-maxlength="10" />
+                                        <label class="control-label col-md-1">所属机构<span class="required">*</label>
+                                        <div class="col-sm-10">
+                                            <select class="form-control" ng-model="orgid"  ng-options="item.orgid as item.orgname   for item in Orglist" ng-disabled="lockOrg" ng-change="ChangeOrg(orgid)" ></select>
+
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <!--<label class="col-sm-1 control-label">编码</label>
+                                    <div class="col-sm-4">
+                                        <input id="UserID" name="UserID" type="text" class="form-control" ng-model="Data.User.UserID" ng-minlength="1" ng-maxlength="10" placeholder="请输入用户代码" required />
+                                    </div>-->
+
+                                    <label class="col-sm-1 control-label">选择员工<span class="required">*</span></label>
+                                    <div class="col-sm-4">
+                                        <input-staff id="selStaff" callback="staffSelected(item)" value="{{Data.User.EmpNo}}" orgid={{orgid}} required="true" />
+                                        <!--<input id="txtName" name="EmpName" type="text" class="form-control" ng-model="Show.EmpName" placeholder="点击选择用户" data-toggle="modal" data-target="#modalEmpFiles" readonly="readonly" required />-->
+                                        <!--<input id="EmpNO" name="EmpNO" type="hidden" class="form-control" ng-model="Data.User.EmpNo" />-->
+                                    </div>
+                                    <label class="col-sm-2 control-label">角色<span class="required">*</span></label>
+                                    <div class="col-sm-4">
+                                        <input id="selRoles" type="text" class="form-control" style="height:auto" name="角色" required/>
+                                        <!--<input type="hidden" ng-model="Data.User.RoleId" />-->
+                                        <!--<select name="roleId" class="col-sm-12 form-control" ng-model="Data.User.RoleId" ng-options="t.RoleId as t.RoleName for t in Roles"></select>-->
+                                    </div>
+
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-1 control-label">登录名称<span class="required">*</span></label>
+                                    <div class="col-sm-4">
+                                        <input id="LoginName" name="LoginName" type="text" class="form-control" ng-model="Data.User.LogonName" ng-minlength="4" ng-maxlength="20" placeholder="请输入登录名称" required />
+                                    </div>
+                                    <label class="col-sm-2 control-label">密码<span ng-show="isPwdChanged" class="required">*</span></label>
+                                    <div class="col-sm-4">
+                                        <input class="form-control" type="{{type ? 'text' : 'password'}}" ng-minlength="1" ng-model="newPassword" ng-maxlength="36" />
+                                      
+                                    </div>
+                                    <div class="col-sm-1">
+                                        <label class="control-label">显示</label>
+                                        <input type="checkbox" ng-model="type" />
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-1 control-label">邮箱<span class="required">*</span></label>
+                                    <div class="col-sm-4">
+                                        <input id="Email" name="邮箱" type="email" class="form-control" ng-model="Data.User.Email" placeholder="请输入邮箱地址" required />
+                                    </div>
+                                </div>
+                                <div class="form-group" ng-hide="true">
+                                    <label class="col-sm-1 control-label">密码有效期</label>
+                                    <div class="col-sm-4">
+                                        <input id="PWDExpdate" class="form-control datepicker" type="text" ca-date-picker ng-model="Data.User.PwdExpDate">
+                                    </div>
+                                    <label class="col-sm-2 control-label">有效时间</label>
+                                    <div class="col-sm-4">
+                                        <div class="input-group">
+                                            <input id="PwdDuration" type="text" ng-model="Data.User.PwdDuration" class="form-control" ng-maxlength="10" only-int />
+                                            <div class="input-group-addon">天</div>
+                                        </div>
+                                        <!--<input id="PwdDuration" class="form-control" ng-model="Data.User.PwdDuration" ng-maxlength="18" />-->
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label ng-hide="true" class="col-sm-1 control-label">密码启用</label>
+                                    <div class="col-sm-4" ng-hide="true">
+                                        <label class="radio inline col-md-2">
+                                            <input type="radio" id="radioPWDFalse" name="radio_PWDEnable" ng-model="Data.User.PwdEnable" ng-checked="true" value="False"> 否
+                                        </label>
+                                        <label class="radio inline col-md-2">
+                                            <input type="radio" id="radioPWDTrue" name="radio_PWDEnable" ng-model="Data.User.PwdEnable" value="True"> 是
+                                        </label>
+                                    </div>
+
+                                    <label class="col-sm-1 control-label">中央控管用户</label>
+                                    <div class="col-sm-5">
+                                        <label class="radio inline col-md-2">
+                                            <input type="radio" id="radioIsOrgCtrlFalse" name="radio_IsOrgCtrl" ng-model="Data.User.IsOrgCtrl" ng-checked="true" value="False"> 否
+                                        </label>
+                                        <label class="radio inline col-md-2">
+                                            <input type="radio" id="radioIsOrgCtrlTrue" name="radio_IsOrgCtrl" ng-model="Data.User.IsOrgCtrl" value="True"> 是
+                                        </label>
+                                    </div>
+                                    <label class="col-sm-1 control-label" ng-show="showStatus">状态</label>
+                                    <div class="col-sm-4">
+                                        <div ng-show="showStatus">
+                                            <label class="radio inline col-md-2">
+                                                <input type="radio" id="rdStatusTrue" name="rdStatus" ng-model="Data.User.Status" ng-value="true"> 启用
+                                            </label>
+                                            <label class="radio inline col-md-2">
+                                                <input type="radio" id="rdStatusFalse" name="rdStatus" ng-model="Data.User.Status" ng-value="false"> 禁用
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="form-group center">
+                                    <input type="text" style="display:none" name="checkEmpNo" ng-model="checkEmpNo" />
+
+                                    <input type="text" style="display:none" name="checkLogonName" ng-model="checkLogonName" />
+                                    <button class="btn btn-info btn-lg" type="submit" ng-disabled="formUser.$invalid">保存</button>
+                                    <button class="btn btn-grey btn-lg" ui-sref="UserList">取消</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--员工Modal -->
+    <!--<div class="modal fade" id="modalEmpFiles" tabindex="-2" role="dialog" aria-labelledby="modalRelationshipLabel" data-target=".bs-example-modal-lg">
+        <div class="modal-dialog bs-example-modal-lg" role="document">
+            <div class="modal-content modal-lg">
+                <div class="modal-header bg-success">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">  &times; </button>
+                    <h4 class="modal-title" id="modalRelationshipLabel">员工选择</h4>
+                </div>
+                <div class="modal-body">
+                        <table class="table table-striped table-bordered table-hover table-handler">
+                            <thead>
+                                <tr>
+                                    <th>编号</th>
+                                    <th>姓名</th>
+                                    <th>性别</th>
+                                    <th>出生日期</th>
+                                    <th>职称</th>
+                                    <th>部门</th>
+                                    <th><i class="fa fa-bars"></i> 操作</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr ng-repeat="emp in Info.empFiles">
+                                    <td>{{emp.EmpNO}}</td>
+                                    <td>{{emp.EmpName}}</td>
+                                    <td>{{Dic.Gender.toText(emp.Sex)}}</td>
+                                    <td>{{emp.BrithDate}}</td>
+                                    <td>{{Dic.TitelList.toText(emp.Title)}}</td>
+                                    <td>{{Dic.DeptList.toText(emp.DeptNO)}}</td>
+                                    <td class="center">
+                                        <button class="btn btn-primary" ng-click="selectStaff(emp.id)">选择</button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" data-dismiss="modal">关闭</button>
+                </div>
+            </div>
+
+        </div>
+    </div>-->
+
+</div>

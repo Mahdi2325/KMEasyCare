@@ -1,0 +1,201 @@
+<div class="row">
+    <div id="content" class="col-lg-12">
+        <!--标题-->
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="page-header">
+                    <ul class="breadcrumb">
+                        <li>
+                            <i class="fa fa-home"></i>
+                            <a href="/">首页</a>
+                        </li>
+                        <li><a ui-sref="OutInValueRecord">输出入量</a></li>
+                        <li>输出入量详情</li>
+                    </ul>
+                    
+                </div>
+
+
+            </div>
+        </div>
+        <!--标题-->
+
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="box border primary">
+                    <div class="box-title">
+                        <h4>
+                            <i class="fa fa-bars"></i>输入量
+                        </h4>
+                    </div>
+                    <div class="box-body">
+                        <ui-data-table options="inOptions">
+                            <table class="table table-striped table-bordered table-hover table-handler">
+                                <thead>
+                                    <tr>
+                                        <th>#</th>
+                                        <th>输入时间</th>
+                                        <th>班别</th>
+                                        <th>注射量(c.c.)</th>
+                                        <th>途径</th>
+                                        <th>记录人员</th>
+                                        <th><i class="fa fa-bars"></i> 操作</th>
+                                    </tr>
+                                </thead>
+
+                                <tbody>
+                                    <tr ng-repeat="item in InList" ng-class="{true: 'ng-scope active', false: 'ng-scope'}[item.InNo==currentItemIn.InNo]">
+                                        <td>{{$index + 1}}</td>
+                                        <td>{{item.RecDate | timeFormat}}</td>
+                                        <td><span select-code="F00.002" select-value="{{item.ClassType}}"></span></td>
+                                        <td>{{item.InValue}}</td>
+                                        <td><span select-code="F00.003" select-value="{{item.InType}}"></span></td>
+                                        <td>{{item.RecordNameBy}}</td>
+                                        <td>
+                                            <div class="btn-group btn-group-xs" role="group" aria-label="...">
+                                                <a class="btn btn-info" role="button" ng-click="editIn(item)"><i class="fa fa-pencil"></i>编辑</a>
+                                                <a class="btn btn-primary" role="button" ng-click="deleteIn(item)"><i class="fa fa-times"></i>删除</a>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </tbody>
+
+                            </table>
+                        </ui-data-table>
+                        <div id="pager1" class="pull-right"></div>
+                    </div>
+                    <div class="well">
+                        <form class="form-horizontal" role="form" name="infrom" ng-submit="saveIn(currentItemIn)">
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">输入时间<span class="required">*</span></label>
+                                <div class="col-sm-4">
+                                    <input class="form-control datepicker" type="text" ng-model="currentItemIn.RecDate" required ca-date-time-picker />
+                                </div>
+                                <label class="col-sm-2 control-label">班别<span class="required">*</span></label>
+                                <div class="col-sm-4">
+                                    <select class="form-control" ng-model="currentItemIn.ClassType" select-code="F00.002" required></select>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">注射量<span class="required">*</span></label>
+                                <div class="col-sm-4">
+                                    <div class="input-group">
+                                        <input type="number" ng-model="currentItemIn.InValue" class="form-control" ng-min="1" ng-maxlength="9" required />
+                                        <div class="input-group-addon">c.c.</div>
+                                    </div>
+                                </div>
+                                <label class="col-sm-2 control-label">途径</label>
+                                <div class="col-sm-4">
+                                    <select class="form-control" ng-model="currentItemIn.InType" select-code="F00.003"></select>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">记录人员</label>
+                                <div class="col-sm-4">
+                                    <input-staff callback="staffByInSelected(item)" clearitem="clearStaffIn()" value="{{currentItemIn.RecordBy}}" required />
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <div class="col-sm-offset-1 col-sm-11">
+                                    <button class="btn btn-primary" type="submit" ng-disabled="infrom.$invalid">保存</button>
+                                    <button class="btn btn-primary" type="button" ng-click="resetIn()">重置</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="col-sm-6">
+                <div class="box border primary">
+                    <div class="box-title">
+                        <h4>
+                            <i class="fa fa-bars"></i>输出量
+                        </h4>
+                    </div>
+                    <div class="box-body">
+                        <ui-data-table options="outOptions">
+                            <table class="table table-striped table-bordered table-hover table-handler">
+                                <thead>
+                                    <tr>
+                                        <th>#</th>
+                                        <th>输出时间</th>
+                                        <th>班别</th>
+                                        <th>排放量(c.c.)</th>
+                                        <th>类型</th>
+                                        <th>记录人员</th>
+                                        <th><i class="fa fa-bars"></i> 操作</th>
+                                    </tr>
+                                </thead>
+
+                                <tbody>
+                                    <tr ng-repeat="item in OutList" ng-class="{true: 'ng-scope active', false: 'ng-scope'}[item.OutNo==currentItemOut.OutNo]">
+                                        <td>{{$index + 1}}</td>
+                                        <td>{{item.RecDate | timeFormat }}</td>
+                                        <td><span select-code="F00.002" select-value="{{item.ClassType}}"></span></td>
+                                        <td>{{item.OutValue}}</td>
+                                        <td><span select-code="F00.004" select-value="{{item.OutType}}"></span></td>
+                                        <td>{{item.RecordNameBy}}</td>
+                                        <td>
+                                            <div class="btn-group btn-group-xs" role="group" aria-label="...">
+                                                <a class="btn btn-info" role="button" ng-click="editOut(item)"><i class="fa fa-pencil"></i>编辑</a>
+                                                <a class="btn btn-primary" role="button" ng-click="deleteOut(item)"><i class="fa fa-times"></i>删除</a>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </ui-data-table>
+                        <div id="pager2" class="pull-right"></div>
+                    </div>
+
+                    <div class="well">
+                        <form class="form-horizontal" role="form" name="outfrom" ng-submit="saveOut(currentItemOut)">
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">输出时间<span class="required">*</span></label>
+                                <div class="col-sm-4">
+                                    <input class="form-control datepicker" type="text" ng-model="currentItemOut.RecDate" ca-date-time-picker required />
+                                </div>
+                                <label class="col-sm-2 control-label">班别<span class="required">*</span></label>
+                                <div class="col-sm-4">
+                                    <select class="form-control" ng-model="currentItemOut.ClassType" select-code="F00.002" required></select>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">排放量<span class="required">*</span></label>
+                                <div class="col-sm-4">
+                                    <div class="input-group">
+                                        <input type="number" ng-model="currentItemOut.OutValue" class="form-control" ng-maxlength="9" ng-min="1" required />
+                                        <div class="input-group-addon">c.c.</div>
+                                    </div>
+                                </div>
+                                <label class="col-sm-2 control-label">类型</label>
+                                <div class="col-sm-4">
+                                    <select class="form-control" ng-model="currentItemOut.OutType" select-code="F00.004"></select>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">记录人员</label>
+                                <div class="col-sm-4">
+                                    <input-staff callback="staffByOutSelected(item)" clearitem="clearStaffOut()" value="{{currentItemOut.RecordBy}}" required />
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <div class="col-sm-offset-1 col-sm-11">
+                                    <button class="btn btn-primary" type="submit" ng-disabled="outfrom.$invalid">保存</button>
+                                    <button class="btn btn-primary" type="button" ng-click="resetOut()">重置</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+

@@ -1,0 +1,50 @@
+<div class="container-fluid" ng-controller="chooseResidentModalCtr">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <form class="form-horizontal" role="form">
+                        <div class="form-group">
+                            <label class="control-label col-md-1">姓名</label>
+                            <div class="col-sm-2">
+                                <input class="form-control" type="text" ng-model="Name" placeholder="姓名" />
+                            </div>
+                            <label class="control-label col-md-1">楼层</label>
+                            <div class="col-sm-2">
+                                <select class="form-control" ng-model="FloorId" ng-options="item.FloorId as item.FloorName for item in floors">
+                                    <option value="">-- 请选择 --</option>
+                                </select>
+                            </div>
+                            <div class="col-sm-2 input-group-btn">
+                                <a class="btn btn-primary" ng-click="Search()"><i class="fa fa-search"></i> 查询</a>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-12">
+            <div class="form-group" >
+                <div class="col-sm-4" >
+                    <select multiple class="form-control" style="height:450px" id="sltFrom">
+                        <option ng-repeat="t in residents" value="{{t.FeeNo}}">{{t.Name}}</option>
+                    </select>
+                </div>
+                <div class="col-sm-2" style="padding-top:150px;"><button class="btn btn-block" ng-click="addEmp('right')">&gt;&gt;</button><button class="btn btn-block" ng-click="addEmp('left')">&lt;&lt;</button></div>
+                <div class="col-sm-4">
+                    <select multiple class="form-control" style="height:450px" id="sltTo">
+                        <option ng-repeat="t in regSelected" value="{{t.FeeNo}}">{{t.Name}}</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-primary" ng-click="Save()" id="btnOk">确定</button>
+            <button type="button" class="btn btn-primary" ng-click="Close()">关闭</button>
+        </div>
+    </div>
+   
+   
+    
+</div>
+

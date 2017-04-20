@@ -1,0 +1,64 @@
+<div class="row">
+    <div class="row">
+        <div id="content" class="col-lg-12">
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="page-header" ng-init="urlstr='DeptList'">
+                        <ul class="breadcrumb">
+                            <li>
+                                <i class="fa fa-home"></i>
+                                <a href="/">首页</a>
+                            </li>
+                            <li>
+                                <a ui-sref="{{urlstr}}">部门管理</a>
+                            </li>
+                            <li>部门信息</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="box border primary">
+                        <div class="box-title">
+                            <h4><i class="fa fa-bars"></i>部门信息</h4>
+                        </div>
+                        <div class="box-body">
+                            
+                            <form class="form-horizontal" role="form" name="form1" ng-submit="submit()" novalidate>
+                                <div class="form-group">
+                                    <label class="col-sm-3 control-label">机构编码<span class="required">*</span></label>
+                                    <div class="col-sm-6">
+                                        <select name="deptCode" class="col-sm-12 form-control" ng-model="Data.dept.OrgId" ng-options="t.OrgId as t.OrgName for t in Data.orgs" ng-if="isAdd" ng-disabled="showOrg" required></select>
+                                        <input name="deptCode" class="col-sm-12 form-control" ng-model="Data.dept.OrgId" ng-if="!isAdd" required readonly />
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-3 control-label">部门编号<span class="required">*</span></label>
+                                    <div class="col-sm-6">
+                                        <input name="DeptNo" class="form-control" ng-model="Data.dept.DeptNo" ng-readonly="!isAdd" unique-type="DeptNo" unique-key="DeptNo" unique required ng-maxlength="10" />
+                                    </div>
+                                    <div class="col-sm-3 control-label" style="text-align: left;">
+                                        <span class="text-danger " ng-show="form1.DeptNo.$dirty && form1.DeptNo.$error.required">部门编号必填</span>
+                                    </div>
+                                </div>
+                               
+                                <div class="form-group">
+                                    <label class="col-sm-3 control-label">部门名称</label>
+                                    <div class="col-sm-6">
+                                        <textarea class="form-control" rows="3" ng-model="Data.dept.DeptName" ng-maxlength="50"></textarea>
+                                    </div>
+                                </div>
+                                <div class="form-group center">
+                                    
+                                    <button class="btn btn-info btn-lg" type="submit" ng-disabled="form1.$invalid">保存</button>
+                                    <button class="btn btn-grey btn-lg" ui-sref="DeptList">取消</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

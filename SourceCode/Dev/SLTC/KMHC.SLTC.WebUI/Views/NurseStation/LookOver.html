@@ -1,0 +1,110 @@
+﻿
+<div class="row">
+    <div id="content" class="col-lg-12">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="page-header">
+                    <ul class="breadcrumb">
+                        <li>
+                            <i class="fa fa-home"></i>
+                            <a href="/">首页</a>
+                        </li>
+                        <li>巡房记录</li>
+                    </ul>
+
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="box border primary">
+                    <div class="box-title">
+                        <h4><i class="fa fa-search"></i>查询条件</h4>
+                    </div>
+                    <div class="box-body">
+                        <div class="form-group">
+                            <div class="input-group col-md-10">
+                                <div class="col-sm-4">
+                                    <input class="form-control" type="text" placeholder="请选择巡房日期" ng-model="options.params.date" ca-date-picker />
+                                </div>
+                                <div class="col-sm-4">
+                                    <select ng-model="options.params.FloorId" class="form-control" placeholder="请选择楼层" ng-options="item.FloorId as item.FloorName for item in Data.floors">
+                                        <option>--选择区域--</option>
+                                    </select>
+                                </div>
+                                <div class="col-sm-1">
+                                    <span class="input-group-btn">
+                                        <a class="btn btn-primary" ng-click="options.search()"><i class="fa fa-search"></i>查询</a>
+                                        <a class="btn btn-primary" ui-sref="LookOverAdd"><i class="fa fa-plus"></i>新增</a>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- BOX -->
+                <div class="box border primary">
+                    <div class="box-title">
+                        <h4><i class="fa fa-bars"></i>巡房记录信息</h4>
+                        <div class="tools hidden-xs">
+                            <a class="reload" href="javascript:;" ca-reload>
+                                <i class="fa fa-refresh"></i>
+                            </a>
+                            <a href="javascript:;" class="collapse" ca-collapse>
+                                <i class="fa fa-chevron-up"></i>
+                            </a>
+                            <a class="remove" href="javascript:;" ca-remove>
+                                <i class="fa fa-times"></i>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="box-body">
+                        <ui-data-table options="options">
+                            <table id="datatable1" class="table table-striped table-bordered table-hover table-handler">
+                                <thead>
+                                    <tr>
+                                        <th style="width:40px" >编号</th>
+                                        <th style="width:100px">区域</th>
+                                        <th style="width:300px">寻访内容</th>
+                                        <th style="width:150px">图片</th>
+                                        <th style="width:80px">巡房人</th>
+                                        <th style="width:120px">时间</th>
+                                        <th><i class="fa fa-bars"></i> 操作</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr ng-repeat="Item in ItemList">
+                                        <td>{{$index + 1}}</td>
+                                        <td>{{Item.FloorName}}</td>
+                                        <td class="w-percent20">
+                                            <div class="bubble-txt" data-toggle="tooltip" title="{{Item.Content}}">
+                                                {{Item.Content | cut:true:50:' ...'}}
+                                            </div>
+                                        </td>
+                                        <td>
+
+                                                <div class="col-md-2" style="vertical-align:middle" ng-repeat="Photo in Item.PhotoList">
+                                                    <a href="{{Photo}}" target="_blank">
+                                                                                    <img src="{{Photo}}" class="carousel-inner img-responsive img-rounded" />
+</a>
+                                                </div>
+                                        </td>
+                                        <td>{{Item.RecordName}}</td>
+                                        <td>{{Item.LookOverTime | date:'yyyy-MM-dd HH:mm:ss'}}</td>
+                                        <td class="center">
+                                            <div class="btn-group btn-group-xs" role="group" aria-label="...">
+                                                <a ui-sref="LookOverEdit({id:Item.ID})" class="btn btn-info" role="button"><i class="fa fa-pencil"></i>编辑</a>
+                                                <a ng-click="deleteItem(Item)" class="btn btn-primary" role="button"><i class="fa fa-times"></i>删除</a>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </ui-data-table>
+                    </div>
+                </div>
+                <!-- /BOX -->
+            </div>
+        </div>
+    </div>
+</div>

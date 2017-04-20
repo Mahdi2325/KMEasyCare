@@ -1,0 +1,180 @@
+<div class="row">
+    <div class="box-body">
+        <div id="content" class="col-lg-12">
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="page-header">
+                        <ul class="breadcrumb">
+                            <li>
+                                <i class="fa fa-home"></i>
+                                <a href="/">首页</a>
+                            </li>
+                            <li>
+                                <a href="/angular/OrgList">机构管理列表</a>
+                            </li>
+                            <li>机构信息管理</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="box border primary">
+                        <div class="box-title">
+                            <h4><i class="fa fa-bars"></i>机构信息</h4>
+                        </div>
+                        <div class="box-body">
+                            <form class="form-horizontal" role="form" name="formOrg" ng-submit="save()" novalidate>
+                                <div class="form-group">
+                                    <label class="col-sm-1 control-label">代码</label>
+                                    <div class="col-sm-4">
+                                        <input id="OrgID" name="OrgID" type="text" class="form-control" ng-model="Data.Org.OrgID" ng-minlength="1" ng-maxlength="10" placeholder="请输入机构代码" required />
+                                    </div>
+                                    <label class="col-sm-2 control-label">名称</label>
+                                    <div class="col-sm-4">
+                                        <input id="OrgName" name="OrgName" type="text" class="form-control" ng-model="Data.Org.OrgName" ng-minlength="1" ng-maxlength="50" placeholder="请填入机构名称" required />
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-1 control-label">类型</label>
+                                    <div class="col-sm-4">
+                                        <select class="form-control" id="selCategory" ng-model="Data.Org.OrgType" ng-options="t.Value as t.Name for t in Dic.Type"></select>
+                                    </div>
+                                    <label class="col-sm-2 control-label">所属集团</label>
+                                    <div class="col-sm-4">
+                                        <select class="form-control" id="selCategory" ng-model="Data.Org.GroupID" ng-options="g.Value as g.Name for g in Dic.GroupList"></select>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-1 control-label">床位数</label>
+                                    <div class="col-sm-4">
+                                        <input class="form-control" ng-model="Data.Org.BedCount" />
+                                    </div>
+                                    <label class="col-sm-2 control-label">负责人</label>
+                                    <div class="col-sm-4">
+                                        <input class="form-control" ng-model="Data.Org.Responsible" />
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-1 control-label">电话</label>
+                                    <div class="col-sm-4">
+                                        <input class="form-control" ng-model="Data.Org.Tel" />
+                                    </div>
+                                    <label class="col-sm-2 control-label">传真</label>
+                                    <div class="col-sm-4">
+                                        <input class="form-control" ng-model="Data.Org.Fax" />
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-1 control-label">电子邮箱</label>
+                                    <div class="col-sm-10">
+                                        <input class="form-control" ng-model="Data.Org.Email" />
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-1 control-label">机构网站</label>
+                                    <div class="col-sm-10">
+                                        <input class="form-control" ng-model="Data.Org.Website" />
+                                    </div>
+                                </div>
+
+                                <div class="form-group center">
+                                    <button class="btn btn-info btn-lg" type="submit" ng-disabled="formOrg.$invalid">保存</button>
+                                    <button class="btn btn-grey btn-lg" ui-sref="OrgList">取消</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!--<div class="row">
+    <div class="row">
+        <div id="content" class="col-lg-12">
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="page-header">
+                        <ul class="breadcrumb">
+                            <li>
+                                <i class="fa fa-home"></i>
+                                <a href="/">首页</a>
+                            </li>
+                            <li>
+                                <a href="/angular/OrgList">机构管理列表</a>
+                            </li>
+                            <li>机构管理信息</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="box border primary">
+                        <div class="box-title">
+                            <h4><i class="fa fa-bars"></i>机构信息</h4>
+                        </div>
+                        <div class="box-body">
+                            <form class="form-horizontal" role="form" name="formOrg" ng-submit="save()" novalidate>
+                                <div class="form-group">
+                                    <label class="col-sm-1 control-label">代码</label>
+                                    <div class="col-sm-4">
+                                        <input id="GroupID" name="GroupID" type="text" class="form-control" ng-model="Data.Org.GroupID" ng-minlength="1" ng-maxlength="10" placeholder="请输入机构代码" required />
+                                    </div>
+                                    <label class="col-sm-2 control-label">名称</label>
+                                    <div class="col-sm-4">
+                                        <input id="OrgName" name="OrgName" type="text" class="form-control" ng-model="Data.Org.OrgName" ng-minlength="1" ng-maxlength="50" placeholder="请填入机构名称" required />
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-1 control-label">类型</label>
+                                    <div class="col-sm-4">
+                                        <input class="form-control" ng-model="Data.Org.OrgType" />
+                                    </div>
+                                    <label class="col-sm-2 control-label">负责人</label>
+                                    <div class="col-sm-4">
+                                        <input class="form-control" ng-model="Data.Org.Responsible" />
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-1 control-label">电话</label>
+                                    <div class="col-sm-4">
+                                        <input class="form-control" ng-model="Data.Org.Tel" />
+                                    </div>
+                                    <label class="col-sm-2 control-label">传真</label>
+                                    <div class="col-sm-4">
+                                        <input class="form-control" ng-model="Data.Org.Fax" />
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-1 control-label">床位数</label>
+                                    <div class="col-sm-4">
+                                        <input class="form-control" ng-model="Data.Org.BedCount" />
+                                    </div>
+                                    <label class="col-sm-2 control-label">电子邮件</label>
+                                    <div class="col-sm-4">
+                                        <input class="form-control" ng-model="Data.Org.Email" />
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-1 control-label">机构网站</label>
+                                    <div class="col-sm-10">
+                                        <input class="form-control" ng-model="Data.Org.Website" />
+                                    </div>
+                                </div>
+
+                                <div class="form-group center">
+                                    <button class="btn btn-info btn-lg" type="submit" ng-disabled="formOrg.$invalid">保存</button>
+                                    <button class="btn btn-grey btn-lg" ui-sref="StaffList">取消</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>-->

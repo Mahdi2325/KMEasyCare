@@ -1,0 +1,329 @@
+<style>
+    .table8_1 {
+        width: 100%;
+        margin: 15px 0;
+    }
+
+    .table8_1 th {
+        background-color: #a4c1df;
+        background: -o-linear-gradient(90deg, #C3E7FA, #dcf1fc);
+        background: -moz-linear-gradient( center top, #C3E7FA 5%, #dcf1fc 100% );
+        background: -webkit-gradient( linear, left top, left bottom, color-stop(0.05, #C3E7FA), color-stop(1, #dcf1fc) );
+        filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#C3E7FA', endColorstr='#dcf1fc');
+        color: #000000;
+    }
+
+    .table8_1, .table8_1 th, .table8_1 td {
+        font-size: 0.95em;
+        text-align: center;
+        padding: 4px;
+        border: 1px solid #efefef;
+        border-collapse: collapse;
+    }
+
+        .table8_1 tr:nth-child(odd) {
+            /*background-color: #ebf7fd;
+            background: -o-linear-gradient(90deg, #ebf7fd, #fbfdfe);
+            background: -moz-linear-gradient( center top, #ebf7fd 5%, #fbfdfe 100% );
+            background: -webkit-gradient( linear, left top, left bottom, color-stop(0.05, #ebf7fd), color-stop(1, #fbfdfe) );
+            filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ebf7fd', endColorstr='#fbfdfe');*/
+        }
+
+        .table8_1 tr:nth-child(even) {
+            background-color: #f3f6f9;
+        }
+</style>
+
+<div class="row">
+    <div id="content" class="col-lg-12">
+        <!-- PAGE HEADER-->
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="page-header">
+                    <ul class="breadcrumb">
+                        <li>
+                            <i class="fa fa-home"></i>
+                            <a href="/">首页</a>
+                        </li>
+                        <li><a ui-sref="CarePlanDetail({regNo:Data.RegNo,feeNo:Data.FeeNo,regName:Data.RegName})">照护计划列表</a></li>
+                        <li>评值 - 当前住民：{{Data.RegName}}</li>
+                    </ul>
+                    <!-- /BREADCRUMBS -->
+                    
+                    <div class="description"></div>
+                </div>
+            </div>
+        </div>
+        <!-- /PAGE HEADER -->
+        <form class="form-horizontal" name="myForm" role="form">
+            <div class="row">
+                <div class="col-md-12">
+
+                    <div class="box-body">
+                        <div class="tab-pane">
+                            <div class="panel panel-default">
+                                <div class="panel-heading">评值与成果</div>
+                                <div class="panel-body">
+                                    <div class="form-group">
+                                        <div class="form-group">
+                                            <label class="col-sm-1 control-label">完成情形</label>
+                                            <div class="col-sm-2">
+                                                <select class="form-control" ng-model="Data.NSCPL.FINISHFLAG" select-code="G00.001" ng-click="ChangeFinishFlag()"></select>
+                                            </div>
+                                            <label class="col-sm-1 control-label">完成时间<span class="required">*</span></label>
+                                            <div class="col-sm-2">
+                                                <input ng-model="Data.NSCPL.FINISHDATE" ng-disabled="!Data.NSCPL.FINISHFLAG" class="form-control" required name="完成时间" ng-change="ChangeTotalDays()" type="text" ca-date-picker>
+                                            </div>
+                                            <label class="col-sm-1 control-label">总天数</label>
+                                            <div class="col-sm-1">
+                                                <input ng-model="Data.NSCPL.TOTALDAYS"  class="form-control" type="text">
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-sm-1 control-label">结果评估</label>
+                                            <div class="col-sm-9">
+                                                <textarea class="form-control"  ng-model="Data.NSCPL.CPRESULT" name="结果评估" ng-maxlength="200"></textarea>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                      
+                                            <div class="col-sm-2 col-sm-offset-7">
+                                                <a class="btn btn-primary"  ng-click="SaveNSCPL()">保存</a>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="box border primary">
+                            <div class="box-title">
+                                <h4><i class="fa fa-table"></i>计划详情</h4>
+                                <div class="tools hidden-xs">
+                                    <a href="javascript:;" class="collapse" ca-collapse>
+                                        <i class="fa fa-chevron-up"></i>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="box-body">
+                                <div class="form-group">
+                                    <label class="col-sm-1 control-label">问题层面</label>
+                                    <div class="col-sm-5">
+                                        <input class="form-control" ng-model="Data.NSCPL.CPLEVEL" readonly="readonly" />
+                                    </div>
+                                    <label class="col-sm-1 control-label">照护问题</label>
+                                    <div class="col-sm-5">
+                                        <!--<input class="form-control" readonly="readonly" ng-model="Data.NSCPL.CPDIAG" />-->
+                                        <select class="form-control"  disabled ng-model="Data.NSCPL.CPDIAG" ng-options="item.ItemCode as item.ItemName for item in Data.Diag"></select>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-1 control-label">背景资料</label>
+                                    <div class="col-sm-5">
+                                        <textarea style="height:100px" required class="form-control" ng-model="Data.NSCPL.NSDESC" readonly="readonly" ></textarea>
+                                    </div>
+                                    <label class="col-sm-1 control-label">问题分析</label>
+                                    <div class="col-sm-5">
+                                        <textarea style="height:100px" required class="form-control" ng-model="Data.NSCPL.CPREASON" readonly="readonly"></textarea>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-md-12">
+                                        <!-- BOX -->
+                                         
+                                        <table class="table8_1">
+                                            <thead>
+                                                <tr>
+                                                    <th class="col-md-1"></th>
+                                                    <th class="col-md-2">日期</th>
+                                                    <th class="col-md-4">目标</th>
+                                                    <th class="col-md-1">已完成</th>
+                                                    <th class="col-md-2">完成日期</th>
+                                                    <th class="col-md-2">未完成原因</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr ng-repeat="Item in Data.CarePlanGoalList">
+                                                    <td>{{$index + 1}}</td>
+                                                    <td>{{Item.RECDATE| date:'yyyy-MM-dd'}}</td>
+                                                    <td>{{Item.CPLGOAL}}</td>
+                                                    <td>
+                                                        <input type="checkbox" class="checkbox" ng-model="Item.FINISHFLAG" disabled ng-click="ChangeFinishFlag(Item)" />
+                                                    </td>
+                                                    <td>{{Item.FINISHDATE | date:'yyyy-MM-dd'}}</td>
+                                                    <td>{{Item.UNFINISHREASON}}</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                        <!-- /BOX -->
+                                    </div>
+                                    <div class="col-md-12">
+                                        <!-- BOX -->
+                                        <table class="table8_1">
+                                            <thead>
+                                                <tr>
+                                                    <th class="col-md-1"></th>
+                                                    <th class="col-md-2">日期</th>
+                                                    <th class="col-md-4">措施</th>
+                                                    <th class="col-md-1">已完成</th>
+                                                    <th class="col-md-2">完成日期</th>
+                                                    <th class="col-md-2">未完成原因</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr ng-repeat="Item in Data.CarePlanActivityList">
+                                                    <td>{{$index + 1}}</td>
+                                                    <td>{{Item.RECDATE| date:'yyyy-MM-dd'}}</td>
+                                                    <td>{{Item.CPLACTIVITY}}</td>
+                                                    <td>
+                                                        <input type="checkbox" class="checkbox" ng-model="Item.FINISHFLAG" disabled ng-click="ChangeFinishFlag(Item)" />
+                                                    </td>
+                                                    <td>{{Item.FINISHDATE | date:'yyyy-MM-dd'}}</td>
+                                                    <td>{{Item.UNFINISHREASON}}</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                           
+                                      
+                                        <!-- /BOX -->
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="box border primary">
+                            <div class="box-title">
+                                <h4><i class="fa fa-table"></i>评值列表</h4>
+                                <div class="tools hidden-xs">
+                                    <a href="javascript:;" class="collapse" ca-collapse>
+                                        <i class="fa fa-chevron-up"></i>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="box-body">
+                                <table class="table table-striped table-bordered table-hover table-handler">
+                                    <thead>
+                                        <tr>
+                                            <th>评值日期</th>
+                                            <th>评值内容</th>
+                                            <th>执行人员</th>
+                                            <th>填写人员</th>
+                                            <th><i class="fa fa-bars"></i> 操作</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr ng-repeat="item in Data.AssessList">
+                                            <td>{{item.RECDATE |date:'yyyy-MM-dd'}}</td>
+                                            <td style=" word-break: break-all; word-wrap: break-word;"><label style="font-weight:normal" title="{{item.VALUEDESC}}">{{item.VALUEDESC.length>75?item.VALUEDESC.substring(0,75)+"...":item.VALUEDESC}}</label></td>
+                                            <td>
+                                                <select ng-disabled="true" ng-model="item.EXECUTEBY" class="form-control" ng-options="item.EmpNo as item.EmpName for item in Data.EmpList"></select>
+                                            </td>
+                                            <td>
+                                                <select ng-disabled="true" ng-model="item.RECORDBY" class="form-control" ng-options="item.EmpNo as item.EmpName for item in Data.EmpList"></select>
+                                            </td>
+                                           
+                                            <td class="center">
+                                                <button class="btn btn-info" ng-click="EditAssess(item)">编辑</button>
+                                                <a class="btn btn-primary" ng-click="DeleteAssess(item)">删除</a>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="pull-right">
+                                        <button class="btn btn-primary" ng-click="EditOrCreate()">添加评值</button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="tab-pane {{assessClass}}">
+                                <div class="panel panel-default">
+                                    <!--<div class="panel-heading">评值编辑栏</div>-->
+                                    <div class="panel-body">
+                                        <div class="form-group">
+                                            <div class="form-group">
+                                                <label class="col-sm-1 control-label">评值日期</label>
+                                                <div class="col-sm-2">
+                                                    <input ng-model="Data.Assess.RECDATE" class="form-control" type="text" ca-date-picker>
+                                                </div>
+                                                <label class="col-sm-3 control-label ">执行人员</label>
+                                                <div class="col-sm-2">
+                                                    <select ng-model="Data.Assess.EXECUTEBY" class="form-control" ng-options="item.EmpNo as item.EmpName for item in Data.EmpList"></select>
+                                                    <!--<input ng-model="Data.Assess.EXECUTEBY" class="form-control" type="text">-->
+                                                </div>
+                                                <label class="col-sm-2 control-label">是否同步写入护理记录</label>
+                                                <div class="col-sm-1">
+                                                    <label class="checkbox-inline">
+                                                        <input type="checkbox" class="uniform" ng-model="Data.SyncNurRec">是
+                                                    </label>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-sm-1 control-label">评值内容</label>
+                                                <div class="col-sm-4">
+                                                    <select multiple class="form-control" style="height:200px" id="sltFrom">
+                                                        <option ng-repeat="item in Data.AssessPL" value="{{item.ItemName}}">{{item.ItemName}}</option>
+                                                    </select>
+                                                </div>
+                                                <div class="col-sm-1" style="padding-top:90px;"><button class="btn btn-block" ng-click="addAssess('right')">&gt;&gt;</button></div>
+                                                <div class="col-sm-4">
+                                                    <textarea class="form-control" style="height:200px" ng-model="Data.Assess.VALUEDESC" name="评值内容" ng-maxlength="500" ></textarea>
+                                                </div>
+                                                <!--<div class="col-sm-9">
+                                                    <div style="float:left;width:90%">
+                                                        <textarea class="form-control" ng-model="Data.Assess.VALUEDESC"></textarea>
+                                                    </div>
+                                                    <div style="float:left;width:30px;overflow:hidden">
+                                                        <select class="width20" ng-model="Data.Assess.VALUEDESC" ng-options="item.ItemCode as item.ItemName for item in Data.AssessPL"></select>
+                                                    </div>
+                                                 
+                                                </div>-->
+                                            </div>
+                                            <div class="col-sm-2 col-sm-offset-8">
+                                                <div class="form-group">
+                                               
+                                                    <a class="btn btn-primary {{saveClass}}" ng-click="SaveAssess()">保存</a>
+                                                    <a class="btn btn-warning {{updateClass}}" ng-click="UpdateAssess()">更新</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </form>
+        <div class="wizard-buttons">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="col-md-offset-4 col-md-8">
+                        <a href="javascript:;" ng-disabled="Planfrom.$invalid" onclick="javascript:history.back(-1);" class="btn btn-default nextBtn">
+                            <i class="fa fa-arrow-circle-left"></i>后退
+                        </a>
+                        <!--<a ui-sref="AddCarePlanActivity({id:Data.id})" ng-disabled="Planfrom.$invalid" class="btn btn-primary nextBtn">
+                            添加照护措施 <i class="fa fa-arrow-circle-right"></i>
+                        </a>-->
+                        <a ui-sref="CarePlanDetail({regNo:Data.RegNo,feeNo:Data.FeeNo,regName:Data.RegName})" class="btn btn-info submitBtn">
+                            退出&返回列表 <i class="fa fa-arrow-circle-right"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer-tools">
+            <span class="go-top">
+                <i class="fa fa-chevron-up"></i> Top
+            </span>
+        </div>
+    </div>
+</div>
+
+
+
+

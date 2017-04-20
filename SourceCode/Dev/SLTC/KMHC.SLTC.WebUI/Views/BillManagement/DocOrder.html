@@ -1,0 +1,768 @@
+﻿<div class="row">
+    <div id="content" class="col-lg-12">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="page-header">
+                    <ul class="breadcrumb">
+                        <li>
+                            <i class="fa fa-home"></i>
+                            <a href="/">首页</a>
+                        </li>
+                        <li>医嘱开立</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <form class="form-horizontal" name="docOrderForm" role="form" novalidate>
+                <div class="col-sm-12">
+                    <div class="col-sm-2">
+                        <div class="box border primary">
+                            <div class="box-title">
+                                <h4>
+                                    <i class="fa fa-bars"></i>住民信息
+                                </h4>
+                            </div>
+                            <div class="box-body">
+                                <resident-card feeno={{FeeNo}} callback="txtResidentIDChange(resident)" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-10">
+                        <div class="box border primary">
+                            <div class="box-title">
+                                <h4>
+                                    <i class="fa fa-bars"></i>医嘱开立
+                                </h4>
+                            </div>
+                            <div class="box-body">
+                                <div class="tab-pane" id="tbBasic">
+                                    <div class="panel panel-default">
+                                        <div class="panel-body">
+                                            <div class="form-group">
+                                                <label for="txtName" class="col-sm-1 control-label">姓名</label>
+                                                <div class="col-sm-2">
+                                                    <input id="txtName" class="form-control" ng-model="Data.rs.Name" ng-disabled="true" readonly>
+                                                </div>
+                                                <label for="txtSex" class="col-sm-1 control-label">性别</label>
+                                                <div class="col-sm-2">
+                                                    <input id="txtSex" class="form-control" value="{{Data.rs.Sex | sexFormat}}" ng-disabled="true" readonly>
+                                                </div>
+                                                <label for="txtAge" class="col-sm-1 control-label">年龄</label>
+                                                <div class="col-sm-2">
+                                                    <input id="txtAge" class="form-control" value="{{Data.rs.BirthDay | ageFormat}}" ng-disabled="true" readonly>
+                                                </div>
+                                                <label for="txtNciFlag" class="col-sm-1 control-label">享受护理险否</label>
+                                                <div class="col-sm-2">
+                                                    <input id="txtNciFlag" class="form-control" ng-model="NciFlag" ng-disabled="true" readonly>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="txtInDate" class="col-sm-1 control-label">入住时间</label>
+                                                <div class="col-sm-2">
+                                                    <input id="txtInDate" class="form-control" ng-model="Data.rs.InDate" ng-disabled="true" ca-date-time-picker readonly>
+                                                </div>
+                                                <label for="txtBedNo" class="col-sm-1 control-label">床号</label>
+                                                <div class="col-sm-2">
+                                                    <input id="txtBedNo" class="form-control" ng-model="Data.rs.BedNo" ng-disabled="true" readonly>
+                                                </div>
+                                                <label for="txtCreateName" class="col-sm-1 control-label">开立医生</label>
+                                                <div class="col-sm-2">
+                                                    <input id="txtCreateName" class="form-control" ng-model="Data.curUser.RecrodByName" ng-disabled="true" readonly>
+                                                </div>
+                                                <label for="txtName" class="col-sm-1 control-label">主责护士</label>
+                                                <div class="col-sm-2">
+                                                    <input id="txtName" class="form-control" ng-model="Data.rs.NurseName" ng-disabled="true" readonly>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="box border primary">
+                                    <div class="box-title">
+                                        <h4>
+                                            <i class="fa fa-table"></i>医嘱编辑
+                                            <a class="btn btn-default" role="button" ng-click="newOrder()">添加新医嘱</a>
+                                            <a class="btn btn-default" role="button" data-toggle="modal" data-target="#modalNewItem" ng-click="selItem()">添加项目</a>
+                                            <a class="btn btn-default" role="button" data-toggle="modal" data-target="#modalNewGroup" ng-click="selGrp()">添加套餐</a>
+                                        </h4>
+                                    </div>
+                                    <div class="box-body">
+                                        <div class="form-group">
+                                            <label class="col-sm-1 control-label">医嘱类型</label>
+                                            <div class="col-sm-2">
+                                                <label class="checkbox-inline mgb10 left"><input type="checkbox" ng-model="Data.newOrders.LOrderType" ng-click="LchargeOrderType()">长嘱</label>
+                                                <label class="checkbox-inline mgb10 left"><input type="checkbox" ng-model="Data.newOrders.SOrderType" ng-click="SchargeOrderType()">临嘱</label>
+                                            </div>
+                                            <label for="txtDays" class="col-sm-1 control-label">天数</label>
+                                            <div class="col-sm-2">
+                                                <input id="txtDays" name="天数" class="form-control" ng-model="Data.newOrders.Days" ng-change="chargeNewOrderDays(Data.newOrders.Days)">
+                                            </div>
+                                            <label for="txtStartDate" class="col-sm-1 control-label">开始时间</label>
+                                            <div class="col-sm-2">
+                                                <input id="txtStartDate" name="开始时间" class="form-control" ng-model="Data.newOrders.StartDate" ng-change="chargeStartDate()" ca-date-time-picker required>
+                                            </div>
+                                            <label for="txtEndDate" class="col-sm-1 control-label">结束时间</label>
+                                            <div class="col-sm-2">
+                                                <input id="txtEndDate" name="结束时间" class="form-control" ng-model="Data.newOrders.EndDate" ng-change="chargeEndDate()" ca-date-time-picker>
+                                            </div>
+                                        </div>
+                                        <table id="datatableCreate" class="table table-striped table-bordered table-hover table-handler">
+                                            <thead>
+                                                <tr>
+                                                    <th>序号</th>
+                                                    <th>医嘱类型</th>
+                                                    <th>医嘱名称</th>
+                                                    <th>
+                                                        医生嘱托
+                                                        <div class="btn-group btn-group-xs" data-toggle="tooltip" title="按选中数据复制粘贴整列医生嘱托" role="group" aria-label="...">
+                                                            <a class="btn btn-default" role="button" ng-click="copyFullColAcRemark()"><i class="fa fa-copy"></i></a>
+                                                        </div>
+                                                    </th>
+                                                    <th>开立单位</th>
+                                                    <th>剂量</th>
+                                                    <th>天数</th>
+                                                    <th>
+                                                        频率
+                                                        <!--<div class="btn-group btn-group-xs" data-toggle="tooltip" title="按选中数据复制粘贴整列频率" role="group" aria-label="...">
+                                                            <a class="btn btn-default" role="button" ng-click="copyFullColTakeFreq()"><i class="fa fa-copy"></i></a>
+                                                        </div>-->
+                                                    </th>
+                                                    <th>
+                                                        途径
+                                                        <div class="btn-group btn-group-xs" data-toggle="tooltip" title="按选中数据复制粘贴整列途径" role="group" aria-label="...">
+                                                            <a class="btn btn-default" role="button" ng-click="copyFullColTakeWay()"><i class="fa fa-copy"></i></a>
+                                                        </div>
+                                                    </th>
+                                                    <th>首日量</th>
+                                                    <th>计价单位</th>
+                                                    <th>单价</th>
+                                                    <th>计价总量</th>
+                                                    <th>总价</th>
+                                                    <th>开始时间</th>
+                                                    <th>结束时间</th>
+                                                    <th><i class="fa fa-bars"></i> 操作</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr ng-repeat="dodtls in Data.docOrderDtls">
+                                                    <td>{{$index + 1}}</td>
+                                                    <td>
+                                                        <select class="form-control" name="第{{$index+1}}行医嘱类型" ng-model="dodtls.NOrderType" select-code="C00.021" required></select>
+                                                    </td>
+                                                    <td>
+                                                        <input-yi-zhu name="第{{$index+1}}行医嘱名称" callback="OrderNameSelected(dodtls,item)" value={{dodtls.NOrderName}} ng-maxlength="100" />
+                                                    </td>
+                                                    <td><input class="form-control" name="第{{$index+1}}行医生嘱托" select-items="医生嘱托" ng-model="dodtls.NAcRemark" ng-maxlength="500" ng-click="copyCurAcRemark(dodtls)" ng-change="copyCurAcRemark(dodtls)" /></td>
+                                                    <td>{{dodtls.NPrescribeUnits}}</td>
+                                                    <td><input class="form-control" name="第{{$index+1}}行剂量" ng-pattern="/^(0|[1-9]\d{0,15})(\.\d{0,2})?$/" ng-model="dodtls.NTakeQty" ng-maxlength="11" ng-change="chargeSingleOrderTakeQty(dodtls)" required /></td>
+                                                    <td><input class="form-control" name="第{{$index+1}}行天数" ng-model="dodtls.NTakeDay" ng-maxlength="11" ng-change="chargeSingleOrderTakeDay(dodtls)" /></td>
+                                                    <td><input-freq name="第{{$index+1}}行频率" value={{dodtls.NTakeFreq}} callback="FreqSelected(dodtls,item)" ng-maxlength="20" /></td>
+                                                    <td><input class="form-control" name="第{{$index+1}}行途径" select-items="医嘱途径" ng-model="dodtls.NTakeWay" ng-maxlength="20" ng-click="copyCurTakeWay(dodtls)" ng-change="copyCurTakeWay(dodtls)" /></td>
+                                                    <td>
+                                                        <select class="form-control" name="第{{$index+1}}行首日量" ng-model="dodtls.NFirstDayQuantity" select-code="C00.022" required></select>
+                                                    </td>
+                                                    <td>{{dodtls.NUnits}}</td>
+                                                    <td>{{dodtls.NUnitPrice}}</td>
+                                                    <td>{{dodtls.NChargeQty}}</td>
+                                                    <td>{{dodtls.NAmount}}</td>
+                                                    <td><input class="form-control input-sm" name="第{{$index+1}}行开始时间" ng-model="dodtls.NStartDate" ng-change="chargeSingleOrderStartDate(dodtls)" ca-date-time-picker required /></td>
+                                                    <td><input class="form-control input-sm" name="第{{$index+1}}行结束时间" ng-model="dodtls.NEndDate" ng-change="chargeSingleOrderEndDate(dodtls)" ca-date-time-picker /></td>
+                                                    <td>
+                                                        <div class="btn-group btn-group-xs" role="group" aria-label="...">
+                                                            <a class="btn btn-danger" role="button" ng-click="Deletedodtls(dodtls)"><i class="fa fa-times"></i>删除</a>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                        <div class="text-right">
+                                            <button class="btn btn-primary" type="button" role="button" ng-click="save()">保存</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="box border primary">
+                            <div class="box-title">
+                                <h4>
+                                    <i class="fa fa-table"></i>医嘱浏览
+                                </h4>
+                            </div>
+                            <div class="box-body">
+                                <div class="form-group">
+                                    <label class="col-sm-1 control-label">医嘱类型</label>
+                                    <div class="col-sm-2">
+                                        <label class="checkbox-inline mgb10 left"><input type="checkbox" ng-model="Data.SearchOrders.ALLchargeOrderType" ng-click="AllSearchOrderType()">全部</label>
+                                        <label class="checkbox-inline mgb10 left"><input type="checkbox" ng-model="Data.SearchOrders.LSearchOrderType" ng-click="LSearchOrderType()">长嘱</label>
+                                        <label class="checkbox-inline mgb10 left"><input type="checkbox" ng-model="Data.SearchOrders.SSearchOrderType" ng-click="SSearchOrderType()">临嘱</label>
+                                    </div>
+                                    <label class="col-sm-1 control-label">时间:</label>
+                                    <div class="col-sm-2">
+                                        <select class="form-control" ng-model="Data.SearchOrders.TimeOption" ng-change="chargeSearchTimeOption()" select-code="C00.020"></select>
+                                    </div>
+                                    <label for="txtSearchStartDate" class="col-sm-1 control-label">开始时间</label>
+                                    <div class="col-sm-2">
+                                        <input id="txtSearchStartDate" name="开始时间" class="form-control" ng-model="Data.SearchOrders.StartDate" ng-disabled="Data.SearchOrders.StartDateShow" ng-change="chargeSearchStartDate()" ca-date-time-picker>
+                                    </div>
+                                    <label for="txtSearchEndDate" class="col-sm-1 control-label">结束时间</label>
+                                    <div class="col-sm-2">
+                                        <input id="txtSearchEndDate" name="结束时间" class="form-control" ng-model="Data.SearchOrders.EndDate" ng-disabled="Data.SearchOrders.EndDateShow" ng-change="chargeSearchEndDate()" ca-date-time-picker>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-1 control-label">停止:</label>
+                                    <div class="col-sm-2">
+                                        <select class="form-control" ng-model="Data.SearchOrders.StopOption" ng-change="chargeStopOption()" select-code="C00.017"></select>
+                                    </div>
+                                    <label class="col-sm-1 control-label">审核:</label>
+                                    <div class="col-sm-2">
+                                        <select class="form-control" ng-model="Data.SearchOrders.AuditOption" ng-change="chargeAuditOption()" select-code="C00.018"></select>
+                                    </div>
+
+                                    <label class="col-sm-1 control-label">校对:</label>
+                                    <div class="col-sm-2">
+                                        <select class="form-control" ng-model="Data.SearchOrders.CheckOption" ng-change="chargeCheckOption()" select-code="C00.019"></select>
+                                    </div>
+                                    <label class="col-sm-1 control-label">作废:</label>
+                                    <div class="col-sm-2">
+                                        <select class="form-control" ng-model="Data.SearchOrders.CancelOption" ng-change="chargeCancelOption()" select-code="C00.023"></select>
+                                    </div>
+                                </div>
+                                <ui-data-table options="options">
+                                    <table id="datatable1" class="table table-striped table-bordered table-hover table-handler">
+                                        <thead>
+                                            <tr>
+                                                <th>序号</th>
+                                                <th>医嘱类型</th>
+                                                <th>医嘱名称</th>
+                                                <th>收费项类别</th>
+                                                <th>医生嘱托</th>
+                                                <th>开立单位</th>
+                                                <th>剂量</th>
+                                                <th>天数</th>
+                                                <th>频率</th>
+                                                <th>途径</th>
+                                                <th>计价单位</th>
+                                                <th>单价</th>
+                                                <th>计价总量</th>
+                                                <th>总价</th>
+                                                <th>开始时间</th>
+                                                <th>结束时间</th>
+                                                <th>开嘱时间</th>
+                                                <th>开嘱医生</th>
+                                                <th>校对护士</th>
+                                                <th><i class="fa fa-bars"></i> 操作</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr ng-repeat="item in Data.docOrders">
+                                                <td>{{$index + 1}}</td>
+                                                <td>{{item.OrderType == 1 ?"长嘱":"临嘱"}}</td>
+                                                <td>{{item.OrderName}}</td>
+                                                <td>{{item.ItemType | ChargeRecordTypeFormat}}</td>
+                                                <td>{{item.AcRemark}}</td>
+                                                <td>{{item.PrescribeUnits}}</td>
+                                                <td>{{item.TakeQty}}</td>
+                                                <td>{{item.TakeDay}}</td>
+                                                <td>{{item.TakeFreq}}</td>
+                                                <td>{{item.TakeWay}}</td>
+                                                <td>{{item.Units}}</td>
+                                                <td>{{item.UnitPrice}}</td>
+                                                <td>{{item.ChargeQty}}</td>
+                                                <td>{{item.Amount}}</td>
+                                                <td>{{item.StartDate | dateFormat }}</td>
+                                                <td>{{item.EndDate | dateFormat}}</td>
+                                                <td>{{item.BillDate | dateFormat}}</td>
+                                                <td>{{item.DoctorName}}</td>
+                                                <td>{{item.NurseName}}</td>
+                                                <td>
+                                                    <div class="btn-group btn-group-xs" role="group">
+                                                        <a class="btn btn-primary" role="button" ng-disabled="item.ConfirmFlag!=0" ng-click="AuditOrder(item)"><i class="fa fa-check"></i>审核</a>
+                                                        <a class="btn btn-primary" role="button" data-toggle="modal" data-target="#modalOrderDtls" ng-click="LookUpOrder(item)"><i class="fa fa-search"></i>查看</a>
+                                                        <a class="btn btn-primary" role="button" ng-click="EditOrder(item)"><i class="fa fa-pencil"></i>编辑</a>
+                                                        <a class="btn btn-primary" role="button" ng-disabled="item.StopFlag!=0 || item.DeleteFlag!=0" ng-click="StopOrder(item)"><i class="fa fa-ban"></i>停止</a>
+                                                        <a class="btn btn-primary" role="button" ng-disabled="item.DeleteFlag!=0 || item.CheckFlag!=0" ng-click="CancelOrder(item)"><i class="fa fa-times"></i>作废</a>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </ui-data-table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="footer-tools">
+            <span class="go-top">
+                <i class="fa fa-chevron-up"></i>Top
+            </span>
+        </div>
+    </div>
+</div>
+
+<!--新开项目-->
+<div id="modalNewItem" class="modal fade" tabindex="-1" aria-labelledby="modalNewItemLabel" role="dialog" data-target=".bs-example-modal-lg">
+    <div class="modal-dialog bs-example-modal-lg" role="document" style="width: 60%">
+        <div class="modal-content modal-lg">
+            <div class="modal-header bg-success">
+                <button type="button" id="billClose" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">
+                    添加项目
+                </h4>
+            </div>
+            <div class="modal-body mHeight-modal">
+                <div class="box-body">
+                    <form class="form-horizontal" role="form" novalidate>
+                        <div class="form-group">
+                            <div class="col-sm-12">
+
+                                <div class="panel panel-default">
+                                    <div class="panel-body">
+                                        <div class="tabbable">
+                                            <ul class="nav nav-tabs">
+                                                <li class="active"><a href="#tab_1_3" data-toggle="tab">服务项目</a></li>
+                                                <li class=""><a href="#tab_1_1" data-toggle="tab">药品</a></li>
+                                                <li class=""><a href="#tab_1_2" data-toggle="tab">耗材</a></li>
+
+                                            </ul>
+                                            <div class="tab-content">
+                                                <div class="tab-pane fade" id="tab_1_1">
+                                                    <div class="panel panel-default">
+                                                        <div class="panel-heading">
+                                                            药品
+                                                        </div>
+                                                        <div class="panel-body">
+                                                            <div class="form-group">
+                                                                <div class="col-md-6">
+                                                                    <km-look-up title="药品列表" button-name="添加药品" pre-open="checkRes()" callback="selectedDrugs(item)" item-property="{key:'DrugId',name:'CNName'}" factory-name="chargeItemNSDrugRes" search-options-params="{status:0}" search-params="{Code:'keyWord',Text:'药品名称'}" col-list="[{Code:'CNName',Name:'药品名称'},{Code:'MCDrugCode',Name:'医保编号'},{Code:'NSDrugCode',Name:'院内编号'},{Code:'Spec',Name:'规格'},{Code:'Units',Name:'单位'},{Code:'UnitPrice',Name:'单价'}]"></km-look-up>
+                                                                </div>
+                                                            </div>
+                                                            <table class="table table-striped table-bordered table-hover">
+                                                                <thead>
+                                                                    <tr>
+                                                                        <th>#</th>
+                                                                        <th>中文名称</th>
+                                                                        <th>医保编号</th>
+                                                                        <th>院内编号</th>
+                                                                        <th>规格</th>
+                                                                        <th>转换比</th>
+                                                                        <th>开药数量</th>
+                                                                        <th>开药单位</th>
+                                                                        <th>计价数量</th>
+                                                                        <th>计价单位</th>
+                                                                        <th>单价</th>
+                                                                        <th>总价</th>
+                                                                        <th><i class="fa fa-bars"></i>操作</th>
+                                                                    </tr>
+                                                                </thead>
+                                                                <tbody>
+                                                                    <tr ng-repeat="drug in drugList">
+                                                                        <td>{{$index + 1}}</td>
+                                                                        <td>{{drug.CNName}}</td>
+                                                                        <td>{{drug.MCDrugCode}}</td>
+                                                                        <td>{{drug.NSDrugCode}}</td>
+                                                                        <td>{{drug.Spec}}</td>
+                                                                        <td>{{drug.ConversionRatio}}</td>
+                                                                        <td><input class="form-control" name="第{{$index+1}}行药品数量" type="number" ng-pattern="/^(0|[1-9]\d{0,15})(\.\d{0,2})?$/" ng-model="drug.FeeItemCount" ng-change="chargeDrugItemCount(drug)" required /></td>
+                                                                        <td>{{drug.PrescribeUnits}}</td>
+                                                                        <td>{{drug.ChargeQty}}</td>
+                                                                        <td>{{drug.Units}}</td>
+                                                                        <td>{{drug.UnitPrice}}</td>
+                                                                        <td>{{drug.Amount}}</td>
+                                                                        <td>
+                                                                            <div class="btn-group btn-group-xs" role="group">
+                                                                                <a class="btn btn-primary" ng-click="deleteDrugItem(drug)"><i class="fa fa-times"></i>删除</a>
+                                                                            </div>
+                                                                        </td>
+                                                                    </tr>
+                                                                </tbody>
+                                                            </table>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="tab-pane fade" id="tab_1_2">
+                                                    <div class="panel panel-default">
+                                                        <div class="panel-heading">
+                                                            耗材
+                                                        </div>
+                                                        <div class="panel-body">
+                                                            <div class="form-group">
+                                                                <div class="col-md-6">
+                                                                    <km-look-up title="耗材列表" button-name="添加耗材" pre-open="checkRes()" callback="selectedMats(item)" item-property="{key:'MaterialId',name:'MaterialName'}" factory-name="chargeItemNSMaterialRes" search-options-params="{status:0}" search-params="{Code:'keyWord',Text:'耗材名称'}" col-list="[{Code:'MaterialName',Name:'耗材名称'},{Code:'MCMaterialCode',Name:'医保编号'},{Code:'NSMaterialCode',Name:'院内编号'},{Code:'Units',Name:'单位'},{Code:'Spec',Name:'规格'},{Code:'UnitPrice',Name:'单价'}]"></km-look-up>
+                                                                </div>
+                                                            </div>
+                                                            <table class="table table-striped table-bordered table-hover">
+                                                                <thead>
+                                                                    <tr>
+                                                                        <th class="col-sm-1">#</th>
+                                                                        <th class="col-sm-1">耗材名称</th>
+                                                                        <th class="col-sm-1">医保编号</th>
+                                                                        <th class="col-sm-1">院内编号</th>
+                                                                        <th class="col-sm-1">规格</th>
+                                                                        <th class="col-sm-1">计价单位</th>
+                                                                        <th class="col-sm-1">单价</th>
+                                                                        <th class="col-sm-1">计价数量</th>
+                                                                        <th class="col-sm-1">总价</th>
+                                                                        <th class="col-sm-1"><i class="fa fa-bars"></i> 操作</th>
+                                                                    </tr>
+                                                                </thead>
+                                                                <tbody>
+                                                                    <tr ng-repeat="mat in matList">
+                                                                        <td>{{$index + 1}}</td>
+                                                                        <td>{{mat.MaterialName}}</td>
+                                                                        <td>{{mat.MCMaterialCode}}</td>
+                                                                        <td>{{mat.NSMaterialCode}}</td>
+                                                                        <td>{{mat.Spec}}</td>
+                                                                        <td>{{mat.Units}}</td>
+                                                                        <td>{{mat.UnitPrice}}</td>
+                                                                        <td><input class="form-control" name="第{{$index+1}}行耗材数量" ng-model="mat.FeeItemCount" ng-change="chargeMatItemCount(mat)" required /></td>
+                                                                        <td>{{mat.Amount}}</td>
+                                                                        <td>
+                                                                            <div class="btn-group btn-group-xs" role="group">
+                                                                                <a class="btn btn-primary" ng-click="deleteMatItem(mat)"><i class="fa fa-times"></i>删除</a>
+                                                                            </div>
+                                                                        </td>
+                                                                    </tr>
+                                                                </tbody>
+                                                            </table>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="tab-pane fade  active in" id="tab_1_3">
+                                                    <div class="panel panel-default">
+                                                        <div class="panel-heading">
+                                                            服务项目
+                                                        </div>
+                                                        <div class="panel-body">
+                                                            <div class="form-group">
+                                                                <div class="col-md-6">
+                                                                    <km-look-up title="服务项目列表" button-name="添加服务项目" pre-open="checkRes()" callback="selectedSers(item)" item-property="{key:'ServiceId',name:'ServiceName'}" factory-name="chargeItemNSServiceRes" search-options-params="{status:0}" search-params="{Code:'keyWord',Text:'服务项目名称'}" col-list="[{Code:'ServiceName',Name:'服务项目名称'},{Code:'MCServiceCode',Name:'医保编号'},{Code:'NSServiceCode',Name:'院内编号'},{Code:'Units',Name:'单位'},{Code:'UnitPrice',Name:'单价'}]"></km-look-up>
+                                                                </div>
+                                                            </div>
+                                                            <table class="table table-striped table-bordered table-hover">
+                                                                <thead>
+                                                                    <tr>
+                                                                        <th class="col-sm-1">#</th>
+                                                                        <th class="col-sm-1">服务项目名称</th>
+                                                                        <th class="col-sm-1">医保编号</th>
+                                                                        <th class="col-sm-1">院内编号</th>
+                                                                        <th class="col-sm-1">计价单位</th>
+                                                                        <th class="col-sm-1">单价</th>
+                                                                        <th class="col-sm-1">计价数量</th>
+                                                                        <th class="col-sm-1">总价</th>
+                                                                        <th class="col-sm-1"><i class="fa fa-bars"></i> 操作</th>
+                                                                    </tr>
+                                                                </thead>
+                                                                <tbody>
+                                                                    <tr ng-repeat="ser in serList">
+                                                                        <td>{{$index + 1}}</td>
+                                                                        <td>{{ser.ServiceName}}</td>
+                                                                        <td>{{ser.MCServiceCode}}</td>
+                                                                        <td>{{ser.NSServiceCode}}</td>
+                                                                        <td>{{ser.Units}}</td>
+                                                                        <td>{{ser.UnitPrice}}</td>
+                                                                        <td><input class="form-control" name="第{{$index+1}}行服务项目数量" ng-model="ser.FeeItemCount" ng-change="chargeSerItemCount(ser)" required /></td>
+                                                                        <td>{{ser.Amount}}</td>
+                                                                        <td>
+                                                                            <div class="btn-group btn-group-xs" role="group">
+                                                                                <a class="btn btn-primary" ng-click="deleteSerItem(ser)"><i class="fa fa-times"></i>删除</a>
+                                                                            </div>
+                                                                        </td>
+                                                                    </tr>
+                                                                </tbody>
+                                                            </table>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="text-right">
+                                            <a class="btn btn-primary" role="button" ng-click="saveItem()">确认添加</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <div class="modal-footer center" style="margin-top:0px;">
+                <button type="button" class="btn btn-primary" ng-click="cancelselItem()" id="disabledcheck" data-dismiss="modal">取消</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!--添加套餐-->
+<div id="modalNewGroup" class="modal fade" tabindex="-1" aria-labelledby="modalNewGroupLabel" role="dialog" data-target=".bs-example-modal-lg">
+    <div class="modal-dialog bs-example-modal-lg" role="document" style="width: 60%">
+        <div class="modal-content modal-lg">
+            <div class="modal-header bg-success">
+                <button type="button" id="billClose" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">
+                    添加套餐
+                </h4>
+            </div>
+            <div class="modal-body mHeight-modal">
+                <div class="box-body">
+                    <form class="form-horizontal" role="form" novalidate>
+                        <div class="form-group">
+                            <label class="control-label col-md-1 left">添加套餐</label>
+                            <div class="col-md-4">
+                                <km-look-up title="套餐列表" pre-open="checkRes()" ng-model="currentItem.CHARGEGROUP" callback="selectedChageGroRec(item)" input-show="true" item-property="{key:'CHARGEGROUPID',name:'CHARGEGROUPNAME'}" factory-name="pacMaintainRes" search-params="{Code:'CHARGEGROUPNAME',Text:'套餐名称'}" col-list="[{Code:'CHARGEGROUPNAME',Name:'套餐名称'}]"></km-look-up>
+                            </div>
+                            <div class="col-sm-6">
+                                <button class="btn btn-primary" type="reset" ng-click="emptyGroupInfo()">重置</button>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div>
+                                <table class="table table-striped table-bordered table-hover table-handler">
+                                    <thead>
+                                        <tr>
+                                            <th>序号</th>
+                                            <th>套餐编号</th>
+                                            <th>套餐名称</th>
+                                            <th>数量</th>
+                                            <th>单价</th>
+                                            <th>总价</th>
+                                            <th class="col-sm-1"><i class="fa fa-bars"></i> 操作</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr ng-repeat="gl in grpList">
+                                            <td>{{$index + 1}}</td>
+                                            <td>{{gl.grpNo}}</td>
+                                            <td>{{gl.grpName}}</td>
+                                            <td><input class="form-control" name="第{{$index+1}}行套餐数量" ng-model="gl.grpQty" ng-change="chargeGrpCount(gl)" required /></td>
+                                            <td>{{gl.grpUnitPrice}}</td>
+                                            <td>{{gl.grpAmount}}</td>
+                                            <td>
+                                                <div class="btn-group btn-group-xs" role="group">
+                                                    <a class="btn btn-primary" ng-click="deleteGrpItem(gl)"><i class="fa fa-times"></i>删除</a>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <div class="text-right">
+                            <a class="btn btn-primary" role="button" ng-click="saveGrp()">确认添加</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <div class="modal-footer center" style="margin-top:0px;">
+                <button type="button" class="btn btn-primary" ng-click="cancelselGrp()" id="disabledcheck" data-dismiss="modal">取消</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!--医嘱详细信息-->
+<div id="modalOrderDtls" class="modal fade" tabindex="-1" aria-labelledby="modalOrderDtlsLabel" role="dialog" data-target=".bs-example-modal-lg">
+    <div class="modal-dialog bs-example-modal-lg" role="document" style="width: 80%">
+        <div class="modal-content modal-lg">
+            <div class="modal-header bg-success">
+                <button type="button" id="billClose" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">
+                    医嘱详细信息
+                </h4>
+            </div>
+            <div class="modal-body mHeight-modal">
+                <form class="form-horizontal" name="docOrderDtlsInfoForm" role="form" novalidate>
+                    <div class="panel panel-default">
+                        <div class="panel-body">
+                            <div class="box-body">
+                                <div class="form-group">
+                                    <label for="txtOrderName" class="col-sm-1 control-label">医嘱名称</label>
+                                    <div class="col-sm-2">
+                                        <input id="txtOrderName" class="form-control" ng-model="Data.docOrderDtlsInfo.OrderName" ng-disabled="true" readonly>
+                                    </div>
+                                    <label for="txtOrderType" class="col-sm-1 control-label">医嘱类型</label>
+                                    <div class="col-sm-2">
+                                        <input id="txtOrderType" class="form-control" ng-model="txtOrderType" ng-disabled="true" readonly>
+                                    </div>
+                                    <label for="txtItemType" class="col-sm-1 control-label">收费项类别</label>
+                                    <div class="col-sm-2">
+                                        <input id="txtItemType" class="form-control" ng-model="txtItemType" ng-disabled="true" readonly>
+                                    </div>
+                                    <label for="txtAcRemark" class="col-sm-1 control-label">医生嘱托</label>
+                                    <div class="col-sm-2">
+                                        <input id="txtAcRemark" class="form-control" ng-model="Data.docOrderDtlsInfo.AcRemark" ng-disabled="true" readonly>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="txtStartDate" class="col-sm-1 control-label">开始执行时间</label>
+                                    <div class="col-sm-2">
+                                        <input id="txtStartDate" class="form-control" ng-model="Data.docOrderDtlsInfo.StartDate" ca-date-time-picker ng-disabled="true" readonly>
+                                    </div>
+                                    <label for="txtEndDate" class="col-sm-1 control-label">结束执行时间</label>
+                                    <div class="col-sm-2">
+                                        <input id="txtEndDate" class="form-control" ng-model="Data.docOrderDtlsInfo.EndDate" ca-date-time-picker ng-disabled="true" readonly>
+                                    </div>
+                                    <label for="txtBillDate" class="col-sm-1 control-label">开嘱时间</label>
+                                    <div class="col-sm-2">
+                                        <input id="txtBillDate" class="form-control" ng-model="Data.docOrderDtlsInfo.BillDate" ca-date-time-picker ng-disabled="true" readonly>
+                                    </div>
+                                    <label for="txtDeleteFlag" class="col-sm-1 control-label">作废标记</label>
+                                    <div class="col-sm-2">
+                                        <input id="txtDeleteFlag" class="form-control" ng-model="txtDeleteFlag" ng-disabled="true" readonly>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="txtConversionRatio" class="col-sm-1 control-label">转换比</label>
+                                    <div class="col-sm-2">
+                                        <input id="txtConversionRatio" class="form-control" ng-model="Data.docOrderDtlsInfo.ConversionRatio" ng-disabled="true" readonly>
+                                    </div>
+                                    <label for="txtPrescribeUnits" class="col-sm-1 control-label">开立单位</label>
+                                    <div class="col-sm-2">
+                                        <input id="txtPrescribeUnits" class="form-control" ng-model="Data.docOrderDtlsInfo.PrescribeUnits" ng-disabled="true" readonly>
+                                    </div>
+                                    <label for="txtTakeQty" class="col-sm-1 control-label">开立数量</label>
+                                    <div class="col-sm-2">
+                                        <input id="txtTakeQty" class="form-control" ng-model="Data.docOrderDtlsInfo.TakeQty" ng-disabled="true" readonly>
+                                    </div>
+                                    <label for="txtTakeDay" class="col-sm-1 control-label">天数</label>
+                                    <div class="col-sm-2">
+                                        <input id="txtTakeDay" class="form-control" ng-model="Data.docOrderDtlsInfo.TakeDay" ng-disabled="true" readonly>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="txtTakeFreq" class="col-sm-1 control-label">执行频率</label>
+                                    <div class="col-sm-2">
+                                        <input id="txtTakeFreq" class="form-control" ng-model="Data.docOrderDtlsInfo.TakeFreq" ng-disabled="true" readonly>
+                                    </div>
+                                    <label for="txtTakeWay" class="col-sm-1 control-label">途径</label>
+                                    <div class="col-sm-2">
+                                        <input id="txtTakeWay" class="form-control" ng-model="Data.docOrderDtlsInfo.TakeWay" ng-disabled="true" readonly>
+                                    </div>
+                                    <label for="txtUnits" class="col-sm-1 control-label">计价单位</label>
+                                    <div class="col-sm-2">
+                                        <input id="txtUnits" class="form-control" ng-model="Data.docOrderDtlsInfo.Units" ng-disabled="true" readonly>
+                                    </div>
+                                    <label for="txtUnitPrice" class="col-sm-1 control-label">单价</label>
+                                    <div class="col-sm-2">
+                                        <input id="txtUnitPrice" class="form-control" ng-model="txtUnitPrice" ng-disabled="true" readonly>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="txtChargeQty" class="col-sm-1 control-label">计价总量</label>
+                                    <div class="col-sm-2">
+                                        <input id="txtChargeQty" class="form-control" ng-model="Data.docOrderDtlsInfo.ChargeQty" ng-disabled="true" readonly>
+                                    </div>
+                                    <label for="txtAmount" class="col-sm-1 control-label">医嘱总价</label>
+                                    <div class="col-sm-2">
+                                        <input id="txtAmount" class="form-control" ng-model="txtAmount" ng-disabled="true" readonly>
+                                    </div>
+                                    <label for="txtConfirmFlag" class="col-sm-1 control-label">审核标记</label>
+                                    <div class="col-sm-2">
+                                        <input id="txtConfirmFlag" class="form-control" ng-model="txtConfirmFlag" ng-disabled="true" readonly>
+                                    </div>
+                                    <label for="txtConfirmDate" class="col-sm-1 control-label">审核日期</label>
+                                    <div class="col-sm-2">
+                                        <input id="txtConfirmDate" class="form-control" ng-model="Data.docOrderDtlsInfo.ConfirmDate" ca-date-time-picker ng-disabled="true" readonly>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="txtCheckFlag" class="col-sm-1 control-label">校对标记</label>
+                                    <div class="col-sm-2">
+                                        <input id="txtCheckFlag" class="form-control" ng-model="txtCheckFlag" ng-disabled="true" readonly>
+                                    </div>
+                                    <label for="txtCheckDate" class="col-sm-1 control-label">校对时间</label>
+                                    <div class="col-sm-2">
+                                        <input id="txtCheckDate" class="form-control" ng-model="Data.docOrderDtlsInfo.CheckDate" ca-date-time-picker ng-disabled="true" readonly>
+                                    </div>
+                                    <label for="txtStopFlag" class="col-sm-1 control-label">停止标记</label>
+                                    <div class="col-sm-2">
+                                        <input id="txtStopFlag" class="form-control" ng-model="txtStopFlag" ng-disabled="true" readonly>
+                                    </div>
+                                    <label for="txtStopDate" class="col-sm-1 control-label">停止时间</label>
+                                    <div class="col-sm-2">
+                                        <input id="txtStopDate" class="form-control" ng-model="Data.docOrderDtlsInfo.StopDate" ca-date-time-picker ng-disabled="true" readonly>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="txtStopCheckFlag" class="col-sm-1 control-label">停止确认标记</label>
+                                    <div class="col-sm-2">
+                                        <input id="txtStopCheckFlag" class="form-control" ng-model="txtStopCheckFlag" ng-disabled="true" readonly>
+                                    </div>
+                                    <label for="txtStopCheckDate" class="col-sm-1 control-label">停止确认日期</label>
+                                    <div class="col-sm-2">
+                                        <input id="txtStopCheckDate" class="form-control" ng-model="Data.docOrderDtlsInfo.StopCheckDate" ca-date-time-picker ng-disabled="true" readonly>
+                                    </div>
+                                    <label for="txtDoctorName" class="col-sm-1 control-label">开立医生</label>
+                                    <div class="col-sm-2">
+                                        <input id="txtDoctorName" class="form-control" ng-model="Data.docOrderDtlsInfo.DoctorName" ng-disabled="true" readonly>
+                                    </div>
+                                    <label for="txtNurseName" class="col-sm-1 control-label">校对护士</label>
+                                    <div class="col-sm-2">
+                                        <input id="txtNurseName" class="form-control" ng-model="Data.docOrderDtlsInfo.NurseName" ng-disabled="true" readonly>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="txtExecTimes" class="col-sm-1 control-label">执行次数</label>
+                                    <div class="col-sm-2">
+                                        <input id="txtExecTimes" class="form-control" ng-model="Data.docOrderDtlsInfo.ExecTimes" ng-disabled="true" readonly>
+                                    </div>
+                                    <label for="txtExecTimes" class="col-sm-1 control-label">录入时间</label>
+                                    <div class="col-sm-2">
+                                        <input id="txtExecTimes" class="form-control" ng-model="Data.docOrderDtlsInfo.CreateTime" ca-date-time-picker ng-disabled="true" readonly>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="box border primary">
+                        <div class="box-title">
+                            <h4>
+                                <i class="fa fa-table"></i>医嘱明细
+                            </h4>
+                        </div>
+                        <div class="box-body">
+                            <ui-data-table options="optionsOrderDtlsInfo">
+                                <table id="datatable1" class="table table-striped table-bordered table-hover table-handler">
+                                    <thead>
+                                        <tr>
+                                            <th>序号</th>
+                                            <th>项目名称</th>
+                                            <th>项目类别</th>
+                                            <th>开立单位</th>
+                                            <th>开立数量</th>
+                                            <th>计价单位</th>
+                                            <th>单价</th>
+                                            <th>计价总量</th>
+                                            <th>总价</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr ng-repeat="cis in Data.chargeItems">
+                                            <td>{{$index + 1}}</td>
+                                            <td>{{cis.NAME}}</td>
+                                            <td>{{cis.CHARGERECORDTYPE | ChargeRecordTypeFormat}}</td>
+                                            <td>{{cis.PRESCRIBEUNITS}}</td>
+                                            <td>{{cis.QTY}}</td>
+                                            <td>{{cis.UNITS}}</td>
+                                            <td>{{cis.UNITPRICE}}</td>
+                                            <td>{{cis.ChargeQty}}</td>
+                                            <td>{{cis.COST}}</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </ui-data-table>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer center" style="margin-top:0px;">
+                <button type="button" class="btn btn-primary" ng-click="cancelOrderDtls()" id="disabledcheck" data-dismiss="modal">取消</button>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,22 @@
+<div ng-mouseleave="mouseleave()" ng-mousedown="mouseenter()">
+    <input class="form-control" type="text" ng-model="searchWords" ng-change="change()" placeholder="可输入关键字筛选" ng-focus="focus()" ng-keydown="keydown()" ng-required="required" />
+    <div class="input-select" style="max-height:300px; overflow-y:scroll;" ng-show="showList">
+        <table class="table table-hover">
+            <thead>
+                <tr role="row">
+                    <th>邮编区号</th>
+                    <th>县/市</th>
+                    <th>乡镇区</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="item in items" ng-click="rowClick(item)">
+                    <td>{{item.PostCode}}</td>
+                    <td>{{item.City}}</td>
+                    <td>{{item.Town}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+

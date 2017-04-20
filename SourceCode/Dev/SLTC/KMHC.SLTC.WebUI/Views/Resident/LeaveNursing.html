@@ -1,0 +1,108 @@
+<div class="row">
+
+    <div id="content" class="col-md-12">
+
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="page-header">
+                    <ul class="breadcrumb">
+                        <li>
+                            <i class="fa fa-home"></i>
+                            <a href="/">首页</a>
+                        </li>
+                        <li>
+                            <a href="#">退住院</a>
+                        </li>
+                    </ul>
+
+                </div>
+                <div class="clearfix"></div>
+                
+            </div>
+
+        </div>
+
+        <div class="row">
+
+            <div class="col-sm-2">
+                <div class="box border primary">
+                    <div class="box-title">
+                        <h4>
+                            <i class="fa fa-bars"></i>住民信息
+                        </h4>
+                    </div>
+                    <div class="box-body">
+                        <resident-card callback="residentSelected(resident)" />
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-sm-10">
+                <div class="box border primary">
+                    <div class="box-title">
+                        <h4>
+                            <i class="fa fa-bars"></i>退住院办理
+                        </h4>
+                    </div>
+                    <div class="box-body">
+                        <div class="well">
+                            <form class="form-horizontal" role="form" name="prefrom" ng-submit="saveLeaveNursing(currentItem)" novalidate>
+                                <div class="form-group">
+                                    <label class="col-sm-1 control-label">入住日期</label>
+                                    <div class="col-sm-2">
+                                        <input type="text" class="form-control" ng-model="currentItem.InDate" readonly="readonly" />
+                                    </div>
+                                    <label class="col-sm-1 control-label">出院日期</label>
+                                    <div class="col-sm-2">
+                                        <input type="text" class="form-control" ng-model="currentItem.OutDate" readonly="readonly" />
+                                    </div>
+                                    <label class="col-sm-1 control-label">主责护士</label>
+                                    <div class="col-sm-2">
+                                        <input type="text" class="form-control" ng-model="currentItem.CarerName" readonly="readonly" />
+
+                                    </div>
+                                    <label class="col-sm-1 control-label">主责社工</label>
+                                    <div class="col-sm-2">
+                                        <input type="text" class="form-control" ng-model="currentItem.NurseName" readonly="readonly" />
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-1 control-label">营养师</label>
+                                    <div class="col-sm-2">
+                                        <input type="text" class="form-control" ng-model="currentItem.NutritionistName" readonly="readonly" />
+                                    </div>
+                                    <label class="col-sm-1 control-label">物理治疗师</label>
+                                    <div class="col-sm-2">
+                                        <input type="text" class="form-control" ng-model="currentItem.PhysiotherapistName" readonly="readonly" />
+                                    </div>
+                                    <label class="col-sm-1 control-label">医师</label>
+                                    <div class="col-sm-2">
+                                        <input type="text" class="form-control" ng-model="currentItem.DoctorName" readonly="readonly" />
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-1 control-label">床位状态</label>
+                                    <div class="col-sm-2">
+                                        <input type="text" class="form-control" ng-model="currentItem.BedStatus" readonly="readonly" />
+                                    </div>
+                                    <label class="col-sm-1 control-label">住院状态</label>
+                                    <div class="col-sm-2">
+                                        <input type="text" class="form-control" ng-model="currentItem.IpdFlagName" readonly="readonly" />
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-sm-offset-10 col-sm-2">
+                                        <button class="btn btn-primary" type="submit" ng-disabled="prefrom.$invalid" ng-show="buttonShow">退住院</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>

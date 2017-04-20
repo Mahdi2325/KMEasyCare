@@ -1,0 +1,64 @@
+﻿<div class="row">
+    <div id="content" class="col-md-12">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="page-header">
+                    <ul class="breadcrumb">
+                        <li>
+                            <i class="fa fa-home"></i>
+                            <a href="/">首页</a>
+                        </li>
+                        <li>缴费作业</li>
+                    </ul>
+
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="col-sm-2">
+                                <div class="box border primary">
+                                    <div class="box-title">
+                                        <h4>
+                                            <i class="fa fa-bars"></i>住民信息
+                                        </h4>
+                                    </div>
+                                    <div class="box-body">
+                                        <resident-card feeno={{FeeNo}} callback="txtResidentIDChange(resident)" />
+                                    </div>
+                                </div>
+                            </div>
+
+                <div class="col-md-10">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="box-body mgt20">
+                                <div class="tabbable header-tabs">
+                                    <ul class="nav nav-tabs" id="tabResident">
+                                        <li ui-sref-active="active">
+                                            <a ui-sref=".BillPayment"><i class="fa fa-circle-o"></i><span class="hidden-inline-mobile">缴费</span></a>
+                                        </li>
+                                        <li>
+                                            <a ui-sref=".BillPaymentRec"><i class="fa fa-calendar-o"></i><span class="hidden-inline-mobile">历史缴费记录</span></a>
+                                        </li>
+                                        <li>
+                                            <a ui-sref=".AdvanceCharge"><i class="fa fa-laptop"></i><span class="hidden-inline-mobile">预收款缴费</span></a>
+                                        </li>
+
+                                        <li>
+                                            <a ui-sref=".RegAccountInfo"><i class="fa fa-building-o"></i><span class="hidden-inline-mobile">住民账户</span></a>
+                                        </li>
+                                    </ul>
+                                    <div class="tab-content">
+                                        <div ui-view=""></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,347 @@
+
+<div class="row">
+    <div id="content" class="col-md-12">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="page-header">
+                    <!-- BREADCRUMBS -->
+                    <ul class="breadcrumb">
+                        <li>
+                            <i class="fa fa-home"></i>
+                            <a href="/">首页</a>
+                        </li>
+                        <li>
+                            转诊信息
+                        </li>
+                    </ul>
+                    <!-- /BREADCRUMBS -->
+
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="col-sm-2">
+                    <div class="box border primary">
+                        <div class="box-title">
+                            <h4>
+                                <i class="fa fa-bars"></i>住民信息
+                            </h4>
+                        </div>
+                        <div class="box-body">
+                            <resident-card feeno ={{FeeNo}} callback="residentSelected(resident)" />
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-10">
+                    <div class="box border primary">
+                        <div class="box-title">
+                            <h4> <i class="fa fa-bars"></i>转诊信息</h4>
+                        </div>
+
+                        <div class="box-body">
+                            <form class="form-horizontal" role="form" name="lifeRecForm">
+                                <div class="form-group">
+
+                                    <label class="col-sm-1 control-label">转诊日期<span class="required">*</span></label>
+                                    <div class="col-sm-3">
+
+                                        <input type="text" class="form-control" id="TRANSDATE" ng-model="record.TRANSDATE" ca-date-picker required>
+
+                                    </div>
+
+                                    <label class="col-sm-1 control-label">转诊科别<span class="required">*</span></label>
+                                    <div class="col-sm-3">
+                                        <!-- 下拉选择框 -->
+                                        <!--DemandType.Value as DemandType.Name for DemandType in Dic.DemandType-->
+
+                                        <select class="form-control" ng-model="record.DEPTNO" select-code="E00.200" id="DEPTNO" required></select>
+
+                                    </div>
+
+                                    <label class="col-sm-1 control-label">统计疾病数</label>
+                                    <div class="col-sm-3">
+
+                                        <input type="text" class="form-control" id="DISEASECOUNT" ng-maxlength="11" only-number ng-model="record.DISEASECOUNT" ng-pattern="/^\d+(\.\d+)?$/">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-1 control-label">诊断</label>
+                                    <div class="col-sm-11">
+                                        <!-- 这边是弹出下拉选择框 -->
+                                        <input type="text" class="form-control" id="DIAGNOSIS" ng-model="record.DIAGNOSIS" name="诊断" maxlength="300" select-items="诊断" />
+                                        <!--<textarea style="height:40px" class="form-control" ng-model="record.ITEMNAME"></textarea>-->
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-1 control-label">目前问题</label>
+                                    <div class="col-sm-11">
+                                        <textarea style="height:40px" class="form-control" ng-model="record.CURRENTISSUE" select-items="目前问题" id="CURRENTISSUE"></textarea>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-1 control-label">身高</label>
+                                    <div class="col-sm-1">
+
+                                        <input type="text" class="form-control" id="HEIGHT" ng-model="record.HEIGHT" ng-maxlength="9" only-number ng-pattern="/^\d+(\.\d+)?$/">
+                                    </div>
+                                    <label class="col-sm-1 control-label">膝长</label>
+                                    <div class="col-sm-1">
+                                        <input type="text" class="form-control" id="KNEELENGTH" ng-model="record.KNEELENGTH" ng-maxlength="9" only-number ng-pattern="/^\d+(\.\d+)?$/">
+                                    </div>
+                                    <label class="col-sm-1 control-label">体重</label>
+                                    <div class="col-sm-1">
+
+                                        <input type="text" class="form-control" id="WEIGHT" ng-model="record.WEIGHT" ng-maxlength="9" only-number ng-pattern="/^\d+(\.\d+)?$/">
+                                    </div>
+                                    <label class="col-sm-1 control-label">理想体重</label>
+                                    <div class="col-sm-1">
+
+                                        <input type="text" class="form-control" id="WEIGHT_S" ng-model="record.WEIGHT_S" ng-maxlength="9" only-number ng-pattern="/^\d+(\.\d+)?$/">
+                                    </div>
+
+                                    <label class="col-sm-1 control-label">BMI</label>
+                                    <div class="col-sm-1">
+
+                                        <input type="text" class="form-control" id="BMI" ng-model="record.BMI" ng-maxlength="9" only-number ng-pattern="/^\d+(\.\d+)?$/">
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="col-sm-1 control-label">体温</label>
+                                    <div class="col-sm-1">
+
+                                        <input type="text" class="form-control" id="BODYTEMP" ng-model="record.BODYTEMP" ng-maxlength="9" min="0.01" only-number ng-pattern="/^([0-9]{1,6}|0)([.][0-9]{0,2})?$/">
+                                    </div>
+                                    <label class="col-sm-1 control-label">脉搏</label>
+                                    <div class="col-sm-1">
+
+                                        <input type="text" class="form-control" id="PULSE" ng-model="record.PULSE" ng-maxlength="9" only-number ng-pattern="/^\d+(\.\d+)?$/">
+                                    </div>
+                                    <label class="col-sm-1 control-label">血压</label>
+                                    <div class="col-sm-1">
+
+                                        <input type="text" class="form-control" id="BP" ng-model="record.BP" ng-maxlength="9" only-number ng-pattern="/^\d+(\.\d+)?$/">
+                                    </div>
+                                    <label class="col-sm-1 control-label">血氧</label>
+                                    <div class="col-sm-1">
+
+                                        <input type="text" class="form-control" id="BLOODOXYGEN" ng-model="record.BLOODOXYGEN" ng-maxlength="9" only-number ng-pattern="/^\d+(\.\d+)?$/">
+                                    </div>
+
+                                    <label class="col-sm-1 control-label">血糖</label>
+                                    <div class="col-sm-1">
+
+                                        <input type="text" class="form-control" id="BS" ng-model="record.BS" ng-maxlength="9" only-number ng-pattern="/^\d+(\.\d+)?$/">
+                                    </div>
+                                    <label class="col-sm-1 control-label">Ekg</label>
+                                    <div class="col-sm-1">
+
+                                        <input type="text" class="form-control" id="EKG" ng-model="record.EKG" ng-maxlength="9" only-number ng-pattern="/^\d+(\.\d+)?$/">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-1 control-label">咀嚼困难</label>
+                                    <div class="col-sm-5">
+
+                                        <select class="form-control" id="EAT" ng-model="record.EAT" ng-maxlength="20" select-code="E00.201"></select>
+                                    </div>
+                                    <label class="col-sm-1 control-label">吞咽能力</label>
+                                    <div class="col-sm-5">
+                                        <select class="form-control" id="SWALLOW" ng-model="record.SWALLOW" ng-maxlength="20" select-code="L00.004"></select>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-1 control-label">进食方式</label>
+                                    <div class="col-sm-5">
+                                        <select class="form-control" id="DIETMODE" ng-model="record.DIETMODE" ng-maxlength="20" select-code="E00.203"></select>
+                                    </div>
+                                    <label class="col-sm-1 control-label">肠胃问题</label>
+                                    <div class="col-sm-5">
+                                        <select class="form-control" id="STOMACH" ng-model="record.STOMACH" ng-maxlength="20" select-code="E00.204"></select>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-1 control-label">食物禁忌</label>
+                                    <div class="col-sm-5">
+
+                                        <input type="text" id="FOODTABOO" ng-model="record.FOODTABOO" ng-maxlength="20" select-items="食物禁忌" class="form-control">
+                                    </div>
+                                    <label class="col-sm-1 control-label">活动能力</label>
+                                    <div class="col-sm-5">
+                                        <select class="form-control" id="ACTIVITY" ng-model="record.ACTIVITY" ng-maxlength="20" select-code="E00.205"></select>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="col-sm-1 control-label">目前饮食</label>
+                                    <div class="col-sm-5">
+
+                                        <input type="text" id="CURRENTDIET" ng-model="record.CURRENTDIET" ng-maxlength="20" select-items="目前饮食" class="form-control">
+                                    </div>
+                                    <label class="col-sm-1 control-label">目前饮食量</label>
+                                    <div class="col-sm-5">
+                                        <input type="text" id="CURRENTDIETSTATE" ng-model="record.CURRENTDIETSTATE" ng-maxlength="20" select-items="目前饮食量" class="form-control">
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="col-sm-1 control-label">食物摄取</label>
+                                    <div class="col-sm-5">
+
+                                        <input type="text" id="FOODINTAKE" ng-maxlength="20" ng-model="record.FOODINTAKE" select-items="食物摄取" class="form-control">
+                                    </div>
+                                    <label class="col-sm-1 control-label">每天喝水量</label>
+                                    <div class="col-sm-5">
+                                        <input type="text" id="WATER" ng-model="record.WATER" ng-maxlength="20" select-items="每天喝水量" class="form-control">
+                                    </div>
+                                </div>
+
+                                <!--<div class="form-group">
+                                 <label class="col-sm-1 control-label">食物摄取</label>
+                                 <div class="col-sm-5">
+                                     <input type="text" id="x1" ng-model="record.EKG" select-items=" 食物摄取" class="form-control">
+                                 <label class="col-sm-1 control-label">每天喝水量</label>
+                                 <div class="col-sm-5">
+                                     <input type="text" id="x1" ng-model="record.EKG" select-items=" 每天喝水量" class="form-control">
+                                 </div>
+                                </div>
+                                 </div>-->
+                                <div class="form-group">
+                                    <label class="col-sm-1 control-label">营养补充剂</label>
+                                    <div class="col-sm-5">
+                                        <input type="text" id="NUTRITION" ng-model="record.NUTRITION" ng-maxlength="20" select-items=" 营养补充剂" class="form-control">
+                                    </div>
+                                    <label class="col-sm-1 control-label">零食或点心</label>
+                                    <div class="col-sm-5">
+                                        <input type="text" id="SNACKS" ng-model="record.SNACKS" ng-maxlength="20" select-items=" 零食或点心" class="form-control">
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="col-sm-1 control-label">目前留置管子</label>
+                                    <div class="col-sm-11">
+                                        <input type="text" id="PIPLELINE" ng-model="record.PIPLELINE" ng-maxlength="20" select-items=" 目前留置管子" class="form-control">
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="col-sm-1 control-label">目前药物</label>
+                                    <div class="col-sm-11">
+                                        <input type="text" id="MEDICINE" ng-model="record.MEDICINE" ng-maxlength="20" select-items=" 目前药物" class="form-control">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-1 control-label">最近生化检查</label>
+                                    <div class="col-sm-11">
+                                        <input type="text" id="CHECKDESC" ng-model="record.CHECKDESC" ng-maxlength="20" select-items=" 最近生化检查" class="form-control">
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+
+                                    <label class="col-sm-1 control-label">转诊情形评估日期<span class="required">*</span></label>
+                                    <div class="col-sm-2">
+                                        <input type="text" class="form-control" id="ASSESSDATE" ng-model="record.ASSESSDATE" ca-date-picker required>
+                                    </div>
+
+                                    <label class="col-sm-1 control-label">评估者<span class="required">*</span></label>
+                                    <div class="col-sm-2">
+                                        <input-staff callback="staffSelected(item,'ASSESSBY')" id="ASSESSBY" ng-maxlength="20" value="{{record.ASSESSBY}}" required=true />
+                                    </div>
+
+                                    <label class="col-sm-1 control-label">回复日期<span class="required">*</span></label>
+                                    <div class="col-sm-2">
+
+                                        <input type="text" class="form-control" id="REPLYDATE" ng-model="record.REPLYDATE" ca-date-picker required>
+                                    </div>
+                                    <label class="col-sm-1 control-label">负责专业人员<span class="required">*</span></label>
+
+                                    <div class="col-sm-2">
+                                        <!--<select class="form-control" id="SUPERVISOR" ng-model="record.SUPERVISOR"   select-code="E00.207"></select>-->
+                                        <input-staff callback="staffSelected(item,'SUPERVISOR')" id="SUPERVISOR" value="{{record.SUPERVISOR}}" required=true ng-maxlength="10" />
+
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-1 control-label">诊疗摘要建议事项</label>
+                                    <div class="col-sm-11">
+                                        <input type="text" id="SUGGESTSUMMARY" ng-model="record.SUGGESTSUMMARY" ng-maxlength="20" select-items="诊疗摘要建议事项" class="form-control">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="text-right">
+                                        <button class="btn btn-primary" type="submit" ng-disabled="lifeRecForm.$invalid" ng-show="btn_cc" ng-click="insertinto()">保存</button>&nbsp;
+                                        <button class="btn btn-primary" ng-click="record={}" ng-show="btn_cc">重置</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+
+                    <div class="box border primary">
+                        <div class="box-title">
+                            <h4>
+                                <i class="fa fa-table"></i>转诊记录
+                            </h4>
+                        </div>
+                        <div class="box-body">
+                            <ui-data-table options="options">
+                                <table class="table table-striped table-bordered table-hover table-handler">
+                                    <thead>
+                                        <tr>
+                                            <th><i class="fa fa-user"></i>转诊日期</th>
+                                            <th>转诊科别</th>
+                                            <th>统计疾病数</th>
+                                            <th>评估日期</th>
+                                            <th>评估者</th>
+                                            <th>负责专业人员</th>
+                                            <th><i class="fa fa-bars"></i> 操作</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr ng-repeat="referrals in Data.item">
+                                            <td>{{referrals.TRANSDATE |date:'yyyy-MM-dd'}}</td>
+                                            <!--<td>{{referrals.DEPTNO}}</td>-->
+
+                                            <td><span select-code="E00.200" select-value="{{referrals.DEPTNO}}"></span></td>
+
+                                            <td>{{referrals.DISEASECOUNT}}</td>
+                                            <td>{{referrals.ASSESSDATE|date:'yyyy-MM-dd'}}</td>
+                                            <td>
+                                                <div class="DivSelect width10">
+                                                    <select class="SelectList width12" disabled="disabled" ng-model="referrals.ASSESSBY" ng-options="item.EmpNo as item.EmpName for item in names"></select>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div class="DivSelect width10">
+                                                    <select class="SelectList width12" disabled="disabled" ng-model="referrals.SUPERVISOR" ng-options="item.EmpNo as item.EmpName for item in names"></select>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div class="btn-group btn-group-xs" role="group" aria-label="...">
+                                                    <a class="btn btn-info" role="button" ng-click="recordModify(referrals)"><i class="fa fa-pencil"></i>编辑</a>
+                                                    &nbsp;
+                                                    &nbsp;
+                                                    <a class="btn btn-primary" role="button" ng-click="delete(referrals.ID)"><i class="fa fa-times"></i>删除</a>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+
+                                </table>
+                            </ui-data-table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    $(".datepicker").datepicker({
+        dateFormat: "yy-mm-dd",
+        changeMonth: true,
+        changeYear: true
+    });
+</script>

@@ -1,0 +1,140 @@
+<div class="row">
+    <div id="content" class="col-lg-12">
+        <!--标题-->
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="page-header">
+                    <ul class="breadcrumb">
+                        <li>
+                            <i class="fa fa-home"></i>
+                            <a href="/">首页</a>
+                        </li>
+                        <li>需求管理</li>
+                    </ul>
+
+                </div>
+
+
+            </div>
+        </div>
+        <!--标题-->
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="col-sm-2">
+                    <div class="box border primary">
+                        <div class="box-title">
+                            <h4>
+                                <i class="fa fa-bars"></i>住民信息
+                            </h4>
+                        </div>
+                        <div class="box-body">
+                            <resident-card feeno={{FeeNo}} callback ="residentSelected(resident)" />
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-10">
+                    <div class="box border primary">
+                        <div class="box-title">
+                            <h4><i class="fa fa-bars"></i>需求管理列表</h4>
+                        </div>
+                        <div class="box-body">
+                            <form class="form-horizontal" role="form" name="ReqForm" ng-submit="saveEdit(currentItem)" novalidate>
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label">日期</label>
+                                    <div class="col-sm-4">
+                                        <input class="form-control" type="text" ng-model="currentItem.RecordDate" ca-date-picker>
+                                    </div>
+                                    <label class="col-sm-2 control-label">需求类型</label>
+                                    <div class="col-sm-4">
+                                        <select class="form-control" ng-model="currentItem.DemandType" select-code="A00.103"></select>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label">执行者<span class="required">*</span></label>
+                                    <div class="col-sm-4">
+                                        <input-staff value="{{currentItem.ExecuteBy}}" callback="staffByInSelected(item)" required="true" />
+                                        <!--<km-staff-look-up ng-model="currentItem.ExecutorName" callback="staffByInSelected(item)" required="true"></km-staff-look-up>-->
+                                    </div>
+                                    <label class="col-sm-2 control-label">完成日期</label>
+                                    <div class="col-sm-4">
+                                        <input class="form-control" type="text" ng-model="currentItem.FinishDate" ca-date-picker>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label">需求内容</label>
+                                    <div class="col-sm-10">
+                                        <input type="text" class="form-control" ng-model="currentItem.Content" ng-maxlength="500" select-items="特定需求_文字" />
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label">未完成原因</label>
+                                    <div class="col-sm-10">
+                                        <input type="text" class="form-control" ng-model="currentItem.UnFinishReason" ng-maxlength="200" />
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-sm-offset-5 col-sm-7">
+                                        <button class="btn btn-primary" type="submit" ng-show="buttonShow" ng-disabled="ReqForm.$invalid">保存</button>
+                                        <button class="btn btn-primary" type="reset" ng-show="buttonShow" ng-click="currentItem = {}">重置</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+
+                    <div class="box border primary">
+                        <div class="box-title">
+                            <h4><i class="fa fa-table"></i>需求管理记录</h4>
+                        </div>
+                        <div class="box-body">
+                            <ui-data-table options="options">
+                                <table class="table table-striped table-bordered table-hover table-handler">
+                                    <thead>
+                                        <tr>
+                                            <th>#</th>
+                                            <th>日期</th>
+                                            <th>需求类型</th>
+                                            <th>需求内容</th>
+                                            <th>执行者</th>
+                                            <th>完成日期</th>
+                                            <th>未完成原因</th>
+                                            <th><i class="fa fa-bars"></i> 操作</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr ng-repeat="item in Data.ReqList">
+                                            <td>{{$index + 1}}</td>
+                                            <td>{{item.RecordDate | dateFormat}}</td>
+                                            <td><span select-code="A00.103" select-value="{{item.DemandType}}"></span></td>
+                                            <td style="word-break:break-all">{{item.Content}}</td>
+                                            <td>{{item.ExecutorName}}</td>
+                                            <td>{{item.FinishDate | dateFormat}}</td>
+                                            <td style="word-break:break-all">{{item.UnFinishReason}}</td>
+                                            <td>
+                                                <div class="btn-group btn-group-xs" role="group" aria-label="...">
+                                                    <a class="btn btn-info" role="button" ng-click="rowSelect(item)"><i class="fa fa-pencil"></i>编辑</a>
+                                                    <a class="btn btn-primary" role="button" ng-click="deleteItem(item)"><i class="fa fa-times"></i>删除</a>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </ui-data-table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+

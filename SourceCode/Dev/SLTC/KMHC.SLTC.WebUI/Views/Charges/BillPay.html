@@ -1,0 +1,79 @@
+<div class="row">
+    <div id="content" class="col-lg-12">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="page-header">
+                    <ul class="breadcrumb">
+                        <li>
+                            <i class="fa fa-home"></i>
+                            <a href="/">首页</a>
+                        </li>
+                        <li>帐单列表</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <!-- BOX -->
+                <div class="box border primary">
+                    <div class="box-title">
+                        <h4><i class="fa fa-table"></i>帐单信息</h4>
+                        <div class="tools hidden-xs">
+                            <!--<a href="#box-config" data-toggle="modal" class="config">
+                                <i class="fa fa-cog"></i>
+                            </a>-->
+                            <a class="reload" href="javascript:;" ca-reload>
+                                <i class="fa fa-refresh"></i>
+                            </a>
+                            <a href="javascript:;" class="collapse" ca-collapse>
+                                <i class="fa fa-chevron-up"></i>
+                            </a>
+                            <a class="remove" href="javascript:;" ca-remove>
+                                <i class="fa fa-times"></i>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="box-body">
+                        <table id="datatable1" class="table table-striped table-bordered table-hover table-handler">
+                            <thead>
+                                <tr>
+                                    <th>帐单编号</th>
+                                    <th>住民</th>
+                                    <th>费用总合</th>
+                                    <th>日期</th>
+                                    <th>状态</th>
+                                    <th><i class="fa fa-bars"></i> 操作</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr ng-repeat="bill in Data.Bills">
+                                    <td>{{bill.id}}</td>
+                                    <td>{{bill.ResidentName}}</td>
+                                    <td>{{bill.Summary}}</td>
+                                    <td>{{bill.CreateDate}}</td>
+                                    <td>{{bill.Status}}</td>
+                                    <td class="center">
+                                        <button class="btn btn-primary" ui-sref="BillPayList({id:bill.id})">帐单缴费</button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                            <tfoot>
+                                <tr>
+                                    <th>帐单编号</th>
+                                    <th>住民</th>
+                                    <th>费用总合</th>
+                                    <th>日期</th>
+                                    <th>状态</th>
+                                    <th><i class="fa fa-bars"></i> 操作</th>
+                                </tr>
+                            </tfoot>
+                        </table>
+                    </div>
+                </div>
+                <!-- /BOX -->
+            </div>
+        </div>
+    </div>
+</div>
+

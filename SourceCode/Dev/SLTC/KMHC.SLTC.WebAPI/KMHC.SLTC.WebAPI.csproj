@@ -1,0 +1,343 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{C7D80DFC-079F-4094-A278-7169D90EA142}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>KMHC.SLTC.WebAPI</RootNamespace>
+    <AssemblyName>KMHC.SLTC.WebAPI</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="JWT">
+      <HintPath>..\..\ThirdPartyLib\JWT.dll</HintPath>
+    </Reference>
+    <Reference Include="KM.Common">
+      <HintPath>..\..\ThirdPartyLib\KM.Common.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Office.Interop.Word, Version=15.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c, processorArchitecture=MSIL">
+      <EmbedInteropTypes>False</EmbedInteropTypes>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=4.5.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\ThirdPartyLib\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Net.Http.Formatting, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\ThirdPartyLib\System.Net.Http.Formatting.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Http, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\ThirdPartyLib\System.Web.Http.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="APP\AuthenticationController.cs" />
+    <Compile Include="APP\LookOverController.cs" />
+    <Compile Include="APP\MeasureController.cs" />
+    <Compile Include="AuditYearCertController.cs" />
+    <Compile Include="BaseController.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Base\AntiForgeryAuthorizationdAttribute.cs" />
+    <Compile Include="BillManagement\IpdOrderController.cs" />
+    <Compile Include="BillManagement\RSMonFeeDtlController.cs" />
+    <Compile Include="BillManagement\PayGrantController.cs" />
+    <Compile Include="ChargeItem\NSDrugManageController.cs" />
+    <Compile Include="ChargeItem\NSMedicalMaterialManageController.cs" />
+    <Compile Include="ChargeItem\NSServiceManageController.cs" />
+    <Compile Include="CommonController.cs" />
+    <Compile Include="BasicInfoController.cs" />
+    <Compile Include="BedSoreChgrecController.cs" />
+    <Compile Include="BedSoreRecController.cs" />
+    <Compile Include="BiochemistryController.cs" />
+    <Compile Include="BiochemistrysAllController.cs" />
+    <Compile Include="BiochemistrysController.cs" />
+    <Compile Include="CarePlans\CarePlanActivityController.cs" />
+    <Compile Include="CarePlans\CarePlanAssessController.cs" />
+    <Compile Include="CarePlans\CarePlanDetailController.cs" />
+    <Compile Include="CarePlans\CarePlanGoalController.cs" />
+    <Compile Include="CarePlans\CarePlanListController.cs" />
+    <Compile Include="CarePlans\CarePlansController.cs" />
+    <Compile Include="CostManage\BillController.cs" />
+    <Compile Include="BillManagement\BillV2Controller.cs" />
+    <Compile Include="CostManage\CostDtlController.cs" />
+    <Compile Include="CostManage\CostGroupController.cs" />
+    <Compile Include="CostManage\CostGroupDtlController.cs" />
+    <Compile Include="CostManage\CostItemCostGroupController.cs" />
+    <Compile Include="CostManage\CostItemController.cs" />
+    <Compile Include="BillManagement\FeeRecordController.cs" />
+    <Compile Include="CostManage\FixedCostController.cs" />
+    <Compile Include="CostManage\PayBillController.cs" />
+    <Compile Include="CostManage\PinMoneyController.cs" />
+    <Compile Include="CostManage\ReceiptsController.cs" />
+    <Compile Include="ChargeInput\CostEntryController.cs" />
+    <Compile Include="DC\CasesWorkStation\CasesTimeline.cs" />
+    <Compile Include="DC\FamilyDoctor\NoteController.cs" />
+    <Compile Include="DC\FamilyDoctor\RegVisitRecordController.cs" />
+    <Compile Include="DC\FamilyDoctor\RegNoteRecordController.cs" />
+    <Compile Include="DC\NurseCare\DC_AssessValueController.cs" />
+    <Compile Include="DC\FamilyDoctor\CheckTemplateController.cs" />
+    <Compile Include="DC\FamilyDoctor\RegCheckRecordController.cs" />
+    <Compile Include="DC\FamilyDoctor\RegCheckRecordDataController.cs" />
+    <Compile Include="DC\NurseCare\DC_NsCplActivityController.cs" />
+    <Compile Include="DC\NurseCare\DC_NsCplGoalController.cs" />
+    <Compile Include="DC\NurseCare\DC_NursingPlanActionController.cs" />
+    <Compile Include="DC\NurseCare\DC_RegBaseInfoListController.cs" />
+    <Compile Include="DC\ResidentManage\AssignJobsController.cs" />
+    <Compile Include="DC\CommWordManage\CommWordController.cs" />
+    <Compile Include="DC\CrossSpeciality\DC_ABNOHisListController.cs" />
+    <Compile Include="DC\CrossSpeciality\DC_ABNORMALEController.cs" />
+    <Compile Include="DC\CrossSpeciality\DC_CrossController.cs" />
+    <Compile Include="DC\CrossSpeciality\DC_CrossLcontroller.cs" />
+    <Compile Include="DC\CrossSpeciality\DC_CrossListController.cs" />
+    <Compile Include="DC\CrossSpeciality\DC_MultiTeamExtController.cs" />
+    <Compile Include="DC\CrossSpeciality\DC_MultiTeamController.cs" />
+    <Compile Include="DC\CrossSpeciality\DC_MultiTeamHisController.cs" />
+    <Compile Include="DC\CrossSpeciality\NurseingLifeController.cs" />
+    <Compile Include="DC\CrossSpeciality\NurseingLifeEditController.cs" />
+    <Compile Include="DC\CrossSpeciality\NurseingLifelistController.cs" />
+    <Compile Include="DC\NurseCare\DCNurseRequirementEvalController.cs" />
+    <Compile Include="DC\NurseCare\DC_NursingPlanController.cs" />
+    <Compile Include="DC\NurseCare\DC_NursingSheetController.cs" />
+    <Compile Include="DC\NurseCare\DC_RegActivityRequestEvalController.cs" />
+    <Compile Include="DC\NurseCare\DC_RegCplController.cs" />
+    <Compile Include="DC\ResidentManage\DC_AssignTaskController.cs" />
+    <Compile Include="DC\ResidentManage\DC_AssignWorkNoteController.cs" />
+    <Compile Include="DC\ResidentManage\DC_ResidentController.cs" />
+    <Compile Include="DC\SocialWorker\DC_IpdRegController.cs" />
+    <Compile Include="DC\SocialWorker\DC_LifeHistoryController.cs" />
+    <Compile Include="DC\SocialWorker\DC_ReferralController.cs" />
+    <Compile Include="DC\SocialWorker\DC_ReferrallistsController.cs" />
+    <Compile Include="DC\SocialWorker\DC_RegDayLifeController.cs" />
+    <Compile Include="DC\SocialWorker\DC_RegFileController.cs" />
+    <Compile Include="DC\SocialWorker\DC_RegLifeQualityEvalController.cs" />
+    <Compile Include="DC\SocialWorker\DC_RegQuestionEvalRecController.cs" />
+    <Compile Include="DC\SocialWorker\DC_SwRegEvalPlanController.cs" />
+    <Compile Include="DC\SocialWorker\DC_TaskGoalyssTrategyController.cs" />
+    <Compile Include="DC\SysAdmin\DC_DataDicEditDtlController.cs" />
+    <Compile Include="DC\SysAdmin\DC_DataDicEditController.cs" />
+    <Compile Include="DC\SysAdmin\DC_DataDicOrglistController.cs" />
+    <Compile Include="DC\SysAdmin\DC_DataDicListController.cs" />
+    <Compile Include="DC\SysAdmin\DC_ActivityController.cs" />
+    <Compile Include="DictManage\CommonUseWordController.cs" />
+    <Compile Include="ConstrainsBevalController.cs" />
+    <Compile Include="DictManage\CodeController.cs" />
+    <Compile Include="DC\NurseCare\DrugManageController.cs" />
+    <Compile Include="DictManage\DictManageController.cs" />
+    <Compile Include="EVM\EvalAnswerController.cs" />
+    <Compile Include="EVM\EvalQuestionController.cs" />
+    <Compile Include="EVM\EvalQuestionResultController.cs" />
+    <Compile Include="EVM\EvalTemplateSetController.cs" />
+    <Compile Include="EVM\ExportQuestionResultsController.cs" />
+    <Compile Include="EVM\ExportEvalController.cs" />
+    <Compile Include="ExtDataInterface\ExtNursingDataController.cs" />
+    <Compile Include="ExtDataInterface\ExtFeeController.cs" />
+    <Compile Include="ExtDataInterface\ExtResidentController.cs" />
+    <Compile Include="FinancialManagement\AdvanceChargeRefundController.cs" />
+    <Compile Include="FinancialManagement\RefundMgmtController.cs" />
+    <Compile Include="FinancialManagement\RefundController.cs" />
+    <Compile Include="FinancialManagement\RefundRecController.cs" />
+    <Compile Include="FinancialManagement\ResidentBalanceRefundController.cs" />
+    <Compile Include="FinancialManagement\ResidentChargeGroupController.cs" />
+    <Compile Include="IndexManage\InfectionItemController.cs" />
+    <Compile Include="IndexManage\SymptomItemController.cs" />
+    <Compile Include="MedicalWork\OwnDrugRecController.cs" />
+    <Compile Include="DeductionController.cs" />
+    <Compile Include="NursingEvaluation\NursingCareEvalController.cs" />
+    <Compile Include="NursingWorkstation\HandoverRecordController.cs" />
+    <Compile Include="NursingWorkstation\WorkItemController.cs" />
+    <Compile Include="OrganizationManage\EmpFileExtController.cs" />
+    <Compile Include="OrganizationManage\IpdController.cs" />
+    <Compile Include="PersonStatusReportController.cs" />
+    <Compile Include="ReceptionManagement\AdvisoryRegCallBackController.cs" />
+    <Compile Include="ReceptionManagement\AdvisoryRegController.cs" />
+    <Compile Include="ReceptionManagement\FrontConsoleController.cs" />
+    <Compile Include="ReceptionManagement\ResBirthDayListController.cs" />
+    <Compile Include="ReceptionManagement\VisitorInOutRecController.cs" />
+    <Compile Include="Report\ReportTempManageController.cs" />
+    <Compile Include="ResidentManage\FinancialCloseController.cs" />
+    <Compile Include="ResidentManage\FstRegRecController.cs" />
+    <Compile Include="ResidentManage\HealthRecordsController.cs" />
+    <Compile Include="ResidentManage\RegNCIInfoController.cs" />
+    <Compile Include="ServiceDeposit\ServiceDepositGrantListController.cs" />
+    <Compile Include="myDeskController.cs" />
+    <Compile Include="NCI\NCIMedicalMaterialController.cs" />
+    <Compile Include="NCI\NCIServiceController.cs" />
+    <Compile Include="NCI\NCIDrugController.cs" />
+    <Compile Include="NursingWorkstation\GroupActivityEvalController.cs" />
+    <Compile Include="NutritionCareRecController.cs" />
+    <Compile Include="EVM\EvalTemplateController.cs" />
+    <Compile Include="OrganizationManage\NoticeController.cs" />
+    <Compile Include="NursingWorkstation\AssignTaskNewController.cs" />
+    <Compile Include="OrganizationManage\CodeFileController.cs" />
+    <Compile Include="NurseDailyReportController.cs" />
+    <Compile Include="NurseDailyReportPipeController.cs" />
+    <Compile Include="NursingEvaluation\NurDemandHisController.cs" />
+    <Compile Include="NursingWorkstation\AssignTaskController.cs" />
+    <Compile Include="NursingWorkstation\MedicationRecordController.cs" />
+    <Compile Include="NursingWorkstation\VisitdocrecordsController.cs" />
+    <Compile Include="NursingWorkstation\VisitprescriptionsController.cs" />
+    <Compile Include="OrganizationManage\CodeDtlController.cs" />
+    <Compile Include="OrganizationManage\CommfileController.cs" />
+    <Compile Include="OrganizationManage\ModuleController.cs" />
+    <Compile Include="OrganizationManage\RegFileGetcontroller.cs" />
+    <Compile Include="PackageRelated\ChargeGroupServiceController.cs" />
+    <Compile Include="PackageRelated\ChargeGroupMaterialController.cs" />
+    <Compile Include="PackageRelated\ChargeGroupDrugController.cs" />
+    <Compile Include="PackageRelated\ChargeGroupEntryController.cs" />
+    <Compile Include="PackageRelated\PacMaintainController.cs" />
+    <Compile Include="FinancialManagement\AdvanceChargeController.cs" />
+    <Compile Include="FinancialManagement\BillV2PayController.cs" />
+    <Compile Include="FinancialManagement\ResidentBalanceController.cs" />
+    <Compile Include="FinancialManagement\PaymentRecController.cs" />
+    <Compile Include="FinancialManagement\PaymentMgmtController.cs" />
+    <Compile Include="PackageRelated\ResChargeGroController.cs" />
+    <Compile Include="PostController.cs" />
+    <Compile Include="Report\ReportManageController.cs" />
+    <Compile Include="Report\ReportController.cs" />
+    <Compile Include="ResidentManage\BedStatusController.cs" />
+    <Compile Include="ResidentManage\NutrtionEvalController.cs" />
+    <Compile Include="ResidentManage\HealthManageController.cs" />
+    <Compile Include="ResidentManage\LeaveNursingController.cs" />
+    <Compile Include="ResidentManage\PersonExtendController.cs" />
+    <Compile Include="SocialWorker\CarerSvrRecController.cs" />
+    <Compile Include="SocialWorker\ComplainRecController.cs" />
+    <Compile Include="ConstraintRecController.cs" />
+    <Compile Include="ContactController.cs" />
+    <Compile Include="DrugController.cs" />
+    <Compile Include="FallingController.cs" />
+    <Compile Include="IndexManage\LabExamRecController.cs" />
+    <Compile Include="IndexManage\InfectionSympotmController.cs" />
+    <Compile Include="IndexManage\InfectionController.cs" />
+    <Compile Include="IndexManage\UnPlanEdipdController.cs" />
+    <Compile Include="IndexManage\UnPlanWeightIndController.cs" />
+    <Compile Include="NursingWorkstation\GroupActivityRecController.cs" />
+    <Compile Include="NursingWorkstation\InValueController.cs" />
+    <Compile Include="NursingWorkstation\OutValueController.cs" />
+    <Compile Include="NursingWorkstation\VitalsignController.cs" />
+    <Compile Include="OrganizationManage\EmpFileController.cs" />
+    <Compile Include="NursingEvaluation\EvaluationController.cs" />
+    <Compile Include="NursingEvaluation\EvaluationHisController.cs" />
+    <Compile Include="OrganizationManage\FloorController.cs" />
+    <Compile Include="GoodsSaleController.cs" />
+    <Compile Include="GoodsLoanController.cs" />
+    <Compile Include="OrganizationManage\GroupController.cs" />
+    <Compile Include="NursingEvaluation\NurDemandEvalController.cs" />
+    <Compile Include="OrganizationManage\AffairsHandoverController.cs" />
+    <Compile Include="PainBodyPartRecController.cs" />
+    <Compile Include="ResidentManage\CaseClosedController.cs" />
+    <Compile Include="ResidentManage\FamilyDiscussController.cs" />
+    <Compile Include="ResidentManage\IpdregOutController.cs" />
+    <Compile Include="ResidentManage\LeaveHospController.cs" />
+    <Compile Include="ResidentManage\PersonController.cs" />
+    <Compile Include="ResidentManage\PreipdController.cs" />
+    <Compile Include="ResidentManage\RelationController.cs" />
+    <Compile Include="ResidentManage\RelationDtlController.cs" />
+    <Compile Include="ResidentManage\RequirementController.cs" />
+    <Compile Include="ResidentManage\ResidentController.cs" />
+    <Compile Include="SocialWorker\DashBoardController.cs" />
+    <Compile Include="SocialWorker\HomeCareSuperviseController.cs" />
+    <Compile Include="NursingEvaluation\InjectionController.cs" />
+    <Compile Include="SocialWorker\LifeRecordController.cs" />
+    <Compile Include="GoodsController.cs" />
+    <Compile Include="MedicineController.cs" />
+    <Compile Include="NursingEvaluation\NursingController.cs" />
+    <Compile Include="BedController.cs" />
+    <Compile Include="ManufactureController.cs" />
+    <Compile Include="AttachFileController.cs" />
+    <Compile Include="NursingWorkstation\NursingSingleShiftController.cs" />
+    <Compile Include="NursingWorkstation\NursingRecordController.cs" />
+    <Compile Include="OrganizationManage\DeptController.cs" />
+    <Compile Include="PainEvalRecController.cs" />
+    <Compile Include="PhysicianAssController.cs" />
+    <Compile Include="PhysicianRoundsController.cs" />
+    <Compile Include="SocialWorker\NewRegEnvAdaptationController.cs" />
+    <Compile Include="SocialWorker\NutritionEvalListController.cs" />
+    <Compile Include="SocialWorker\PharmacistController.cs" />
+    <Compile Include="SocialWorker\PipelineEvalController.cs" />
+    <Compile Include="ReferralListController.cs" />
+    <Compile Include="RehabilitationController.cs" />
+    <Compile Include="OrganizationManage\OrgController.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="SocialWorker\PipelineController.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SocialWorker\ReferralRecController.cs" />
+    <Compile Include="SocialWorker\RegActivityRequEvalController.cs" />
+    <Compile Include="SocialWorker\NewResideEntenvRecController.cs" />
+    <Compile Include="SocialWorker\RegEvaluateController.cs" />
+    <Compile Include="SocialWorker\ResidentListV2Controller.cs" />
+    <Compile Include="SocialWorker\ResourceLinkController.cs" />
+    <Compile Include="OrganizationManage\RolesController.cs" />
+    <Compile Include="OrganizationManage\RoomController.cs" />
+    <Compile Include="SocialWorker\SubsidyRecController.cs" />
+    <Compile Include="NgUploadController.cs" />
+    <Compile Include="TSG\TsgController.cs" />
+    <Compile Include="UploadController.cs" />
+    <Compile Include="OrganizationManage\UsersController.cs" />
+    <Compile Include="ValuesController.cs" />
+    <Compile Include="VerifyController.cs" />
+    <Compile Include="WelfareController.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\KMHC.Infrastructure\KMHC.Infrastructure.csproj">
+      <Project>{0997f971-1d2f-4aa8-aa67-5b1683afdefd}</Project>
+      <Name>KMHC.Infrastructure</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\KMHC.SLTC.Business.Entity\KMHC.SLTC.Business.Entity.csproj">
+      <Project>{208d3a36-9507-4ff2-a3bf-374d718f0a11}</Project>
+      <Name>KMHC.SLTC.Business.Entity</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\KMHC.SLTC.Business.Interface\KMHC.SLTC.Business.Interface.csproj">
+      <Project>{5b2e2137-06d2-4adf-bc85-aa94984acc50}</Project>
+      <Name>KMHC.SLTC.Business.Interface</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\KMHC.SLTC.Persistence\KMHC.SLTC.Persistence.csproj">
+      <Project>{3a0737ce-99b6-429f-9b11-85b49fad1de2}</Project>
+      <Name>KMHC.SLTC.Persistence</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

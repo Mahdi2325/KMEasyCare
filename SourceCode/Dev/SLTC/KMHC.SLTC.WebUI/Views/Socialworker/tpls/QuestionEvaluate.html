@@ -1,0 +1,69 @@
+<div class="row">
+    
+    <div class="col-md-12">
+        <div class="panel panel-default">
+            <div class="panel-body">
+                <form class="form-horizontal" ng-submit="saveEvaluate()" novalidate>
+                    <div class="form-group">
+
+                        <label class="col-md-1 control-label">评估人员</label>
+                        <div class="col-md-2">
+                            <select class="form-control" id="selEvaluator" ng-model="Data.psychologyPerson.EvaluateBy" ng-options="t.value as t.text for t in Data.Evaluators"></select>
+                        </div>
+                        <label class="col-md-1 control-label">评估日期</label>
+                        <div class="col-md-2">
+                            <input type="text" class="form-control datepicker" id="dtEvalDate" ng-model="Data.psychologyPerson.EvalDate">
+                        </div>
+                        <label class="col-md-1 control-label">下次评估日期</label>
+                        <div class="col-md-2">
+                            <input type="text" class="form-control datepicker" id="dtNextEvalDate" ng-model="Data.psychologyPerson.NextEvalDate">
+                        </div>
+                        <label class="col-md-1 control-label">下次受托者</label>
+                        <div class="col-md-2">
+                            <select class="form-control" id="selNextEvaluator" ng-model="Data.psychologyPerson.NextEvaluateBy" ng-options="t.value as t.text for t in Data.Evaluators"></select>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div class="panel panel-default">
+            <div class="panel-heading">问题与处遇</div>
+            <div class="panel-body">
+                <form class="form-horizontal" role="form" ng-submit="saveEvaluate()">
+                  
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label">主要问题(可复选)</label>
+                        <div class="col-sm-9">
+                            <textarea class="form-control" rows="3" ng-model="Data.psychologyPerson.KeyQuestion" select-items="需求或问题"></textarea>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label">计划处遇-短期目标</label>
+                        <div class="col-sm-9">
+                            <textarea class="form-control" rows="3" ng-model="Data.psychologyPerson.ProcessPlanS" select-items="目标"/>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label">计划处遇-中期目标</label>
+                        <div class="col-sm-9">
+                            <textarea class="form-control" rows="3" ng-model="Data.psychologyPerson.ProcessPlanM" select-items="目标"></textarea>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label">计划处遇-长期目标</label>
+                        <div class="col-sm-9">
+                            <textarea class="form-control" rows="3" ng-model="Data.psychologyPerson.ProcessPlanL" select-items="目标"></textarea>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label"></label>
+                        <div class="col-sm-9">
+                            <button class="form-control btn btn-primary">保存</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+

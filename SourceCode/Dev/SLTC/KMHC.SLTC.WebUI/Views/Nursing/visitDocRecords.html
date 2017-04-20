@@ -1,0 +1,733 @@
+<!--住民就医列表-->
+<style type="text/css">
+    .comboText {
+        font-size: 14px;
+        line-height: 1.428571429;
+        color: #555555;
+        vertical-align: middle;
+        background-color: #ffffff;
+        background-image: none;
+        border: 1px solid #cccccc;
+        border-radius: 4px;
+        -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+        box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+        -webkit-transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+        transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+    }
+</style>
+
+<div class="row" ng-show="displayMode == 'list'">
+    <div id="content" class="col-md-12">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="page-header">
+
+                    <ul class="breadcrumb">
+                        <li>
+                            <i class="fa fa-home"></i>
+                            <a href="/">首页</a>
+                        </li>
+                        <li>
+                            就医/用药
+                        </li>
+                    </ul>
+                    <div class="clearfix"></div>
+
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="col-sm-2">
+                    <div class="box border primary">
+                        <div class="box-title">
+                            <h4>
+                                <i class="fa fa-bars"></i>住民信息
+                            </h4>
+                        </div>
+                        <div class="box-body">
+                            <resident-card feeno={{FeeNo}} callback="residentSelected(resident)" />
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-10">
+                    <div class="box border primary">
+                        <div class="box-title">
+                            <h4><i class="fa fa-table"></i>住民就医记录</h4>
+                        </div>
+                        <div class="box-body">
+
+                            <div class="col-lg-offset-11">
+                                <div>
+                                    <button class="btn btn-primary" ng-show="buttonShow" ng-click="openWin()">新增资料</button>
+                                </div>
+                            </div>
+
+                            <ui-data-table options="options">
+                                <table class="table table-striped table-bordered table-hover">
+
+                                    <thead>
+                                        <tr role="row">
+                                            <th>就医日期</th>
+                                            <th>填写人员</th>
+                                            <th>就医类型</th>
+                                            <th>医院名称</th>
+                                            <th>科别</th>
+                                            <th>医师姓名</th>
+                                            <th>就医原因</th>
+                                            <th>领药天数</th>
+                                            <th>下次就医日期</th>
+                                            <th>预约序号</th>
+                                            <th>下次就医类型</th>
+                                            <th style="text-align:center; width:130px"><i class="fa fa-bars"></i> 操作</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody role="alert" aria-live="polite" aria-relevant="all">
+                                        <tr ng-repeat="medicine in Data.visitDocRecords">
+                                            <td class="">
+                                                <span ng-bind="medicine.VisitDate | dateFormat"></span>
+                                            </td>
+                                            <td><span ng-bind="medicine.RecordNameBy"></span></td>
+                                            <td><span ng-bind="medicine.VisitType"></span></td>
+                                            <td><span ng-bind="medicine.VisitHosp"></span></td>
+                                            <td><span ng-bind="medicine.VisitDept"></span></td>
+                                            <td><span ng-bind="medicine.VisitDoctor"></span></td>
+                                            <td><span select-code="K00.010" select-value="{{medicine.VisitReason}}"></span></td>
+                                            <td><span ng-bind="medicine.TakeDays"></span></td>
+                                            <td><span ng-bind="medicine.Nextvisitdate | dateFormat"></span></td>
+                                            <td><span ng-bind="medicine.Prereginfo"></span></td>
+                                            <td><span ng-bind="medicine.Nextvisittype"></span></td>
+                                            <td>
+                                                <div class="btn-group btn-group-xs" role="group" aria-label="...">
+                                                    <button class="btn btn-primary" ng-click="openWin(medicine)">编辑</button>
+                                                    <a class="btn btn-primary" role="button" data-toggle="modal" ng-click="deleteItem(medicine)">删除</a>
+                                                    <!--<a class="btn btn-warning" href="/api/Report/P19?seqno={{medicine.SeqNo}}" target="_blank">打印</a>-->
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </ui-data-table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+<div class="row" ng-show="displayMode == 'edit'">
+    <div id="content" class="col-md-12">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="page-header">
+                    <ul class="breadcrumb">
+                        <li>
+                            <i class="fa fa-home"></i>
+                            <a href="/">首页</a>
+                        </li>
+                        <li><a href="#" ng-click="cancelVisitDocRec()"> 就医/用药</a></li>
+                        <li>
+                            编辑就医/用药
+                        </li>
+                    </ul>
+                    <div class="clearfix"></div>
+
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="box border primary">
+                    <div class="box-title">
+                        <h4>
+                            <i class="fa fa-bars"></i>编辑就医记录
+                            <a class="btn btn-primary" ng-click="copy(currentResident.FeeNo)" ng-show="add">复制</a>
+                        </h4>
+
+                    </div>
+                    <div class="box-body">
+                        <form class="form-horizontal" role="form" name="vrForm" novalidate>
+                            <div class="form-group">
+                                <label class="col-sm-1 control-label input-sm">就医日期<span class="required">*</span></label>
+                                <div class="col-sm-2">
+                                    <input class="form-control input-sm" name="就医日期" ng-model="currentItem.VisitDate" ca-date-picker required />
+                                </div>
+                                <label class="col-sm-1 control-label">就医类型</label>
+                                <div class="col-sm-2">
+                                    <input class="form-control input-sm" name="就医类型" ng-model="currentItem.VisitType" select-items="就医类型" maxlength="16" />
+                                </div>
+                                <label class="col-sm-1 control-label">填写人员</label>
+                                <div class="col-sm-2">
+                                    <input-staff id="txtRecordBy" callback="staffSelected(item,'RecordBy')" value="{{currentItem.RecordBy}}" />
+                                </div>
+                                <div class="col-lg-offset-1 col-sm-1">
+                                    <label>感染就诊&nbsp;&nbsp;<input type="checkbox" class="uniform" ng-model="currentItem.InfectFlag">&nbsp;是</label>
+                                </div>
+                                <div class="col-sm-1">
+                                    <label>非计划&nbsp;&nbsp;<input type="checkbox" class="uniform" ng-model="currentItem.PlanvisitFlag">&nbsp;是</label>
+                                </div>
+                            </div>
+                            <div class="form-group">
+
+
+
+
+                                <label class="col-sm-1 control-label">医院名称</label>
+                                <!--<div class="col-sm-2">
+                                    <select class="form-control" id="selVisitHosp" ng-model="currentItem.VisitHosp" ng-change="changeHospital(currentItem.VisitHosp)" ng-options="Data.HospNo as Data.HospName for Data in Info.VisitHosp" />
+                                    <input class="form-control" name="医院名称" ng-model="currentItem.VisitHospName" type="hidden" />
+                                </div>-->
+
+                                <div class="col-sm-2 ContNamediv">
+                                    <div style="position:relative;">
+                                        <span class="spanwidth" style="width:18px;overflow:hidden;">
+                                            <select class="comboText selContName input-sm" style="height:34px; padding-left:10px;" ng-model="currentItem.VisitHosp" ng-change="changeHospital(currentItem.VisitHosp)" name="医院名称">
+                                                <option ng-repeat="item in Info.VisitHosp" value="{{item.HospName}}">{{item.HospName}}
+                                            </select>
+                                        </span>
+                                        <input name="box" ng-maxlength="40" class="comboText inputwidth input-sm" ng-model="currentItem.VisitHosp" ng-change="changeHospital(currentItem.VisitHosp)" maxlength="50" style="position:absolute;left:0px; padding-left:10px; height:34px;">
+                                    </div>
+                                </div>
+
+
+                                <label class="col-sm-1 control-label">科别</label>
+                                <!--<div class="col-sm-2">
+                                    <select class="form-control" id="selVisitDept" ng-model="currentItem.VisitDept" ng-change="changeDept(currentItem.VisitDept)" ng-options="Data.DeptNo as Data.DeptName for Data in Info.VisitDept" />
+                                    <input class="form-control" ng-model="currentItem.VisitDeptName" type="hidden" />
+                                </div>-->
+
+                                <div class="col-sm-2 ContNamediv">
+                                    <div style="position:relative;">
+                                        <span class="spanwidth" style="width:18px;overflow:hidden;">
+                                            <select class="comboText selContName input-sm" id="sltVisitDept" style="height:34px; padding-left:10px;" ng-model="currentItem.VisitDept" ng-change="changeDept(currentItem.VisitDept)" name="科别">
+                                                <option ng-repeat="item in Info.VisitDept" value="{{item.DeptName}}">{{item.DeptName}}
+                                            </select>
+                                        </span>
+                                        <input name="box" ng-maxlength="40" class="comboText inputwidth input-sm" ng-model="currentItem.VisitDept" maxlength="50" ng-change="changeDept(currentItem.VisitDept)" style="position:absolute;left:0px; padding-left:10px; height:34px;">
+                                    </div>
+                                </div>
+
+                                <label class="col-sm-1 control-label">医师姓名</label>
+
+                                <div class="col-sm-2 ContNamediv">
+                                    <div style="position:relative;">
+                                        <span class="spanwidth" style="width:18px;overflow:hidden;">
+                                            <select class="comboText selContName input-sm" style="height:34px; padding-left:10px;" ng-model="currentItem.VisitDoctor" name="医师姓名">
+                                                <option ng-repeat="item in Info.VisitDoctor" value="{{item.DocName}}">{{item.DocName}}
+                                            </select>
+                                        </span>
+                                        <input name="box" ng-maxlength="40" class="comboText inputwidth input-sm" ng-model="currentItem.VisitDoctor" maxlength="50" style="position:absolute;left:0px; padding-left:10px; height:34px;">
+                                    </div>
+                                </div>
+                                <!--<div class="col-sm-2">
+                                    <select class="form-control" id="selVisitDoctor" ng-model="currentItem.VisitDoctor" ng-change="changeDoctor(currentItem.VisitDoctor)" ng-options="Data.DocNo as Data.DocName for Data in Info.VisitDoctor" />
+                                    <input class="form-control" ng-model="currentItem.VisitDoctorName" type="hidden" />
+                                </div>-->
+                                <!--<label class="col-sm-1 control-label">就医原因</label>
+                                <div class="col-sm-2">
+                                    <select class="form-control" id="selRecordBy" ng-model="currentItem.VisitReason" select-code="K00.008">
+                                        <option value="">-- 请选择 --</option>
+                                    </select>
+                                </div>-->
+                                <label class="col-sm-1 control-label">就医原因</label>
+
+                                <div class="col-sm-2" id="ContNamediv2">
+                                    <div style="position:relative;">
+                                        <span id="spanwidth2" style="width:18px;overflow:hidden;">
+                                            <select class="comboText input-sm" style="height:34px; padding-left:10px;" id="selContName2" ng-model="currentItem.VisitReason" name="就医原因">
+                                                <option ng-repeat="item in VisitReasonList" value="{{item.ItemName}}">{{item.ItemName}}</option>
+                                            </select>
+                                        </span>
+                                        <input name="box" id="inputwidth2" ng-maxlength="40" class="comboText input-sm" ng-model="currentItem.VisitReason" style="position:absolute;left:0px; padding-left:10px; height:34px;">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-1 control-label">领药天数</label>
+                                <div class="col-sm-2">
+                                    <div class="input-group">
+                                        <input class="form-control input-sm" ng-pattern="/^[0-9]\d*|[1-9]\d*\.\d*[1-9]|0\.\d*[1-9]$/" name="领药天数" ng-model="currentItem.TakeDays" type="number" maxlength="4" />
+                                        <div class="input-group-addon">天</div>
+                                    </div>
+                                </div>
+                                <label class="col-sm-1 control-label">服药开始时间</label>
+                                <div class="col-sm-2">
+                                    <input class="form-control input-sm" ng-model="currentItem.StartDate" ca-date-time-picker />
+                                </div>
+                                <label class="col-sm-1 control-label">服药结束时间</label>
+                                <div class="col-sm-2">
+                                    <input class="form-control input-sm" ng-model="currentItem.EndDate" ng-change="getVisitDate(currentItem.EndDate)" ca-date-time-picker />
+                                </div>
+                                <div class="col-sm-3">
+                                    <button class="btn btn-primary input-sm" ng-click="calculation()"><i class="fa fa-arrow-circle-left">&nbsp;&nbsp;计算服药结束时间</i></button>
+                                </div>
+
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-1 control-label">ICD</label>
+                                <div class="col-sm-1">
+                                    <input-i-c-d9 callback="ICD9Selected(item)" />
+                                </div>
+                                <div class="col-sm-4">
+                                    <input class="form-control input-sm" name="国际分类" ng-model="currentItem.DiseaseType" ng-maxlength="40" />
+                                </div>
+                                <label class="col-sm-1 control-label">伤病名称</label>
+                                <div class="col-sm-5">
+                                    <input class="form-control input-sm" name="伤病名称" ng-model="currentItem.DiseaseName" ng-maxlength="400" />
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-1 control-label">主诉</label>
+                                <div class="col-sm-5">
+                                    <textarea class="form-control input-sm" name="主诉" rows="1" ng-model="currentItem.Symptoms" select-items="主诉" maxlength="66"></textarea>
+                                </div>
+                                <label class="col-sm-1 control-label">客观描述</label>
+                                <div class="col-sm-5">
+                                    <textarea class="form-control input-sm" name="客观描述" rows="1" ng-model="currentItem.Objectivedescrip" ng-maxlength="166"></textarea>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-1 control-label">诊断评估</label>
+                                <div class="col-sm-5">
+                                    <textarea class="form-control input-sm" name="诊断评估" rows="1" ng-model="currentItem.Diagnosticeval" ng-maxlength="166"></textarea>
+                                </div>
+                                <label class="col-sm-1 control-label">治疗方法</label>
+                                <div class="col-sm-5">
+                                    <textarea class="form-control input-sm" name="治疗方法" rows="1" ng-model="currentItem.Treatment" ng-maxlength="166"></textarea>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">是否同步写入护理记录</label>
+                                <div class="col-sm-1">
+                                    <label class="checkbox-inline">
+                                        <input type="checkbox" class="uniform input-sm" ng-model="SyncNurRec">是
+                                    </label>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="col-sm-1 control-label">备注</label>
+                                <div class="col-sm-11">
+                                    <textarea class="form-control input-sm" name="备注" rows="2" ng-model="currentItem.Description" ng-maxlength="166"></textarea>
+                                </div>
+                            </div>
+                            <div class="panel panel-default">
+                                <div class="panel-heading">下次就医资料</div>
+                                <div class="panel panel-body">
+                                    <div class="form-group">
+                                        <label class="checkbox-inline col-lg-offset-1 col-md-2">
+                                            <input type="checkbox" class="uniform" ng-click="cancelInfectVisitReason(currentItem.Nextvisitflag)" ng-model="currentItem.Nextvisitflag">取消下次再就医
+                                        </label>
+                                        <label ng-hide="!currentItem.Nextvisitflag" class="control-label col-md-1">取消原因</label>
+                                        <div class="col-md-2" ng-hide="!currentItem.Nextvisitflag">
+                                            <input class="form-control input-sm" name="取消原因" ng-model="currentItem.Infectvisitreason" select-items="取消下次就医原因" ng-maxlength="16" />
+                                        </div>
+                                        <label ng-hide="currentItem.Nextvisitflag" class="col-md-1 control-label">下次提示</label>
+                                        <div class="col-md-5">
+                                            <input class="form-control input-sm" ng-hide="currentItem.Nextvisitflag" name="下次提示" ng-model="currentItem.Nextvisithint" select-items="下次就医提示" ng-maxlength="66" />
+                                        </div>
+                                    </div>
+                                    <div class="form-group" ng-hide="currentItem.Nextvisitflag">
+                                        <label class="col-md-1 control-label">预约挂号</label>
+                                        <div class="col-md-2">
+                                            <input class="form-control input-sm" name="预约挂号" ng-model="currentItem.Prereginfo" ng-maxlength="33" />
+                                        </div>
+                                        <label class="col-md-1 control-label">间隔天数</label>
+                                        <div class="col-md-2">
+                                            <div class="input-group">
+                                                <input class="form-control input-sm" ng-pattern="/^[0-9]\d*|[1-9]\d*\.\d*[1-9]|0\.\d*[1-9]$/" name="间隔天数" ng-model="currentItem.Intervalday" type="number" ng-maxlength="11" ng-change="GetNextvisitdate()" />
+                                                <div class="input-group-addon">天</div>
+                                            </div>
+                                        </div>
+                                        <label class="col-md-1 control-label">就医日期</label>
+                                        <div class="col-md-2">
+                                            <input class="form-control input-sm" ng-model="currentItem.Nextvisitdate" ng-change="ChangeNextvisitdate()" ca-date-picker />
+                                        </div>
+                                        <label class="col-md-1 control-label">就医类型</label>
+                                        <div class="col-md-2">
+                                            <input class="form-control input-sm" name="就医类型" ng-model="currentItem.Nextvisittype" select-items="就医类型" maxlength="6" />
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="panel panel-default">
+                                <div class="panel-heading">
+                                    输入处方
+                                </div>
+                                <div class="panel-body">
+                                    <div class="form-group">
+                                        <div class="col-md-6">
+                                            <button class="btn btn-default" ng-click="openWin_vdr()">
+                                                <span class="glyphicon glyphicon-pencil">药品费用管理</span>
+                                            </button>
+                                        </div>
+                                        <div class="col-md-6" style="text-align:right">
+                                            <!--<a class="btn btn-primary" href="/angular/DrugList">药品管理</a>-->
+                                            <!--<a class="btn btn-primary" href="/api/Report/P19?seqno={{currentItem.SeqNo}}" target="_blank">打印本次给药单</a>-->
+                                        </div>
+                                    </div>
+                                    <table class="table table-striped table-bordered table-hover">
+                                        <thead>
+                                            <tr>
+                                                <th>#</th>
+                                                <th>药品名称</th>
+                                                <th>总量</th>
+                                                <th>每次颗数</th>
+                                                <th>剂量</th>
+                                                <th>服用频率</th>
+                                                <th>用法</th>
+                                                <th>给药途径</th>
+                                                <th>使用中</th>
+                                                <th>处方开始日</th>
+                                                <th>处方到期日</th>
+                                                <!--<th><i class="fa fa-bars"></i>操作</th>-->
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr ng-repeat="visitpres in Data.visitpresList">
+                                                <td>{{$index + 1}}</td>
+                                                <td style="word-break: break-all;word-wrap: break-word;">{{visitpres.CnName}}</td>
+                                                <td style="word-break: break-all;word-wrap: break-word;">{{visitpres.TotalQty}}</td>
+                                                <td style="word-break: break-all;word-wrap: break-word;">{{visitpres.Qty}}</td>
+                                                <td style="word-break: break-all;word-wrap: break-word;">{{visitpres.TakeQty}}</td>
+                                                <td style="word-break: break-all;word-wrap: break-word;">{{visitpres.FreqName}}</td>
+                                                <td style="word-break: break-all;word-wrap: break-word;">{{visitpres.Freqday}}天{{visitpres.Freqqty}}次</td>
+                                                <td style="word-break: break-all;word-wrap: break-word;"><span select-code="K00.027" select-value="{{visitpres.TakeWay}}"><></span></td>
+                                                <td style="word-break: break-all;word-wrap: break-word;">{{visitpres.UseFlag?'是':'否'}}</td>
+                                                <td style="word-break: break-all;word-wrap: break-word;">{{visitpres.StartDate | dateFormat}}</td>
+                                                <td style="word-break: break-all;word-wrap: break-word;">{{visitpres.EndDate | dateFormat}}</td>
+                                                <!--<td>
+                                                    <div class="btn-group btn-group-xs" role="group" aria-label="...">
+                                                        <a class="btn btn-default" role="button" ng-click="editVisitpres(visitpres)">编辑</a>
+                                                        <a class="btn btn-default" role="button" ng-click="deleteVisitpres(visitpres)">删除</a>
+                                                    </div>
+                                                </td>-->
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                            <div class="form-group">
+
+                                <div class="col-sm-offset-8">
+                                    <div class="btn-group btn-group-sm" role="group" aria-label="...">
+                                        <button class="btn btn-primary" type="submit" ng-click="saveVisitDocRec(currentItem)">保存</button>
+                                        <button class="btn btn-default" type="button" ng-click="cancelVisitDocRec()">取消</button>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+<!-- Modal -->
+<div class="modal fade" id="visitDocModal" tabindex="-1" role="dialog" aria-labelledby="modalBedLabel" data-target=".bs-example-modal-lg">
+    <div class="modal-dialog bs-example-modal-lg" role="document" style="width:72%;">
+        <div class="modal-content modal-lg">
+            <div class="modal-header bg-success">
+                <button type="button" id="chargeClose" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            </div>
+            <div class="modal-body">
+                <div class="box border primary">
+                    <div class="box-title"><h4>挑选药品</h4></div>
+                    <div class="box-body">
+                        <div class="row" style="padding-left:15px;padding-right:15px;">
+                            <div class="col-sm-7">
+                                <div class="form-group">
+                                    <div class="input-group col-md-10">
+                                        <input class="form-control ng-pristine ng-untouched ng-valid input-sm" id="Keyword" type="text" placeholder="请输入[药名 / 医保码 / 开药医院]  进行查询" ng-model="keyword">
+                                        <span class="input-group-btn">
+                                            <a class="btn btn-primary search btn-sm" ng-click="searchMedicines()"><i class="fa fa-search"></i>查询</a>
+                                        </span>
+                                    </div>
+                                </div>
+                                <div class="dataTables_wrapper form-inline" id="datatable2_wrapper" role="grid">
+                                    <ui-data-table options="options2">
+                                        <div style="height:250px; overflow-y:scroll">
+                                            <table class="datatable table table-striped table-bordered table-hover dataTable" id="datatable2" aria-describedby="datatable2_info" border="0" cellspacing="0" cellpadding="0">
+                                                <thead>
+                                                    <tr role="row">
+                                                        <th>药品名称</th>
+                                                        <th>药品英文名称</th>
+                                                        <th>剂型</th>
+                                                        <th>规格/含量</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody role="alert" aria-live="polite" aria-relevant="all">
+                                                    <tr ng-repeat="medicine in Data.medicines" ng-click="rowSelect(medicine)">
+                                                        <td>
+                                                            <span ng-bind="medicine.CNName"></span>
+                                                        </td>
+                                                        <td><span ng-bind="medicine.ENName"></span></td>
+                                                        <td><span ng-bind="medicine.MinPackage"></span></td>
+                                                        <td><span ng-bind="medicine.Spec"></span></td>
+                                                    </tr>
+
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </ui-data-table>
+                                </div>
+                            </div>
+                            <div class="col-sm-5">
+                                <div class="panel panel-default">
+                                    <div class="panel-heading">药物信息</div>
+                                    <div class="panel panel-body">
+                                        <div class="form-horizontal" style="text-align:left">
+                                            <div class="form-group">
+                                                <div class="col-md-12">
+                                                    <div class="col-md-6">
+                                                        <div class="filter-content">
+                                                            <img src="{{pillItem.MedPict}}" alt="{{pillItem.ENName}}" style="width:200px;height:100px;" />
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col-md-6">
+                                                        <div class="form-group">
+                                                            <label class="col-sm-12 control-label" style="text-align:left;color:InactiveCaptionText">
+                                                                药品名称(英文):
+                                                                <span style="font-weight:normal;font-family:'Microsoft YaHei';color:black">
+                                                                    {{pillItem.ENName}}
+                                                                </span>
+                                                            </label>
+                                                        </div>
+                                                        <div class="form-group">
+
+                                                            <label class="col-sm-12 control-label" style="text-align:left;color:InactiveCaptionText">
+                                                                药品名称(中文):
+                                                                <span style="font-weight:normal;font-family:'Microsoft YaHei';color:black">
+                                                                    {{pillItem.CNName}}
+                                                                </span>
+                                                            </label>
+                                                        </div>
+
+                                                        <div class="form-group">
+                                                            <label class="col-sm-12 control-label" style="text-align:left;color:InactiveCaptionText">
+                                                                价格:
+                                                                <span style="font-weight:normal;font-family:'Microsoft YaHei';color:black">
+                                                                    {{pillItem.UnitPrice | currency:"￥"}}
+                                                                </span>
+                                                            </label>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label class="col-sm-12 control-label" style="text-align:left;color:InactiveCaptionText">
+                                                                用药途径:
+                                                                <span style="font-weight:normal;font-family:'Microsoft YaHei';color:black">
+                                                                    {{pillItem.DrugUsageMode}}
+                                                                </span>
+                                                            </label>
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-sm-3 control-label" style="text-align:left;color:InactiveCaptionText">
+                                                    规格:<span style="font-weight:normal;font-family:'Microsoft YaHei';color:black">
+                                                        {{pillItem.Spec}}
+                                                    </span>
+                                                </label>
+                                                <label class="col-sm-3 control-label" style="text-align:left;color:InactiveCaptionText">
+                                                    单位:
+                                                    <span style="font-weight:normal;font-family:'Microsoft YaHei';color:black">{{pillItem.Units}} </span>
+                                                </label>
+                                                <label class="col-sm-3 control-label" style="text-align:left;color:InactiveCaptionText">
+                                                    剂型:
+                                                    <span style="font-weight:normal;font-family:'Microsoft YaHei';color:black">{{pillItem.Form}}</span>
+                                                </label>
+                                                <label class="col-sm-3 control-label" style="text-align:left;color:InactiveCaptionText">
+                                                    转换比:
+                                                    <span style="font-weight:normal;font-family:'Microsoft YaHei';color:black">{{pillItem.ConversionRatio}}</span>
+                                                </label>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-sm-12 control-label" style="text-align:left;color:InactiveCaptionText">
+                                                    注意事项/副作用:
+                                                    <span style="font-weight:normal;font-family:'Microsoft YaHei';color:black">
+                                                        {{pillItem.Attention}}
+                                                    </span>
+                                                </label>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-sm-12 control-label" style="text-align:left;color:InactiveCaptionText">
+                                                    用法:
+                                                    <span style="font-weight:normal;font-family:'Microsoft YaHei';color:black">
+                                                        {{pillItem.DrugUsage}}
+                                                    </span>
+                                                </label>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-sm-12 control-label" style="text-align:left;color:InactiveCaptionText">
+                                                    产地:<span style="font-weight:normal;font-family:'Microsoft YaHei';color:black">
+                                                        {{pillItem.Orgin}}
+                                                    </span>
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                        <div>
+                            <form novalidate name="medForm">
+                                <div class="panel panel-default">
+                                    <div class="panel-heading" style="font-weight:bold">处方单-药名及用法用量</div>
+                                    <div class="panel panel-body">
+                                        <div class="form-horizontal" style="text-align:left">
+                                            <div class="form-group">
+                                                <label class="col-md-1 control-label">药品名称&nbsp;<span class="required">*</span></label>
+                                                <div class="col-md-2">
+                                                    <input class="form-control input-sm" name="药品名称" ng-model="PrescItem.CnName" required readonly="readonly" />
+                                                </div>
+                                                <label class="col-md-1 control-label">总量</label>
+                                                <div class="col-md-2">
+                                                    <input class="form-control input-sm" type="number" name="总量" ng-change="getCost(PrescItem)" ng-model="PrescItem.TotalQty" ng-pattern="/^([0-9]{1,7}|0)([.][0-9]{0,2})?$/" ng-maxlength="10" />
+                                                </div>
+                                                <label class="col-md-1 control-label">剂型</label>
+                                                <div class="col-md-2">
+                                                    <input class="form-control input-sm" name="剂型" id="selRecordBy" ng-model="PrescItem.Dosage" ng-maxlength="6" />
+                                                </div>
+                                                <div class="col-md-3">
+                                                    <label class="checkbox-inline"><input type="checkbox" class="uniform" ng-model="PrescItem.LongFlag">长期药</label>
+                                                    <label class="checkbox-inline"><input type="checkbox" class="uniform" ng-model="PrescItem.UseFlag">使用中</label>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-md-1 control-label">每次颗数</label>
+                                                <div class="col-md-2">
+                                                    <input class="form-control  input-sm" type="number" name="每次颗数" ng-model="PrescItem.Qty" ng-pattern="/^([0-9]{1,7}|0)([.][0-9]{0,2})?$/" ng-maxlength="10" />
+                                                </div>
+                                                <label class="col-md-1 control-label">每剂剂量</label>
+                                                <div class="col-md-2">
+                                                    <input class="form-control input-sm" name="每剂剂量" ng-model="PrescItem.TakeQty" select-items="每颗剂量单位" ng-maxlength="20" />
+                                                </div>
+                                                <label class="col-md-1 control-label">给药途径</label>
+                                                <div class="col-md-4">
+                                                    <input class="form-control input-sm" ng-model="PrescItem.TakeWay" select-items="给药途径" ng-maxlength="20" />
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-md-1 control-label">服药频率</label>
+                                                <div class="col-md-2">
+                                                    <input-freq name="服药频率" value={{PrescItem.Freq}} callback="FreqSelected(item)" ng-maxlength="20" />
+                                                </div>
+                                                <label class="col-md-1 control-label">给药时间</label>
+                                                <div class="col-md-2">
+                                                    <input class="form-control input-sm" name="给药时间" ng-model="PrescItem.Freqtime" ng-maxlength="50" />
+                                                </div>
+                                                <label class="col-md-1 control-label">用法</label>
+                                                <div class="col-md-2">
+                                                    <div class="input-group">
+                                                        <input class="form-control input-sm" name="天数" ng-model="PrescItem.Freqday" ng-maxlength="4" />
+                                                        <div class="input-group-addon">天</div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-2">
+                                                    <div class="input-group">
+                                                        <input class="form-control input-sm" name="次数" ng-model="PrescItem.Freqqty" ng-maxlength="4" />
+                                                        <div class="input-group-addon">次</div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-md-1 control-label">服药起迄</label>
+                                                <div class="col-md-2">
+                                                    <input class="form-control input-sm" ng-model="PrescItem.StartDate" ca-date-time-picker />
+                                                </div>
+                                                <label class="col-md-1 control-label" style="text-align:center">～</label>
+                                                <div class="col-md-2">
+                                                    <input class="form-control input-sm" ng-model="PrescItem.EndDate" ca-date-time-picker />
+                                                </div>
+                                                <label class="col-md-1 control-label">总价</label>
+                                                <div class="col-md-2">
+                                                    <label class="control-label">
+                                                        {{ PrescItem.Cost | currency:"￥"}}
+                                                    </label>
+
+                                                </div>
+                                                <div class="col-md-3">
+                                                    <a href="javascript:;" class="btn btn-primary btn-sm" ng-disabled="medForm.$invalid" ng-click="addVisitDocRec(PrescItem)" ng-init="editName='确定添加'">
+                                                        {{editName}}
+                                                    </a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                            <div style="height:200px; overflow-y:scroll">
+                                <table class="table table-striped table-bordered table-hover">
+                                    <thead>
+                                        <tr>
+                                            <th>#</th>
+                                            <th>药品名称</th>
+                                            <th>总量</th>
+                                            <th>每次颗数</th>
+                                            <th>剂量</th>
+                                            <th>服用频率</th>
+                                            <th>用法</th>
+                                            <th>给药途径</th>
+                                            <!--<th>使用中</th>-->
+                                            <th>处方开始日</th>
+                                            <th>处方到期日</th>
+                                            <th><i class="fa fa-bars"></i>操作</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr ng-repeat="visitpres in Data.visitpresList">
+                                            <td>{{$index + 1}}</td>
+                                            <td style="word-break: break-all;word-wrap: break-word;">{{visitpres.CnName}}</td>
+                                            <td style="word-break: break-all;word-wrap: break-word;">{{visitpres.TotalQty}}</td>
+                                            <td style="word-break: break-all;word-wrap: break-word;">{{visitpres.Qty}}</td>
+                                            <td style="word-break: break-all;word-wrap: break-word;">{{visitpres.TakeQty}}</td>
+                                            <td style="word-break: break-all;word-wrap: break-word;">{{visitpres.FreqName}}</td>
+                                            <td style="word-break: break-all;word-wrap: break-word;">{{visitpres.Freqday}}天{{visitpres.Freqqty}}次</td>
+                                            <td style="word-break: break-all;word-wrap: break-word;"><span select-code="K00.027" select-value="{{visitpres.TakeWay}}"><></span></td>
+                                            <!--<td style="word-break: break-all;word-wrap: break-word;">{{visitpres.UseFlag?'是':'否'}}</td>-->
+                                            <td style="word-break: break-all;word-wrap: break-word;">{{visitpres.StartDate | dateFormat}}</td>
+                                            <td style="word-break: break-all;word-wrap: break-word;">{{visitpres.EndDate | dateFormat}}</td>
+                                            <td>
+                                                <div class="btn-group btn-group-xs" role="group" aria-label="...">
+                                                    <a class="btn btn-default" role="button" ng-click="editVisitpres(visitpres)">编辑</a>
+                                                    <a class="btn btn-default" role="button" ng-click="deleteVisitpres(visitpres)">删除</a>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+            <div class="modal-footer">
+                <a href="javascript:;" class="btn btn-default" ng-click="closeWin()">
+                    关闭
+                </a>
+            </div>
+
+        </div>
+    </div>
+</div>
+<script>
+    $(".datepicker").datepicker({
+        dateFormat: "yy-mm-dd",
+        changeMonth: true,
+        changeYear: true
+    });
+</script>
+

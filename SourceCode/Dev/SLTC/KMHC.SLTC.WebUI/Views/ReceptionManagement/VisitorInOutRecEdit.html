@@ -1,0 +1,79 @@
+<div class="form-horizontal" >
+    <div class="panel panel-default">
+        
+        <form class="form-horizontal" name="appertForm" role="form" novalidate>
+            <div class="panel-body">
+
+                <div class="form-group">
+                    <label for="vitStartDate" class="col-sm-2 control-label">来访时间:<span class="required">*</span></label>
+                    <div class="col-sm-9">
+                        <input type="text" class="form-control" id="vitStartDate" ng-model="currentItem.StartDate" ca-date-time-picker required />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="vitName" class="col-sm-2 control-label">来宾姓名:<span class="required">*</span></label>
+                    <div class="col-sm-9">
+                        <input class="form-control" id="vitName" ng-model="currentItem.VisitorName" ng-maxlength="4" required />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="selVitSex" class="col-sm-2 control-label">来宾性别:</label>
+                    <div class="col-sm-9">
+                        <select class="form-control" id="selVitSex" ng-model="currentItem.VisitorSex" select-code="A00.001"></select>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="vitIdNo" class="col-sm-2 control-label">来宾证件号:<span class="required">*</span></label>
+                    <div class="col-sm-9">
+                        <input class="form-control" id="vitIdNo" ng-model="currentItem.VisitorIdNo" ng-maxlength="18" required />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="vitCompany" class="col-sm-2 control-label">来宾单位:</label>
+                    <div class="col-sm-9">
+                        <input class="form-control" id="vitCompany" ng-model="currentItem.VisitorCompany" ng-maxlength="20" />
+                    </div>
+                </div>
+                <div class="form-group">
+
+                    <label for="vitInterviewee" class="col-sm-2 control-label">被访人姓名:<span class="required">*</span></label>
+                    <div class="col-sm-9">
+                        <input class="form-control" id="vitInterviewee" ng-model="currentItem.Interviewee" required />
+                    </div>
+                </div>
+                <div class="form-group">
+
+                    <label for="vitReason" class="col-sm-2 control-label">访问事由:</label>
+                    <div class="col-sm-9">
+                        <textarea class="form-control" rows="6" id="vitReason" ng-model="currentItem.Description" ng-maxlength="1000" />
+                    </div>
+                </div>
+                <div class="form-group">
+
+                    <label for="vitEndDate" class="col-sm-2 control-label">离去时间:</label>
+                    <div class="col-sm-9">
+                        <input type="text" class="form-control" id="vitEndDate" ng-model="currentItem.EndDate" ng-change="ChangeNextEvalDate()" ca-date-time-picker />
+                    </div>
+                </div>
+                <div class="form-group">
+
+                    <label for="vitRemark" class="col-sm-2 control-label">备注:</label>
+                    <div class="col-sm-9">
+                        <textarea class="form-control" rows="4" id="vitRemark" ng-model="currentItem.Remark" ng-maxlength="100" />
+                    </div>
+                </div>
+
+
+                <div class="hack hack-border"></div>
+                <div class="form-group">
+
+                    <div class="col-md-offset-6">
+                        <a class="btn btn-primary" ng-disabled="appertForm.$invalid" ng-click="SaveVisitRec(currentItem)"><i class="fa">保存</i></a>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+

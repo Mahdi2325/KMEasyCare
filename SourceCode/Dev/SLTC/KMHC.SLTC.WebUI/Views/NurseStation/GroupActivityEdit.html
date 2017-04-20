@@ -1,0 +1,421 @@
+
+<div class="row">
+    <div id="content" class="col-lg-12">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="page-header">
+                    <ul class="breadcrumb">
+                        <li>
+                            <i class="fa fa-home"></i>
+                            <a href="/">首页</a>
+                        </li>
+                        <li>
+                            <a href="/angular/GroupActivityList">团体活动</a>
+                        </li>
+                        <li>团体活动信息</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="box border primary">
+                    <div class="box-title">
+                        <h4><i class="fa fa-columns"></i>团体活动信息</h4>
+                    </div>
+                    <div class="box-body">
+                        <div class="tabbable header-tabs">
+                            <ul class="nav nav-tabs" id="tabResident">
+                                <li><a href="#nursingEval" data-toggle="tab"><i class="fa fa-edit"></i> <span class="hidden-inline-mobile">团体护理</span></a></li>
+                                <li><a href="#activityEval" data-toggle="tab"><i class="fa fa-edit"></i> <span class="hidden-inline-mobile">团体参与评估</span></a></li>
+                                <li><a href="#Photo" data-toggle="tab"><i class="fa fa-medkit"></i> <span class="hidden-inline-mobile">精彩照片</span></a></li>
+                                <li class="active"><a href="#Info" data-toggle="tab"><i class="fa fa-book"></i> <span class="hidden-inline-mobile">活动信息</span></a></li>
+
+                            </ul>
+                        </div>
+                        <!--<form class="form-horizontal" name="myForm" novalidate>-->
+                        <div class="tab-content">
+                            <div id="Info" class="tab-pane active">
+                                <div class="panel panel-default">
+                                    <div class="panel-heading">活动信息</div>
+                                    <div class="panel-body">
+                                        <form class="form-horizontal" name="myForm" novalidate>
+                                            <div class="form-group">
+                                                <label class="col-sm-1 control-label">活动名称<span class="required">*</span></label>
+                                                <div class="col-sm-3">
+                                                    <input class="form-control" type="text" ng-model="Data.ActivityName" name="活动名称" ng-maxlength="50" required />
+                                                </div>
+                                                <label class="col-sm-1 control-label">活动日期<span class="required">*</span></label>
+                                                <div class="col-sm-3">
+                                                    <input class="form-control" type="text" ng-model="Data.EventDate" name="活动日期" ca-date-picker required />
+                                                </div>
+                                                <label class="col-sm-1 control-label">活动类型<span class="required">*</span></label>
+                                                <div class="col-sm-3">
+                                                    <select class="form-control" ng-model="Data.ActivityType" name="活动类型" select-code="F00.045" required></select>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-sm-1 control-label">活动地点</label>
+                                                <div class="col-sm-3">
+                                                    <select class="form-control" ng-model="Data.EventPlace" select-code="F00.046"></select>
+                                                </div>
+                                                <label class="col-sm-1 control-label">活动时数</label>
+                                                <div class="col-sm-3">
+                                                    <input class="form-control" ng-pattern="/^\d*$/" type="number" ng-model="Data.EventHours" name="活动时数" ng-maxlength="9" />
+                                                </div>
+                                                <label class="col-sm-1 control-label">填写日期</label>
+                                                <div class="col-sm-3">
+                                                    <input class="form-control" type="text" ng-model="Data.RecordDate" ca-date-picker />
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-sm-1 control-label">领导者</label>
+                                                <div class="col-sm-3">
+                                                    <input-staff callback="staffSelected(item,'Leader')" value="{{Data.LeaderName}}" />
+                                                    <!--<input class="form-control" type="text" ng-model="Data.Leader">-->
+                                                </div>
+                                                <label class="col-sm-1 control-label">协同领导者1</label>
+                                                <div class="col-sm-3">
+                                                    <input-staff callback="staffSelected(item,'Leader1')" value="{{Data.LeaderName1}}" />
+                                                    <!--<input class="form-control" type="text" ng-model="Data.Leader1">-->
+                                                </div>
+                                                <label class="col-sm-1 control-label">协同领导者2</label>
+                                                <div class="col-sm-3">
+                                                    <input-staff callback="staffSelected(item,'Leader2')" value="{{Data.LeaderName2}}" />
+                                                    <!--<input class="form-control" type="text" ng-model="Data.Leader2">-->
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-sm-1 control-label">活动结果分类</label>
+                                                <div class="col-sm-3">
+                                                    <select class="form-control" ng-model="Data.ActivityResults" select-code="F00.047"></select>
+                                                </div>
+                                                <label class="col-sm-1 control-label">评估总平均</label>
+                                                <div class="col-sm-3">
+                                                    <input class="form-control" ng-pattern="/^\d*$/" type="number" ng-model="Data.EvalResults" name="评估总平均" ng-maxlength="9" />
+                                                </div>
+                                                <label class="col-sm-1 control-label">记录人员</label>
+                                                <div class="col-sm-3">
+                                                    <input-staff callback="staffSelected(item,'InputName')" value="{{Data.CreateBy}}" />
+                                                    <!--<input class="form-control" type="text" ng-model="Data.InputName">-->
+                                                </div>
+
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-sm-1 control-label">参加人数</label>
+                                                <div class="col-sm-3">
+                                                    <input class="form-control" ng-pattern="/^\d*$/" type="number" ng-model="Data.AttendNumber" name="参加人数" ng-maxlength="9" />
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-sm-1 control-label">参与人员</label>
+                                                <div class="col-sm-9">
+                                                    <input class="form-control" ng-model="Data.AttendName" name="参与人员" disabled ng-maxlength="150" />
+                                                </div>
+                                                <div class="col-sm-1">
+                                                    <input type="button" data-toggle="modal" data-target="#modalChooseResident" class="form-control btn btn-info" value="选择参与者">
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+
+                                </div>
+                                <div class="panel panel-default">
+                                    <div class="panel-heading">活动过程</div>
+                                    <div class="panel-body">
+                                        <div class="form-group">
+                                            <label class="col-sm-1 control-label">活动流程团体动力</label>
+                                            <div class="col-sm-11">
+                                                <textarea class="form-control" rows="3" ng-model="Data.GroupCompetence" name="活动流程团体动力" ng-maxlength="200"></textarea>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-sm-1 control-label">特殊个案个别纪要</label>
+                                            <div class="col-sm-11">
+                                                <textarea class="form-control" rows="3" ng-model="Data.IndividualSummary" name="特殊个案个别纪要" ng-maxlength="200"></textarea>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-sm-1 control-label">成果评估(建议改进事项)</label>
+                                            <div class="col-sm-11">
+                                                <textarea class="form-control" rows="3" ng-model="Data.Suggestion" name="成果评估(建议改进事项)" ng-maxlength="200"></textarea>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-sm-1 control-label">备注</label>
+                                            <div class="col-sm-11">
+                                                <textarea class="form-control" rows="3" ng-model="Data.Description" name="备注" ng-maxlength="200"></textarea>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group center">
+                                    <button class="btn btn-info btn-lg" ng-click="saveActivity()">保存</button>
+                                    <button class="btn btn-grey btn-lg" ui-sref="GroupActivityList">取消</button>
+                                </div>
+                            </div>
+                            <div id="Photo" class="tab-pane">
+                                <form class="form-horizontal" name="picForm" novalidate>
+                                    <div class="form-group">
+                                        <div class="col-sm-6">
+                                            <h3>精彩照片1</h3>
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <h3>精彩照片2</h3>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="col-sm-6">
+                                            <div>
+                                                <img src="{{Data.Picture1}}" style="max-height:60%; vertical-align:central;width:80%; " />
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <div>
+                                                <img src="{{Data.Picture2}}" style="max-height:60%;vertical-align:central;width:80%; " />
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="col-sm-2">
+                                            <div id="Picture1PathPicker">选择照片</div>
+                                        </div>
+                                        <div class="col-sm-4">
+                                            <button class="btn btn-primary" type="button" ng-click="clear('PhotoPicker1')">清除</button>
+                                        </div>
+                                        <div class="col-sm-2">
+                                            <div id="Picture2PathPicker">选择照片</div>
+                                        </div>
+                                        <div class="col-sm-4">
+                                            <button class="btn btn-primary" type="button" ng-click="clear('PhotoPicker2')">清除</button>
+                                        </div>
+                                    </div>
+                                    <div class="form-group center">
+                                        <button class="btn btn-info btn-lg" ng-click="saveActivity()" ng-disabled="formItem.$invalid">保存</button>
+                                        <button class="btn btn-grey btn-lg" ui-sref="GroupActivityList">取消</button>
+                                    </div>
+                                </form>
+                            </div>
+                            <div id="activityEval" class="tab-pane">
+                                <div class="panel panel-default">
+                                    <div class="panel-heading">模板数据</div>
+                                    <div class="panel-body ">
+                                        <form class="form-horizontal" name="myForm1" novalidate>
+                                            <div class="form-group">
+                                                <div class="col-sm-2"><label class="control-label">评估人员</label></div>
+                                                <div class="col-sm-4">
+                                                    <select ng-model="EVALUATEBY" class="form-control" ng-change="ChangeEvalBy(EVALUATEBY)" ng-options="item as item.EmpName  for item in EmpList"></select>
+                                                </div>
+                                                <div class="col-sm-2">
+                                                    <label for="txtEvaluDate" class="control-label">评估日期<span class="required">*</span></label>
+                                                </div>
+                                                <div class="col-sm-4">
+                                                    <input id="txttValuationDate" ng-model="RegQuestion.EVALDATE" class="form-control" required name="评估日期" type="text" ca-date-picker>
+                                                </div>
+                                            </div>
+                                            <div ng-repeat="Item in Maker">
+                                                <div>
+                                                    <div class="col-sm-2 item-detail">
+                                                        <label class="control-label">{{Item.MAKENAME}}</label>
+                                                    </div>
+                                                    <div class="col-sm-4 item-detail">
+                                                        <select class="form-control" ng-change="calcResult()" ng-model="Item.LIMITEDVALUEID" ng-options="item.LIMITEDVALUEID as item.LIMITEDVALUENAME for item in Item.Answers"></select>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+
+
+
+                                <div class="panel panel-default">
+                                    <div class="panel-heading">评估结果</div>
+                                    <div class="panel-body">
+                                        <form class="form-horizontal" novalidate>
+                                            <div class="form-group">
+                                                <label for="lbScoreSummry" class="col-sm-1 control-label">分数小计</label>
+                                                <div class="col-sm-2">
+                                                    <input type="text" class="form-control" id="txtScoreSummry" ng-model="RegQuestion.SCORE" readonly="readonly">
+                                                </div>
+                                                <label for="lbEvaluResult" class="col-sm-1 control-label">评估结果</label>
+                                                <div class="col-sm-3">
+                                                    <input type="text" class="form-control" id="txtEvaluResult" ng-model="RegQuestion.ENVRESULTS" readonly="readonly">
+                                                </div>
+                                                <div class="col-sm-3">
+                                                    <input type="button" class="form-control btn btn-primary" ng-click="BatchImport()" value="批量带入模板数据到住民评估列表">
+                                                </div>
+                                            </div>
+                                        </form>
+
+                                    </div>
+                                </div>
+
+                                <div class="box border primary">
+                                    <div class="box-title">
+                                        <h4><i class="fa fa-table"></i>参与活动住民评估列表</h4>
+                                    </div>
+                                    <div class="form-horizontal" role="form">
+                                        <table class="table table-bordered" id="editOutTable">
+                                            <thead>
+                                                <tr>
+                                                    <th>个案姓名</th>
+                                                    <th>评估人员</th>
+                                                    <th>评估日期</th>
+                                                    <th ng-repeat="Item in Maker">
+                                                        {{Item.MAKENAME}}
+                                                    </th>
+                                                    <th>分数</th>
+                                                    <th>结果</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr ng-repeat="item in RegQuestionList">
+                                                    <td>{{item.NAME}}</td>
+                                                    <td>{{item.EVALUATEName}}</td>
+                                                    <td>{{item.EVALDATE}}</td>
+                                                    <td ng-repeat="m in item.MakerItemList">
+                                                        <select class="form-control" ng-change="calcSubResult(item)" ng-model="m.LIMITEDVALUEID" ng-options="a.LIMITEDVALUEID as a.LIMITEDVALUENAME for a in m.Answers"></select>
+                                                    </td>
+                                                    <td>{{item.SCORE}}</td>
+                                                    <td>{{item.ENVRESULTS}}</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+
+                                        <div class="form-group center">
+                                            <input type="button" class="btn btn-info submitBtn" ng-disabled="disabledSaveEval" ng-click="SaveBatchEval()" value="批量保存">
+                                        </div>
+
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+                            <div id="nursingEval" class="tab-pane">
+                                <div class="panel panel-default">
+                                    <div class="panel-heading">模板数据</div>
+                                    <div class="panel-body ">
+                                        <form class="form-horizontal" name="frmRecord" ng-submit="submit()" novalidate>
+                                            <div class="form-group">
+                                                <label class="col-md-1 control-label ">记录时间<span class="required">*</span></label>
+                                                <div class="col-md-2">
+                                                    <input id="txtRecord" ng-model="record.RecordDate" class="form-control" ca-date-time-picker required />
+                                                </div>
+                                                <label class="col-md-1 control-label ">护理人员<span class="required">*</span></label>
+                                                <div class="col-md-2">
+                                                    <input type="text" class="form-control" ng-show="false" ng-model="record.RecordNameBy">
+                                                    <input-staff callback="nurseStaffSelected(item)" value="{{record.RecordBy}}" emp-group="001" required />
+                                                </div>
+                                                <label class="col-md-1 control-label ">班别类型<span class="required">*</span></label>
+                                                <div class="col-md-2">
+                                                    <select ng-model="record.ClassType" class="form-control" select-code="J00.005" required />
+                                                </div>
+
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-md-1 control-label">记录内容<span class="required">*</span></label>
+                                                <div class="col-md-8">
+                                                    <textarea class="form-control record-content" select-items="护理内容" ng-model="record.Content" ng-maxlength="500" required></textarea>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-md-1  control-label">是否打印</label>
+                                                <div class="col-sm-2">
+                                                    <label class="checkbox-inline">
+                                                        <input type="checkbox" ng-model="record.PrintFlag" class="ng-pristine ng-untouched ng-valid">是
+                                                    </label>
+                                                </div>
+                                                <!--ng-show="record.IsShow"-->
+                                                <label class="col-md-1 control-label">是否同步录入交班</label>
+                                                <div class="col-sm-2">
+                                                    <label class="checkbox-inline">
+                                                        <input type="checkbox" class="ng-pristine ng-untouched ng-valid" ng-model="record.SynchronizeFlag">是
+                                                    </label>
+                                                </div>
+                                                <div class="col-sm-3">
+                                                    <input type="button" class="form-control btn btn-primary" ng-disabled="frmRecord.$invalid" ng-click="BatchImportNursingData(record)" value="批量带入模板数据到住民评估列表">
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                                <div class="box border primary">
+                                    <div class="box-title">
+                                        <h4><i class="fa fa-table"></i>参与活动住民护理记录</h4>
+                                    </div>
+                                    <div class="form-horizontal" role="form">
+                                        <table class="table table-bordered" id="editOutTable">
+                                            <thead>
+                                                <tr>
+                                                    <th>个案姓名</th>
+                                                    <th>记录时间<span class="required">*</span></th>
+                                                    <th>护理人员<span class="required">*</span></th>
+                                                    <th>班别类型<span class="required">*</span></th>
+                                                    <th>记录内容<span class="required">*</span></th>
+                                                    <th>是否打印</th>
+                                                    <th>是否同步录入交班</th>
+                                                    <th>是否保存</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr ng-repeat="Item in NursingList">
+
+                                                    <td>{{Item.Name}}</td>
+                                                    <td><input id="txtRecord" ng-model="Item.RecordDate" class="form-control" ca-date-time-picker required /></td>
+                                                    <td><input-staff callback="subNurseStaffSelected(item,Item)" value="{{Item.RecordBy}}" emp-group="001" required /></td>
+                                                    <td><select ng-model="Item.ClassType" class="form-control" select-code="J00.005" required /></td>
+                                                    <td><textarea class="form-control record-content" select-items="护理内容" rows="3" ng-model="Item.Content" ng-maxlength="500" required></textarea></td>
+                                                    <td>
+                                                        <label class="checkbox-inline">
+                                                            <input type="checkbox" ng-model="Item.PrintFlag" class="ng-pristine ng-untouched ng-valid">是
+                                                        </label>
+                                                    </td>
+                                                    <td>
+                                                        <div class="col-sm-2">
+                                                            <label class="checkbox-inline">
+                                                                <input type="checkbox" class="ng-pristine ng-untouched ng-valid" ng-model="Item.SynchronizeFlag">是
+                                                            </label>
+                                                        </div>
+                                                    </td>
+                                                    <td>
+                                                        <label class="checkbox-inline">
+                                                            <input type="checkbox" ng-model="Item.IsSave" class="ng-pristine ng-untouched ng-valid">是
+                                                        </label>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+
+                                        <div class="form-group center">
+                                            <input type="button" class="btn btn-info submitBtn" ng-click="SaveBatchNursing()" value="批量保存">
+                                        </div>
+
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                        <!--</form>-->
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+<div class="modal fade" style="border-left:0px" id="modalChooseResident" tabindex="-1" role="dialog" aria-labelledby="modalLabel" data-target=".bs-example-modal-lg">
+    <div class="modal-dialog bs-example-modal-lg" role="document">
+        <div style="width:850px" class="modal-content modal-lg">
+            <div class="modal-header bg-success">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            </div>
+            <div class="modal-body">
+                <div ng-include="'/Views/NurseStation/ChooseResident.html'"></div>
+            </div>
+
+        </div>
+    </div>
+</div>

@@ -1,0 +1,486 @@
+﻿@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html ng-app="sltcApp">
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <meta charset="utf-8">
+    <title>长期护理险管理系统</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1, user-scalable=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <base href="/">
+    <link rel="stylesheet" type="text/css" href="/Content/CloudAdmin/css/cloud-admin.css">
+    <link rel="stylesheet" type="text/css" href="/Content/CloudAdmin/css/themes/default.css" id="skin-switcher">
+    <link rel="stylesheet" type="text/css" href="/Content/CloudAdmin/css/responsive.css">
+    <!-- STYLESHEETS --><!--[if lt IE 9]><script src="js/flot/excanvas.min.js"></script><script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script><script src="http://css3-mediaqueries-js.googlecode.com/svn/trunk/css3-mediaqueries.js"></script><![endif]-->
+    <link href="/Content/CloudAdmin/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+    <!-- ANIMATE -->
+    <link rel="stylesheet" type="text/css" href="/Content/CloudAdmin/css/animatecss/animate.min.css" />
+    <!-- DATE RANGE PICKER -->
+    <link rel="stylesheet" type="text/css" href="/Content/CloudAdmin/js/bootstrap-daterangepicker/daterangepicker-bs3.css" />
+    <!-- TODO -->
+    <link rel="stylesheet" type="text/css" href="/Content/CloudAdmin/js/jquery-todo/css/styles.css" />
+    <!-- FULL CALENDAR -->
+    <link rel="stylesheet" type="text/css" href="/Content/CloudAdmin/js/fullcalendar/fullcalendar.min.css" />
+    <!-- GRITTER -->
+    <link rel="stylesheet" type="text/css" href="/Content/CloudAdmin/js/gritter/css/jquery.gritter.css" />
+    <link rel="stylesheet" type="text/css" href="/Content/CloudAdmin/js/bootstrap-switch/bootstrap-switch.min.css" />
+    <link href="/Content/user.css" rel="stylesheet" />
+    <!-- DATA TABLES -->
+    <link rel="stylesheet" type="text/css" href="/Content/CloudAdmin/js/datatables/media/css/jquery.dataTables.min.css" />
+    <link rel="stylesheet" type="text/css" href="/Content/CloudAdmin/js/datatables/media/assets/css/datatables.min.css" />
+    <link rel="stylesheet" type="text/css" href="/Content/CloudAdmin/js/datatables/extras/TableTools/media/css/TableTools.min.css" />
+    <!-- TABLE CLOTH -->
+    <link rel="stylesheet" type="text/css" href="/Content/CloudAdmin/js/tablecloth/css/tablecloth.min.css" />
+    <link href="/Content/CloudAdmin/js/select2/select2.min.css" rel="stylesheet" />
+
+    <!-- JQUERY UI-->
+    <link rel="stylesheet" type="text/css" href="/Content/CloudAdmin/js/jquery-ui-1.10.3.custom/css/custom-theme/jquery-ui-1.10.3.custom.min.css" />
+    <!-- HUBSPOT MESSENGER -->
+    <link rel="stylesheet" type="text/css" href="/Content/CloudAdmin/js/hubspot-messenger/css/messenger.min.css" />
+    <link rel="stylesheet" type="text/css" href="/Content/CloudAdmin/js/hubspot-messenger/css/messenger-spinner.min.css" />
+    <link rel="stylesheet" type="text/css" href="/Content/CloudAdmin/js/hubspot-messenger/css/messenger-theme-future.min.css" />
+    <link rel="stylesheet" type="text/css" href="/Content/CloudAdmin/js/uniform/css/uniform.default.min.css" />
+
+    <link href="/Content/webuploader.css" rel="stylesheet" />
+
+
+    <!-- FONTS
+    <link href='http://fonts.useso.com/css?family=Open+Sans:300,400,600,700' rel='stylesheet' type='text/css'> -->
+</head>
+<body>
+    <!-- HEADER -->
+    <header class="navbar clearfix" id="header">
+        <div class="container" ng-controller="msgListCtr">
+            <div class="navbar-brand">
+                <!-- COMPANY LOGO -->
+                <a href="#">
+                    <img src="/Images/logo.png" alt="STLC Logo" class="img-responsive" height="30" width="120">
+                </a>
+                <!-- /COMPANY LOGO -->
+                <!-- TEAM STATUS FOR MOBILE -->
+                <div class="visible-xs">
+                    <a href="#" class="team-status-toggle switcher btn dropdown-toggle">
+                        <i class="fa fa-users"></i>
+                    </a>
+                </div>
+                <!-- /TEAM STATUS FOR MOBILE -->
+                <!-- SIDEBAR COLLAPSE -->
+                <div id="sidebar-collapse" class="sidebar-collapse btn">
+                    <i class="fa fa-bars"
+                       data-icon1="fa fa-bars"
+                       data-icon2="fa fa-bars"></i>
+                </div>
+                <!-- /SIDEBAR COLLAPSE -->
+            </div>
+            <!-- BEGIN TOP NAVIGATION MENU -->
+            <ul class="nav navbar-nav pull-right">
+                <!-- BEGIN NOTIFICATION DROPDOWN -->
+                <li class="dropdown" id="header-notification">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                        <i class="fa fa-bell"></i>
+                        <span class="badge">@ViewBag.Notifications.Count</span>
+                    </a>
+                    <ul class="dropdown-menu notification">
+                        <li class="dropdown-title">
+                            <span><i class="fa fa-bell"></i> @ViewBag.Notifications.Count 提醒</span>
+                        </li>
+                        @foreach (var notification in ViewBag.Notifications)
+                        {
+                            <li>
+                                <a href="@notification.Url">
+                                    <span class="label label-@notification.InfoLevel"><i class="fa fa-user"></i></span>
+                                    <span class="body">
+                                        <span class="message">@notification.Content</span>
+                                        <span class="time">
+                                            <i class="fa fa-clock-o"></i>
+                                            <span>@notification.TimeRange</span>
+                                        </span>
+                                    </span>
+                                </a>
+                            </li>
+                        }
+                        <li class="footer">
+                            <a href="#">See all notifications <i class="fa fa-arrow-circle-right"></i></a>
+                        </li>
+                    </ul>
+                </li>
+                <!-- END NOTIFICATION DROPDOWN -->
+                <!-- BEGIN INBOX DROPDOWN -->
+                <li class="dropdown" id="header-message">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                        <i class="fa fa-envelope"></i>
+                        <span class="badge">{{Data.Msgs.length}}</span>
+                    </a>
+                    <ul class="dropdown-menu inbox">
+                        <li class="dropdown-title">
+                            <span><i class="fa fa-envelope-o"></i> {{Data.Msgs.length}}工作任务</span>
+                            <span class="compose pull-right tip-right" title="添加工作交接" ui-sref="AdminHandovers"> <i class="fa fa-pencil-square-o"></i></span>
+                        </li>
+
+                        <li ng-repeat="item in Data.Msgs">
+                            <a href="#">
+                                @*<img src="{{item.FromImgUrl}}" alt="" />*@
+                                <span class="body">
+                                    <span class="from">{{item.DelivererName}}</span>
+                                    <span class="message">
+                                        {{item.DelivererContent}}
+                                    </span>
+                                    <span class="time">
+                                        <i class="fa fa-clock-o"></i>
+                                        <span>{{item.DelivererDate}}</span>
+                                    </span>
+                                </span>
+                            </a>
+                        </li>
+                        <li class="footer">
+                            <a href="#">查看所有工作任务<i class="fa fa-arrow-circle-right"></i></a>
+                        </li>
+                    </ul>
+                </li>
+                <!-- END INBOX DROPDOWN -->
+                <!-- BEGIN TODO DROPDOWN -->
+                <li class="dropdown" id="header-tasks">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                        <i class="fa fa-tasks"></i>
+                        <span class="badge">@ViewBag.Tasks.Count</span>
+                    </a>
+                    <ul class="dropdown-menu tasks">
+                        <li class="dropdown-title">
+                            <span><i class="fa fa-check"></i> @ViewBag.Tasks.Count 任务正在进行中</span>
+                        </li>
+                        @foreach (var task in ViewBag.Tasks)
+                        {
+                            <li>
+                                <a href="#">
+                                    <span class="header clearfix">
+                                        <span class="pull-left">@task.Name</span>
+                                        <span class="pull-right">@task.Progress%</span>
+                                    </span>
+                                    <div class="progress">
+                                        <div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="@task.Progress" aria-valuemin="0" aria-valuemax="100" style="width: 60%;">
+                                            <span class="sr-only">@task.Progress % Complete</span>
+                                        </div>
+                                    </div>
+                                </a>
+                            </li>
+                        }
+                        <li class="footer">
+                            <a href="#">See all tasks <i class="fa fa-arrow-circle-right"></i></a>
+                        </li>
+                    </ul>
+                </li>
+                <!-- END TODO DROPDOWN -->
+                <!-- BEGIN USER LOGIN DROPDOWN -->
+                <li class="dropdown user" id="header-user">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                        <img alt="" src="/Images/@ViewBag.User.ImgUrl" />
+                        <span class="username">@ViewBag.User.RealName</span>
+                        <i class="fa fa-angle-down"></i>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li><a href="#"><i class="fa fa-user"></i> 我的个人资料</a></li>
+                        <li><a href="#"><i class="fa fa-cog"></i> 账号设置</a></li>
+                        <li><a href="#"><i class="fa fa-eye"></i> 隐私设置</a></li>
+                        <li><a href="/angular/login"><i class="fa fa-power-off"></i> 退出</a></li>
+                    </ul>
+                </li>
+                <!-- END USER LOGIN DROPDOWN -->
+            </ul>
+            <!-- END TOP NAVIGATION MENU -->
+        </div>
+    </header>
+    <!-- PAGE -->
+    <section id="page">
+        <!-- SIDEBAR -->
+        <div id="sidebar" class="sidebar">
+            <div class="sidebar-menu nav-collapse">
+                <div class="divide-20"></div>
+                <!-- SEARCH BAR -->
+                <div id="search-bar">
+                    <input class="search" type="text" placeholder="Search"><i class="fa fa-search search-icon"></i>
+                </div>
+                <!-- /SEARCH BAR -->
+                <!-- SIDEBAR MENU -->
+                <ul>
+                    <li class="has-sub open">
+                        <a href="javascript:;" class="">
+                            <i class="fa fa-bookmark-o fa-fw"></i> <span class="menu-text">住民管理</span>
+                            <span class="arrow open"></span>
+                        </a>
+                        <ul class="sub" style="display: block">
+                            <li class="active"><a class="" ui-sref="PersonList" href=""><span class="sub-menu-text">客户资料</span></a></li>
+                            <li><a class="" ui-sref="Preipd"><span class="sub-menu-text">预约登记</span></a></li>
+                            <li><a class="" href="/angular/"><span class="sub-menu-text">住民列表</span></a></li>
+                            <li><a class="" href="/angular/regResident"><span class="sub-menu-text">入住登记</span></a></li>
+                            @*<li><a class="" ui-sref="Resident.BasicInfo({id:0})" href="/"><span class="sub-menu-text">入住登记</span></a></li>*@
+                            <li><a class="" ui-sref="ChargeCheck" href="/"><span class="sub-menu-text">入住审核</span></a></li>
+                            @*<li><a class="" ui-sref="Resident.BasicInfo({id:0})" href="/"><span class="sub-menu-text">安排床位</span></a></li>*@
+                            <li><a class="" ui-sref="Welfare" href="/"><span class="sub-menu-text">福利信息</span></a></li>
+                            <li><a class="" ui-sref="RegVisitRec" href="/"><span class="sub-menu-text">住民访视</span></a></li>
+                            <li><a class="" ui-sref="RequirementManage" href="/"><span class="sub-menu-text">需求管理</span></a></li>
+                            <li><a class="" ui-sref="HealthManage" href="/"><span class="sub-menu-text">健康管理</span></a></li>
+                            <li><a class="" ui-sref="Resident.BasicInfo({id:0})" href="/"><span class="sub-menu-text">补助申请</span></a></li>
+                            <li><a class="" ui-sref="LeaveHosp" href="/"><span class="sub-menu-text">请假</span></a></li>
+                            <li><a class="" ui-sref="CaseClose" href="/"><span class="sub-menu-text">出院结案</span></a></li>
+                            <li><a class="" ui-sref="Ipdregout" href="/"><span class="sub-menu-text">出院办理</span></a></li>
+                            @*<li><a class="" ui-sref="HspRecordList" href=""><span class="sub-menu-text">住院记录</span></a></li>*@
+                            <li><a class="" ui-sref="LeaveNursing" href="/"><span class="sub-menu-text">退住院</span></a></li>
+
+                        </ul>
+                    </li>
+
+                    <li class="has-sub">
+                        <a>
+                            <i class="fa fa-bookmark-o fa-fw"></i><span class="sub-menu-text">费用管理</span>
+                            <span class="arrow open"></span>
+                        </a>
+                        <ul class="sub">
+                            <li><a class="" ui-sref="FixChargeSetting"><span class="sub-menu-text">固定费用设定</span></a></li>
+                            <li><a class="" ui-sref="ChargeGroup"><span class="sub-menu-text">费用套餐维护</span></a></li>
+                            <li><a class="" ui-sref="ChargeInput" href="/"><span class="sub-menu-text">费用录入</span></a></li>
+                            <li><a class="" ui-sref="PrePayment" href="/"><span class="sub-menu-text">预收款</span></a></li>
+                            <li><a class="" ui-sref="PinMoney" href="/"><span class="sub-menu-text">零用金</span></a></li>
+                            <li><a class="" ui-sref="BillList" href="/"><span class="sub-menu-text">账单查询</span></a></li>
+                            <li><a class="" ui-sref="PayBills" href="/"><span class="sub-menu-text">账单缴费</span></a></li>
+                            <li><a class="" ui-sref="ChargeItem"><span class="sub-menu-text">收费项目维护</span></a></li>
+                        </ul>
+                    </li>
+
+                    <li class="has-sub">
+                        <a href="javascript:;" class="">
+                            <i class="fa fa-bookmark-o fa-fw"></i><span class="sub-menu-text">评估/行政</span>
+                            <span class="arrow"></span>
+                        </a>
+                        <ul class="sub">
+                            <li><a class="" ui-sref="ResidentListV2"><span class="sub-menu-text">住民清册</span></a></li>
+                            <li><a class="" ui-sref="EvaluateAdd"><span class="sub-menu-text">社工评估</span></a></li>
+                            <li><a class="" ui-sref="ResourceLink"><span class="sub-menu-text">资源连接</span></a></li>
+                            <li><a class="" ui-sref="SubsidyRec"><span class="sub-menu-text">补助申请</span></a></li>
+                            <li><a class="" ui-sref="LifeRecords"><span class="sub-menu-text">生活记录</span></a></li>
+                            <li><a class="" ui-sref="ComplainRec"><span class="sub-menu-text">申诉/权益维护</span></a></li>
+                            @*<li><a class="" ui-sref="ProposalDisscuss"><span class="sub-menu-text">提案跨专业讨论</span></a></li>
+                            <li><a class="" ui-sref="ProposalDisscussrec"><span class="sub-menu-text">个案研讨会议记录</span></a></li>
+                            <li><a class="" ui-sref="HomeCareSvrrec"><span class="sub-menu-text">日照服务日志</span></a></li>*@
+                            <li><a class="" ui-sref="RegVisitRec" href="/"><span class="sub-menu-text">家庭支持</span></a></li>
+                            @*<li><a class="" ui-sref="HomeCareSupervise" href="/"><span class="sub-menu-text">居家服务督导记录</span></a></li>*@
+                            <li class=""><a class="" href="/angular/EvaluationList/2/社会网络评估"><span class="sub-menu-text">社会网络评估</span></a></li>
+                            <li class=""><a class="" href="/angular/EvaluationList/3/团体参与"><span class="sub-menu-text">团体参与评估</span></a></li>
+                        </ul>
+
+                    </li>
+
+                    <li class="has-sub">
+                        <a href="javascript:;" class="">
+                            <i class="fa fa-bookmark-o fa-fw"></i><span class="sub-menu-text">机构管理</span>
+                            <span class="arrow"></span>
+                        </a>
+                        <ul class="sub">
+                            <li class="active"><a class="" ui-sref="OrgList" href=""><span class="sub-menu-text">机构管理</span></a></li>
+                            <li class=""><a class="" ui-sref="AdminHandovers" href=""><span class="sub-menu-text">交付照会</span></a></li>
+                            <li class=""><a class="" ui-sref="AffairsHandoverList" href=""><span class="sub-menu-text">机构行政</span></a></li>
+                            <li class=""><a class="" ui-sref="FloorList" href=""><span class="sub-menu-text">楼层管理</span></a></li>
+                            <li class=""><a class="" ui-sref="RoomList" href=""><span class="sub-menu-text">房间管理</span></a></li>
+                            <li class=""><a class="" ui-sref="BedList" href=""><span class="sub-menu-text">床位管理</span></a></li>
+                            <li class=""><a class="" ui-sref="StaffList" href="/"><span class="sub-menu-text">机构员工管理</span></a></li>
+                            <li class=""><a class="" ui-sref="UserList" href=""><span class="sub-menu-text">用户管理</span></a></li>
+                            <li class=""><a class="" ui-sref="RoleList" href=""><span class="sub-menu-text">角色管理</span></a></li>
+                            <li class=""><a class="" ui-sref="CodeList" href=""><span class="sub-menu-text">字典管理</span></a></li>
+                            <li class=""><a class="" ui-sref="GroupList" href=""><span class="sub-menu-text">集团管理</span></a></li>
+                            <li class=""><a class="" ui-sref="DeptList" href=""><span class="sub-menu-text">科室管理</span></a></li>
+                        </ul>
+                    </li>
+                    <li class="has-sub">
+                        <a href="javascript:;" class="">
+                            <i class="fa fa-bookmark-o fa-fw"></i> <span class="menu-text">护理评估</span>
+                            <span class="arrow"></span>
+                        </a>
+                        <ul class="sub">
+                            <li class="active"><a class="" href="/angular/EvaluationList/4/巴氏量表"><span class="sub-menu-text">ADL评估</span></a></li>
+                            <li class=""><a class="" href="/angular/EvaluationList/5/失智量表"><span class="sub-menu-text">MMSE评估</span></a></li>
+                            <li class=""><a class="" href="/angular/EvaluationList/6/简易心智量表"><span class="sub-menu-text">SPMSQ评估</span></a></li>
+                            <li class=""><a class="" href="/angular/EvaluationList/7/工具性日常生活功能量表"><span class="sub-menu-text">IADL评估</span></a></li>
+                            <li class=""><a class="" href="/angular/EvaluationList/10/压疮风险评估"><span class="sub-menu-text">压疮风险评估</span></a></li>
+                            <li class=""><a class="" href="/angular/EvaluationList/11/跌倒风险评估"><span class="sub-menu-text">跌倒风险评估</span></a></li>
+                            <li class=""><a class="" href="/angular/EvaluationList/8/柯氏评估"><span class="sub-menu-text">柯氏评估</span></a></li>
+                            <li class=""><a class="" href="/angular/EvaluationList/9/认知行为评估"><span class="sub-menu-text">认知行为评估</span></a></li>
+                            <li class=""><a class="" href="/angular/NursingDemandList"><span class="sub-menu-text">护理需求评估</span></a></li>
+
+
+                            <li class=""><a class="" href="/angular/NurseDailyReportList"><span class="sub-menu-text">护士日报表</span></a></li>
+
+                            <li class=""><a class="" href="/angular/BiochemistryList"><span class="sub-menu-text">生化检查</span></a></li>
+                            <li class=""><a class="" href="/angular/InjectionList"><span class="sub-menu-text">针剂</span></a></li>
+                            <li class=""><a class="" href="/angular/RehabilitationList"><span class="sub-menu-text">复健</span></a></li>
+                            <li class=""><a class="" href="/angular/ReferralList"><span class="sub-menu-text">转诊</span></a></li>
+                            <li class=""><a class="" href="/angular/DrugList"><span class="sub-menu-text">药品管理</span></a></li>
+                            <li class=""><a class="" href="/angular/VisitDocRecords"><span class="sub-menu-text">就医/用药</span></a></li>
+                        </ul>
+                    </li>
+                    <li class="has-sub">
+                        <a href="javascript:;" class="">
+                            <i class="fa fa-bookmark-o fa-fw"></i> <span class="menu-text">照护计划</span>
+                            <span class="arrow"></span>
+                        </a>
+                        <ul class="sub">
+                            <li class="active"><a class="" href="/angular/CarePlanList"><span class="sub-menu-text">照护计划</span></a></li>
+                            @*<li class="active"><a class="" href="/angular/MultidisciplinaryCarePlan/1"><span class="sub-menu-text">照护计划制定</span></a></li>*@
+                        </ul>
+                    </li>
+
+                    <li class="has-sub">
+                        <a href="javascript:;" class="">
+                            <i class="fa fa-bookmark-o fa-fw"></i> <span class="menu-text">护理工作站</span>
+                            <span class="arrow"></span>
+                        </a>
+                        <ul class="sub">
+                            <li class="active" ui-sref="VitalSignsRecord" href="/"><a class="" href=""><span class="sub-menu-text">生命体征</span></a></li>
+                            <li class="" ui-sref="OutInValueRecord" href="/"><a class="" href=""><span class="sub-menu-text">输出入量</span></a></li>
+                            @*<li class="" ui-sref="VitalSigns" href="/"><a class="" href=""><span class="sub-menu-text">生命体征批量录入</span></a></li>
+                            <li class="" ui-sref="OutInValue" href="/"><a class="" href=""><span class="sub-menu-text">输出入量批量录入</span></a></li>*@
+                            <li><a class="" ui-sref="NursingRecord.Record" href=""><span class="sub-menu-text">护理记录及交班</span></a></li>
+                            <li class="" ui-sref="GroupActivityList" href="/"><a class="" href=""><span class="sub-menu-text">团体活动</span></a></li>
+                            <li class="" ui-sref="PhysicianAss" href="/"><a class="" href=""><span class="sub-menu-text">48小时医师评估</span></a></li>
+                            <li class="" ui-sref="PhysicianRounds" href="/"><a class="" href=""><span class="sub-menu-text">医师巡诊</span></a></li>
+                            <li class="" ui-sref="MedicationRecord" href="/"><a class="" href=""><span class="sub-menu-text">用药记录</span></a></li>
+                            <li class="" ui-sref="ShiftWork" href="/"><a class="" href=""><span class="sub-menu-text">工作照会</span></a></li>
+                        </ul>
+                    </li>
+
+                    <li class="has-sub">
+                        <a href="javascript:;" class="">
+                            <i class="fa fa-bookmark-o fa-fw"></i> <span class="menu-text">库存管理</span>
+                            <span class="arrow"></span>
+                        </a>
+                        <ul class="sub">
+                            <li class="active"><a class="" href="/angular/goodsList"><span class="sub-menu-text">库存查询</span></a></li>
+                            <li class="active"><a class="" href="/angular/storeList"><span class="sub-menu-text">库存项目维护</span></a></li>
+                            <li class="active"><a class="" href="/angular/ManufactureList"><span class="sub-menu-text">厂商管理</span></a></li>
+                        </ul>
+                    </li>
+
+
+                    <li class="has-sub">
+                        <a href="javascript:;" class="">
+                            <i class="fa fa-bookmark-o fa-fw"></i><span class="sub-menu-text">指标管理</span>
+                            <span class="arrow"></span>
+                        </a>
+                        <ul class="sub">
+                            <li><a class="" ui-sref="Fall" href=""><span class="sub-menu-text">跌倒</span></a></li>
+                            <li><a ui-sref="PrsSore" href=""><span class="sub-menu-text">压疮</span></a></li>
+                            <li><a ui-sref="Restrict" href=""><span class="sub-menu-text">约束</span></a></li>
+                            <li><a ui-sref="Infection" href=""><span class="sub-menu-text">感染</span></a></li>
+                            <li><a ui-sref="Pain" href=""><span class="sub-menu-text">疼痛</span></a></li>
+                            <li><a ui-sref="UnPlanWeight" href=""><span class="sub-menu-text">非计划减重改变</span></a></li>
+                            <li><a ui-sref="UnPlanIpd" href=""><span class="sub-menu-text">非计划住院</span></a></li>
+                            <li><a ui-sref="Pharmacist" href=""><span class="sub-menu-text">多重用药</span></a></li>
+                            <li class=""><a class="" href="/angular/PipelineRec"><span class="sub-menu-text">管路</span></a></li>
+                            <li class=""><a class="" href="/angular/EvaluationList/1/忧郁评估"><span class="sub-menu-text">忧郁评估</span></a></li>
+                        </ul>
+                    </li>
+
+                </ul>
+                <!-- /SIDEBAR MENU -->
+            </div>
+        </div>
+        <!-- /SIDEBAR -->
+        <div id="main-content">
+            <div class="container" ui-view>
+            </div>
+        </div>
+    </section>
+
+    <!--/PAGE -->
+    <!-- JAVASCRIPTS -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <!-- JQUERY -->
+    <script src="/Content/CloudAdmin/js/jquery/jquery-2.0.3.min.js"></script>
+    <!-- JQUERY UI-->
+    <script src="/Content/CloudAdmin/js/jquery-ui-1.10.3.custom/js/jquery-ui-1.10.3.custom.min.js"></script>
+    <!-- BOOTSTRAP -->
+    <script src="/Content/CloudAdmin/bootstrap-dist/js/bootstrap.min.js"></script>
+
+
+    <!-- DATE RANGE PICKER -->
+    <script src="/Content/CloudAdmin/js/bootstrap-daterangepicker/moment.min.js"></script>
+
+    <script src="/Content/CloudAdmin/js/bootstrap-daterangepicker/daterangepicker.min.js"></script>
+    <!-- SLIMSCROLL -->
+    <script type="text/javascript" src="/Content/CloudAdmin/js/jQuery-slimScroll-1.3.0/jquery.slimscroll.min.js"></script>
+    <!-- SLIMSCROLL -->
+    <script type="text/javascript" src="/Content/CloudAdmin/js/jQuery-slimScroll-1.3.0/jquery.slimscroll.min.js"></script>
+    <script type="text/javascript" src="/Content/CloudAdmin/js/jQuery-slimScroll-1.3.0/slimScrollHorizontal.min.js"></script>
+    <!-- BLOCK UI -->
+    <script type="text/javascript" src="/Content/CloudAdmin/js/jQuery-BlockUI/jquery.blockUI.min.js"></script>
+    <!-- SPARKLINES -->
+    <script type="text/javascript" src="/Content/CloudAdmin/js/sparklines/jquery.sparkline.min.js"></script>
+    <!-- EASY PIE CHART -->
+    <script src="/Content/CloudAdmin/js/jquery-easing/jquery.easing.min.js"></script>
+    <script type="text/javascript" src="/Content/CloudAdmin/js/easypiechart/jquery.easypiechart.min.js"></script>
+    <!-- FLOT CHARTS -->
+    <script src="/Content/CloudAdmin/js/flot/jquery.flot.min.js"></script>
+    <script src="/Content/CloudAdmin/js/flot/jquery.flot.time.min.js"></script>
+    <script src="/Content/CloudAdmin/js/flot/jquery.flot.selection.min.js"></script>
+    <script src="/Content/CloudAdmin/js/flot/jquery.flot.resize.min.js"></script>
+    <script src="/Content/CloudAdmin/js/flot/jquery.flot.pie.min.js"></script>
+    <script src="/Content/CloudAdmin/js/flot/jquery.flot.stack.min.js"></script>
+    <script src="/Content/CloudAdmin/js/flot/jquery.flot.crosshair.min.js"></script>
+    <!-- TODO -->
+    <script type="text/javascript" src="/Content/CloudAdmin/js/jquery-todo/js/paddystodolist.js"></script>
+    <!-- TIMEAGO -->
+    <script type="text/javascript" src="/Content/CloudAdmin/js/timeago/jquery.timeago.min.js"></script>
+    <!-- FULL CALENDAR -->
+    <script type="text/javascript" src="/Content/CloudAdmin/js/fullcalendar/fullcalendar.min.js"></script>
+    <!-- DATA TABLES -->
+    <script type="text/javascript" src="/Content/CloudAdmin/js/datatables/media/js/jquery.dataTables.js"></script>
+    <script type="text/javascript" src="/Content/CloudAdmin/js/datatables/media/assets/js/datatables.min.js"></script>
+    <script type="text/javascript" src="/Content/CloudAdmin/js/datatables/extras/TableTools/media/js/TableTools.min.js"></script>
+    <script type="text/javascript" src="/Content/CloudAdmin/js/datatables/extras/TableTools/media/js/ZeroClipboard.min.js"></script>
+    <!-- DATE PICKER -->
+    <script type="text/javascript" src="/Content/CloudAdmin/js/datepicker/picker.js"></script>
+    <script type="text/javascript" src="/Content/CloudAdmin/js/datepicker/picker.date.js"></script>
+    <script type="text/javascript" src="/Content/CloudAdmin/js/datepicker/picker.time.js"></script>
+    <script src="~/Content/CloudAdmin/js/datepicker/jquery-ui-timepicker-addon.js"></script>
+    <!-- COOKIE -->
+    <script type="text/javascript" src="/Content/CloudAdmin/js/jQuery-Cookie/jquery.cookie.min.js"></script>
+    <!-- GRITTER -->
+    <script type="text/javascript" src="/Content/CloudAdmin/js/gritter/js/jquery.gritter.min.js"></script>
+    <script src="/Content/CloudAdmin/js/select2/select2.min.js"></script>
+    <!-- TABLE CLOTH -->
+    <script type="text/javascript" src="/Content/CloudAdmin/js/tablecloth/js/jquery.tablecloth.js"></script>
+    <script type="text/javascript" src="/Content/CloudAdmin/js/tablecloth/js/jquery.tablesorter.min.js"></script>
+    <script type="text/javascript" src="/Content/CloudAdmin/js/jQuery-slimScroll-1.3.0/jquery.slimscroll.min.js"></script>
+    <script type="text/javascript" src="/Content/CloudAdmin/js/jQuery-slimScroll-1.3.0/slimScrollHorizontal.min.js"></script>
+    <script type="text/javascript" src="/Content/CloudAdmin/js/bootstrap-switch/bootstrap-switch.min.js"></script>
+    <!-- BOOTBOX -->
+    <script type="text/javascript" src="/Content/CloudAdmin/js/bootbox/bootbox.min.js"></script>
+    <!-- HUBSPOT MESSENGER -->
+    <script type="text/javascript" src="/Content/CloudAdmin/js/hubspot-messenger/js/messenger.min.js"></script>
+    <script type="text/javascript" src="/Content/CloudAdmin/js/hubspot-messenger/js/messenger-theme-flat.js"></script>
+
+    <script src="/Scripts/webuploader.js"></script>
+
+    <script src="/Scripts/paging.js"></script>
+
+    <!-- UNIFORM -->
+    <script type="text/javascript" src="/Content/CloudAdmin/js/uniform/jquery.uniform.min.js"></script>
+    <script src="/Content/CloudAdmin/js/jquery-validate/jquery.validate.min.js"></script>
+    <script src="/Content/CloudAdmin/js/jquery-validate/additional-methods.min.js"></script>
+
+    <!-- CUSTOM SCRIPT -->
+    <script src="/Content/CloudAdmin/js/script.js"></script>
+    <script>
+        jQuery(document).ready(function () {
+            //App.setPage("index");  //Set current page
+            App.init(); //Initialise plugins and elements
+        });
+    </script>
+    <!-- /JAVASCRIPTS -->
+    @Scripts.Render("~/Scripts/angular")
+    @Scripts.Render("~/Scripts/AppCommon")
+</body>
+</html>
+
+

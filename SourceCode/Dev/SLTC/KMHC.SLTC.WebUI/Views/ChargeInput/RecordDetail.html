@@ -1,0 +1,80 @@
+﻿<div>
+    <table border="1" style="width:98%;line-height:2em;">
+        <tbody class="center">
+            <tr>
+                <td style="width:20%">
+                    <label class="control-label">{{nameHeader}}名称</label>
+                </td>
+                <td style="width:30%">{{currentItem.Name}}</td>
+                <td style="width:20%">
+                    <label class="control-label">计价单位</label>
+                </td>
+                <td style="width:30%">{{currentItem.Units}}</td>
+            </tr>
+
+            <tr>
+                <td>
+                    <label class="control-label">单价</label>
+                </td>
+                <td>{{currentItem.Unitprice | currency:"￥"}}</td>
+                <td>
+                    <label class="control-label">计价总量</label>
+                </td>
+                <td>{{currentItem.Qty}}</td>
+            </tr>
+
+            <tr>
+                <td>
+                    <label class="control-label">总价</label>
+                </td>
+                <td>{{currentItem.Cost | currency:"￥"}}</td>
+                <td>
+                    <label class="control-label">使用日期</label>
+                </td>
+                <td>{{currentItem.TakeTime | timeFormat}}</td>
+            </tr>
+
+            <tr>
+                <td>
+                    <label class="control-label">是否是护理险项目</label>
+                </td>
+                <td>{{currentItem.IsNciItem | boolName}}</td>
+                <td>
+                    <label class="control-label">是否来自套餐</label>
+                </td>
+                <td>{{currentItem.IsChargeGroupItem | boolName}}</td>
+            </tr>
+
+            <tr>
+                <td>
+                    <label class="control-label">用途</label>
+                </td>
+                <td colspan="3">{{currentItem.Takeway}}</td>
+            </tr>
+
+            <!--<tr>
+                <td>
+                    <label class="control-label">账单时间</label>
+                </td>
+                <td colspan="3">{{currentItem.TakeTime | timeFormat}}</td>
+            </tr>-->
+
+            <!--<tr>
+                <td>
+                    <label class="control-label">备注</label>
+                </td>
+                <td colspan="3">{{currentItem.Comment}}</td>
+            </tr>-->
+
+            <tr>
+                <td>
+                    <label class="control-label">录入时间</label>
+                </td>
+                <td colspan="3">{{currentItem.CreateTime  | timeFormat}}</td>
+            </tr>
+
+        </tbody>
+    </table>
+
+
+</div>

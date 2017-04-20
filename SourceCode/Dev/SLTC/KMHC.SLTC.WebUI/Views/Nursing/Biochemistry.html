@@ -1,0 +1,208 @@
+<!-- JQUERY UI-->
+<link rel="stylesheet" type="text/css" href="/Content/CloudAdmin/js/jquery-ui-1.10.3.custom/css/custom-theme/jquery-ui-1.10.3.custom.min.css" />
+<!-- DATE RANGE PICKER -->
+<link rel="stylesheet" type="text/css" href="/Content/CloudAdmin/js/bootstrap-daterangepicker/daterangepicker-bs3.css" />
+<!-- DATE PICKER -->
+<script type="text/javascript" src="/Content/CloudAdmin/js/datepicker/picker.js"></script>
+<script type="text/javascript" src="/Content/CloudAdmin/js/datepicker/picker.date.js"></script>
+<script type="text/javascript" src="/Content/CloudAdmin/js/datepicker/picker.time.js"></script>
+
+<div class="row">
+    <div id="content" class="col-lg-12">
+        <!-- PAGE HEADER-->
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="page-header">
+                    <ul class="breadcrumb">
+                        <li>
+                            <i class="fa fa-home"></i>
+                            <a href="/">首页</a>
+                        </li>
+                        <li><a href="/">护理评估</a></li>
+                        <li>生化检查</li>
+                    </ul>
+                    <!-- /BREADCRUMBS -->
+                    
+                </div>
+            </div>
+        </div>
+        <!-- /PAGE HEADER -->
+        <form class="form-horizontal" role="form">
+            <div class="row">
+                <div class="col-md-12">
+
+                    <div class="box-body">
+                        <div class="tab-pane ">
+                            <div class="panel panel-default">
+                                <div class="panel-body">
+                                    <div class="form-group">
+                                        <label for="txtEvaluDate" class="col-sm-1 control-label">填写日期</label>
+                                        <div class="col-sm-2">
+                                            <input id="txttValuationDate" ng-model="Data.checkRec.CHECKDATE" class="form-control datepicker" type="text">
+                                        </div>
+                                        <label for="txtEvaluBy" class="col-sm-1 control-label">填写人员</label>
+                                        <div class="col-sm-2">
+                                            <select class="form-control" id="selEvaluBy" ng-model="Data.checkRec.RECORDBY" ng-options=""></select>
+                                        </div>
+                                    </div> 
+                                    <div class="form-group">
+                                        <label for="txtEvaluGap" class="col-sm-1 control-label">间隔天数</label>
+                                        <div class="col-sm-2">
+                                            <select class="form-control" id="selGap" ng-model="Data.checkRec.INTERVAL" ng-options="gap.Value for gap in Dic.EvalDateGap" ng-change="setNextValDate(Data.pipelineEval)"></select>
+                                        </div>
+                                        <label for="lbNextEvaluGap" class="col-sm-1 control-label">下次日期</label> 
+                                        <div class="col-sm-2">
+                                            <input id="txtNextEvaluGap" class="form-control" ng-model="Data.checkRec.NEXTCHECKDATE" type="text" readonly="readonly">
+                                        </div>
+                                        <label for="txtEvaluBy" class="col-sm-1 control-label">下次受托者</label>
+                                        <div class="col-sm-2">
+                                            <select class="form-control" id="selEvaluBy" ng-model="Data.checkRec.REGNO" ng-options=""></select>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="lbNextEvaluGap" class="col-sm-1 control-label">检查单位</label>
+                                        <div class="col-sm-2">
+                                            <select class="form-control" id="selNextEvalBy" ng-model="Data.checkRec.HOSPNAME" ng-options=""></select>
+                                        </div>
+                                        <label for="txtNextEvalBy" class="col-sm-1 control-label">检查结果</label>
+                                        <div class="col-sm-5">
+                                            <select class="form-control" id="selNextEvalBy" ng-model="Data.checkRec.CHECKRESULTS" ng-options=""></select>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="lbNextEvaluGap" class="col-sm-1 control-label">追踪情形</label>
+                                        <div class="col-sm-2">
+                                            <select class="form-control" id="selNextEvalBy" ng-model="Data.checkRec.TRACESTATE" ng-options=""></select>
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <input id="txttValuationDate" class="form-control" type="text">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="lbNextEvaluGap" class="col-sm-1 control-label">病况</label>
+                                        <div class="col-sm-8">
+                                            <input id="txttValuationDate" ng-model="Data.checkRec.DISEASEDESC" class="form-control" type="text">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="lbNextEvaluGap" class="col-sm-1 control-label">备注</label>
+                                        <div class="col-sm-8">
+                                            <textarea id="txttValuationDate" ng-model="Data.checkRec.DESCRIPTION" class="form-control"></textarea>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="lbNextEvaluGap" class="col-sm-1 control-label">X光检查</label>
+                                        <div class="col-sm-1">
+                                            <input class="checkbox" type="checkbox" />
+                                        </div>
+                                        <label for="lbNextEvaluGap" class="col-sm-1 control-label">检查结果异常</label>
+                                        <div class="col-sm-1">
+                                            <label class="checkbox-inline">
+                                                <input type="checkbox" class="uniform" ng-model="Welfare.Custody">是
+                                            </label>
+                                        </div>
+
+                                        <div class="col-sm-1 col-sm-offset-3">
+                                            <button class="btn btn-primary" ng-click="Save(Data.checkRec)">保存</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="box border primary">
+                            <div class="box-title">
+                                <h4><i class="fa fa-table"></i>检查项目列表</h4>
+                                <div class="tools hidden-xs">
+                                    <!--<a href="#box-config" data-toggle="modal" class="config">
+                                        <i class="fa fa-cog"></i>
+                                    </a>-->
+                                    <a class="reload" href="javascript:;" ca-reload>
+                                        <i class="fa fa-refresh"></i>
+                                    </a>
+                                    <a href="javascript:;" class="collapse" ca-collapse>
+                                        <i class="fa fa-chevron-up"></i>
+                                    </a>
+                                    <a class="remove" href="javascript:;" ca-remove>
+                                        <i class="fa fa-times"></i>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="box-body">
+                                <table id="bioTab"  class="table table-striped table-bordered table-hover table-handler">
+                                    <thead>
+                                        <tr>
+                                            <th>检查类型</th>
+                                            <th>检查项目</th>
+                                            <th>检查结果</th>
+                                            <th>说明</th>
+                                            <th>标准值范围</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr ng-repeat="items in tt">
+                                       
+                                            <td><span class="{{tbCancle}}">{{items.CHECKTYPE}}</span><input ng-model="items.CHECKTYPE" class="form-control {{tbEdit}}" /> </td>
+                                            <td><span class="{{tbCancle}}">{{items.CHECKITEM}}</span><input ng-model="itemitemsCHECKITEM" class="form-control {{tbEdit}}" /> </td>
+                                            <td><span class="{{tbCancle}}">{{items.CHECKRESULTS}}</span><input ng-model="items.CHECKRESULTS" class="form-control {{tbEdit}}" /></td>
+                                            <td><span class="{{tbCancle}}">{{items.DESCRIPTION}}</span><input ng-model="items.DESCRIPTION" class="form-control {{tbEdit}}" /></td>
+                                            <td><span class="{{tbCancle}}">{{items.EVALCOMBO}}</span><input ng-model="items.EVALCOMBO" class="form-control {{tbEdit}}" /></td>
+                                            <td class="text-left">
+                                                <button class="btn btn-primary btn-xs" ng-click="DeleteItem(items)">
+                                                    <span class="glyphicon glyphicon-remove"></span>
+                                                </button>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                    <tfoot>
+                                        <tr>
+                                            <td></td>
+                                            <td><select ng-model="currentItem.CHECKTYPE" placeholder="检查类型" class="form-control" /> </td>
+                                            <td><input ng-model="currentItem.CHECKITEM" placeholder="检查项目" class="form-control" /> </td>
+                                            <td><input ng-model="currentItem.CHECKRESULTS" placeholder="检查结果" class="form-control" /></td>
+                                            <td><input ng-model="currentItem.DESCRIPTION" placeholder="说明" class="form-control" /></td>
+                                            <td><input ng-model="currentItem.EVALCOMBO" placeholder="标准值范围" class="form-control" /></td>
+                                            <td>
+                                                <button class="btn btn-primary btn-xs" ng-click="SaveItem(currentItem)">
+                                                    <span class="glyphicon glyphicon-plus"> </span>
+                                                </button>
+                                            </td>
+                                        </tr>
+                                    </tfoot>
+                                </table>
+                                <div class="form-group">
+                                    <div class="col-sm-1 col-sm-offset-2">
+                                        <button class="btn btn-primary {{classEditAll}}" ng-click="EditAll()">编辑全部</button>
+                                    </div>
+                                    <div class="col-sm-1">
+                                        <button class="btn btn-primary {{classEdit}}" ng-click="SaveAll(Data.checkRec)">保存</button>
+                                    </div>
+                                    <div class="col-sm-1">
+                                        <button class="btn btn-warning {{classEdit}}" ng-click="CancleEdit()">取消</button>
+                                    </div>
+                                    <label for="txtNextEvalBy" class="col-sm-2 control-label">快速产生检查项目</label>
+                                    <div class="col-sm-3">
+                                        <select class="form-control" ng-model="Data.selPackage" ng-options=""></select>
+                                    </div>
+                                    <div class="col-sm-1">
+                                        <button class="btn btn-primary" ng-click="addPackageItem(Data.selPackage)">确定产生</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </form>
+
+        <div class="footer-tools">
+            <span class="go-top">
+                <i class="fa fa-chevron-up"></i> Top
+            </span>
+        </div>
+    </div>
+</div>
+
+
+

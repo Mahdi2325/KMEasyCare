@@ -1,0 +1,203 @@
+<div class="row">
+    <div id="content" class="col-lg-12">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="page-header">
+                    <ul class="breadcrumb">
+                        <li>
+                            <i class="fa fa-home"></i>
+                            <a href="/">首页</a>
+                        </li>
+                        <li>预约登记</li>
+                    </ul>
+                    <div class="clearfix"></div>
+                    
+                </div>
+            </div>
+        </div>
+
+        <!--<ng-include src="'/Views/Resident/PreipdList.html'" ng-show=" displayMode == 'list' " />
+
+        <ng-include src="'/Views/Resident/PreipdEdit.html'" ng-show=" displayMode == 'edit' "/>-->
+        <div class="row" ng-show=" displayMode == 'list' ">
+            <div class="col-md-12">
+                <div class="box border primary">
+                    <div class="box-title">
+                        <h4><i class="fa fa-table"></i>预约登记信息</h4>
+                    </div>
+                    <div class="box-body">
+                        <div class="pull-right">
+                            <div>
+                                <button class="btn btn-primary" ng-click="CreatePreipd()">新增资料</button>
+                            </div>
+
+                        </div>
+                        <ui-data-table options="options">
+                            <table class="table table-striped table-bordered table-hover table-handler">
+                                <thead>
+                                    <tr>
+                                        <th>#</th>
+                                        <th>姓名</th>
+                                        <th>电话</th>
+                                        <th>性别</th>
+                                        <th>身份证号</th>
+                                        <th>紧急联系人</th>
+                                        <th>紧急联系方式</th>
+                                        <th>来源</th>
+                                        <!--<th>是否需要等床位</th>
+                                        <th>床号</th>-->
+                                        <th>特殊身份</th>
+                                        <th>预约日期</th>
+                                        <!--<th>部门</th>-->
+                                        <th>预约状态</th>
+                                        <th>备注</th>
+                                        <th><i class="fa fa-bars"></i> 操作</th>
+                                    </tr>
+                                </thead>
+
+                                <tr ng-repeat="item in Data.priepedList">
+                                    <td>{{$index + 1}}</td>
+                                    <td>{{item.PName}}</td>
+                                    <td>{{item.Phone}}</td>
+                                    <td><span select-code="A00.001" select-value="{{item.Sex}}"></span></td>
+                                    <td>{{item.IdNo}}</td>
+                                    <td>{{item.ContactName}}</td>
+                                    <td>{{item.ContactTel}}</td>
+                                    <td>{{(item.SourceType=='001')?'门诊':((item.SourceType=='002')?'病房转诊':((item.SourceType=='003')?'他院转介':((item.SourceType=='004')?'自由登记':((item.SourceType=='005')?'其他':''))))}}</td>
+                                    <!--<td>{{item.WaitFlag ?"是":"否"}}</td>
+                                    <td>{{item.BedNo}}</td>-->
+                                    <td><span select-code="A00.102" select-value="{{item.InsMark}}"></span></td>
+                                    <td>{{item.PreDate | dateFormat}}</td>
+                                    <!--<td>{{item.DeptName}}</td>-->
+                                    <td>{{(item.RecStatus=='P')?'预约':((item.RecStatus=='D')?'取消':((item.RecStatus=='A')?'已办入院':''))}}</td>
+                                    <td style="word-break: break-all; word-wrap: break-word;">
+                                        <label style="font-weight:normal;" title="{{item.CommDesc}}" style="display: block;">{{item.CommDesc.length>15?item.CommDesc.substring(0,15)+"...":item.CommDesc}}</label>
+                                    </td>
+                                    <td class="text-right">
+                                        <div class="btn-group btn-group-xs" role="group" aria-label="...">
+                                            <a class="btn btn-info" role="button" ng-click="rowSelect(item)"><i class="fa fa-pencil"></i>编辑</a>
+                                            <a class="btn btn-primary" role="button" ng-click="deleteItem(item)"><i class="fa fa-times"></i>删除</a>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </table>
+                        </ui-data-table>
+                    </div>
+                </div>
+
+            </div>
+
+
+        </div>
+
+        <div class="row" ng-show=" displayMode == 'edit' ">
+            <div class="col-md-12">
+                <div class="box border primary">
+                    <div class="box-title">
+                        <h4><i class="fa fa-bars"></i>预约信息</h4>
+                    </div>
+                    <div class="box-body">
+                        <form class="form-horizontal" role="form" name="prefrom" novalidate>
+                            <div class="form-group">
+                                <label class="control-label col-md-1">姓名&nbsp;<span class="required">*</span></label>
+                                <div class="col-md-2">
+                                    <input type="text" class="form-control" name="name" placeholder="请输入姓名" ng-model="currentItem.PName" required/>
+                                </div>
+                                <label class="col-sm-1 control-label">电话&nbsp;<span class="required">*</span></label>
+                                <div class="col-sm-2">
+                                    <input type="text" class="form-control" placeholder="输入电话" ng-model="currentItem.Phone" phone required />
+                                </div>
+                                <label class="control-label col-md-1">性别&nbsp;<span class="required">*</span></label>
+                                <div class="col-md-2">
+                                    <select class="form-control" ng-model="currentItem.Sex" select-code="A00.001" required />
+                                </div>
+                                <label class="control-label col-md-1">年龄</label>
+                                <div class="col-md-2">
+                                    <input type="number" class="form-control" ng-model="currentItem.Age" ng-pattern="/^\d*$/" />
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-md-1">身份证号</label>
+                                <div class="col-md-2">
+                                    <input type="text" class="form-control" ng-model="currentItem.IdNo" idcard>
+                                </div>
+                                <label class="control-label col-md-1">紧急联系人</label>
+                                <div class="col-md-2">
+                                    <input type="text" class="form-control" ng-model="currentItem.ContactName" custom-valid="currentItem.PName" valid="customValidity(validity,'ContactName')">
+                                </div>
+                                <label class="control-label col-md-1">紧急联系方式</label>
+                                <div class="col-md-2">
+                                    <input type="text" class="form-control" ng-model="currentItem.ContactTel" phone custom-valid="currentItem.Phone" valid="customValidity(validity, 'ContactTel')">
+                                </div>
+                                <label class="col-sm-1 control-label">来源</label>
+                                <div class="col-sm-2">
+                                    <select class="form-control" id="selSourceType" ng-model="currentItem.SourceType">
+                                        <option value="001">门诊</option>
+                                        <option value="002">病房转诊</option>
+                                        <option value="003">他院转介</option>
+                                        <option value="004">自由登记</option>
+                                        <option value="005">其他</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <!--<div class="form-group">
+                                <label class="col-lg-offset-1 col-sm-2 checkbox-inline"><input type="checkbox" class="uniform" ng-model="currentItem.WaitFlag" />是否需要等床位</label>
+                            </div>-->
+                            <div class="form-group">
+                                <!--<label class="col-sm-1 control-label">床号</label>
+                                <div class="col-sm-2">
+                                    <input type="text" class="form-control" ng-model="currentItem.BedNo" ng-maxlength="8" />
+                                </div>-->
+                                <label class="col-sm-1 control-label">特殊身份</label>
+                                <div class="col-sm-2">
+                                    <select class="form-control" id="selInsMark" ng-model="currentItem.InsMark" select-code="A00.102"></select>
+                                </div>
+                                <label class="col-sm-1 control-label">预约日期&nbsp;<span class="required">*</span></label>
+                                <div class="col-sm-2">
+                                    <input class="form-control datepicker" type="text" ng-model="currentItem.PreDate" ca-date-picker  required />
+                                </div>
+                                <!--<label class="col-sm-1 control-label">部门</label>
+                                <div class="col-sm-2">
+                                    <select class="form-control" id="selDeptNo" ng-model="currentItem.DeptNo" ng-options="x.DeptNo as x.DeptName for x in Info.Depts" required></select>
+                                </div>-->
+                                <label class="col-sm-1 control-label">预约状态</label>
+                                <div class="col-sm-2">
+                                    <select class="form-control" ng-change="change(currentItem.RecStatus)" id="selRecStatus" ng-model="currentItem.RecStatus">
+                                        <option value="P">预约</option>
+                                        <option value="D">取消</option>
+                                        <option value="A">已办入院</option>
+                                    </select>
+                                </div>
+
+                                <div class="col-sm-3" ng-hide="recStatus">
+                                    <input type="text" ng-show="TextShow" class="form-control" placeholder="请输入取消原因" ng-model="currentItem.CancelReason" ng-maxlength="16" />
+                                </div>
+                            </div>
+                            <!--<div class="form-group" ng-hide="recStatus">
+
+                            </div>-->
+                            <div class="form-group">
+                                <label class="col-sm-1 control-label">备注</label>
+                                <div class="col-sm-11">
+                                    <textarea id="txtRemark" class="form-control" rows="4" ng-model="currentItem.CommDesc" ng-maxlength="166"></textarea>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-sm-offset-10 col-sm-2">
+                                    <button class="btn btn-primary" type="submit" ng-disabled="prefrom.$invalid" ng-click="savePreipd(currentItem)">保存</button>
+                                    <button class="btn btn-primary" ng-click="cancelPreipd()">取消</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+            </div>
+
+
+        </div>
+
+    </div>
+
+</div>
+

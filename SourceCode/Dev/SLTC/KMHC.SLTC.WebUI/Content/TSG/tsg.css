@@ -1,0 +1,111 @@
+﻿body {
+}
+
+.headStyle {
+    padding: 30px;
+    padding-bottom: 50px;
+    text-align: left;
+}
+
+.aStyle {
+    display: block;
+    font-size: 18px;
+    color: #616161;
+}
+
+    .aStyle:link {
+        text-decoration: none;
+    }
+
+    .aStyle:visited,
+    .aStyle:hover,
+    .aStyle:active {
+        text-decoration: none;
+        color: #4595ff;
+    }
+
+
+.backWhite {
+    background-color: white;
+}
+
+.queDiv {
+    margin-top: 5px;
+    margin-left: 15px;
+    margin-bottom: 5px;
+}
+
+.ulStyle {
+    list-style-type: none;
+    padding-left: 30px;
+}
+
+.tab-content {
+    padding-left: 80px;
+    padding-right: 80px;
+}
+
+.liStyle {
+}
+
+    .liStyle > a {
+        padding-left: 20px;
+        padding-top: 12px;
+        padding-bottom: 12px;
+        display: block;
+        font-size: 18px;
+        color: #616161;
+    }
+
+        .liStyle > a:link,
+        .liStyle > a:visited,
+        .liStyle > a:hover,
+        .liStyle > a:active {
+            text-decoration: none;
+        }
+
+    .liStyle.active > a,
+    .liStyle.active > a:active,
+    .liStyle.active > a:hover,
+    .liStyle.active > a:focus {
+        background-color: #4595ff;
+        color: white;
+    }
+
+.ansDiv {
+    padding-top: 5px;
+    padding-left: 15px;
+    padding-bottom: 10px;
+}
+
+.bbs {
+    padding-bottom:3px;
+    border-bottom-style: solid;
+    border-bottom-width: 1px;
+    border-bottom-color: #dcdcdc;
+}
+
+.width80 {
+    width: 80%;
+}
+
+.width20 {
+    width: 20%;
+}
+
+.left {
+    float: left;
+}
+
+.right {
+    float: right;
+}
+
+.clearBoth {
+    clear: both;
+}
+
+.divStyle {
+    padding-top: -15px;
+    text-align: right;
+}

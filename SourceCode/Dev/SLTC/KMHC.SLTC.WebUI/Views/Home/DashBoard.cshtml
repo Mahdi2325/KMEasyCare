@@ -1,0 +1,223 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html ng-app="examples">
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <meta charset="utf-8">
+    <title>长期护理险管理系统 | 登录</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1, user-scalable=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <script src="~/Scripts/angular.js"></script>
+
+    <link href="~/Content/DashBoard/bootstrap.css" rel="stylesheet" />
+
+    <script src="../../Content/DashBoard/ui-bootstrap-tpls.min.js"></script>
+    <script src="../../Content/DashBoard/Chart.js"></script>
+    <script src="../../Content/DashBoard/Chart.StackedBar.js"></script>
+    <script src="../../Content/DashBoard/angular-chart.js"></script>
+    <script src="../../Content/DashBoard/chatApp.js" charset="gbk"></script>
+    <script>
+        (function () {
+
+            'use strict';
+
+        var app = angular.module('examples', ['chart.js', 'ui.bootstrap']);
+        app.config(function (ChartJsProvider) {
+            ChartJsProvider.setOptions({
+                colours: ['#97BBCD', '#DCDCDC', '#F7464A', '#46BFBD', '#FDB45C', '#949FB1', '#4D5360'],
+                responsive: true
+            });
+            ChartJsProvider.setOptions('Doughnut',
+            {
+                animateScale: true
+            });
+        });
+
+        
+        //结案统计
+        app.controller('LineCtrl', ['$scope', '$timeout', '$http', function ($scope, $timeout, $http) {
+            $scope.labels_Out = ['01月', '02月', '03月', '04月', '05月', '06月', '07月', '08月', '09月', '10月', '11月', '12月'];
+            $scope.series_Out = ['男性', '女性'];
+            $scope.data_Out = [];
+
+            $http({
+                url: '/Dashboard/dataOutJSON.js',
+                method: 'GET'
+            }).success(function (data, header, config, status) {
+      
+                //响应成功
+                for (var n = 0; n < data.length; n++) {
+                    $scope.data_Out.push(data[n]);
+                }
+            }).error(function (data, header, config, status) {
+          
+                //处理响应失败
+                alert("Error:结案人数统计数据获取出错异常！")
+            });
+
+        }]);
+        //(１)本年度入院人数
+        app.controller('BarCtrl', ['$scope', '$timeout', '$http', function ($scope, $timeout, $http) {
+     
+            $scope.options = { scaleShowVerticalLines: false };
+            $scope.data_In = [];
+            $http({
+                url: '/Dashboard/dataInJSON.js',
+                method: 'GET'
+            }).success(function (data, header, config, status) {
+              
+                //响应成功
+                for (var n = 0; n < data.length; n++) {
+        
+                    $scope.data_In.push(data[n]);
+                }
+            }).error(function (data, header, config, status) {
+                //处理响应失败
+                alert("Error:数据获取出错异常！")
+            });
+
+            $scope.labels = ['01月', '02月', '03月', '04月', '05月', '06月', '07月', '08月', '09月', '10月', '11月', '12月'];
+            $scope.series = ['女性', '男性'];
+            
+            
+            $timeout(function () {
+                $scope.options = { scaleShowVerticalLines: true };
+            }, 3000);
+        }]);
+        //床位占用率
+        app.controller('PieCtrl', ['$scope','$http', function ($scope, $http) {
+            $scope.data_bed = [];
+            $scope.labels_bed = []; //['床位占用数:76', '床位空闲数:24','关帐中：'];
+
+            $scope.series_bed = [];//['床位占用数:76', '床位空闲数:24', '关帐中：'];
+
+            $http({
+                url: '/Dashboard/dataBedJSON.js',
+                method: 'GET'
+            }).success(function (data, header, config, status) {
+                //响应成功
+                for (var n = 0; n < data.length; n++) {
+                    $scope.data_bed.push(data[n]);
+                }
+                
+                $scope.labels_bed = ['床位占用数:' + data[1], '床位空闲数:' + data[0]];
+                $scope.series_bed = ['床位占用数:' + data[1], '床位空闲数:' + data[0]];
+            }).error(function (data, header, config, status) {
+                
+                //处理响应失败
+                alert("Error:数据获取出错异常！")
+            });
+
+        }]);
+
+        //(２)压疮
+        app.controller('BarCtrl_BedSore', ['$scope', '$timeout', '$http', function ($scope, $timeout, $http) {
+            $scope.options = { scaleShowVerticalLines: false };
+            $scope.data_bedsore = [];
+            var arraryObj;
+            $scope.labels_bedsore = ['01月', '02月', '03月', '04月', '05月', '06月', '07月', '08月', '09月', '10月', '11月', '12月'];
+            $scope.series_bedsore = ['女性', '男性', '未填'];
+            $http({
+                url: '/Dashboard/dataBedSoreJSON.js',
+                method: 'GET'
+            }).success(function (data, header, config, status) {
+                //响应成功
+                for (var n = 0; n < data.length; n++) {
+                    $scope.data_bedsore.push(data[n]);
+                }
+            }).error(function (data, header, config, status) {
+                
+                //处理响应失败
+                alert("Error:压疮统计数据获取出错异常！")
+            });
+
+            $timeout(function () {
+                $scope.options = { scaleShowVerticalLines: true };
+            }, 3000);
+        }]);
+
+        function getRandomValue(data) {
+            var l = data.length, previous = l ? data[l - 1] : 50;
+            var y = previous + Math.random() * 10 - 5;
+            return y < 0 ? 0 : y > 100 ? 100 : y;
+        }
+    })();
+
+    </script>
+
+    <link rel="stylesheet" href="../../Content/DashBoard/angular-chart.css">
+    
+</head>
+<body>
+    <br />
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4"></div>
+            <div class="col-md-4"><h2>智能仪表盘</h2></div>
+            <div class="col-md-4"></div>
+            <br />
+
+        </div>
+    </div>
+
+    <div id="container" class="container">
+        <div class="row" style="left:2%;top:2%;position:absolute">
+            <a href="/Home/MainForm" style="text-decoration:none;border:none">
+                <table>
+                    <tr style="cursor:pointer">
+
+                        <td><img src="~/Images/arrow-left.png" /></td>
+                        <td style="font-size:20pt;color:#000000">返回首页</td>
+                    </tr>
+                </table>
+            </a>
+        </div>
+        <div class="row">
+            <div class="col-sm-6" ng-controller="BarCtrl">
+                <div class="panel panel-default">
+                    <div class="panel-heading">本年度入院人数</div>
+                    <div class="panel-body">
+                        <!--<canvas class="chart chart-base" chart-type="type" data="data" labels="labels"></canvas>-->
+                        <canvas id="bar" class="chart chart-bar" chart-data="data_In" chart-labels="labels" chart-series="series" chart-legend="true"></canvas>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-6" ng-controller="LineCtrl">
+                <div class="panel panel-default">
+                    <div class="panel-heading">本年度结案人数</div>
+                    <div class="panel-body">
+                        <canvas id="line" class="chart chart-line" chart-data="data_Out" chart-labels="labels_Out" chart-legend="true" chart-series="series_Out"   chart-click="onClick"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="panel panel-default" ng-controller="PieCtrl">
+                    <div class="panel-heading">床位占用数</div>
+                    <div class="panel-body">
+                        <canvas id="pie" class="chart chart-pie" chart-data="data_bed" chart-labels="labels_bed" chart-series="series_bed" chart-legend="true"></canvas>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="panel panel-default" ng-controller="BarCtrl_BedSore">
+                    <div class="panel-heading">压疮</div>
+                    <div class="panel-body">
+                        <canvas id="bar" class="chart chart-bar" chart-data="data_bedsore" chart-labels="labels_bedsore" chart-series="series_bedsore" chart-legend="true"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+   
+    
+</body>
+</html>
+

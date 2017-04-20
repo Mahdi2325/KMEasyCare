@@ -1,0 +1,63 @@
+﻿<div class="row">
+    <div class="box-body">
+        <div id="content" class="col-lg-12">
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="page-header">
+                        <ul class="breadcrumb">
+                            <li>
+                                <i class="fa fa-home"></i>
+                                <a href="/">首页</a>
+                            </li>
+                            <li>
+                                <a href="/angular/ReceptionManagement/AdvisoryReg">咨询登记</a>
+                            </li>
+                            <li>
+                                <a href="/angular/ReceptionManagement/AdvisoryRegCallBack/{{ConsultRecId}}">回访</a>
+                            </li>
+                            <li>回访管理</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="box border primary">
+                        <div class="box-title">
+                            <h4><i class="fa fa-bars"></i>咨询登记信息</h4>
+                        </div>
+                        <div class="box-body">
+                            <form class="form-horizontal" role="form" name="advisoryRegCallBack" ng-submit="save(Data)" novalidate>
+                                <div class="panel panel-default">
+                                    <div class="panel-body">
+                                        <div class="form-group">
+                                            <label class="col-sm-1 control-label">回访时间<span class="required">*</span></label>
+                                            <div class="col-sm-2">
+                                                <input class="form-control" name="回访时间" type="text" ng-model="Data.CallBackTime" required ca-date-picker />
+                                            </div>
+                                            <label class="col-sm-1 control-label">被访者姓名<span class="required">*</span></label>
+                                            <div class="col-sm-2">
+                                                <input class="form-control" name="被访者姓名" type="text" ng-model="Data.Interviewee" required />
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label class="col-sm-1 control-label">访谈记录</label>
+                                            <div class="col-sm-11">
+                                                <textarea class="form-control" name="访谈记录" rows="3" ng-model="Data.InterviewRec" ng-maxlength="200"></textarea>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group center">
+                                    <button class="btn btn-info btn-lg" type="submit">保存</button>
+                                    <button class="btn btn-grey btn-lg" ui-sref="AdvisoryReg">取消</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

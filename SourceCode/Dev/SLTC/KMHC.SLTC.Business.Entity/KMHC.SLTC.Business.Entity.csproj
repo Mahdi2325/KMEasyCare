@@ -1,0 +1,416 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{208D3A36-9507-4FF2-A3BF-374D718F0A11}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>KMHC.SLTC.Business.Entity</RootNamespace>
+    <AssemblyName>KMHC.SLTC.Business.Entity</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Base\BaseRequest.cs" />
+    <Compile Include="Base\BaseResponse.cs" />
+    <Compile Include="BillManagement\IpdOrder.cs" />
+    <Compile Include="BillManagement\IpdOrderPostRec.cs" />
+    <Compile Include="BillManagement\RESIDENTMONFEE.cs" />
+    <Compile Include="ChargeInputModel\CommonRecord.cs" />
+    <Compile Include="ChargeInputModel\DrugRecord.cs" />
+    <Compile Include="ChargeInputModel\MaterialRecord.cs" />
+    <Compile Include="ChargeInputModel\ServiceRecord.cs" />
+    <Compile Include="DC\Filter\ABFilter.cs" />
+    <Compile Include="DC\Filter\DcNurseingPlanEvalFilter.cs" />
+    <Compile Include="DC\Filter\DC_AssignJobsFilter.cs" />
+    <Compile Include="DC\Filter\DC_CarePlanProblemFilter.cs" />
+    <Compile Include="DC\Filter\DC_EvalQeustionFilter.cs" />
+    <Compile Include="DC\Filter\DC_IpdRegFilter.cs" />
+    <Compile Include="DC\Filter\DC_RegCheckRecordFilter.cs" />
+    <Compile Include="DC\Filter\DC_LifeHistoryFilter.cs" />
+    <Compile Include="DC\Filter\DC_QuestionFilter.cs" />
+    <Compile Include="DC\Filter\DC_QuestionItemFilter.cs" />
+    <Compile Include="DC\Filter\DC_QuestionValueFilter.cs" />
+    <Compile Include="DC\Filter\DC_ReferrallistsFilter.cs" />
+    <Compile Include="DC\Filter\DC_RegActivityRequestEvalFilter.cs" />
+    <Compile Include="DC\Filter\DC_RegBaseInfoListFilter.cs" />
+    <Compile Include="DC\Filter\DC_RegCplFilter.cs" />
+    <Compile Include="DC\Filter\DC_RegDayLifeFilter.cs" />
+    <Compile Include="DC\Filter\DC_RegEvalQuestionFilter.cs" />
+    <Compile Include="DC\Filter\DC_RegFileFilter.cs" />
+    <Compile Include="DC\Filter\DC_RegLifeQualityEvalFilter.cs" />
+    <Compile Include="DC\Filter\DC_RegQuestionDataFilter.cs" />
+    <Compile Include="DC\Filter\DC_ResidentFilter.cs" />
+    <Compile Include="DC\Filter\DC_SwRegEvalPlanFilter.cs" />
+    <Compile Include="DC\Filter\DC_SysAdminFilter.cs" />
+    <Compile Include="DC\Filter\DC_TaskGoalsStrategyFilter.cs" />
+    <Compile Include="DC\Filter\RegQuestionEvalRecFilter.cs" />
+    <Compile Include="DC\Model\CasesTimeline.cs" />
+    <Compile Include="DC\Model\DC_AbNormaleMotionRec.cs" />
+    <Compile Include="DC\Model\DC_ChartsModel.cs" />
+    <Compile Include="DC\Model\DC_COMMDTLModel.cs" />
+    <Compile Include="DC\Model\DC_CommUseWord.cs" />
+    <Compile Include="DC\Model\DC_RegCheckRecord.cs" />
+    <Compile Include="DC\Model\DC_DayLifeCaredtl.cs" />
+    <Compile Include="DC\Model\DC_DayLifeCarerec.cs" />
+    <Compile Include="DC\Model\DC_EvalQeustionModel.cs" />
+    <Compile Include="DC\Model\DC_IpdRegModel.cs" />
+    <Compile Include="DC\Model\DC_LifeHistoryModel.cs" />
+    <Compile Include="DC\Model\DC_MultiteaMcarePlanEvalModel.cs" />
+    <Compile Include="DC\Model\DC_MultiteamCarePlanModel.cs" />
+    <Compile Include="DC\Model\DC_MultiteamCarePlanRecModel.cs" />
+    <Compile Include="DC\Model\DC_NurseingLifeCareEDTL.cs" />
+    <Compile Include="DC\Model\DC_NurseingLifeCareREC.cs" />
+    <Compile Include="DC\Model\DC_QuestionModel.cs" />
+    <Compile Include="DC\Model\DC_QuestionValueModel.cs" />
+    <Compile Include="DC\Model\DC_ReferrallistsModel.cs" />
+    <Compile Include="DC\Model\DC_RegActivityRequestEval.cs" />
+    <Compile Include="DC\Model\DC_RegBaseInfoList.cs" />
+    <Compile Include="DC\Model\DC_RegCaseCarePlanModel.cs" />
+    <Compile Include="DC\Model\DC_RegCaseCarePlanRecModel.cs" />
+    <Compile Include="DC\Model\DC_RegCpl.cs" />
+    <Compile Include="DC\Model\DC_RegDayLifeModel.cs" />
+    <Compile Include="DC\Model\DC_RegEvalQuestionModel.cs" />
+    <Compile Include="DC\Model\DC_RegFileModel.cs" />
+    <Compile Include="DC\Model\DC_RegLifeQualityEvalModel.cs" />
+    <Compile Include="DC\Model\DC_RegQuestionDataModel.cs" />
+    <Compile Include="DC\Model\DC_RegQuestionEvalRecModel.cs" />
+    <Compile Include="DC\Model\DC_Resident.cs" />
+    <Compile Include="DC\Model\DC_SwRegEvalPlanModel.cs" />
+    <Compile Include="DC\Model\DC_TaskEmpModel.cs" />
+    <Compile Include="DC\Model\DC_TaskGoalsStrategyModel.cs" />
+    <Compile Include="DC\Model\DC_TaskRemind.cs" />
+    <Compile Include="DC\Model\DC_COMMFILEFModel.cs" />
+    <Compile Include="DC\Model\DC_TeamActivitydtlModel.cs" />
+    <Compile Include="DC\Model\DC_TeamActivityModel.cs" />
+    <Compile Include="DC\Report\ReportBaseInfoList.cs" />
+    <Compile Include="DC\Report\ReportNurseingPlanEval.cs" />
+    <Compile Include="DC\Report\ReportRegActivityRequestEval.cs" />
+    <Compile Include="DC\Report\ReportRegCpl.cs" />
+    <Compile Include="DC\Report\ReportRegMedicine.cs" />
+    <Compile Include="DC\Report\ReportRequest.cs" />
+    <Compile Include="Filter\AdvisoryRegFilter.cs" />
+    <Compile Include="Filter\AssignTaskFilter.cs" />
+    <Compile Include="Filter\CloseFinancialFilter.cs" />
+    <Compile Include="Filter\ConsultCallBackFilter.cs" />
+    <Compile Include="Filter\DeductionFilter.cs" />
+    <Compile Include="Filter\DrugRecordFilter.cs" />
+    <Compile Include="Filter\EvalFilter.cs" />
+    <Compile Include="Filter\FstRegRecFilter.cs" />
+    <Compile Include="Filter\HeathRecordFilter.cs" />
+    <Compile Include="Filter\IpdOrderFilter.cs" />
+    <Compile Include="Filter\MeasureFilter.cs" />
+    <Compile Include="Filter\MonthFeeFilter.cs" />
+    <Compile Include="Filter\NCIMedicalMaterialFilter.cs" />
+    <Compile Include="Filter\NCIServiceFilter.cs" />
+    <Compile Include="Filter\NCIDrugFilter.cs" />
+    <Compile Include="Filter\NSDrugFilter.cs" />
+    <Compile Include="Filter\BillV2Filter.cs" />
+    <Compile Include="Filter\CarePlansFilter.cs" />
+    <Compile Include="Filter\CaresvrRecFilter.cs" />
+    <Compile Include="Filter\FeeRecordFilter.cs" />
+    <Compile Include="Filter\IpdregoutFilter.cs" />
+    <Compile Include="Filter\NewResideEntenvRecFilter.cs" />
+    <Compile Include="Filter\ComplainRecFilter.cs" />
+    <Compile Include="Filter\CostManageFilter.cs" />
+    <Compile Include="Filter\DashboardFilter.cs" />
+    <Compile Include="Filter\DictManageFilter.cs" />
+    <Compile Include="Filter\DoctorCheckRecFilter.cs" />
+    <Compile Include="Filter\DoctorEvalRecFilter.cs" />
+    <Compile Include="Filter\FallIncidentEventFilter.cs" />
+    <Compile Include="Filter\HomeCareSuperviseFilter.cs" />
+    <Compile Include="Filter\LifeRecordFilter.cs" />
+    <Compile Include="Filter\LifeRecordListFilter.cs" />
+    <Compile Include="Filter\MedicineFilter.cs" />
+    <Compile Include="Filter\NSMedicalMaterialFilter.cs" />
+    <Compile Include="Filter\NSServiceFilter.cs" />
+    <Compile Include="Filter\NursingRecordManage.cs" />
+    <Compile Include="Filter\NursingWorkstationFilter.cs" />
+    <Compile Include="Filter\NursingFilter.cs" />
+    <Compile Include="Filter\InventoryManageFilter.cs" />
+    <Compile Include="Filter\GoodsManageFilter.cs" />
+    <Compile Include="Filter\CommonFilter.cs" />
+    <Compile Include="Filter\NutritionEvalFilter.cs" />
+    <Compile Include="Filter\NutrtioncateRecFilter.cs" />
+    <Compile Include="Filter\OrderFiltyer.cs" />
+    <Compile Include="Filter\OwnDrugRecFilter.cs" />
+    <Compile Include="Filter\PackageRelatedFilter.cs" />
+    <Compile Include="Filter\PersonStatusFilter.cs" />
+    <Compile Include="Filter\RefundMgmtFilter.cs" />
+    <Compile Include="Filter\PaymentMgmtFilter.cs" />
+    <Compile Include="Filter\PharmacistFilter.cs" />
+    <Compile Include="Filter\IndexManageFilter.cs" />
+    <Compile Include="Filter\PipelineEvalFilter.cs" />
+    <Compile Include="Filter\PipelineRecFilter.cs" />
+    <Compile Include="Filter\PreipdFilter.cs" />
+    <Compile Include="Filter\QuestionFilter.cs" />
+    <Compile Include="Filter\ReferralRecFilter.cs" />
+    <Compile Include="Filter\RegActivityRequEvalFilter.cs" />
+    <Compile Include="Filter\RegEvaluateFilter.cs" />
+    <Compile Include="Filter\NoticeFilter.cs" />
+    <Compile Include="Filter\ReportFilter.cs" />
+    <Compile Include="Filter\ResidentManageFilter.cs" />
+    <Compile Include="Filter\ResourceLinkFilter.cs" />
+    <Compile Include="Filter\SubsidyFilter.cs" />
+    <Compile Include="DC\Model\DC_CarePlanProblem.cs" />
+    <Compile Include="DC\Model\DC_QuestionItemModel.cs" />
+    <Compile Include="Filter\VisitorInOutFilter.cs" />
+    <Compile Include="Filter\ZipFileFilter.cs" />
+    <Compile Include="Model\AuditYearCertModel.cs" />
+    <Compile Include="Model\ConsultCallBack.cs" />
+    <Compile Include="Model\ConsultRec.cs" />
+    <Compile Include="Model\EmployeeExt.cs" />
+    <Compile Include="Model\FinancialManagement\BillV2ForThisSelfAndLastPreAmt.cs" />
+    <Compile Include="Model\FinancialManagement\NCIFinancialMonth.cs" />
+    <Compile Include="Model\FinancialManagement\RsChargeGroup.cs" />
+    <Compile Include="Model\FinancialManagement\SettleAccountModel.cs" />
+    <Compile Include="Model\FinancialManagement\ThisSelfAmtAndLastPreAmt.cs" />
+    <Compile Include="Model\FstRegRec.cs" />
+    <Compile Include="Model\HealthRecords.cs" />
+    <Compile Include="Model\FinancialManagement\BillV2.cs" />
+    <Compile Include="Model\FinancialManagement\BillReceivedAmount.cs" />
+    <Compile Include="Model\FinancialManagement\BillV2PAY.cs" />
+    <Compile Include="Model\EvalReportHeader.cs" />
+    <Compile Include="Model\FinancialManagement\MonthlyPayBillRecords.cs" />
+    <Compile Include="Model\FinancialManagement\ResidentBalanceRefund.cs" />
+    <Compile Include="Model\FinancialManagement\FeeRecord.cs" />
+    <Compile Include="BillManagement\FeeRecordModel.cs" />
+    <Compile Include="Model\FinancialManagement\Refund.cs" />
+    <Compile Include="Model\LTC_MakerItem.cs" />
+    <Compile Include="Model\LTC_MakerItemLimitedValue.cs" />
+    <Compile Include="Model\LTC_NCIFinancialMonth.cs" />
+    <Compile Include="Model\LTC_QuestionResults.cs" />
+    <Compile Include="Model\LTC_UserLoginLog.cs" />
+    <Compile Include="Model\MedicalWork\OwnDrugDtlModel.cs" />
+    <Compile Include="Model\MedicalWork\OwnDrugRecModel.cs" />
+    <Compile Include="Model\MeaSuredRecord.cs" />
+    <Compile Include="Model\MeasureItem.cs" />
+    <Compile Include="Model\MonFeeModel.cs" />
+    <Compile Include="Model\MonthlyPayBillRecord.cs" />
+    <Compile Include="Model\MonthlyPayLimit.cs" />
+    <Compile Include="Model\MyDeskKPI.cs" />
+    <Compile Include="Model\NCIDeductionModel.cs" />
+    <Compile Include="Model\NewRegEnvAdaptation.cs" />
+    <Compile Include="Model\NewResideEntenvRec.cs" />
+    <Compile Include="Model\BedTransferModel.cs" />
+    <Compile Include="Model\LTCNUTRTION72EVAL.cs" />
+    <Compile Include="Model\GlobalVariable.cs" />
+    <Compile Include="Model\NavigationModel.cs" />
+    <Compile Include="Model\Notice.cs" />
+    <Compile Include="Model\NCIDrug.cs" />
+    <Compile Include="Model\NSDrug.cs" />
+    <Compile Include="Model\NCIMedicalMaterial.cs" />
+    <Compile Include="Model\NSMedicalMaterial.cs" />
+    <Compile Include="Model\NCIService.cs" />
+    <Compile Include="Model\NSService.cs" />
+    <Compile Include="Model\NursingCareEval.cs" />
+    <Compile Include="Model\NutritionEvalModel.cs" />
+    <Compile Include="Model\NutrtioncateRec.cs" />
+    <Compile Include="Model\LTC_Question.cs" />
+    <Compile Include="Model\PersonPreview.cs" />
+    <Compile Include="Model\FinancialManagement\PreCharge.cs" />
+    <Compile Include="Model\PersonStatusReportModel.cs" />
+    <Compile Include="Model\PrintMonthFee.cs" />
+    <Compile Include="Model\RegActivityRequEval.cs" />
+    <Compile Include="Model\Regdiseasehis.cs" />
+    <Compile Include="Model\RegHosProof.cs" />
+    <Compile Include="Model\RegInHosStatusListEntity.cs" />
+    <Compile Include="Model\RegNCIInfo.cs" />
+    <Compile Include="Model\ReportModel.cs" />
+    <Compile Include="Model\FinancialManagement\ResidentBalance.cs" />
+    <Compile Include="Model\ResidentMonFee.cs" />
+    <Compile Include="Model\ResidentMonFeeModel.cs" />
+    <Compile Include="Model\RSMonFeeDtl.cs" />
+    <Compile Include="Model\Scenario.cs" />
+    <Compile Include="Model\TableParam.cs" />
+    <Compile Include="Model\BedSoreChgrec.cs" />
+    <Compile Include="Filter\VisitDocRecordsFilter.cs" />
+    <Compile Include="Filter\VisitPrescriptionFilter.cs" />
+    <Compile Include="DC\Model\DcNurseingPlanEval.cs" />
+    <Compile Include="DC\Model\DcRegMedicine.cs" />
+    <Compile Include="Model\CostItemCostGroup.cs" />
+    <Compile Include="Model\TreatmentAccount.cs" />
+    <Compile Include="Model\VisitorInOut.cs" />
+    <Compile Include="Model\Year.cs" />
+    <Compile Include="Model\StatisticItem.cs" />
+    <Compile Include="Model\CaresvrRecModel.cs" />
+    <Compile Include="Model\CheckGroup.cs" />
+    <Compile Include="Model\CheckItem.cs" />
+    <Compile Include="Model\CodeDtl.cs" />
+    <Compile Include="Model\CodeFile.cs" />
+    <Compile Include="Model\CommFile.cs" />
+    <Compile Include="Model\Dashboard.cs" />
+    <Compile Include="Model\InfectionItem.cs" />
+    <Compile Include="Model\Ipdregout.cs" />
+    <Compile Include="Model\NurseRpttpr.cs" />
+    <Compile Include="Model\ReferralRecModel.cs" />
+    <Compile Include="Model\RSDList.cs" />
+    <Compile Include="Model\MenuTree.cs" />
+    <Compile Include="Model\SymptomItem.cs" />
+    <Compile Include="Model\TreeNode.cs" />
+    <Compile Include="Model\Bill.cs" />
+    <Compile Include="Model\CheckRec.cs" />
+    <Compile Include="Model\CheckRecdtl.cs" />
+    <Compile Include="Model\ComplainRecModel.cs" />
+    <Compile Include="Model\ConstrainsBeval.cs" />
+    <Compile Include="Model\CostDtl.cs" />
+    <Compile Include="Model\CostGroup.cs" />
+    <Compile Include="Model\CostGroupDtl.cs" />
+    <Compile Include="Model\CostItem.cs" />
+    <Compile Include="Model\DoctorCheckRec.cs" />
+    <Compile Include="Model\DoctorEvalRec.cs" />
+    <Compile Include="Model\FamilyDiscuss.cs" />
+    <Compile Include="Model\FixedCost.cs" />
+    <Compile Include="Model\GroupActivityRec.cs" />
+    <Compile Include="Model\Groups.cs" />
+    <Compile Include="Model\HomeCareSuperviseModel.cs" />
+    <Compile Include="Model\Medicine.cs" />
+    <Compile Include="Model\InfectionSympotm.cs" />
+    <Compile Include="Model\LabExamRec.cs" />
+    <Compile Include="Model\OrgFloor.cs" />
+    <Compile Include="Model\OrgRoom.cs" />
+    <Compile Include="Model\PainBodyPartRec.cs" />
+    <Compile Include="Model\PayBill.cs" />
+    <Compile Include="Model\PinMoney.cs" />
+    <Compile Include="Model\PipelineEvalModel.cs" />
+    <Compile Include="Model\PipelineRecModel.cs" />
+    <Compile Include="Model\Preipd.cs" />
+    <Compile Include="Model\Receipts.cs" />
+    <Compile Include="Model\RegEvaluateModel.cs" />
+    <Compile Include="Model\Rehabilitrec.cs" />
+    <Compile Include="Model\Module.cs" />
+    <Compile Include="Model\TranSferVisit.cs" />
+    <Compile Include="Model\UnPlanEdipd.cs" />
+    <Compile Include="Model\UnPlanWeightInd.cs" />
+    <Compile Include="Model\PainEvalRec.cs" />
+    <Compile Include="Model\InfectionInd.cs" />
+    <Compile Include="Model\ConstraintRec.cs" />
+    <Compile Include="Model\BedSoreRec.cs" />
+    <Compile Include="Model\AssignTask.cs" />
+    <Compile Include="Model\AttachFile.cs" />
+    <Compile Include="Model\CarePlans.cs" />
+    <Compile Include="Model\Demand.cs" />
+    <Compile Include="Model\FallIncidentEvent.cs" />
+    <Compile Include="Model\Manufacture.cs" />
+    <Compile Include="Model\GoodsSale.cs" />
+    <Compile Include="Model\GoodsLoan.cs" />
+    <Compile Include="Model\Goods.cs" />
+    <Compile Include="Model\Health.cs" />
+    <Compile Include="Model\LifeRecordModel.cs" />
+    <Compile Include="Model\NSCPL.cs" />
+    <Compile Include="Model\NSCPLACTIVITY.cs" />
+    <Compile Include="Model\NSCPLGOAL.cs" />
+    <Compile Include="Model\Pharmacist.cs" />
+    <Compile Include="Model\Relation.cs" />
+    <Compile Include="Model\RelationDtl.cs" />
+    <Compile Include="Model\ResidentDtl.cs" />
+    <Compile Include="Model\CommonUseWord.cs" />
+    <Compile Include="Model\Contact.cs" />
+    <Compile Include="Model\BedBasic.cs" />
+    <Compile Include="Model\AffairsHandover.cs" />
+    <Compile Include="Model\OutValue.cs" />
+    <Compile Include="Model\ResourceLinkModel.cs" />
+    <Compile Include="Model\Role.cs" />
+    <Compile Include="Model\message.cs" />
+    <Compile Include="Model\Notification.cs" />
+    <Compile Include="Model\Nursing.cs" />
+    <Compile Include="Model\InValue.cs" />
+    <Compile Include="Model\LeaveHosp.cs" />
+    <Compile Include="Model\SubsidyView.cs" />
+    <Compile Include="Model\CodeRule.cs" />
+    <Compile Include="Model\Vaccineinject.cs" />
+    <Compile Include="Model\Verify.cs" />
+    <Compile Include="Model\Visit.cs" />
+    <Compile Include="Model\Deposit.cs" />
+    <Compile Include="Model\CloseCase.cs" />
+    <Compile Include="Model\Employee.cs" />
+    <Compile Include="Model\Dept.cs" />
+    <Compile Include="Model\NursingRec.cs" />
+    <Compile Include="Model\NursingHandover.cs" />
+    <Compile Include="Model\VisitDocRecords.cs" />
+    <Compile Include="Model\VisitPrescription.cs" />
+    <Compile Include="Model\Vitalsign.cs" />
+    <Compile Include="Model\Organization.cs" />
+    <Compile Include="Model\Person.cs" />
+    <Compile Include="Model\Resident.cs" />
+    <Compile Include="Model\Task.cs" />
+    <Compile Include="Model\CodeValue.cs" />
+    <Compile Include="Model\User.cs" />
+    <Compile Include="Constants.cs" />
+    <Compile Include="Enumerations.cs" />
+    <Compile Include="Filter\OrganizationManageFilter.cs" />
+    <Compile Include="Model\ZipFile.cs" />
+    <Compile Include="NursingWorkstation\HandoverRecord.cs" />
+    <Compile Include="NursingWorkstation\LTC_HandoverDtl.cs" />
+    <Compile Include="NursingWorkstation\LookOverModel.cs" />
+    <Compile Include="NursingWorkstation\WorkItemModel.cs" />
+    <Compile Include="PackageRelated\CHARGEGROUP.cs" />
+    <Compile Include="PackageRelated\ChargeGroupRec.cs" />
+    <Compile Include="PackageRelated\CHARGEITEM.cs" />
+    <Compile Include="PackageRelated\CHARGERECORD.cs" />
+    <Compile Include="ChargeInputModel\ServiceRecords.cs" />
+    <Compile Include="ChargeInputModel\MaterialRecords.cs" />
+    <Compile Include="ChargeInputModel\DrugRecords.cs" />
+    <Compile Include="PackageRelated\RESCHARGEGRO.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Report\ActivityRequEval.cs" />
+    <Compile Include="Report\ReportInfo.cs" />
+    <Compile Include="Report\reportP18.cs" />
+    <Compile Include="Report\TimeDiffEntity.cs" />
+    <Compile Include="Report\Question.cs" />
+    <Compile Include="Report\ResidentInfo.cs" />
+    <Compile Include="Report\Statistic.cs" />
+    <Compile Include="TSG\TsgAnswer.cs" />
+    <Compile Include="TSG\TsgAnswerDtl.cs" />
+    <Compile Include="TSG\TsgCategory.cs" />
+    <Compile Include="TSG\TsgQuestion.cs" />
+    <Compile Include="ViewModel\TaskEmpFile.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\KMHC.SLTC.Persistence\KMHC.SLTC.Persistence.csproj">
+      <Project>{3a0737ce-99b6-429f-9b11-85b49fad1de2}</Project>
+      <Name>KMHC.SLTC.Persistence</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

@@ -1,0 +1,322 @@
+<!-- JQUERY UI-->
+<link rel="stylesheet" type="text/css" href="/Content/CloudAdmin/js/jquery-ui-1.10.3.custom/css/custom-theme/jquery-ui-1.10.3.custom.min.css" />
+
+<link rel="stylesheet" type="text/css" href="/Content/CloudAdmin/js/bootstrap-daterangepicker/daterangepicker-bs3.css" />
+
+<script type="text/javascript" src="/Content/CloudAdmin/js/datepicker/picker.js"></script>
+<script type="text/javascript" src="/Content/CloudAdmin/js/datepicker/picker.date.js"></script>
+<script type="text/javascript" src="/Content/CloudAdmin/js/datepicker/picker.time.js"></script>
+
+<div class="row">
+    <div id="content" class="col-md-12">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="page-header">
+                    <!-- BREADCRUMBS -->
+                    <ul class="breadcrumb">
+                        <li>
+                            <i class="fa fa-home"></i>
+                            <a href="/">首页</a>
+                        </li>
+                        <li>
+                            生化检查
+                        </li>
+                    </ul>
+                    <!-- /BREADCRUMBS -->
+
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="col-sm-2">
+                    <div class="box border primary">
+                        <div class="box-title">
+                            <h4>
+                                <i class="fa fa-bars"></i>住民信息
+                            </h4>
+                        </div>
+                        <div class="box-body">
+                            <resident-card feeno={{FeeNo}} callback="residentSelected(resident)" />
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-10">
+                    <div class="box border primary">
+                        <div class="box-title">
+                            <h4>
+                                <i class="fa fa-table"></i>生化检查信息
+                            </h4>
+                        </div>
+                        <div class="box-body">
+                            <form class="form-horizontal" role="form" name="lifeRecForm">
+                                <div class="form-group">
+
+                                    <label class="col-sm-1 control-label">填写人员<span class="required">*</span></label>
+
+
+                                    <div class="col-sm-2">
+                                        <input-staff callback="staffSelected(item,'RECORDBY')" id="RECORDBY" value="{{record.RECORDBY}}" required=true />
+                                    </div>
+
+                                    <label class="col-sm-1 control-label">下次受托者<span class="required">*</span></label>
+                                    <div class="col-sm-2">
+                                        <input-staff callback="staffSelected(item,'NEXTCHECKBY')" id="NEXTCHECKBY" value="{{record.NEXTCHECKBY}}" required=true />
+                                    </div>
+
+                                    <label class="col-sm-1 control-label">检查单位</label>
+                                    <div class="col-sm-2">
+
+                                        <input type="text" class="form-control" id="HOSPNAME" ng-model="record.HOSPNAME" />
+
+                                    </div>
+                                    <label class="col-sm-1 control-label">检查结果</label>
+                                    <div class="col-sm-2">
+
+                                        <input type="text" class="form-control" id="CHECKRESULTS" ng-model="record.CHECKRESULTS" />
+
+                                    </div>
+
+
+
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-1 control-label">检查日期<span class="required">*</span></label>
+                                    <div class="col-sm-2">
+                                        <input type="text" class="form-control" id="CHECKDATE" ng-model="record.CHECKDATE" ca-date-picker required>
+
+                                    </div>
+
+                                    <label class="col-sm-1 control-label">间隔天数</label>
+                                    <div class="col-sm-2">
+                                        <input type="number" class="form-control" ng-pattern="/^[1-9]\d*|0$/" id="selGap" ng-model="day" ng-disabled="day_show" />
+                                    </div>
+
+                                    <label class="col-sm-1 control-label">下次日期<span class="required">*</span></label>
+                                    <div class="col-sm-2">
+                                        <input type="text" class="form-control" id="NEXTCHECKDATE" ng-model="record.NEXTCHECKDATE" ca-date-picker required>
+                                    </div>
+
+                                    <label class="col-sm-1 control-label">追踪情形</label>
+                                    <div class="col-sm-2">
+                                        <input type="text" class="form-control" id="TRACESTATE" ng-model="record.TRACESTATE" />
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-1 control-label">病况</label>
+                                    <div class="col-sm-11">
+                                        <textarea ng-model="record.DISEASEDESC" class="form-control" maxlength="2000"></textarea>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-1 control-label">备注</label>
+                                    <div class="col-sm-11">
+                                        <textarea ng-model="record.DESCRIPTION" class="form-control" maxlength="2000"></textarea>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="lbNextEvaluGap" class="col-sm-1 control-label">X光检查</label>
+                                    <div class="col-sm-1">
+                                        <input class="checkbox" type="checkbox" ng-model="record.XRAYFLAG" />
+                                    </div>
+                                    <label for="lbNextEvaluGap" class="col-sm-1 control-label">检查结果异常</label>
+                                    <div class="col-sm-1">
+                                        <label class="checkbox-inline">
+                                            <input type="checkbox" class="uniform" ng-model="record.NORMALFLAG">是
+                                        </label>
+                                    </div>
+                                    <label class="col-sm-2 control-label">是否同步写入护理记录</label>
+                                    <div class="col-sm-1">
+                                        <label class="checkbox-inline">
+                                            <input type="checkbox" class="uniform" ng-model="SyncNurRec">是
+                                        </label>
+                                    </div>
+
+                                    <div style="float:right; height:18px; margin-right:10px">
+                                        <a class="btn btn-info" role="button" ng-show="btn_s" ng-click="produceCode(code)">确认产生</a>
+                                    </div>
+                                    <div class="col-sm-3" style="float:right">
+                                        <select class="form-control" ng-model="code" ng-options="record.GROUPCODE as record.GROUPNAME for record in CheckCode">
+                                            <option value="" selected="selected">---请选择---</option>
+                                        </select>
+
+                                    </div>
+                                </div>
+                                <div class="box border primary">
+                                    <div class="box-title">
+                                        <h4>
+                                            <i class="fa fa-bars"></i>生化检查项目
+                                        </h4>
+                                    </div>
+                                    <div class="box-body">
+                                        <table class="table table-striped table-bordered table-hover table-handler">
+                                            <thead>
+                                                <tr>
+                                                    <th>#</th>
+                                                    <th>检查类型</th>
+                                                    <th>检查项目</th>
+                                                    <th>检查结果</th>
+                                                    <th>说明</th>
+                                                    <th style="min-width:200px">标志范围</th>
+                                                    <th><i class="fa fa-bars"></i> 操作</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr ng-repeat="CheckRecdtl in tt">
+                                                    <td>{{$index + 1}}</td>
+                                                    <td>
+                                                        <select class="{{tbCancle}}" disabled="disabled" style="height:30px;width:200px" ng-model="CheckRecdtl.CHECKTYPE" ng-options="CheckRecdtl.GROUPCODE as CheckRecdtl.GROUPNAME for CheckRecdtl in CheckCode"></select>
+                                                        <select ng-model="CheckRecdtl.CHECKTYPE" disabled="disabled" class="form-control {{tbEdit}}" ng-options="CheckRecdtl.GROUPCODE as CheckRecdtl.GROUPNAME for CheckRecdtl in CheckCode"></select>
+                                                    </td>
+                                                    <td>
+                                                        <select class="{{tbCancle}}" disabled="disabled" style="height:30px;width:200px" ng-model="CheckRecdtl.CHECKITEM" ng-options="CheckRecdtl.ITEMCODE as CheckRecdtl.ITEMNAME for CheckRecdtl in produceitem"></select>
+                                                        <select ng-model="CheckRecdtl.CHECKITEM" disabled="disabled" class="form-control {{tbEdit}}" ng-options="CheckRecdtl.ITEMCODE as CheckRecdtl.ITEMNAME for CheckRecdtl in produceitem"></select>
+                                                    </td>
+                                                    <td style="word-break: break-all;word-wrap: break-word;"><span class="{{tbCancle}}">{{CheckRecdtl.CHECKRESULTS}}</span><input ng-model="CheckRecdtl.CHECKRESULTS" class="form-control {{tbEdit}}" maxlength="100" /></td>
+                                                    <td style="word-break: break-all;word-wrap: break-word;"><span class="{{tbCancle}}">{{CheckRecdtl.DESCRIPTION }}</span><input ng-model="CheckRecdtl.DESCRIPTION" class="form-control {{tbEdit}}" maxlength="2000" /></td>
+                                                    <!--<td><span class="{{tbCancle}}">{{CheckRecdtl.EVALCOMBO}}</span><input ng-model="CheckRecdtl.EVALCOMBO" class="form-control {{tbEdit}}" /></td>-->
+
+                                                    <td>
+                                                        {{CheckRecdtl.LOWBOUND}}
+                                                        <span> ~</span>
+                                                        {{CheckRecdtl.UPBOUND}}
+                                                        <!--<label ng-model="CheckRecdtl.LOWBOUND" class="form-control {{tbEdit}}" style="width:24%;display:inline-block" maxlength="200" ng-pattern="/^\d+(\.\d+)?$/" />
+                                        ~
+                                        <label ng-model="CheckRecdtl.UPBOUND" class="form-control {{tbEdit}}" style="width:24%;display:inline-block" maxlength="200" ng-pattern="/^\d+(\.\d+)?$/" />-->
+
+                                                    </td>
+
+                                                    <td class="text-left">
+                                                        <button class="btn btn-primary btn-xs" ng-click="DeleteItem(CheckRecdtl)">
+                                                            <span class="glyphicon glyphicon-remove"></span>
+                                                        </button>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                            <tfoot>
+                                                <tr>
+                                                    <td></td>
+                                                    <!--ng-model="m.GROUPCODE" ng-options="m.GROUPCODE as m.GROUPNAME for m in CheckCode"-->
+                                                    <td>
+                                                        <select class="form-control" ng-model="CheckRecdtl.GROUPCODE" ng-change="change(CheckRecdtl.GROUPCODE)" ng-options="CheckRecdtl.GROUPCODE as CheckRecdtl.GROUPNAME for CheckRecdtl in CheckCode">
+                                                            <option value="">---请选择---</option>
+                                                        </select>
+                                                    </td>
+                                                    <td><select ng-model="CheckRecdtl.ITEMCODE" class="form-control" ng-change="changeitem(CheckRecdtl.ITEMCODE)" ng-options="CheckRecdtl.ITEMCODE as CheckRecdtl.ITEMNAME for CheckRecdtl in Itemcode"><option></option></select></td>
+
+                                                    <td><input ng-model="CheckRecdtl.CHECKRESULTS" placeholder="检查结果" class="form-control" maxlength="100" /></td>
+                                                    <td><input ng-model="CheckRecdtl.DESCRIPTION" placeholder="说明" class="form-control" maxlength="200" /></td>
+
+                                                    <td>
+                                                        <div class="col-sm-12">
+                                                            {{CheckRecdtl.LOWBOUND}}
+                                                            <span> ~</span>
+                                                            {{CheckRecdtl.UPBOUND}}
+                                                        </div>
+                                                    </td>
+
+                                                    <td>
+                                                        <button class="btn btn-primary btn-xs" ng-click="SaveItem(CheckRecdtl)">
+                                                            <span class="glyphicon glyphicon-plus"> </span>
+                                                        </button>
+                                                    </td>
+                                                </tr>
+                                            </tfoot>
+
+                                        </table>
+
+                                        <div class="form-group">
+                                            <div class="col-sm-1 col-sm-offset-10">
+                                                <button class="btn btn-primary {{classEditAll}}" ng-show="btn_s" ng-click="EditAll()">编辑全部</button>
+                                            </div>
+
+                                            <div class="col-sm-1">
+                                                <button class="btn btn-primary {{classEdit}}" ng-click="SaveAll(tt)">确定</button>
+                                            </div>
+                                            <!--<div>
+                                <button class="btn btn-warning {{classEdit}}" ng-click="CancleEdit()">取消</button>
+                            </div>-->
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="col-sm-1 pull-right" >
+                                            <button class="btn btn-primary" type="submit" ng-disabled="lifeRecForm.$invalid" ng-click="insertinto()" ng-show="btn_s">保存</button>&nbsp;
+                                        </div>
+                                    </div>
+
+
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+
+                    <div class="box border primary">
+                        <div class="box-title">
+                            <h4>
+                                <i class="fa fa-table"></i>生化检查历史记录
+                            </h4>
+                        </div>
+                        <div class="box-body">
+                            <ui-data-table options="options">
+                                <table class="table table-striped table-bordered table-hover table-handler">
+                                    <thead>
+                                        <tr>
+
+                                            <th><i class="fa fa-user"></i>填写人员</th>
+                                            <th>检查日期</th>
+                                            <!--<th>间隔天数</th>-->
+                                            <th>下次日期</th>
+                                            <th>下次受托者</th>
+                                            <th>病况</th>
+                                            <th>检查结果</th>
+                                            <th><i class="fa fa-bars"></i> 操作</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+
+                                        <tr ng-repeat="referrals in Data.item">
+                                            <td>
+                                                <div class="DivSelect width10">
+                                                    <select class="SelectList width12" disabled="disabled" ng-model="referrals.RECORDBY" ng-options="item.EmpNo as item.EmpName for item in names"></select>
+                                                </div>
+                                            </td>
+                                            <td>{{referrals.CHECKDATE|date:'yyyy-MM-dd'}}</td>
+                                            <!--<td>{{referrals.Interval}}</td>-->
+                                            <td>{{referrals.NEXTCHECKDATE|date:'yyyy-MM-dd'}}</td>
+
+                                            <td>
+                                                <div class="DivSelect width10">
+                                                    <select class="SelectList width12" disabled="disabled" ng-model="referrals.NEXTCHECKBY" ng-options="item.EmpNo as item.EmpName for item in names"></select>
+                                                </div>
+                                            </td>
+                                            <td style="word-break: break-all;word-wrap: break-word;">{{referrals.DISEASEDESC}}</td>
+                                            <td style="word-break: break-all;word-wrap: break-word;">{{referrals.CHECKRESULTS}}</td>
+                                            <td>
+
+                                                <div class="btn-group btn-group-xs" role="group" aria-label="...">
+                                                    <a class="btn btn-info" role="button" ng-click="recordModify(referrals)"><i class="fa fa-pencil"></i>编辑</a>
+                                                    &nbsp;
+                                                    &nbsp;
+                                                    <a class="btn btn-primary" role="button" ng-click="delete(referrals.RECORDID)">删除</a>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+
+                                </table>
+                            </ui-data-table>
+                        </div>
+                        <div id="pager" class="pull-right"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    $(".datepicker").datepicker({
+        dateFormat: "yy-mm-dd",
+        changeMonth: true,
+        changeYear: true
+    });
+</script>

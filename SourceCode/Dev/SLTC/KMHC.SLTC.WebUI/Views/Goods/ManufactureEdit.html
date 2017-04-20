@@ -1,0 +1,61 @@
+<div class="row">
+    <div class="row">
+        <div id="content" class="col-lg-12">
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="page-header">
+                        <ul class="breadcrumb">
+                            <li>
+                                <i class="fa fa-home"></i>
+                                <a href="/">首页</a>
+                            </li>
+                            <li>
+                                <a ui-sref="manufactureList">厂商管理</a>
+                            </li>
+                            <li>厂商信息</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="box border primary">
+                        <div class="box-title">
+                            <h4><i class="fa fa-bars"></i>厂商信息</h4>
+                        </div>
+                        <div class="box-body">
+                            <h3 class="form-title">详细信息</h3>
+                            <form class="form-horizontal" name="form1" ng-submit="submit()" novalidate>
+                                <!--<div class="form-group">
+                                    <label class="col-sm-3 control-label">编号<span class="required">*</span></label>
+                                    <div class="col-sm-6">
+                                        <input name="No" class="form-control" ng-model="Data.manufacture.No" ng-readonly="!isAdd" required />
+                                    </div>
+                                    <div class="col-sm-3 control-label" style="text-align: left;">
+                                        <span class="text-danger " ng-show="form1.code.$dirty && form1.code.$error.required">编号必填</span>
+                                    </div>
+                                </div>-->
+                                <div class="form-group">
+                                    <label class="col-sm-3 control-label">名称<span class="required">*</span></label>
+                                    <div class="col-sm-6">
+                                        <input name="名称" class="form-control" ng-model="Data.manufacture.Name" ng-maxlength="50" required />
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-3 control-label">厂商描述</label>
+                                    <div class="col-sm-6">
+                                        <textarea name="厂商描述" class="form-control" rows="3" ng-model="Data.manufacture.Description" ng-maxlength="150"></textarea>
+                                    </div>
+                                </div>
+                                <div class="form-group center">
+                                    <input type="submit" class="btn btn-info"  value="保存" />
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

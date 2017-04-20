@@ -1,0 +1,221 @@
+<div class="row" >
+    <div id="content" class="col-md-12">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="page-header">
+                    <!-- BREADCRUMBS -->
+                    <ul class="breadcrumb">
+                        <li>
+                            <i class="fa fa-home"></i>
+                            <a href="/">首页</a>
+                        </li>
+                        <li>
+                            <a href="#">社工/行政</a>
+                        </li>
+                        <li>补助申请列表</li>
+                    </ul>
+                    <!-- /BREADCRUMBS -->
+                    <div class="clearfix"></div>
+                    <div class="description">
+                        <h4> 个案-{{personName}}资源连接</h4>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-12">
+                <div class="form-group">
+                    <div class="input-group col-md-10">
+                        <input class="form-control ng-pristine ng-valid ng-touched" id="Keyword" type="text" placeholder="请输入您想要查询的内容" ng-model="filter.keyContent">
+                        <span class="input-group-btn">
+                            <a class="btn btn-primary" ng-click="search()"><i class="icon-search"></i>搜索</a>
+                            <button type="button" ng-click="editOrCreate(complainrec)" class="btn btn-primary">新增</button>
+                            <!--<a class=" btn btn-primary" role="button" data-toggle="modal" data-target="#modalSubsidy">新增</a>-->
+                            <!--<input ng-model="charge.ChargeItem" class="form-control" readonly data-toggle="modal" />-->
+                        </span>
+                    </div>
+                </div>
+                <div class="box border primary">
+                    <div class="box-title">
+                        <h4>申诉-历史记录</h4>
+                        <div class="tools hidden-xs">
+                            <!--<a href="#box-config" data-toggle="modal" class="config">
+                                <i class="fa fa-cog"></i>
+                            </a>-->
+                            <a class="reload" href="javascript:;" ca-reload>
+                                <i class="fa fa-refresh"></i>
+                            </a>
+                            <a href="javascript:;" class="collapse" ca-collapse>
+                                <i class="fa fa-chevron-up"></i>
+                            </a>
+                            <a class="remove" href="javascript:;" ca-remove>
+                                <i class="fa fa-times"></i>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="box-body">
+                        <table id="tbEvalList"   class="table table-striped table-bordered table-hover table-handler">
+                            <thead>
+                                <tr>
+                                    <th>申诉日期</th>
+                                    <th>处理人员</th>
+                                    <th>申诉问题分类</th>
+                                    <th>申诉对象</th>
+                                    <th>申诉问题简述</th>
+                                    <th>处理结果分类</th>
+                                    <th>处理说明</th>
+                                    <th><i class="fa fa-bars"></i> 操作</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr ng-repeat="complainrec in complainrecList">
+
+                                    <td>{{complainrec.RecDate}}</td>
+                                    <td>{{complainrec.CreateBy}}</td>
+                                    <td>{{complainrec.QuestionType}}</td>
+                                    <td>{{complainrec.EmpNo}}</td>
+                                    <td>{{complainrec.QuestionDesc}}</td>
+                                    <td>{{complainrec.Status}}</td>
+                                    <td>{{complainrec.Results}}</td>
+                                    <td>
+                                        <div class="btn-group btn-group-xs" role="group" aria-label="...">
+
+                                            <!--<a ui-sref="AddLifeRecord({id:records.RegNo})" class=" btn btn-primary" role="button" data-toggle="modal">新增</a>-->
+                                            <button class="btn btn-primary" ng-click="editOrCreate(complainrec)">编辑</button>
+
+                                            <a class="btn btn-primary" role="button" data-toggle="modal" ng-click="deleteItem(complainrec)">删除</a>
+                                            <!--<a ui-sref="EvaluateHistory({id:person.id})" class="btn btn-info" role="button" data-toggle="modal">历次资料</a>-->
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+<!--弹出添加窗口-->
+<div class="modal fade" id="modalComplainRec" tabindex="-1" role="dialog" aria-labelledby="modalBedLabel" data-target=".bs-example-modal-lg">
+    <div class="modal-dialog bs-example-modal-lg" role="document" style="width:60%;">
+        <div class="modal-content modal-lg">
+            <div class="modal-header bg-success">
+                <button type="button" id="chargeClose" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            </div>
+            <div class="modal-body">
+                <!--<div ng-include="'/Views/Socialworker/AddComplainRec.html'"></div>-->
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="box border primary">
+                            <div class="box-title">
+                                <h4>新增资源连接</h4>
+                            </div>
+                            <div class="box-body">
+                                <div class="panel panel-default">
+                                    <div class="panel-title">
+
+                                    </div>
+                                    <div class="panel-body">
+                                        <form class="form-horizontal" ng-submit="saveEdit(currentItem)" role="form" novalidate>
+
+                                            <div class="form-group">
+
+                                                <label for="selRecordBy" class="col-sm-1 control-label">处理人员</label>
+                                                <div class="col-sm-2">
+
+                                                    <select class="form-control" id="selRecordBy" ng-model="currentItem.RecordBy" ng-options="Socialworkers.Value as Socialworkers.Name for Socialworkers in Dic.Socialworkers">
+                                                        <option value="">-- 请选择 --</option>
+                                                    </select>
+                                                </div>
+                                                <label for="dtContactDate" class="col-sm-1 control-label">申诉日期</label>
+                                                <div class="col-sm-2">
+                                                    <input type="text" class="form-control datepicker" readonly id="dtRecDate" ng-model="currentItem.RecDate">
+                                                </div>
+                                                <label for="dtFinishDate" class="col-sm-1 control-label"></label>
+                                                <div class="col-sm-5">
+
+                                                </div>
+
+
+                                            </div>
+                                            <div class="form-group">
+
+                                                <label for="selType" class="col-sm-1 control-label">问题分类</label>
+                                                <div class="col-sm-2">
+                                                    <select class="form-control" id="selType" ng-model="currentItem.QuestionType" ng-options="QuestionCategory.Value as QuestionCategory.Name for QuestionCategory in Dic.QuestionCategory">
+                                                        <option value="">-- 请选择 --</option>
+                                                    </select>
+                                                </div>
+                                                <label for="selName" class="col-sm-1 control-label">申诉对象</label>
+                                                <div class="col-sm-5">
+                                                    <select class="form-control" id="selName" ng-model="currentItem.EmpNo" ng-options="Socialworkers.Value as Socialworkers.Name for Socialworkers in Dic.Socialworkers">
+                                                        <option value="">-- 请选择 --</option>
+                                                    </select>
+                                                </div>
+
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="selName" class="col-sm-1 control-label">问题简述</label>
+                                                <div class="col-sm-11">
+                                                    <textarea class="form-control" rows="5" ng-model="currentItem.QuestionDesc"></textarea>
+                                                </div>
+
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="selName" class="col-sm-1 control-label">处理结果</label>
+                                                <div class="col-sm-2">
+                                                    <select class="form-control" id="selName" ng-model="currentItem.Status" ng-options="ProcessRlt.Value as ProcessRlt.Name for ProcessRlt in Dic.ProcessRlt">
+                                                        <option value="">-- 请选择 --</option>
+                                                    </select>
+                                                </div>
+                                                <div class="col-sm-9"></div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="selName" class="col-sm-1 control-label">处理说明</label>
+                                                <div class="col-sm-11">
+                                                    <textarea class="form-control" rows="5" ng-model="currentItem.Results"></textarea>
+                                                </div>
+
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="selName" class="col-sm-1 control-label">备注</label>
+                                                <div class="col-sm-11">
+                                                    <textarea class="form-control" rows="5" ng-model="currentItem.Description"></textarea>
+                                                </div>
+
+                                            </div>
+                                            <div class="form-group">
+
+                                                <div class="col-sm-offset-10">
+                                                    <div class="btn-group btn-group-sm" role="group" aria-label="...">
+                                                        <button class="btn btn-primary" type="submit">保存</button>&nbsp;<button type="button" class="btn btn-default" ng-click="cancelEdit()">取消</button>
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <script>
+    $(".datepicker").datepicker({
+        dateFormat: "yy-mm-dd",
+        changeMonth: true,
+        changeYear: true
+    });
+                </script>
+            </div>
+        </div>
+    </div>
+</div>
+

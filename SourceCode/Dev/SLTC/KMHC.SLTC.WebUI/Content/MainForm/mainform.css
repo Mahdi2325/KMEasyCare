@@ -1,0 +1,406 @@
+.code {
+    /*background: rgba(255, 255, 255,1);*/
+    font-family: Arial;
+    font-style: italic;
+    /*color: #00688B;*/
+    font-size: 30px;
+    border: 0;
+    padding: 2px 3px;
+    letter-spacing: 3px;
+    /*font-weight: bolder;*/
+    float: left;
+    cursor: pointer;
+    width: 150px;
+    height: 35px;
+    line-height: 30px;
+    text-align: center;
+    vertical-align: middle;
+    margin-left: 30px;
+}
+
+a {
+    text-decoration: none;
+    font-size: 12px;
+    color: #288bc4;
+}
+
+    a:hover {
+        text-decoration: underline;
+    }
+
+.mainbody {
+    background-color: #1970d6;
+}
+
+.mainBox {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 1200px;
+    height: 630px;
+    color: #ffffff;
+}
+
+.mainlabel {
+    font-family: 黑体,隶书;
+    font-size: 14pt;
+    color: #ffffff;
+}
+
+.loginError {
+    color: red;
+}
+
+.mainBtn11 {
+    background-color: #3d9bea;
+    width: 200px;
+    height: 200px;
+    margin: 3px 3px;
+}
+
+.mainBtn12 {
+    background-color: #19aba6;
+    width: 406px;
+    height: 200px;
+    margin: 3px 3px;
+}
+
+.mainBtn13 {
+    background-color: #21a0db;
+    width: 200px;
+    height: 200px;
+    margin: 3px 3px;
+}
+
+.mainBtn14 {
+    background-color: #e59a07;
+    width: 200px;
+    height: 200px;
+    margin: 3px 3px;
+}
+
+.mainBtn21 {
+    background-color: #e59a07;
+    width: 406px;
+    height: 200px;
+    margin: 3px 3px;
+}
+
+.mainBtn22 {
+    background-color: #1695a3;
+    width: 200px;
+    height: 200px;
+    margin: 3px 3px;
+}
+
+.mainBtn23 {
+    background-color: #18a64a;
+    width: 200px;
+    height: 200px;
+    margin: 3px 3px;
+}
+
+.mainBtn24 {
+    background-color: #17a18b;
+    width: 200px;
+    height: 200px;
+    margin: 3px 3px;
+}
+
+.mainBtn31 {
+    background-color: #28ae9f;
+    width: 200px;
+    height: 200px;
+    margin: 3px 3px;
+}
+
+.mainBtn32 {
+    background-color: #47a833;
+    width: 200px;
+    height: 200px;
+    margin: 3px 3px;
+}
+
+.mainBtn33 {
+    background-color: #2fa39f;
+    width: 200px;
+    height: 200px;
+    margin: 3px 3px;
+}
+
+.mainBtn34 {
+    background-color: #e59a07;
+    width: 200px;
+    height: 200px;
+    margin: 3px 3px;
+}
+
+.mainBtn35 {
+    background-color: #13a546;
+    width: 200px;
+    height: 200px;
+    margin: 3px 3px;
+}
+
+.versions {
+    /*background-color: #999;*/
+    height: 100px;
+    width: 200px;
+    position: absolute;
+    right: 0px;
+    bottom: 0px;
+}
+
+.loginbody {
+    background: url(../Images/login/bg.jpg);
+    background-size: cover;
+}
+
+.kmlogo {
+    background: url(../Images/login/logo.png);
+    width: 437px;
+    height: 71px;
+    position: absolute;
+    left: 90px;
+    top: 40px;
+}
+
+
+.loginMain {
+    width: 450px;
+    height: 300px;
+     /*width: 360px;
+    height: 300px;*/
+    background: #fff;
+    box-shadow: 0 0 20px 2px #AAAAAA;
+    position: absolute;
+    right: 15%;
+    top: 35%;
+    padding: 60px 50px;
+}
+
+    .loginMain > div {
+        height: 50px;
+    }
+
+        .loginMain > div input {
+            border: 1px solid #7E7E7E;
+            height: 36px;
+            border-radius: 4px;
+            box-shadow: 0 0 5px 1px #AAAAAA;
+            width: 100%;
+        }
+
+            .loginMain > div input.userName {
+                padding: 0 6px 0 40px;
+            }
+
+        .loginMain > div .iuserName {
+            background: url(../Images/login/username.png) no-repeat 10px 8px !important;
+            width: 30px;
+            height: 36px;
+            position: absolute;
+        }
+
+        .loginMain > div input.pwd {
+            padding: 0 6px 0 40px;
+            background: url(../Images/login/password.png) no-repeat 10px 8px #fff;
+        }
+
+        .loginMain > div .ipwd {
+            background: url(../Images/login/password.png) no-repeat 10px 8px !important;
+            width: 30px;
+            height: 36px;
+            position: absolute;
+        }
+
+.sMain {
+    position: relative;
+}
+
+.loginMain > div .iOrg {
+    background: url(../Images/login/org.png) no-repeat 10px 8px !important;
+    width: 30px;
+    height: 36px;
+    position: absolute;
+    left: 0px;
+    top: 0px;
+    z-index: 1;
+}
+
+
+.loginMain > div input.btnLogin {
+    background: #5E87B1;
+    color: #fff;
+    font-size: 16px;
+}
+
+.loginMain > div.dfgt {
+    text-align: right;
+}
+
+    .loginMain > div.dfgt a {
+        text-decoration: underline;
+    }
+
+.loginMain .errorMsg {
+    color: red;
+    position: absolute;
+    width: 100%;
+    top: 0px;
+    left: 0px;
+    background: #F1F3F2;
+    line-height: 40px;
+    height: 40px;
+    padding: 0 20px;
+    box-sizing: border-box;
+    display: none;
+}
+
+.footer {
+    width: 100%;
+    position: fixed;
+    bottom: 0px;
+    text-align: center;
+    padding: 30px;
+    line-height: 26px;
+}
+
+    .footer span {
+        margin: 0 4px;
+    }
+
+@media screen and (max-width: 1380px) {
+    .loginbody {
+        width: 1200px;
+        overflow: auto;
+    }
+
+    .loginMain {
+        width: 360px;
+        height: 300px;
+        background: #fff;
+        box-shadow: 0 0 20px 2px #AAAAAA;
+        position: absolute;
+        left:700px;
+        top: 35%;
+        padding: 60px 50px;
+    }
+}
+
+
+
+
+input:-webkit-autofill {
+    -webkit-box-shadow: 0 0 0 1000px white inset !important;
+}
+
+
+/*外面边框的样式*/
+.selectpick_div {
+    background-color: #FFFFFF;
+    font-size: 16px;
+    font-weight: 500;
+    border-radius: 5px;
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    border: 1px solid #7E7E7E;
+    line-height: 30px;
+    text-align: center;
+    padding-left: 5px;
+    overflow: hidden;
+    cursor: pointer;
+    overflow: hidden;
+    z-index: 9060;
+}
+
+.selectpick_icon {
+    float: right;
+    background: url(../images/login/drop.png) no-repeat center;
+    margin-right: 5px;
+    height: 30px;
+    width: 19px;
+    cursor: pointer;
+}
+
+.selectpick_div:hover {
+    background-color: #F5F5F5;
+    border: 1px solid #7E7E7E;
+}
+
+.selectpick_div:active {
+    -moz-box-shadow: 0 0 3px #0099CC;
+    -webkit-box-shadow: 0 0 3px #0099CC;
+    box-shadow: 0 0 3px #0099CC;
+    border: solid 1px #0099CC;
+}
+/*下拉框的主体*/
+.selectpick_options {
+    width: 100%;
+    border: solid 1px #CFCFCF;
+    border-bottom: none;
+    position: absolute;
+    z-index: 9060;
+    font-size: 13.5px;
+    text-align: center;
+    display: none;
+}
+
+    .selectpick_options ul {
+        list-style: none;
+        height: auto;
+        margin: 0px;
+        padding: 0px;
+        z-index: 9060;
+        font-size: 13.5px;
+    }
+
+        .selectpick_options ul li {
+            border-bottom: solid 1px #CFCFCF;
+            padding-left: 5px;
+            display: block;
+            font-size: 13.5px;
+            z-index: 9060;
+            background-color: #fff;
+            height: 28px;
+            line-height: 28px;
+        }
+
+    .selectpick_options li:hover {
+        background-color: #E5E5E5;
+        color: #000;
+    }
+
+    .selectpick_options ul li.selectpick_options_selected {
+        background-color: #E5E5E5;
+        color: #000;
+        z-index: 9060;
+    }
+/*设置为disabled的时候*/
+.selectpick_no_select {
+    cursor: default;
+    color: #9a9898;
+    background-color: #F5F5F5;
+}
+/*设置下拉框的不透明度*/
+.select_hide {
+    display: none;
+    -moz-opacity: 0;
+    opacity: 0;
+    -webkit-opacity: 0;
+    filter: alpha(opacity =0);
+}
+/*其他*/
+.selectpick_options li {
+    cursor: pointer;
+}
+
+    .selectpick_options li label {
+        cursor: pointer;
+    }
+
+.selectpick_div_box {
+    position: relative;
+    width: 100%;
+}

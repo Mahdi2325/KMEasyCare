@@ -1,0 +1,426 @@
+<div class="row">
+    <div id="content" class="col-lg-12">
+        <!--标题-->
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="page-header">
+                    <ul class="breadcrumb">
+                        <li>
+                            <i class="fa fa-home"></i>
+                            <a href="/">首页</a>
+                        </li>
+                        <li>
+                            医师评估
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <!--标题-->
+
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="col-sm-2">
+                    <div class="box border primary">
+                        <div class="box-title">
+                            <h4>
+                                <i class="fa fa-bars"></i>住民信息
+                            </h4>
+                        </div>
+                        <div class="box-body">
+                            <resident-card feeno={{FeeNo}} callback="residentSelected(resident)" />
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-10">
+                    <div class="box border primary">
+                        <div class="box-title">
+                            <h4>
+                                <i class="fa fa-bars"></i>医师评估单
+                            </h4>
+                        </div>
+
+                        <div class="box-body">
+                            <form class="form-horizontal" role="form" name="PhysicianAssForm" novalidate>
+                                <div class="form-group mt10">
+                                    <label class="col-sm-1 control-label">医师姓名</label>
+                                    <div class="col-sm-2">
+                                        <!--<select class="form-control" id="selDocName" ng-model="currentItem.DocName" select-code="F00.062"></select>-->
+                                        <input-staff id="txtDocName" callback="staffSelected(item)" value="{{currentItem.DocName}}" />
+                                    </div>
+
+                                    <label class="col-sm-1 control-label">评估日期<span class="required">*</span></label>
+                                    <div class="col-sm-2">
+                                        <input id="txtEvalDate" class="form-control datepicker" name="评估日期" type="text" ng-model="currentItem.EvalDate" required ca-date-picker>
+                                    </div>
+                                </div>
+
+                                <fieldset>
+
+
+                                    <legend>健康行为</legend>
+                                    <div class="well">
+                                        <div class="form-group">
+                                            <label class="col-sm-1 control-label">吸烟史</label>
+                                            <div class="col-sm-5">
+                                                <input id="txt_SmokingHistory" name="吸烟史" type="text" ng-model="currentItem.SmokingHistory" class="form-control" ng-maxlength="30" />
+                                            </div>
+
+                                            <label class="col-sm-1 control-label">饮酒</label>
+                                            <div class="col-sm-5">
+                                                <input id="txt_DrinkWine" name="饮酒" type="text" ng-model="currentItem.DrinkWine" class="form-control" ng-maxlength="30" />
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-sm-1 control-label">嚼食槟榔</label>
+                                            <div class="col-sm-2">
+                                                <select class="form-control" id="selChewingBetelnut" name="嚼食槟榔" ng-model="currentItem.ChewingBetelnut" select-code="F00.056"></select>
+                                            </div>
+
+                                            <label class="col-sm-1 control-label">服食药物</label>
+                                            <div class="col-sm-2">
+                                                <select class="form-control" id="selDrugflag" name="服食药物" ng-model="currentItem.Drugflag" select-code="F00.056"></select>
+                                            </div>
+                                            <label class="col-sm-1 control-label">规律运动</label>
+                                            <div class="col-sm-2">
+                                                <select class="form-control" id="selRegularExercise" name="规律运动" ng-model="currentItem.RegularExercise" select-code="F00.056"></select>
+                                            </div>
+
+                                            <label class="col-sm-1 control-label">其它</label>
+                                            <div class="col-sm-2">
+                                                <input id="txt_OtherDesc" name="其它" type="text" ng-model="currentItem.OtherDesc" class="form-control" ng-maxlength="30" />
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-sm-1 control-label">疾病史</label>
+                                            <div class="col-sm-11">
+                                                <textarea rows="3" id="txt_DiseaseDesc" name="疾病史" type="text" ng-model="currentItem.DiseaseDesc" class="form-control" ng-maxlength="100" />
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-sm-1 control-label">既往史</label>
+                                            <div class="col-sm-11">
+                                                <textarea rows="3" id="txt_MedicalHistory" name="既往史" type="text" ng-model="currentItem.MedicalHistory" class="form-control" ng-maxlength="30" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                </fieldset>
+                                <div class="box-title" style="height: 37px;border-radius: 3px;">
+
+                                </div>
+                                <div class="">
+                                    <div class="tabbable header-tabs">
+                                        <ul class="nav nav-tabs">
+                                            <li class="left"><a href="#PhysicianAssWithin48" data-toggle="tab" class="left"><i class="fa fa-check-circle-o"></i><span class="hidden-inline-mobile">48小时内医师评估单</span></a></li>
+                                            <li class="active"><a href="#pmHealth" data-toggle="tab" class="left"><i class="fa  fa-check-circle-o"></i><span class="hidden-inline-mobile">一般身心健康状况</span></a></li>
+                                        </ul>
+                                        <div class="tab-content" >
+                                            <div id="pmHealth" class="tab-pane active">
+                                                <div class="well">
+                                                    <div class="form-group">
+                                                        <label class="col-sm-1 control-label">身高</label>
+                                                        <div class="col-sm-2">
+                                                            <div class="input-group">
+                                                                <input id="txt_Height" name="身高" type="text" ng-model="currentItem.Height" class="form-control" ng-maxlength="4" />
+                                                                <div class="input-group-addon">cm</div>
+                                                            </div>
+                                                        </div>
+                                                        <label class="col-sm-1 control-label">体重</label>
+                                                        <div class="col-sm-2">
+                                                            <div class="input-group">
+                                                                <input id="txt_Weight" name="体重" type="text" ng-model="currentItem.Weight" class="form-control" ng-maxlength="5" />
+                                                                <div class="input-group-addon">KG</div>
+                                                            </div>
+                                                        </div>
+                                                        <label class="col-sm-1 control-label">腰围</label>
+                                                        <div class="col-sm-2">
+                                                            <div class="input-group">
+                                                                <input id="txt_Waist" name="腰围" type="text" ng-model="currentItem.Waist" class="form-control" ng-maxlength="4" />
+                                                                <div class="input-group-addon">cm</div>
+                                                            </div>
+                                                        </div>
+                                                        <label class="col-sm-1 control-label">臀围</label>
+                                                        <div class="col-sm-2">
+                                                            <div class="input-group">
+                                                                <input id="txt_Hipline" name="臀围" type="text" ng-model="currentItem.Hipline" class="form-control" ng-maxlength="4" />
+                                                                <div class="input-group-addon">cm</div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label class="col-sm-1 control-label">中臂环围</label>
+                                                        <div class="col-sm-2">
+                                                            <div class="input-group">
+                                                                <input id="txt_ArmSaRound" name="中臂环围" type="text" ng-model="currentItem.ArmSaRound" class="form-control" ng-maxlength="4" />
+                                                                <div class="input-group-addon">cm</div>
+                                                            </div>
+                                                        </div>
+                                                        <label class="col-sm-1 control-label">生命体征</label>
+                                                        <div class="col-sm-2">
+                                                            <select class="form-control" id="selVitalSigns" name="生命体征" ng-model="currentItem.VitalSigns" select-code="F00.065"></select>
+                                                        </div>
+                                                        <label class="col-sm-1 control-label">意识状态</label>
+                                                        <div class="col-sm-5">
+                                                            <input id="txt_Consciousness" name="意识状态" type="text" ng-model="currentItem.Consciousness" class="form-control" ng-maxlength="50" />
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="form-group">
+                                                        <label class="col-sm-1 control-label">情绪</label>
+                                                        <div class="col-sm-2">
+                                                            <select class="form-control" id="selEmotion" name="情绪" ng-model="currentItem.Emotion" select-code="F00.057"></select>
+                                                        </div>
+
+                                                        <label class="col-sm-1 control-label">沟通能力</label>
+                                                        <div class="col-sm-2">
+                                                            <input id="txt_Communication" name="沟通能力" type="text" ng-model="currentItem.Communication" class="form-control" ng-maxlength="50" />
+                                                        </div>
+
+                                                        <label class="col-sm-1 control-label">眼睛视力</label>
+                                                        <div class="col-sm-2">
+                                                            <input id="txt_Eyesight" name="眼睛视力" type="text" ng-model="currentItem.Eyesight" class="form-control" ng-maxlength="20" />
+                                                        </div>
+
+                                                        <label class="col-sm-1 control-label">耳朵听力</label>
+                                                        <div class="col-sm-2">
+                                                            <input id="txt_Hearing" name="耳朵听力" type="text" ng-model="currentItem.Hearing" class="form-control" ng-maxlength="20" />
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="form-group">
+                                                        <label class="col-sm-1 control-label">触觉</label>
+                                                        <div class="col-sm-2">
+                                                            <input id="txt_Tactilesensation" name="触觉" type="text" ng-model="currentItem.Tactilesensation" class="form-control" ng-maxlength="20" />
+                                                        </div>
+                                                        <label class="col-sm-1 control-label">疼痛状态</label>
+                                                        <div class="col-sm-2">
+                                                            <input id="txt_PainState" name="疼痛状态" type="text" ng-model="currentItem.PainState" class="form-control" ng-maxlength="20" />
+                                                        </div>
+
+                                                        <label class="col-sm-1 control-label">疼痛类型</label>
+                                                        <div class="col-sm-2">
+                                                            <select class="form-control" id="selPainType" name="疼痛类型" ng-model="currentItem.PainType" select-code="F00.058"></select>
+                                                        </div>
+
+                                                        <label class="col-sm-1 control-label">疼痛性质</label>
+                                                        <div class="col-sm-2">
+                                                            <select class="form-control" id="selPainNature" name="疼痛性质" ng-model="currentItem.PainNature" select-code="F00.059"></select>
+                                                        </div>
+                                                    </div>
+
+
+                                                    <div class="form-group">
+                                                        <label class="col-sm-1 control-label">饮食状态</label>
+                                                        <div class="col-sm-2">
+                                                            <input id="txt_DietState" name="饮食状态" type="text" ng-model="currentItem.DietState" class="form-control" ng-maxlength="20" />
+                                                        </div>
+
+                                                        <label class="col-sm-1 control-label">饮食方式</label>
+                                                        <div class="col-sm-2">
+                                                            <input id="txt_DietWay" name="饮食方式" type="text" ng-model="currentItem.DietWay" class="form-control" ng-maxlength="20" />
+                                                        </div>
+
+                                                        <label class="col-sm-1 control-label">饮食型态</label>
+                                                        <div class="col-sm-2">
+                                                            <input id="txt_DietPaTtern" name="txt_DietPaTtern" type="text" ng-model="currentItem.DietPaTtern" class="form-control" ng-maxlength="20" />
+                                                        </div>
+                                                        <label class="col-sm-1 control-label">药物使用状态</label>
+                                                        <div class="col-sm-2">
+                                                            <input id="txt_DrugUseState" name="txt_DrugUseState" type="text" ng-model="currentItem.DrugUseState" class="form-control" ng-maxlength="20" />
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label class="col-sm-1 control-label">活动型态</label>
+                                                        <div class="col-sm-2">
+                                                            <input id="txt_Movement" name="txt_Movement" type="text" ng-model="currentItem.Movement" class="form-control" ng-maxlength="20" />
+                                                        </div>
+
+                                                        <label class="col-sm-1 control-label">睡眠型态</label>
+                                                        <div class="col-sm-2">
+                                                            <select class="form-control" id="selSleep" ng-model="currentItem.Sleep" select-code="F00.060"></select>
+                                                        </div>
+
+                                                        <label class="col-sm-1 control-label">是否使用安眠药</label>
+                                                        <div class="col-sm-2">
+                                                            <select class="form-control" id="selSleepPills" ng-model="currentItem.SleepPills">
+                                                                <option value="">--请选择--</option>
+                                                                <option value="1">有</option>
+                                                                <option value="0">无</option>
+                                                            </select>
+                                                            <!--<input id="txt_SleepPills" name="txt_SleepPills" type="text" ng-model="currentItem.SleepPills" class="form-control"/>-->
+                                                        </div>
+                                                        <label class="col-sm-1 control-label">有无伤口</label>
+                                                        <div class="col-sm-2">
+                                                            <select class="form-control" id="selWoundFlag" ng-model="currentItem.WoundFlag">
+                                                                <option value="">--请选择--</option>
+                                                                <option value="1">有</option>
+                                                                <option value="0">无</option>
+                                                            </select>
+                                                            <!--<input id="txt_WoundFlag" name="txt_WoundFlag" type="text" ng-model="currentItem.WoundFlag" class="form-control"/>-->
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label class="col-sm-1 control-label">伤口愈合状态</label>
+                                                        <div class="col-sm-2">
+                                                            <input id="txt_WoundHeal" name="txt_WoundHeal" type="text" ng-model="currentItem.WoundHeal" class="form-control" ng-maxlength="20" />
+                                                        </div>
+                                                        <label class="col-sm-1 control-label">伤口部位</label>
+                                                        <div class="col-sm-2">
+                                                            <input id="txt_WoundPart" name="txt_WoundPart" type="text" ng-model="currentItem.WoundPart" class="form-control" ng-maxlength="20" />
+                                                        </div>
+                                                        <label class="col-sm-1 control-label">皮肤表面光滑度</label>
+                                                        <div class="col-sm-2">
+                                                            <input id="txt_SkinDesc" name="txt_SkinDesc" type="text" ng-model="currentItem.SkinDesc" class="form-control" ng-maxlength="20" />
+                                                        </div>
+                                                        <label class="col-sm-1 control-label">伤口大小</label>
+                                                        <div class="col-sm-2">
+                                                            <input id="txt_Woundsize" name="txt_Woundsize" type="text" ng-model="currentItem.Woundsize" class="form-control" ng-maxlength="20" />
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+
+                                            </div>
+                                            <div id="PhysicianAssWithin48" class="tab-pane">
+                                                <div class="well">
+                                                    <div class="form-group">
+                                                        <label class="col-sm-2 control-label">口腔假牙装置</label>
+                                                        <div class="col-sm-4">
+                                                            <input id="txt_FalseTeeth" name="txt_FalseTeeth" type="text" ng-model="currentItem.FalseTeeth" class="form-control" ng-maxlength="20" />
+                                                        </div>
+
+                                                        <label class="col-sm-2 control-label">颈部淋巴结</label>
+                                                        <div class="col-sm-4">
+                                                            <input id="txt_Lymphnode" name="txt_Lymphnode" type="text" ng-model="currentItem.Lymphnode" class="form-control" ng-maxlength="20" />
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="form-group">
+                                                        <label class="col-sm-2 control-label">乳房(硬物或硬块)</label>
+                                                        <div class="col-sm-4">
+                                                            <select class="form-control" id="selBreast" ng-model="currentItem.Breast" select-code="F00.056"></select>
+                                                        </div>
+                                                    </div>
+
+
+                                                    <div class="form-group">
+                                                        <label class="col-sm-2 control-label">胸腔(罗音或嘈音)</label>
+                                                        <div class="col-sm-4">
+                                                            <select class="form-control" id="selPleural" ng-model="currentItem.Pleural" select-code="F00.056"></select>
+
+                                                        </div>
+
+                                                        <label class="col-sm-2 control-label">胸腔是否均匀对称</label>
+                                                        <div class="col-sm-4">
+                                                            <select class="form-control" id="selSymmetricalChest" ng-model="currentItem.SymmetricalChest" select-code="F00.056"></select>
+
+                                                        </div>
+                                                    </div>
+
+
+                                                    <div class="form-group">
+                                                        <label class="col-sm-2 control-label">心脏</label>
+                                                        <div class="col-sm-10">
+                                                            <select class="form-control" id="selHeart" ng-model="currentItem.Heart" select-code="F00.056"></select>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="form-group">
+                                                        <label class="col-sm-2 control-label">心脏_心杂音及S3、S4等</label>
+                                                        <div class="col-sm-4">
+                                                            <select class="form-control" id="selHeartNoise" ng-model="currentItem.HeartNoise" select-code="F00.056"></select>
+                                                        </div>
+                                                        <label class="col-sm-2 control-label">心脏_心率不整</label>
+                                                        <div class="col-sm-4">
+                                                            <select class="form-control" id="selHeartArrhythmia" ng-model="currentItem.HeartArrhythmia" select-code="F00.056"></select>
+                                                        </div>
+
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label class="col-sm-2 control-label">腹腔(腹部硬块或异物、疼痛、其他等)</label>
+                                                        <div class="col-sm-4">
+                                                            <select class="form-control" id="selAbdomen" name=" 腹腔(腹部硬块或异物、疼痛、其他等)" ng-model="currentItem.Abdomen" select-code="F00.056"></select>
+                                                        </div>
+                                                        <label class="col-sm-2 control-label">肢体</label>
+                                                        <div class="col-sm-4">
+                                                            <select class="form-control" id="selLimbs" name=" 肢体" ng-model="currentItem.Limbs" select-code="F00.061"></select>
+                                                        </div>
+
+                                                    </div>
+
+                                                    <div class="form-group">
+                                                        <label class="col-sm-2 control-label">神经系统</label>
+                                                        <div class="col-sm-10">
+                                                            <textarea rows="2" id="txt_Nervoussystem" name=" 神经系统" type="text" ng-model="currentItem.Nervoussystem" class="form-control" ng-maxlength="50"></textarea>
+                                                        </div>
+
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label class="col-sm-2 control-label">重要之实验数据</label>
+                                                        <div class="col-sm-10">
+                                                            <textarea rows="3" id="txt_Checkdata" name=" 重要之实验数据" type="text" ng-model="currentItem.Checkdata" class="form-control" ng-maxlength="100"></textarea>
+                                                        </div>
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-sm-offset-1 col-sm-11">
+                                        <button class="btn btn-primary" type="submit" ng-show="buttonShow" ng-click="savePhysicianAssEdit(currentItem)">保存</button>
+                                        <button class="btn btn-primary" ng-show="buttonShow" ng-click="currentItem = {}">重置</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                    <div class="box border primary">
+                        <div class="box-title">
+                            <h4><i class="fa fa-table"></i>医师评估单列表</h4>
+                        </div>
+                        <div class="box-body">
+                            <ui-data-table options="options">
+                                <table class="table table-striped table-bordered table-hover table-handler">
+                                    <thead>
+                                        <tr>
+                                            <th>#</th>
+                                            <th>评估日期</th>
+                                            <th>姓名</th>
+                                            <th>吸烟史</th>
+                                            <th>饮酒</th>
+                                            <th>疾病史</th>
+                                            <th><i class="fa fa-bars"></i> 操作</th>
+                                        </tr>
+                                    </thead>
+
+                                    <tbody>
+                                        <tr ng-repeat="item in Data.docRevList">
+                                            <td>{{$index + 1}}</td>
+                                            <td>{{item.EvalDate | dateFormat}}</td>
+                                            <td>{{item.DocActName}}</td>
+                                            <td>{{item.SmokingHistory}}</td>
+                                            <td>{{item.DrinkWine}}</td>
+                                            <td>{{item.DiseaseDesc}}</td>
+                                            <td>
+                                                <div class="btn-group btn-group-xs" role="group" aria-label="...">
+                                                    <a class="btn btn-info" role="button" ng-click="rowSelect(item)"><i class="fa fa-pencil"></i>编辑</a>
+                                                    <a class="btn btn-primary" role="button" ng-click="deleteItem(item)"><i class="fa fa-times"></i>删除</a>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+
+                                </table>
+                            </ui-data-table>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+</div>

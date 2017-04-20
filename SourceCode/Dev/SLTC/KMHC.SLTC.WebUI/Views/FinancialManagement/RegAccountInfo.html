@@ -1,0 +1,75 @@
+﻿<div class="row">
+    <div class="col-sm-12">
+        <div class="box border primary">
+            <div class="box-title">
+                <h4>
+                    <i class="fa fa-bars"></i>住民账户
+                </h4>
+            </div>
+            <div class="well">
+                <form class="form-horizontal" role="form" name="prefrom" novalidate>
+                    <div class="form-group">
+                        <label for="txtReceivable" class="col-sm-1 control-label">住民姓名</label>
+                        <div class="col-sm-2">
+                            <input type="text" class="form-control" name="住民姓名" ng-model="ResidentBalance.Name" ng-disabled="true" />
+                        </div>
+                        <label for="txtReceivable" class="col-sm-1 control-label">账户状态</label>
+                        <div class="col-sm-2">
+                            <input type="text" class="form-control" name="账户状态" ng-model="BStatus" ng-disabled="true" />
+                        </div>
+                        <label for="txtReceivable" class="col-sm-1 control-label">享受护理险否</label>
+                        <div class="col-sm-2">
+                            <input type="text" class="form-control" name="享受护理险否" ng-model="BIsHaveNCI" ng-disabled="true" />
+                        </div>
+                        <label for="txtReceivable" class="col-sm-1 control-label">预收款账户余额</label>
+                        <div class="col-sm-2">
+                            <input type="text" class="form-control" name="预收款账户余额" ng-model="ResidentBalance.Blance" ng-disabled="true" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="txtReceivable" class="col-sm-1 control-label">累计额度</label>
+                        <div class="col-sm-2">
+                            <input type="text" class="form-control" name="累计额度" ng-model="ResidentBalance.TotalPayment" ng-disabled="true" />
+                        </div>
+                        <label for="txtReceivable" class="col-sm-1 control-label">累计费用</label>
+                        <div class="col-sm-2">
+                            <input type="text" class="form-control" name="累计费用" ng-model="ResidentBalance.TotalCost" ng-disabled="true" />
+                        </div>
+                        <label for="txtReceivable" class="col-sm-1 control-label">累计报销额度</label>
+                        <div class="col-sm-2">
+                            <input type="text" class="form-control" name="累计报销额度" ng-model="ResidentBalance.TotalNCIPay" ng-disabled="true" />
+                        </div>
+                        <label for="txtReceivable" class="col-sm-1 control-label">护理险超支金额</label>
+                        <div class="col-sm-2">
+                            <input type="text" class="form-control" name="护理险超支金额" ng-model="ResidentBalance.TotalNCIOverspend" ng-disabled="true" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="txtReceivable" class="col-sm-1 control-label">报销标准</label>
+                        <div class="col-sm-2">
+                            <input type="text" class="form-control" name="报销标准" ng-model="ResidentBalance.NCIPayLevel" ng-disabled="true" />
+                        </div>
+                        <label for="txtReceivable" class="col-sm-1 control-label">报销比例</label>
+                        <div class="col-sm-2">
+                            <input type="text" class="form-control" name="报销比例" ng-model="ResidentBalance.NCIPayScale" ng-disabled="true" />
+                        </div>
+                        <label for="txtReceivable" class="col-sm-1 control-label">生效时间</label>
+                        <div class="col-sm-2">
+                            <input type="text" class="form-control" name="生效时间" ng-model="ResidentBalance.CertStartTime" ng-disabled="true" ca-date-time-picker />
+                        </div>
+                        <label for="txtReceivable" class="col-sm-1 control-label">失效时间</label>
+                        <div class="col-sm-2">
+                            <input type="text" class="form-control" name="失效时间" ng-model="ResidentBalance.CertExpiredTime" ng-disabled="true" ca-date-time-picker />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="txtReceivable" class="col-sm-1 control-label">资格证书号</label>
+                        <div class="col-sm-2">
+                            <input type="text" class="form-control" name="资格证书号" ng-model="ResidentBalance.CertNo" ng-disabled="true" />
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

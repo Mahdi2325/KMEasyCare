@@ -1,0 +1,111 @@
+<div class="row">
+    <div id="content" class="col-lg-12" ng-controller='IpdregoutCtrl'>
+
+        <!--标题-->
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="page-header">
+                    <ul class="breadcrumb">
+                        <li>
+                            <i class="fa fa-home"></i>
+                            <a href="/">首页</a>
+                        </li>
+                        <li>
+                            结案作业
+                        </li>
+                    </ul>
+                    <div class="clearfix"></div>
+                    
+                </div>
+            </div>
+        </div>
+        <!--标题-->
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="col-sm-2">
+                    <div class="box border primary">
+                        <div class="box-title">
+                            <h4>
+                                <i class="fa fa-bars"></i>住民信息
+                            </h4>
+                        </div>
+                        <div class="box-body">
+                            <resident-card feeno={{FeeNo}} callback ="residentSelected(resident)" />
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-10">
+                    <div class="box border primary">
+                        <div class="box-title">
+                            <h4>
+                                <i class="fa fa-bars"></i>结案作业
+                            </h4>
+                        </div>
+                        <div class="box-body">
+                            <form class="form-horizontal" role="form" name="IpdregoutForm" ng-submit="checkIpdregout(currentItem)">
+                                <div class="well">
+                                    <div class="form-group">
+                                        <label class="control-label col-md-1">入住日期</label>
+                                        <div class="col-md-2">
+                                            <!--<input class="form-control datepicker" type="text" ng-model="currentItem.InDate" ca-date-picker readonly="readonly">-->
+                                            <input type="text" class="form-control" ng-model="InDate" readonly="readonly" />
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class=" col-sm-1 checkbox-inline"><input type="checkbox" class="uniform" ng-click="selCloseDate(currentItem.CloseFlag)" ng-model="currentItem.CloseFlag" required />已结案<span class="required">*</span></label>
+                                        <div class="col-md-3" style="text-align:left;color:red">
+                                            <label class="control-label">请务必确认结案状态 选择结案日期！</label>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="control-label col-md-1">结案日期<span class="required">*</span></label>
+                                        <div class="col-md-2">
+                                            <input class="form-control datepicker" type="text" ng-model="currentItem.CloseDate" start="setdate" ng-change="GetTotalDay()" ca-date-picker required>
+                                        </div>
+                                        <label class="control-label col-md-1">结案原因</label>
+                                        <div class="col-md-2">
+                                            <select class="form-control" id="selectCloseReason" ng-model="currentItem.CloseReason" select-code="A00.029"></select>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class=" col-sm-2 checkbox-inline"><input type="checkbox" class="uniform" ng-click="selDeadDate(currentItem.DeadFlag)" ng-model="currentItem.DeadFlag" />已亡故</label>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-sm-1 control-label">亡故日期</label>
+                                        <div class="col-sm-2">
+                                            <input class="form-control datepicker" type="text" ng-model="currentItem.DeadDate" ca-date-picker>
+                                        </div>
+                                        <label class="col-sm-1 control-label">亡故原因</label>
+                                        <div class="col-sm-2">
+                                            <select class="form-control" id="selectDeadReason" ng-model="currentItem.DeadReason">
+                                                <option value="001">因病死亡</option>
+                                                <option value="002">意外死亡</option>
+                                                <option value="003">不明原因</option>
+                                            </select>
+                                            <!--<input id="txt_DeadReason" name="txt_DeadReason" type="text" ng-model="currentItem.DeadReason" class="form-control" />-->
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-sm-1 control-label">入住天数</label>
+                                        <div class="col-sm-2">
+                                            <div class="input-group">
+                                                <input id="txt_TotalDay" name="txt_TotalDay" type="number" ng-model="currentItem.TotalDay" class="form-control" readonly="readonly" />
+                                                <div class="input-group-addon">天</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="center">
+                                        <button class="btn btn-info btn-lg" ng-show="buttonShow" ng-disabled="IpdregoutForm.$invalid" type="submit">保存</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

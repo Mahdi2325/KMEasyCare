@@ -1,0 +1,44 @@
+/*
+Navicat MySQL Data Transfer
+
+Source Server         : sltc_dc01
+Source Server Version : 50630
+Source Host           : 192.168.1.106:3306
+Source Database       : KMECare
+
+Target Server Type    : MYSQL
+Target Server Version : 50630
+File Encoding         : 65001
+
+Date: 2017-03-29 10:27:02
+*/
+
+SET FOREIGN_KEY_CHECKS=0;
+
+-- ----------------------------
+-- Table structure for `LTC_NCIFINANCIALMONTH`
+-- ----------------------------
+DROP TABLE IF EXISTS `LTC_NCIFINANCIALMONTH`;
+CREATE TABLE `LTC_NCIFINANCIALMONTH` (
+  `MONTH` varchar(7) COLLATE utf8_bin NOT NULL COMMENT '结算月',
+  `STARTDATE` varchar(8) COLLATE utf8_bin NOT NULL,
+  `ENDDATE` varchar(8) COLLATE utf8_bin NOT NULL,
+  `GOVID` varchar(50) COLLATE utf8_bin NOT NULL COMMENT '政府代码',
+  PRIMARY KEY (`GOVID`,`MONTH`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+
+-- ----------------------------
+-- Records of LTC_NCIFINANCIALMONTH
+-- ----------------------------
+INSERT INTO `LTC_NCIFINANCIALMONTH` VALUES ('1', '12-21', '01-20', '1');
+INSERT INTO `LTC_NCIFINANCIALMONTH` VALUES ('10', '09-21', '10-20', '1');
+INSERT INTO `LTC_NCIFINANCIALMONTH` VALUES ('11', '10-21', '11-20', '1');
+INSERT INTO `LTC_NCIFINANCIALMONTH` VALUES ('12', '11-21', '12-20', '1');
+INSERT INTO `LTC_NCIFINANCIALMONTH` VALUES ('2', '01-21', '02-20', '1');
+INSERT INTO `LTC_NCIFINANCIALMONTH` VALUES ('3', '02-21', '03-20', '1');
+INSERT INTO `LTC_NCIFINANCIALMONTH` VALUES ('4', '03-21', '04-20', '1');
+INSERT INTO `LTC_NCIFINANCIALMONTH` VALUES ('5', '04-21', '05-20', '1');
+INSERT INTO `LTC_NCIFINANCIALMONTH` VALUES ('6', '05-21', '06-20', '1');
+INSERT INTO `LTC_NCIFINANCIALMONTH` VALUES ('7', '06-21', '07-20', '1');
+INSERT INTO `LTC_NCIFINANCIALMONTH` VALUES ('8', '07-21', '08-20', '1');
+INSERT INTO `LTC_NCIFINANCIALMONTH` VALUES ('9', '08-21', '09-20', '1');

@@ -1,0 +1,9 @@
+﻿<form class="form-horizontal" name="form1" novalidate>
+    <div class="form-group">
+        <label class="col-sm-2 control-label">选择更换床位<span class="required">*</span></label>
+        <div class="col-sm-10">
+            <km-look-up title="床位" single="true" is-can-choose="{key:'BedStatus',value:'Empty'}" ng-model="Data.ReservationBed" input-show="true" item-property="{key:'BedNo',name:'BedNo'}" factory-name="bedRes" search-params="{Code:'keyWords',Text:'请输入楼层或房间号查询'}" col-list="[{Code:'BedNo',Name:'床位号'},{Code:'BedStatus',Name:'状态',Format:'dic',dicCode:'J00.002'},{Code:'FloorName',Name:'所在楼层'},{Code:'RoomName',Name:'所在房间'},{Code:'BedType',Name:'床位型态',Format:'dic',dicCode:'J00.003'},{Code:'BedKind',Name:'病床种类',Format:'dic',dicCode:'J00.004'},{Code:'ResidentName',Name:'姓名'}]"></km-look-up>
+        </div>
+    </div>
+</form>
+

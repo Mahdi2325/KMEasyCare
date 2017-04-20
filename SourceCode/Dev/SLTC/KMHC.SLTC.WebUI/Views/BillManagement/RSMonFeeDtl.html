@@ -1,0 +1,187 @@
+﻿<div class="row">
+    <div id="content" class="col-lg-12">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="page-header">
+                    <ul class="breadcrumb">
+                        <li>
+                            <i class="fa fa-home"></i>
+                                <a href="#">首页</a>
+                            </li>
+                            <li><a href="/angular/MonFeeList">上传月度费用列表</a></li>
+                            <li>
+                                <a href="/angular/MonFeeUploadEdit/{{NsMonFeeID}}">上传月度费用明细</a>
+                            </li>
+                            <li>住民月费用明细</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="box border primary">
+                    <div class="box-title">
+                        <h4>
+                            <i class="fa fa-bars"></i>住民月费用信息
+                        </h4>
+                    </div>
+                    <div class="box-body">
+                        <form class="form-horizontal" role="form" name="formRSMonFee" novalidate>
+                            <div class="form-group">
+                                <label class="col-sm-1 control-label">姓名</label>
+                                <div class="col-sm-2">
+                                    <input type="text" class="form-control" ng-disabled="true" readonly ng-model="Data.RSMonFees.Name" />
+                                </div>
+                                <label class="col-sm-1 control-label">身份证号</label>
+                                <div class="col-sm-2">
+                                    <input type="text" class="form-control" ng-disabled="true" readonly ng-model="Data.RSMonFees.Residentssid" />
+                                </div>
+                                <label class="col-sm-1 control-label">包干标准</label>
+                                <div class="col-sm-2">
+                                    <input type="text" class="form-control" ng-disabled="true" readonly ng-model="Data.RSMonFees.Ncipaylevel" />
+                                </div>
+                                <label class="col-sm-1 control-label">报销比例</label>
+                                <div class="col-sm-2">
+                                    <input type="text" class="form-control" ng-disabled="true" readonly ng-model="Data.RSMonFees.Ncipayscale" />
+                                </div>
+
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-1 control-label">定点服务机构</label>
+                                <div class="col-sm-2">
+                                    <input type="text" class="form-control" ng-disabled="true" readonly ng-model="Data.RSMonFees.NsName" />
+                                </div>
+                                <label class="col-sm-1 control-label">住院天数</label>
+                                <div class="col-sm-2">
+                                    <input type="text" class="form-control" ng-disabled="true" readonly ng-model="Data.RSMonFees.Hospday" />
+                                </div>
+                                <label class="col-sm-1 control-label">结算开始日期</label>
+                                <div class="col-sm-2">
+                                    <input type="text" class="form-control" ng-disabled="true" readonly ng-model="Data.RSMonFees.Hospentrydate" ca-date-picker />
+                                </div>
+                                <label class="col-sm-1 control-label">结算结束日期</label>
+                                <div class="col-sm-2">
+                                    <input type="text" class="form-control" ng-disabled="true" readonly ng-model="Data.RSMonFees.Hospdischargedate" ca-date-picker />
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-1 control-label">年月</label>
+                                <div class="col-sm-2">
+                                    <input type="text" class="form-control" ng-disabled="true" readonly ng-model="YearMon" />
+                                </div>
+                                <label class="col-sm-1 control-label">总费用</label>
+                                <div class="col-sm-2">
+                                    <input type="text" class="form-control" ng-disabled="true" readonly ng-model="Data.RSMonFees.Totalamount" />
+                                </div>
+                                <label class="col-sm-1 control-label">护理险报销费用</label>
+                                <div class="col-sm-2">
+                                    <input type="text" class="form-control" ng-disabled="true" readonly ng-model="Data.RSMonFees.Ncipay" />
+                                </div>
+                                <label class="col-sm-1 control-label" ng-show="false">报销金额</label>
+                                <div class="col-sm-2" ng-show="false">
+                                    <input type="text" class="form-control" ng-disabled="true" readonly ng-model="Data.RSMonFees.RA" />
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <div class="box border primary">
+                    <div class="box-title">
+                        <h4>
+                            <i class="fa fa-table"></i>住民月费用明细
+                        </h4>
+                    </div>
+                    <div class="box-body">
+                        <form class="form-horizontal" role="form" name="formRSMonFeeDtl" novalidate>
+                            <div class="tabbable header-tabs">
+                                <ul class="nav nav-tabs">
+                                    <li><a href="#box_tab2" data-toggle="tab" ng-click="searchSelfFee()"><span class="hidden-inline-mobile">自费项目</span></a></li>
+                                    <li class="active"><a href="#box_tab1" data-toggle="tab" ng-click="searchNciFee()"> <span class="hidden-inline-mobile">护理险项目</span></a></li>
+                                </ul>
+                                <div class="tab-content">
+                                    <div class="tab-pane fade in active" id="box_tab1">
+                                        <!--<div class="mgl15 center"><h3>护理险项目明细</h3></div>-->
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <ui-data-table options="options">
+                                                    <table id="datatable1" class="table table-hover">
+                                                        <thead>
+                                                            <tr>
+                                                                <th>序号</th>
+                                                                <th>医保编码</th>
+                                                                <th>名称</th>
+                                                                <th>类型</th>
+                                                                <th>单价</th>
+                                                                <th>数量</th>
+                                                                <th>金额</th>
+                                                                <th>经办人</th>
+                                                                <th>使用时间</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            <tr ng-repeat="rsNciMonFee in Data.RSNciMonFeeDtlList">
+                                                                <td>{{$index+1}}</td>
+                                                                <td>{{rsNciMonFee.MCCode}}</td>
+                                                                <td>{{rsNciMonFee.FeeName}}</td>
+                                                                <td>{{rsNciMonFee.FeeType}}</td>
+                                                                <td>{{rsNciMonFee.UnitPrice}}</td>
+                                                                <td>{{rsNciMonFee.Qty}}</td>
+                                                                <td>{{rsNciMonFee.Amount}}</td>
+                                                                <td>{{rsNciMonFee.OperatorName}}</td>
+                                                                <td>{{rsNciMonFee.TakeTime | timeFormat}}</td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </ui-data-table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="tab-pane fade" id="box_tab2">
+                                        <!--<div class="mgl15 center"><h3>自费项目明细</h3></div>-->
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <ui-data-table options="optionsSELF">
+                                                    <table id="datatable1" class="table table-hover">
+                                                        <thead>
+                                                            <tr>
+                                                                <th>序号</th>
+                                                                <th>名称</th>
+                                                                <th>类型</th>
+                                                                <th>单价</th>
+                                                                <th>数量</th>
+                                                                <th>金额</th>
+                                                                <th>经办人</th>
+                                                                <th>使用时间</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            <tr ng-repeat="rsSelfMonFee in Data.RSSelfMonFeeDtlList">
+                                                                <td>{{$index+1}}</td>
+                                                                <td>{{rsSelfMonFee.FeeName}}</td>
+                                                                <td>{{rsSelfMonFee.FeeType}}</td>
+                                                                <td>{{rsSelfMonFee.UnitPrice}}</td>
+                                                                <td>{{rsSelfMonFee.Qty}}</td>
+                                                                <td>{{rsSelfMonFee.Amount}}</td>
+                                                                <td>{{rsSelfMonFee.OperatorName}}</td>
+                                                                <td>{{rsSelfMonFee.TakeTime | timeFormat}}</td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </ui-data-table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <div class="col-md-offset-8">
+                    <a class="btn btn-default" ng-click="closeRSMonFeeDtl()"><i class="fa">返回费用明细</i></a>
+                </div>
+            </div>
+        </div>
+   </div>
+</div>
+
+

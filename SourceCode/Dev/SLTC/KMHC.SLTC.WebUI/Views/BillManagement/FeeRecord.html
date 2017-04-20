@@ -1,0 +1,141 @@
+﻿<style>
+    .ng-cloak {
+        display: none;
+    }
+
+    .control-element {
+        float: left;
+        padding-left: 15px;
+        font-size: large;
+    }
+
+    .feeRecord thead tr {
+        display: block;
+    }
+
+    .feeRecord tbody {
+        display: block;
+        height: 450px;
+        overflow: auto;
+    }
+
+    .feeRecord th {
+        width: 17.8%;
+    }
+
+    .feeRecord td {
+        width: 18%;
+    }
+</style>
+<div class="row">
+    <div id="content" class="col-lg-12">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="page-header">
+                    <ul class="breadcrumb">
+                        <li>
+                            <i class="fa fa-home"></i>
+                            <a href="/">首页</a>
+                        </li>
+                        <li>账单生成</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="col-sm-2">
+                    <div class="box border primary">
+                        <div class="box-title">
+                            <h4>
+                                <i class="fa fa-bars"></i>住民信息
+                            </h4>
+                        </div>
+                        <div class="box-body">
+                            <resident-card feeno="{{FeeNo}}" callback="txtResidentIDChange(resident)" />
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-10">
+                    <div class="box border primary">
+                        <div class="box-title">
+                            <h4><i class="fa fa-search"></i>查询条件</h4>
+                        </div>
+                        <div class="box-body">
+                            <form class="form-horizontal" role="form">
+                                <div class="form-group">
+                                   <label class="col-sm-1 control-label">结算月份</label>
+                                    <div class="col-sm-2">
+                                        <input type="text" class="form-control" ng-model="billMonth"  ng-change="SetSearchDate()"  date-picker date-fmt="yyyy-MM">
+                                    </div>
+                                    
+                                    <div class="control-element">
+                                        <input type="button" class="form-control btn btn-primary" ng-click="searchInfo()" value="查询">
+                                    </div>
+
+                                    <label class="col-sm-1 control-label">开始日期</label>
+                                    <div class="col-sm-2">
+                                        <input type="text" class="form-control" ng-model="sDate" ng-disabled="true" ca-date-picker ng-change="checksDate()" />
+                                    </div>
+                                    <label class="col-sm-1 control-label">结束日期</label>
+                                    <div class="col-sm-2">
+                                        <input type="text" class="form-control" ng-model="eDate" ng-disabled="true" ca-date-picker ng-change="checkeDate()" />
+                                    </div>
+
+                                    <label class="col-md-1 control-label" ng-show="false" for="e2">类型</label>
+                                    <div class="col-md-3" ng-show="false">
+                                        <select multiple id="taskStatus" class="col-md-12">
+                                            <option value="R0" selected>药品</option>
+                                            <option value="R1" selected>耗材</option>
+                                            <option value="R2" selected>服务</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                    <div class="box border primary">
+                        <div class="box-title">
+                            <h4><i class="fa fa-table"></i>费用记录</h4>
+                        </div>
+                        <div class="box-body">
+                            <table class="table table-striped table-bordered table-hover table-handler">
+                                <thead>
+                                    <tr>
+                                        <!--<th ng-show="false">选择</th>-->
+                                        <th>名称</th>
+                                        <th>类型</th>
+                                        <th>单价</th>
+                                        <th>数量</th>
+                                        <th>总价</th>
+                                        <th>是否护理险</th>
+                                        <th>账单时间</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr ng-repeat="fr in feeRecordList">
+                                        <!--<td ng-show="false">
+                                            <input type="checkbox" ng-checked="{{fr.IsChecked}}" ng-model="fr.IsChecked" />
+                                        </td>-->
+                                        <td>{{fr.ProjectName}}</td>
+                                        <td>{{fr.ChargeRecordType | ChargeRecordTypeFormat}}</td>
+                                        <td>{{fr.UnitPrice}}</td>
+                                        <td>{{fr.Count}}</td>
+                                        <td>{{fr.Cost}}</td>
+                                        <td>{{fr.IsNCIItem?"是":"否"}}</td>
+                                        <td>{{fr.TakeTime | date:'yyyy-MM-dd HH:mm:ss'}}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+
+                            <div class="modal-footer right">
+                                <button type="button" ng-show="IsHasRecord" ng-disabled="isdisbtn" class="btn btn-primary" ng-click="GenerateBill()">生成帐单</button>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,348 @@
+
+ 记录时间：2017-04-18 15:42:10,883 线程ID:[11] 日志级别：  ERROR 出错类：KMLOG property: [(null)] - 错误描述：The underlying provider failed on Open.
+ 
+
+ 记录时间：2017-04-19 17:09:54,705 线程ID:[7] 日志级别：  DEBUG 出错类：KMLOG property: [(null)] - 错误描述：SELECT
+`GroupBy1`.`A1` AS `C1`
+FROM (SELECT
+COUNT(1) AS `A1`
+FROM `LTC_ORG` AS `Extent1`) AS `GroupBy1`
+ 
+
+ 记录时间：2017-04-19 17:09:54,963 线程ID:[7] 日志级别：  DEBUG 出错类：KMLOG property: [(null)] - 错误描述：SELECT
+`Extent1`.`ORGID`, 
+`Extent1`.`GROUPID`, 
+`Extent1`.`ORGNAME`, 
+`Extent1`.`ORGTYPE`, 
+`Extent1`.`NSNO`, 
+`Extent1`.`GOVID`, 
+`Extent1`.`RESPONSIBLE`, 
+`Extent1`.`TEL`, 
+`Extent1`.`FAX`, 
+`Extent1`.`BEDCOUNT`, 
+`Extent1`.`EMAIL`, 
+`Extent1`.`WEBSITE`, 
+`Extent1`.`STATUS`
+FROM `LTC_ORG` AS `Extent1`
+ ORDER BY 
+`Extent1`.`ORGID` ASC
+ 
+
+ 记录时间：2017-04-19 17:21:10,669 线程ID:[8] 日志级别：  DEBUG 出错类：KMLOG property: [(null)] - 错误描述：SELECT
+`GroupBy1`.`A1` AS `C1`
+FROM (SELECT
+COUNT(1) AS `A1`
+FROM `LTC_ORG` AS `Extent1`) AS `GroupBy1`
+ 
+
+ 记录时间：2017-04-19 17:21:10,854 线程ID:[8] 日志级别：  DEBUG 出错类：KMLOG property: [(null)] - 错误描述：SELECT
+`Extent1`.`ORGID`, 
+`Extent1`.`GROUPID`, 
+`Extent1`.`ORGNAME`, 
+`Extent1`.`ORGTYPE`, 
+`Extent1`.`NSNO`, 
+`Extent1`.`GOVID`, 
+`Extent1`.`RESPONSIBLE`, 
+`Extent1`.`TEL`, 
+`Extent1`.`FAX`, 
+`Extent1`.`BEDCOUNT`, 
+`Extent1`.`EMAIL`, 
+`Extent1`.`WEBSITE`, 
+`Extent1`.`STATUS`
+FROM `LTC_ORG` AS `Extent1`
+ ORDER BY 
+`Extent1`.`ORGID` ASC
+ 
+
+ 记录时间：2017-04-19 17:21:15,396 线程ID:[5] 日志级别：  DEBUG 出错类：KMLOG property: [(null)] - 错误描述：SELECT
+`Filter1`.`REGNO1` AS `REGNO`, 
+`Filter1`.`FEENO`, 
+`Filter1`.`NAME`, 
+`Filter1`.`FLOOR`, 
+`Filter1`.`BEDNO`, 
+`Filter1`.`SEX`, 
+`Filter1`.`BRITHDATE`, 
+`Filter1`.`IDNO`, 
+`Filter1`.`BRITHPLACE`, 
+`Filter1`.`DISEASEDIAG`, 
+`Filter1`.`ORGID1` AS `ORGID`, 
+`Filter1`.`NSNO`, 
+`Filter1`.`IPDFLAG`, 
+`Filter1`.`CARETYPEID`, 
+`Extent6`.`NCIPAYLEVEL`, 
+`Extent6`.`NCIPAYSCALE`, 
+`Filter1`.`OPERATION`, 
+`Filter1`.`FOODALLERGY`, 
+`Filter1`.`DRUGALLERGY`, 
+`Filter1`.`FAMILYHISTORY`
+FROM (SELECT
+`Extent1`.`FEENO`, 
+`Extent1`.`SERVICETYPE`, 
+`Extent1`.`RSTYPE`, 
+`Extent1`.`RSSTATUS`, 
+`Extent1`.`NURLEVEL`, 
+`Extent1`.`RSATT`, 
+`Extent1`.`FMYRSATT`, 
+`Extent1`.`NURASSSUGG`, 
+`Extent1`.`ORGSUGG`, 
+`Extent1`.`IMPCOMMENT`, 
+`Extent1`.`PTYPE`, 
+`Extent1`.`INDATE`, 
+`Extent1`.`DEPTNO`, 
+`Extent1`.`NURSENO`, 
+`Extent1`.`CARER`, 
+`Extent1`.`BEDNO`, 
+`Extent1`.`ROOMNO`, 
+`Extent1`.`BEDCLASS`, 
+`Extent1`.`BEDTYPE`, 
+`Extent1`.`FLOOR`, 
+`Extent1`.`BEDKIND`, 
+`Extent1`.`SICKFLAG`, 
+`Extent1`.`ROOMFLAG`, 
+`Extent1`.`PROTFLAF`, 
+`Extent1`.`IPDFLAG`, 
+`Extent1`.`OUTDATE`, 
+`Extent1`.`DANGERFLAG`, 
+`Extent1`.`DEPOSITAMT`, 
+`Extent1`.`PREPAYAMT`, 
+`Extent1`.`CTRLFLAG`, 
+`Extent1`.`CTRLREASON`, 
+`Extent1`.`NURSINGTIPS`, 
+`Extent1`.`CARERTIPS`, 
+`Extent1`.`STATEFLAG`, 
+`Extent1`.`STATEREASON`, 
+`Extent1`.`ORGID`, 
+`Extent1`.`REGNO`, 
+`Extent1`.`NUTRITIONIST`, 
+`Extent1`.`PHYSIOTHERAPIST`, 
+`Extent1`.`DOCTOR`, 
+`Extent1`.`ISFINANCIALCLOSE`, 
+`Extent1`.`FINANCIALCLOSETIME`, 
+`Extent2`.`REGNO` AS `REGNO1`, 
+`Extent2`.`NAME`, 
+`Extent2`.`NICKNAME`, 
+`Extent2`.`RESIDENGNO`, 
+`Extent2`.`SEX`, 
+`Extent2`.`BRITHDATE`, 
+`Extent2`.`AGE`, 
+`Extent2`.`IDNO`, 
+`Extent2`.`SSNO`, 
+`Extent2`.`EDUCATION`, 
+`Extent2`.`RACE`, 
+`Extent2`.`POLITICAL`, 
+`Extent2`.`SKILL`, 
+`Extent2`.`WORKCODE`, 
+`Extent2`.`EXPERIENCE`, 
+`Extent2`.`TITLE`, 
+`Extent2`.`HABIT`, 
+`Extent2`.`RELIGIONCODE`, 
+`Extent2`.`LANGUAGE`, 
+`Extent2`.`COMMUNICATETYPE`, 
+`Extent2`.`BRITHPLACE`, 
+`Extent2`.`MERRYFLAG`, 
+`Extent2`.`CHILD_BOY`, 
+`Extent2`.`CHILD_GIRL`, 
+`Extent2`.`CAREGIVER`, 
+`Extent2`.`LIVECONDITION`, 
+`Extent2`.`CONSTELLATIONS`, 
+`Extent2`.`BLOODTYPE`, 
+`Extent2`.`HEIGHT`, 
+`Extent2`.`WEIGHT`, 
+`Extent2`.`PERSONALHISTORY`, 
+`Extent2`.`FAMILYHISTORY`, 
+`Extent2`.`INFECFLAG`, 
+`Extent2`.`RHTYPE`, 
+`Extent2`.`CREATEDATE`, 
+`Extent2`.`CREATEBY`, 
+`Extent2`.`UPDATEDATE`, 
+`Extent2`.`UPDATEBY`, 
+`Extent2`.`ORGID` AS `ORGID1`, 
+`Extent2`.`DISEASEDIAG`, 
+`Extent3`.`REGNO` AS `REGNO2`, 
+`Extent3`.`HAVEOPERATION`, 
+`Extent3`.`OPERATION`, 
+`Extent3`.`HAVEDRUGALLERGY`, 
+`Extent3`.`DRUGALLERGY`, 
+`Extent3`.`HAVEFOODALLERGY`, 
+`Extent3`.`FOODALLERGY`, 
+`Extent3`.`HAVETRANSFUSION`, 
+`Extent3`.`ORIGMEDICALHOS`, 
+`Extent3`.`EMERGENCYTRANSTO`, 
+`Extent3`.`ISAGREETRANSFER`, 
+`Extent3`.`MEDICALHIS`, 
+`Extent3`.`OTHERS`, 
+`Extent4`.`ID`, 
+`Extent4`.`FEENO` AS `FEENO1`, 
+`Extent4`.`CERTNO`, 
+`Extent4`.`CERTSTARTTIME`, 
+`Extent4`.`CERTEXPIREDTIME`, 
+`Extent4`.`APPLYHOSTIME`, 
+`Extent4`.`CARETYPEID`, 
+`Extent4`.`NCIPAYLEVEL`, 
+`Extent4`.`NCIPAYSCALE`, 
+`Extent4`.`STATUS`, 
+`Extent4`.`CREATEBY` AS `CREATEBY1`, 
+`Extent4`.`CREATETIME`, 
+`Extent4`.`UPDATEBY` AS `UPDATEBY1`, 
+`Extent4`.`UPDATETIME`, 
+`Extent5`.`ORGID` AS `ORGID2`, 
+`Extent5`.`GROUPID`, 
+`Extent5`.`ORGNAME`, 
+`Extent5`.`ORGTYPE`, 
+`Extent5`.`NSNO`, 
+`Extent5`.`GOVID`, 
+`Extent5`.`RESPONSIBLE`, 
+`Extent5`.`TEL`, 
+`Extent5`.`FAX`, 
+`Extent5`.`BEDCOUNT`, 
+`Extent5`.`EMAIL`, 
+`Extent5`.`WEBSITE`, 
+`Extent5`.`STATUS` AS `STATUS1`
+FROM `LTC_IPDREG` AS `Extent1` INNER JOIN `LTC_REGFILE` AS `Extent2` ON `Extent1`.`REGNO` = `Extent2`.`REGNO` INNER JOIN `LTC_REGDISEASEHIS` AS `Extent3` ON `Extent1`.`REGNO` = `Extent3`.`REGNO` INNER JOIN `LTC_REGNCIINFO` AS `Extent4` ON `Extent1`.`FEENO` = `Extent4`.`FEENO` INNER JOIN `LTC_ORG` AS `Extent5` ON `Extent2`.`ORGID` = `Extent5`.`ORGID`
+ WHERE 0 = `Extent4`.`STATUS`) AS `Filter1` INNER JOIN `LTC_REGNCIINFO` AS `Extent6` ON `Filter1`.`FEENO` = `Extent6`.`FEENO`
+ WHERE (0 = `Extent6`.`STATUS`) AND (((`Filter1`.`NSNO` = '1') AND (NOT ((`Filter1`.`NSNO` IS  NULL) OR ('1' IS  NULL)))) OR ((`Filter1`.`NSNO` IS  NULL) AND ('1' IS  NULL)))
+ 
+
+ 记录时间：2017-04-19 17:21:20,624 线程ID:[8] 日志级别：  DEBUG 出错类：KMLOG property: [(null)] - 错误描述：SELECT
+`Extent2`.`REGNO`, 
+`Extent1`.`FEENO`, 
+`Extent2`.`NAME`, 
+`Extent1`.`FLOOR`, 
+`Extent1`.`BEDNO`, 
+`Extent2`.`SEX`, 
+`Extent2`.`BRITHDATE`, 
+`Extent2`.`IDNO`, 
+`Extent2`.`BRITHPLACE`, 
+`Extent2`.`DISEASEDIAG`, 
+`Extent2`.`ORGID`, 
+`Extent5`.`NSNO`, 
+`Extent1`.`IPDFLAG`, 
+`Extent4`.`CARETYPEID`, 
+`Extent6`.`NCIPAYLEVEL`, 
+`Extent6`.`NCIPAYSCALE`, 
+`Extent3`.`OPERATION`, 
+`Extent3`.`FOODALLERGY`, 
+`Extent3`.`DRUGALLERGY`, 
+`Extent2`.`FAMILYHISTORY`
+FROM `LTC_IPDREG` AS `Extent1` INNER JOIN `LTC_REGFILE` AS `Extent2` ON `Extent1`.`REGNO` = `Extent2`.`REGNO` INNER JOIN `LTC_REGDISEASEHIS` AS `Extent3` ON `Extent1`.`REGNO` = `Extent3`.`REGNO` INNER JOIN `LTC_REGNCIINFO` AS `Extent4` ON `Extent1`.`FEENO` = `Extent4`.`FEENO` INNER JOIN `LTC_ORG` AS `Extent5` ON `Extent2`.`ORGID` = `Extent5`.`ORGID` INNER JOIN `LTC_REGNCIINFO` AS `Extent6` ON `Extent1`.`FEENO` = `Extent6`.`FEENO`
+ WHERE (0 = `Extent4`.`STATUS`) AND (0 = `Extent6`.`STATUS`)
+ 
+
+ 记录时间：2017-04-19 17:21:20,746 线程ID:[8] 日志级别：  DEBUG 出错类：KMLOG property: [(null)] - 错误描述：SELECT
+`Extent1`.`ITEMCODE`, 
+`Extent1`.`ITEMTYPE`, 
+`Extent1`.`ITEMNAME`, 
+`Extent1`.`DESCRIPTION`, 
+`Extent1`.`ORDERSEQ`, 
+`Extent1`.`UPDATEDATE`, 
+`Extent1`.`UPDATEBY`
+FROM `LTC_CODEDTL_REF` AS `Extent1`
+ 
+
+ 记录时间：2017-04-19 17:21:20,898 线程ID:[8] 日志级别：  DEBUG 出错类：KMLOG property: [(null)] - 错误描述：SELECT
+`Extent1`.`ITEMCODE`, 
+`Extent1`.`ITEMTYPE`, 
+`Extent1`.`ITEMNAME`, 
+`Extent1`.`DESCRIPTION`, 
+`Extent1`.`ORDERSEQ`, 
+`Extent1`.`UPDATEDATE`, 
+`Extent1`.`UPDATEBY`
+FROM `LTC_CODEDTL_REF` AS `Extent1`
+ 
+
+ 记录时间：2017-04-19 17:21:21,036 线程ID:[8] 日志级别：  DEBUG 出错类：KMLOG property: [(null)] - 错误描述：SELECT
+`Extent1`.`ITEMCODE`, 
+`Extent1`.`ITEMTYPE`, 
+`Extent1`.`ITEMNAME`, 
+`Extent1`.`DESCRIPTION`, 
+`Extent1`.`ORDERSEQ`, 
+`Extent1`.`UPDATEDATE`, 
+`Extent1`.`UPDATEBY`
+FROM `LTC_CODEDTL_REF` AS `Extent1`
+ 
+
+ 记录时间：2017-04-19 17:21:21,175 线程ID:[8] 日志级别：  DEBUG 出错类：KMLOG property: [(null)] - 错误描述：SELECT
+`Extent1`.`ITEMCODE`, 
+`Extent1`.`ITEMTYPE`, 
+`Extent1`.`ITEMNAME`, 
+`Extent1`.`DESCRIPTION`, 
+`Extent1`.`ORDERSEQ`, 
+`Extent1`.`UPDATEDATE`, 
+`Extent1`.`UPDATEBY`
+FROM `LTC_CODEDTL_REF` AS `Extent1`
+ 
+
+ 记录时间：2017-04-19 17:45:32,859 线程ID:[35] 日志级别：  DEBUG 出错类：KMLOG property: [(null)] - 错误描述：SELECT
+`Extent2`.`REGNO`, 
+`Extent1`.`FEENO`, 
+`Extent2`.`NAME`, 
+`Extent1`.`FLOOR`, 
+`Extent1`.`BEDNO`, 
+`Extent2`.`SEX`, 
+`Extent2`.`BRITHDATE`, 
+`Extent2`.`IDNO`, 
+`Extent2`.`BRITHPLACE`, 
+`Extent2`.`DISEASEDIAG`, 
+`Extent2`.`ORGID`, 
+`Extent5`.`NSNO`, 
+`Extent1`.`IPDFLAG`, 
+`Extent4`.`CARETYPEID`, 
+`Extent6`.`NCIPAYLEVEL`, 
+`Extent6`.`NCIPAYSCALE`, 
+`Extent3`.`OPERATION`, 
+`Extent3`.`FOODALLERGY`, 
+`Extent3`.`DRUGALLERGY`, 
+`Extent2`.`FAMILYHISTORY`
+FROM `LTC_IPDREG` AS `Extent1` INNER JOIN `LTC_REGFILE` AS `Extent2` ON `Extent1`.`REGNO` = `Extent2`.`REGNO` INNER JOIN `LTC_REGDISEASEHIS` AS `Extent3` ON `Extent1`.`REGNO` = `Extent3`.`REGNO` INNER JOIN `LTC_REGNCIINFO` AS `Extent4` ON `Extent1`.`FEENO` = `Extent4`.`FEENO` INNER JOIN `LTC_ORG` AS `Extent5` ON `Extent2`.`ORGID` = `Extent5`.`ORGID` INNER JOIN `LTC_REGNCIINFO` AS `Extent6` ON `Extent1`.`FEENO` = `Extent6`.`FEENO`
+ WHERE (0 = `Extent4`.`STATUS`) AND (0 = `Extent6`.`STATUS`)
+ 
+
+ 记录时间：2017-04-19 17:48:45,254 线程ID:[37] 日志级别：  DEBUG 出错类：KMLOG property: [(null)] - 错误描述：SELECT
+`Extent2`.`REGNO`, 
+`Extent1`.`FEENO`, 
+`Extent2`.`NAME`, 
+`Extent1`.`FLOOR`, 
+`Extent1`.`BEDNO`, 
+`Extent2`.`SEX`, 
+`Extent2`.`BRITHDATE`, 
+`Extent2`.`IDNO`, 
+`Extent2`.`BRITHPLACE`, 
+`Extent2`.`DISEASEDIAG`, 
+`Extent2`.`ORGID`, 
+`Extent5`.`NSNO`, 
+`Extent1`.`IPDFLAG`, 
+`Extent4`.`CARETYPEID`, 
+`Extent6`.`NCIPAYLEVEL`, 
+`Extent6`.`NCIPAYSCALE`, 
+`Extent3`.`OPERATION`, 
+`Extent3`.`FOODALLERGY`, 
+`Extent3`.`DRUGALLERGY`, 
+`Extent2`.`FAMILYHISTORY`
+FROM `LTC_IPDREG` AS `Extent1` INNER JOIN `LTC_REGFILE` AS `Extent2` ON `Extent1`.`REGNO` = `Extent2`.`REGNO` INNER JOIN `LTC_REGDISEASEHIS` AS `Extent3` ON `Extent1`.`REGNO` = `Extent3`.`REGNO` INNER JOIN `LTC_REGNCIINFO` AS `Extent4` ON `Extent1`.`FEENO` = `Extent4`.`FEENO` INNER JOIN `LTC_ORG` AS `Extent5` ON `Extent2`.`ORGID` = `Extent5`.`ORGID` INNER JOIN `LTC_REGNCIINFO` AS `Extent6` ON `Extent1`.`FEENO` = `Extent6`.`FEENO`
+ WHERE (0 = `Extent4`.`STATUS`) AND (0 = `Extent6`.`STATUS`)
+ 
+
+ 记录时间：2017-04-19 18:10:33,774 线程ID:[66] 日志级别：  DEBUG 出错类：KMLOG property: [(null)] - 错误描述：SELECT
+`Extent2`.`REGNO`, 
+`Extent1`.`FEENO`, 
+`Extent2`.`NAME`, 
+`Extent1`.`FLOOR`, 
+`Extent1`.`BEDNO`, 
+`Extent2`.`SEX`, 
+`Extent2`.`BRITHDATE`, 
+`Extent2`.`IDNO`, 
+`Extent2`.`BRITHPLACE`, 
+`Extent2`.`DISEASEDIAG`, 
+`Extent2`.`ORGID`, 
+`Extent5`.`NSNO`, 
+`Extent1`.`IPDFLAG`, 
+`Extent4`.`CARETYPEID`, 
+`Extent6`.`NCIPAYLEVEL`, 
+`Extent6`.`NCIPAYSCALE`, 
+`Extent3`.`OPERATION`, 
+`Extent3`.`FOODALLERGY`, 
+`Extent3`.`DRUGALLERGY`, 
+`Extent2`.`FAMILYHISTORY`
+FROM `LTC_IPDREG` AS `Extent1` INNER JOIN `LTC_REGFILE` AS `Extent2` ON `Extent1`.`REGNO` = `Extent2`.`REGNO` INNER JOIN `LTC_REGDISEASEHIS` AS `Extent3` ON `Extent1`.`REGNO` = `Extent3`.`REGNO` INNER JOIN `LTC_REGNCIINFO` AS `Extent4` ON `Extent1`.`FEENO` = `Extent4`.`FEENO` INNER JOIN `LTC_ORG` AS `Extent5` ON `Extent2`.`ORGID` = `Extent5`.`ORGID` INNER JOIN `LTC_REGNCIINFO` AS `Extent6` ON `Extent1`.`FEENO` = `Extent6`.`FEENO`
+ WHERE (0 = `Extent4`.`STATUS`) AND (0 = `Extent6`.`STATUS`)
+ 

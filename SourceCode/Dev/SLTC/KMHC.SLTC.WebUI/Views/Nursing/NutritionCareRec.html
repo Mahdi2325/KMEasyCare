@@ -1,0 +1,283 @@
+<div class="row">
+    <div id="content" class="col-lg-12">
+        <!--标题-->
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="page-header">
+                    <ul class="breadcrumb">
+                        <li>
+                            <i class="fa fa-home"></i>
+                            <a href="/">首页</a>
+                        </li>
+                        <li>营养照顾</li>
+                    </ul>
+
+                </div>
+            </div>
+        </div>
+        <!--标题-->
+        <div class="row">
+            <div class="col-sm-2">
+                <div class="box border primary">
+                    <div class="box-title">
+                        <h4>
+                            <i class="fa fa-bars"></i>住民信息
+                        </h4>
+                    </div>
+                    <div class="box-body">
+                        <resident-card feeno ={{FeeNo}} callback="residentSelected(resident)" />
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-sm-10">
+                <div class="box border primary">
+                    <div class="box-title">
+                        <h4>
+                            <i class="fa fa-bars"></i>营养照顾记录单
+                        </h4>
+                    </div>
+                    <div class="box-body">
+                        <form class="form-horizontal" role="form" name="NutritionCareForm" novalidate>
+                            <div>
+                                <div class="form-group">
+                                    <label class="col-sm-1 control-label">记录日期<span class="required">*</span></label>
+                                    <div class="col-sm-2">
+                                        <input class="form-control" name="记录日期" type="text" ng-model="currentItem.Recorddate" ca-date-picker required>
+                                    </div>
+                                    <label class="col-sm-1 control-label">营养师<span class="required">*</span></label>
+                                    <div class="col-sm-2">
+                                        <!--<input class="form-control" name="营养师" type="text" ng-model="currentItem.Dietitian" ng-maxlength="10">-->
+                                        <input-staff id="txtDietitian" name="营养师" callback="staffSelected(item)" clearitem="clearStaff()" value="{{staffName}}" required="true" />
+                                    </div>
+                                </div>
+                            </div>
+                            <br />
+                            <fieldset>
+                                <legend>S主观资料</legend>
+                                <div class="well">
+                                    <div class="form-group">
+                                        <label class="col-sm-1 control-label">饮食形态</label>
+                                        <div class="col-sm-5">
+                                            <input class="form-control" name="饮食形态" id="selDietPattern" ng-model="currentItem.DietPattern" edit select-multiple-value="L00.015" ng-maxlength="100" />
+                                        </div>
+                                        <label class="col-sm-1 control-label">营养途径</label>
+                                        <div class="col-sm-2">
+                                            <select class="form-control" name="营养途径" id="selNutrtionPathway" ng-model="currentItem.NutrtionPathway" select-code="L00.016"></select>
+                                        </div>
+                                        <label class="col-sm-1 control-label">进食方式</label>
+                                        <div class="col-sm-2">
+                                            <select class="form-control" name="进食方式" id="selDietWay" ng-model="currentItem.DietWay" select-code="L00.017"></select>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-sm-1 control-label">进食频率</label>
+                                        <div class="col-sm-8">
+                                            <!--<select class="form-control" name="进食频率" id="selDinnerFreq" ng-model="currentItem.DinnerFreq" edit select-multiple-value="L00.009"></select>-->
+                                            <div class="input-group">
+                                                <div class="input-group-addon">正餐</div>
+                                                <input class="form-control" name="主食类" type="text" ng-model="DinnerFreqPartOne" ng-maxlength="11">
+                                                <div class="input-group-addon">次/天&nbsp;,&nbsp;点心</div>
+                                                <input class="form-control" name="肉鱼豆蛋" type="text" ng-model="DinnerFreqPartTwo" ng-maxlength="11">
+                                                <div class="input-group-addon">次/天&nbsp;,&nbsp;其他</div>
+                                                <input class="form-control" name="蔬菜" type="text" ng-model="DinnerFreqPartOther" ng-maxlength="11">
+                                                <div class="input-group-addon">次/天</div>
+                                            </div>
+                                        </div>
+                                        <label class="col-sm-1 control-label">活动能力</label>
+                                        <div class="col-sm-2">
+                                            <select class="form-control" name="活动能力" id="selActivityAbility" ng-model="currentItem.ActivityAbility" select-code="L00.018" ng-maxlength="50"></select>
+                                        </div>
+                                    </div>
+                                </div>
+                            </fieldset>
+
+                            <fieldset>
+                                <legend>O客观资料</legend>
+                                <div class="well">
+                                    <div class="form-group">
+                                        <label class="col-sm-1 control-label">体重</label>
+                                        <div class="col-sm-2">
+                                            <div class="input-group">
+                                                <input class="form-control" name="体重" type="text" ng-model="currentItem.Weight">
+                                                <div class="input-group-addon">Kg</div>
+                                            </div>
+                                        </div>
+                                        <label class="col-sm-1 control-label">其他（疾病）</label>
+                                        <div class="col-sm-8">
+                                            <input class="form-control" name="其他（疾病）" type="text" ng-model="currentItem.OtherDisease" ng-maxlength="200">
+                                        </div>
+                                    </div>
+                                </div>
+                            </fieldset>
+
+                            <fieldset>
+                                <legend>A评估</legend>
+                                <div class="well">
+                                    <div class="form-group">
+                                        <label class="col-sm-1 control-label">BMI</label>
+                                        <div class="col-sm-2">
+                                            <div class="input-group">
+                                                <input class="form-control" name="BMI" type="text" ng-model="currentItem.Bmi">
+                                                <div class="input-group-addon">Kg/m2</div>
+                                            </div>
+                                        </div>
+                                        <label class="col-sm-1 control-label">体重评估</label>
+                                        <div class="col-sm-2">
+                                            <select class="form-control" name="体重评估" id="selWeightEval" ng-model="currentItem.WeightEval" select-code="L00.019"></select>
+                                        </div>
+                                        <label class="col-sm-1 control-label">目前饮食状况</label>
+                                        <div class="col-sm-2">
+                                            <select class="form-control" name="目前饮食状况" id="selDietState" ng-model="currentItem.DietState" select-code="L00.020"></select>
+                                        </div>
+                                        <label class="col-sm-1 control-label">水分摄取</label>
+                                        <div class="col-sm-2">
+                                            <input class="form-control" name="水分摄取" type="text" ng-model="currentItem.WaterUptake" ng-maxlength="10">
+                                        </div>
+                                    </div>
+                                </div>
+                            </fieldset>
+
+                            <fieldset>
+                                <legend>P计划</legend>
+                                <div class="well">
+                                    <div class="form-group">
+                                        <label class="col-sm-1 control-label">能量需求</label>
+                                        <div class="col-sm-2">
+                                            <div class="input-group">
+                                                <input class="form-control" name="能量需求" type="text" ng-model="currentItem.Kcal" ng-maxlength="11">
+                                                <div class="input-group-addon">kcal/天</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-sm-1 control-label">能量需求类型</label>
+                                        <div class="col-sm-2">
+                                            <div class="input-group">
+                                                <select class="form-control" name="能量需求类型" id="selKcalType" ng-model="currentItem.KCALTYPE" select-code="L00.022"></select>
+                                                <!--<input class="form-control" name="能量需求类型" type="text" ng-model="currentItem.KcalType" ng-maxlength="11">-->
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-9">
+                                            <div class="input-group">
+                                                <div class="input-group-addon">主食类</div>
+                                                <input class="form-control" name="主食类" type="text" ng-model="currentItem.KcalFood" ng-maxlength="11">
+
+                                                <div class="input-group-addon">份、肉鱼豆蛋</div>
+                                                <input class="form-control" name="肉鱼豆蛋" type="text" ng-model="currentItem.KcalFish" ng-maxlength="11">
+
+                                                <div class="input-group-addon">份、蔬菜</div>
+                                                <input class="form-control" name="蔬菜" type="text" ng-model="currentItem.KcalVegetables" ng-maxlength="11">
+
+                                                <div class="input-group-addon">份、水果类</div>
+                                                <input class="form-control" name="水果类" type="text" ng-model="currentItem.KcalFruit" ng-maxlength="11">
+
+                                                <div class="input-group-addon">份、油脂类</div>
+                                                <input class="form-control" name="油脂类" type="text" ng-model="currentItem.KcalGrease" ng-maxlength="11">
+                                                <div class="input-group-addon">份</div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-sm-1 control-label">蛋白质需求</label>
+                                        <div class="col-sm-2">
+                                            <div class="input-group">
+                                                <input class="form-control" name="蛋白质需求" type="text" ng-model="currentItem.Protein" ng-maxlength="11">
+                                                <div class="input-group-addon">g/天</div>
+                                            </div>
+                                        </div>
+                                        <label class="col-sm-1 control-label">额外分摄取</label>
+                                        <div class="col-sm-8">
+                                            <input class="form-control" name="额外分摄取" id="selSalinity" ng-model="currentItem.Salinity" edit select-multiple-value="L00.021" />
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-sm-1 control-label">管灌需求</label>
+                                        <div class="col-sm-2">
+                                            <div class="input-group">
+                                                <input class="form-control" name="管灌需求" type="text" ng-model="currentItem.PipeKcal" ng-maxlength="11">
+                                                <div class="input-group-addon">kcal/天</div>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-9">
+                                            <div class="input-group">
+                                                <div class="input-group-addon">蛋白质</div>
+                                                <input class="form-control" name="蛋白质" type="text" ng-model="currentItem.PipeProtein" ng-maxlength="11">
+                                                <div class="input-group-addon">g、冲管水量</div>
+                                                <input class="form-control" name="冲管水量" type="text" ng-model="currentItem.PipleWater" ng-maxlength="10">
+                                                <div class="input-group-addon">c.c.、其他水量</div>
+                                                <input class="form-control" name="其他水量" type="text" ng-model="currentItem.PipleOtherWater" ng-maxlength="10">
+                                                <div class="input-group-addon">c.c.、Vit补充</div>
+                                                <input class="form-control" name="Vit补充" type="text" ng-model="currentItem.PipleVit" ng-maxlength="10">
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-sm-1 control-label">营养诊断</label>
+                                        <div class="col-sm-2">
+                                            <input class="form-control" name="营养诊断" type="text" ng-model="currentItem.NutrtionDiag" ng-maxlength="200">
+                                        </div>
+                                        <label class="col-sm-1 control-label">特殊疾病饮食</label>
+                                        <div class="col-sm-8">
+                                            <input class="form-control" name="特殊疾病饮食" type="text" ng-model="currentItem.SpecialDiet" ng-maxlength="200">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-sm-1 control-label">其他计划与建议</label>
+                                        <div class="col-sm-11">
+                                            <input class="form-control" name="其他计划与建议" type="text" ng-model="currentItem.Suggestion" ng-maxlength="200">
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </fieldset>
+                            <div class="form-group">
+                                <div class="col-sm-offset-1 col-sm-11">
+                                    <button class="btn btn-primary" type="submit" ng-show="buttonShow" ng-click="saveNutritionCateRecEdit(currentItem)">保存</button>
+                                    <button class="btn btn-primary" ng-show="buttonShow" ng-click="clear()">重置</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="box-body">
+                        <div class="pull-right">
+                            <button class="btn btn-warning" style="margin-right:20px;margin-bottom:10px;" ng-show="buttonShow" ng-disabled="buttonPrintShow" ng-click="PrintPreview()"><i class="fa fa-print"></i> 打印预览</button>
+                        </div>
+
+                        <ui-data-table options="options">
+                            <table class="table table-striped table-bordered table-hover table-handler">
+                                <thead>
+                                    <tr>
+                                        <th>#</th>
+                                        <th>记录日期</th>
+                                        <th>营养师</th>
+                                        <th><i class="fa fa-bars"></i> 操作</th>
+                                    </tr>
+                                </thead>
+
+                                <tbody>
+                                    <tr ng-repeat="item in Data.items">
+                                        <td>{{$index + 1}}</td>
+                                        <td>{{item.Recorddate | dateFormat}}</td>
+                                        <td>{{item.Dietitian}}</td>
+                                        <td>
+                                            <div class="btn-group btn-group-xs" role="group" aria-label="...">
+                                                <a class="btn btn-info" role="button" ng-click="rowSelect(item)"><i class="fa fa-pencil"></i>编辑</a>
+                                                <a class="btn btn-primary" role="button" ng-click="deleteItem(item)"><i class="fa fa-times"></i>删除</a>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </tbody>
+
+                            </table>
+                        </ui-data-table>
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+</div>

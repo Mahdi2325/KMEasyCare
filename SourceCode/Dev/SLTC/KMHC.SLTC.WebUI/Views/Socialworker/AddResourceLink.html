@@ -1,0 +1,125 @@
+<!--添加申请补助-->
+
+<div class="row" ng-controller="resourceLinkCtrl">
+    <div class="col-md-12">
+        <div class="box border primary">
+            <div class="box-title">
+                <h4>新增资源连接</h4>
+            </div>
+            <div class="box-body">
+                <div class="panel panel-default">
+                    <div class="panel-title">
+
+                    </div>
+                    <div class="panel-body">
+                        <form class="form-horizontal" ng-submit="saveEdit(currentItem)" role="form" novalidate>
+
+                            <div class="panel panel-default">
+                                <div class="panel-body">
+                                    <label for="selRecordBy" class="col-sm-2 control-label">负责人员</label>
+                                    <div class="col-sm-2">
+
+                                        <select class="form-control" id="selRecordBy" ng-model="currentItem.RecordBy" ng-options="Socialworkers.Value as Socialworkers.Name for Socialworkers in Dic.Socialworkers">
+                                            <option value="">-- 请选择 --</option>
+                                        </select>
+                                    </div>
+                                    <label for="dtContactDate" class="col-sm-2 control-label">首次联系日期</label>
+                                    <div class="col-sm-2">
+                                        <input type="text" class="form-control datepicker" readonly id="dtContactDate" ng-model="currentItem.ContactDate">
+                                    </div>
+                                    <label for="dtFinishDate" class="col-sm-2 control-label">连接完成日期</label>
+                                    <div class="col-sm-2">
+                                        <input type="text" class="form-control datepicker" readonly id="dtFinishDate" ng-model="currentItem.FinishDate">
+                                    </div>
+
+                                </div>
+                            </div>
+
+
+                            <div class="panel panel-default">
+                                <div class="panel panel-heading">需求评估情形</div>
+                                <div class="panel-body">
+                                    <div class="form-group">
+                                        <label for="selType" class="col-sm-2 control-label">需求类型</label>
+                                        <div class="col-sm-2">
+                                            <select class="form-control" id="selType" ng-model="currentItem.Type" ng-options="DemandType.Value as DemandType.Name for DemandType in Dic.DemandType">
+                                                <option value="">-- 请选择 --</option>
+                                            </select>
+                                        </div>
+
+                                        <label for="selName" class="col-sm-2 control-label">需求名称</label>
+                                        <div class="col-sm-2">
+                                            <select class="form-control" id="selName" ng-model="currentItem.Name" ng-options="DemandName.Value as DemandName.Name for DemandName in Dic.DemandName">
+                                                <option value="">-- 请选择 --</option>
+                                            </select>
+                                        </div>
+                                        <label for="selEvalResult" class="col-sm-2 control-label">需求评估结果</label>
+                                        <div class="col-sm-2">
+                                            <select class="form-control" id="selEvalResult" ng-model="currentItem.EvalResult" ng-options="t.Value as t.Name for t in Dic.DemandEvalResult">
+                                                <option value="">-- 请选择 --</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="selUnit" class="col-sm-2 control-label">提供单位名称</label>
+                                        <div class="col-sm-10">
+                                            <select class="form-control" id="selUnit" ng-model="currentItem.Unit" ng-options="t.Value as t.Name for t in Dic.UnitName">
+                                                <option value="">-- 请选择 --</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+
+                            <div class="panel panel-default">
+                                <div class="panel panel-heading">资源连接情形</div>
+                                <div class="panel-body">
+                                    <div class="form-group">
+                                        <label for="selResourceStatus" class="col-sm-2 control-label">连接情形</label>
+                                        <div class="col-sm-2">
+                                            <select class="form-control" id="selResourceStatus" ng-model="currentItem.ResourceStatus" ng-options="t.Value as t.Name for t in Dic.ResourceState">
+                                                <option value="">-- 请选择 --</option>
+                                            </select>
+                                        </div>
+
+                                        <label for="selReason" class="col-sm-2 control-label">未能连接原因</label>
+                                        <div class="col-sm-2">
+                                            <select class="form-control" id="selReason" ng-model="currentItem.Reason" ng-options="t.Value as t.Name for t in Dic.LinkReason">
+                                                <option value="">-- 请选择 --</option>
+                                            </select>
+                                        </div>
+                                        <label for="selRegState" class="col-sm-2 control-label">资源连接时机</label>
+                                        <div class="col-sm-2">
+                                            <select class="form-control" id="selRegState" ng-model="currentItem.RegState" ng-options="t.Value as t.Name for t in Dic.RegState">
+                                                <option value="">-- 请选择 --</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-sm-2 control-label">说明</label>
+                                        <div class="col-sm-10">
+                                            <textarea class="form-control" rows="5" ng-model="currentItem.Description"></textarea>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label"></label>
+                                <div class="col-sm-offset-10">
+                                    <div class="btn-group btn-group-sm" role="group" aria-label="...">
+                                        <button class="btn btn-primary" type="button" ng-click="saveEdit(currentItem)">保存</button>&nbsp;<button type="button" class="btn btn-default" ng-click="cancelEdit()">取消</button>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+

@@ -1,0 +1,62 @@
+<div class="row">
+    <div id="content" class="col-md-12">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="page-header">
+                    <!-- BREADCRUMBS -->
+                    <ul class="breadcrumb">
+                        <li>
+                            <i class="fa fa-home"></i>
+                            <a href="/">首页</a>
+                        </li>
+                        <li>
+                            评估量表设置
+                        </li>
+                    </ul>
+                    <!-- /BREADCRUMBS -->
+                    <div class="clearfix"></div>
+
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="box border primary">
+                    <div class="box-title">
+                        <h4>
+                            <i class="fa fa-bars"></i>评估量表设置
+                        </h4>
+                    </div>
+                    <div class="well well-sm form-horizontal" style="margin: 0; background-color: #fff">
+                        <div class="form-group">
+                            <label class="col-sm-1 control-label" ng-show="OrgISSelect">所属机构</label>
+                            <div class="col-sm-2" ng-show="OrgISSelect">
+                                <select class="form-control" ng-model="orgId" ng-options="item.orgid as item.orgname   for item in Orglist"></select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-sm-2">
+                                <input type="checkbox" id="chk0" class="chk_1" ng-model="Status" /><label for="chk0" ng-click="selectAll()"><span>全选</span></label>
+                            </div>
+                            <a href="#" class="btn btn-primary btn-sm col-sm-offset-8 col-sm-2" role="button" ng-click="save()">确定</a>
+                        </div>
+                    </div>
+                    <div class="box-body form-horizontal">
+                        <div ng-repeat="report in reportList">
+                            <div class="form-group">
+                                <h4>{{MajorName(report.CategoryId)}}</h4>
+                                <div class="col-sm-3 separator" style="border-top-color: #507aa4 !important; margin-top: 0; margin-bottom: 10px; "></div>
+                            </div>
+                            <div class="form-group" style="padding-left:20px">
+                                <div class="col-sm-3" ng-repeat="item in report.Items">
+                                    <input type="checkbox" id="chk{{item.Id}}" class="chk_1" ng-model="item.Status" /><label for="chk{{item.Id}}"><span>{{item.QuestionName}}</span></label>
+                                </div>
+                            </div>
+                            <br />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

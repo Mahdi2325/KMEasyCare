@@ -1,0 +1,973 @@
+﻿<style type="text/css">
+    .mgb5 {
+        margin-bottom: 5px;
+    }
+
+    .mgb10 {
+        margin-bottom: 10px;
+    }
+
+    .mgr5 {
+        margin-right: 5px;
+    }
+
+    .left {
+        float: left;
+    }
+
+    .right {
+        float: right;
+    }
+
+    .width80 {
+        width: 80%;
+    }
+
+    .width60 {
+        width: 60%;
+    }
+
+
+    .width100 {
+        width: 100%;
+    }
+
+    .width96px {
+        width: 96px;
+    }
+
+    .width25 {
+        width: 25%;
+    }
+
+    .width40 {
+        width: 40%;
+    }
+
+    .center {
+        text-align: center;
+    }
+
+    .underline {
+        text-decoration: underline;
+    }
+
+    .clearBoth {
+        clear: both;
+    }
+
+    .table-Style {
+        padding: 0px;
+        margin: 0px;
+        width: 100%;
+    }
+
+    .label-Style {
+        width: 96px;
+        font-weight: 600;
+        display: table-cell;
+        vertical-align: middle;
+        text-align:left;
+        margin-top: 0;
+        margin-bottom: 0;
+        padding-top: 7px;
+    }
+</style>
+
+<form class="form-horizontal" role="form" name="form1" novalidate>
+    <div class="row">
+        <div id="content" class="col-lg-12">
+            <!-- PAGE HEADER-->
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="page-header">
+                        <!-- STYLER -->
+                        <!-- /STYLER -->
+                        <!-- BREADCRUMBS -->
+                        <ul class="breadcrumb">
+                            <li>
+                                <i class="fa fa-home"></i>
+                                <a href="/">首页</a>
+                            </li>
+                            <li>首次入住记录</li>
+                        </ul>
+                        <!-- /BREADCRUMBS -->
+                        <div class="clearfix"><!--<h3 class="content-title pull-left">SLTC</h3>--></div>
+                        <!--<div class="description"></div>-->
+                    </div>
+                </div>
+            </div>
+            <!-- /PAGE HEADER -->
+
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="col-sm-2">
+                        <div class="box border primary">
+                            <div class="box-title">
+                                <h4>
+                                    <i class="fa fa-bars"></i>住民信息
+                                </h4>
+                            </div>
+                            <div class="box-body">
+                                <resident-card feeno={{FeeNo}} callback="txtResidentIDChange(resident)" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-10">
+                        <!-- 基本信息 -->
+                        <div class="box border primary">
+                            <div class="box-title">
+                                <h4><i class="fa fa-bars"></i>基本信息</h4>
+                                <div class="tools hidden-xs">
+                                    <a href="javascript:;" class="collapse" ca-collapse>
+                                        <i class="fa fa-chevron-up"></i>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="box-body">
+                                <div class="form-group">
+                                    <label class="col-sm-1 control-label">姓名</label>
+                                    <div class="col-sm-2">
+                                        <input type="text" class="form-control" id="txtItemName" ng-model="currentItem.Name" ng-disabled="true" readonly>
+                                    </div>
+                                    <label class="col-sm-1 control-label">性别</label>
+                                    <div class="col-sm-2">
+                                        <select class="form-control" ng-model="currentItem.Sex" select-code="A00.001" ng-disabled="true" readonly></select>
+                                    </div>
+                                    <label class="col-sm-1 control-label">身份证号</label>
+                                    <div class="col-sm-2">
+                                        <input type="text" class="form-control" ng-model="currentItem.IdNo" ng-disabled="true" readonly />
+                                    </div>
+                                    <label class="col-sm-1 control-label">年龄</label>
+                                    <div class="col-sm-2">
+                                        <input type="text" class="form-control" id="txtAge" value="{{currentItem.BirthDay | ageFormat}}" ng-disabled="true" readonly />
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-1 control-label">楼层</label>
+                                    <div class="col-sm-2">
+                                        <input type="text" class="form-control" ng-disabled="true" readonly ng-model="currentItem.FloorName" />
+                                    </div>
+                                    <label class="col-sm-1 control-label">房间</label>
+                                    <div class="col-sm-2">
+                                        <input type="text" class="form-control" ng-disabled="true" readonly ng-model="currentItem.RoomName" />
+                                    </div>
+                                    <label class="col-sm-1 control-label">住民类型</label>
+                                    <div class="col-sm-2">
+                                        <select class="form-control" ng-model="currentItem.RsType" select-code="A00.051" ng-disabled="true" readonly></select>
+                                    </div>
+                                    <label class="col-sm-1 control-label">住民身份</label>
+                                    <div class="col-sm-2">
+                                        <select class="form-control" ng-model="currentItem.RsStatus" select-code="A00.052" ng-disabled="true" readonly></select>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-1 control-label">入住时间</label>
+                                    <div class="col-sm-2">
+                                        <input type="text" class="form-control" ng-model="currentItem.InDate" ng-disabled="true" readonly ca-date-time-picker />
+                                    </div>
+                                    <label class="col-sm-1 control-label">联系电话</label>
+                                    <div class="col-sm-2">
+                                        <input type="text" class="form-control" ng-model="currentItem.ContactPhone" ng-disabled="true" readonly />
+                                    </div>
+                                    <label class="col-sm-1 control-label">家庭住址</label>
+                                    <div class="col-sm-5">
+                                        <input type="text" class="form-control" ng-model="AddressDtls" ng-disabled="true" readonly />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <div class="box border primary">
+                            <div class="box-title">
+                                <h4><i class="fa fa-columns"></i><span class="hidden-inline-mobile">首次入住信息</span></h4>
+                            </div>
+                            <div class="box-body">
+                                <form class="form-horizontal" role="form" name="formFstRegRec" novalidate>
+                                    <div class="tabbable header-tabs">
+                                        <ul class="nav nav-tabs">
+                                            <li><a href="#box_tab3" data-toggle="tab"><span class="hidden-inline-mobile">需求/初诊/计划/处理</span></a></li>
+                                            <li><a href="#box_tab2" data-toggle="tab"><span class="hidden-inline-mobile">体格检查（身份评估）</span></a></li>
+                                            <li class="active"><a href="#box_tab1" data-toggle="tab"> <span class="hidden-inline-mobile">健康状况和病史</span></a></li>
+                                        </ul>
+                                        <div class="tab-content">
+                                            <div class="tab-pane fade in active" id="box_tab1">
+                                                <table class="table table-Style  table-no-bordered">
+                                                    <tbody>
+                                                        <tr>
+                                                            <td><label class="left" style="font-weight:600">主诉：</label></td>
+                                                            <td><input type="text" class="form-control" ng-model="FstRegRec.Subject" maxlength="500" select-items="主诉" /></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td><label class="left" style="font-weight:600">现病史：</label></td>
+                                                            <td><textarea class="form-control" rows="3" ng-model="FstRegRec.PresentIllness" maxlength="500"  select-items="现病史"/></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td><label class="left" style="font-weight:600">既往史：</label></td>
+                                                            <td>
+                                                                <div class="left">
+                                                                    <label class="checkbox-inline mgb10 left"><input type="checkbox" ng-model="FstRegRec.tHaveOperation" ng-click="tPrevhxFlag()">体健</label>
+                                                                    <label class="checkbox-inline mgb10 left"><input type="checkbox" ng-model="FstRegRec.fHaveOperation" ng-click="fPrevhxFlag()">异常：</label>
+                                                                </div>
+                                                                <div class="left width80">
+                                                                    <input type="text" class="form-control" ng-disabled="FstRegRec.PrevhxFlag" ng-model="FstRegRec.Prevhx" />
+                                                                </div>
+                                                            </td>
+                                                        </tr>
+
+                                                        <tr>
+                                                            <td><label class="left" style="font-weight:600">婚育史：</label></td>
+                                                            <td>
+                                                                <div class="left">
+                                                                    <label class="control-label left" style="font-weight:600">结婚&nbsp;&nbsp;</label>
+                                                                    <label class="checkbox-inline mgb10 left"><input type="checkbox" ng-model="FstRegRec.tMarryFlag" ng-click="tMarryFlag()">是</label>
+                                                                    <label class="checkbox-inline mgb10 left"><input type="checkbox" ng-model="FstRegRec.fMarryFlag" ng-click="fMarryFlag()">否&nbsp;&nbsp;&nbsp;&nbsp;</label>
+                                                                </div>
+                                                                <div class="left">
+                                                                    <label class="control-label left" style="font-weight:600">&nbsp;子女&nbsp;</label>
+                                                                    <label class="checkbox-inline mgb10 left"><input type="checkbox" ng-model="FstRegRec.fOffspringFlag" ng-click="fOffspringFlag()">无</label>
+                                                                    <label class="checkbox-inline mgb10 left"><input type="checkbox" ng-model="FstRegRec.tOffspringFlag" ng-click="tOffspringFlag()">有&nbsp;&nbsp;</label>
+                                                                </div>
+                                                                <div class="left">
+                                                                    <input type="text" class="form-control left" ng-disabled="!FstRegRec.OffspringFlag" ng-model="FstRegRec.Offspring" />
+                                                                </div>
+                                                                <div class="left">
+                                                                    <label class="control-label left" style="font-weight:600">&nbsp;停经：&nbsp;</label>
+                                                                    <label class="checkbox-inline mgb10 left"><input type="checkbox" ng-model="FstRegRec.Menelipsis1" ng-click="sMenelipsis1()">不适用</label>
+                                                                    <label class="checkbox-inline mgb10 left"><input type="checkbox" ng-model="FstRegRec.Menelipsis2" ng-click="sMenelipsis2()">否</label>
+                                                                    <label class="checkbox-inline mgb10 left"><input type="checkbox" ng-model="FstRegRec.Menelipsis3" ng-click="sMenelipsis3()">是&nbsp;&nbsp;&nbsp;&nbsp;</label>
+                                                                </div>
+                                                                <div class="left">
+                                                                    <label class="control-label left" style="font-weight:600">&nbsp;末次月经&nbsp;</label>
+                                                                </div>
+                                                                <div class="left">
+                                                                    <input type="text" class="form-control width80" ng-model="FstRegRec.LMP" ca-date-picker />
+                                                                </div>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td><label class="left" style="font-weight:600">用药史：</label></td>
+                                                            <td>
+                                                                <div class="left">
+                                                                    <label class="checkbox-inline mgb10 left"><input type="checkbox" ng-model="FstRegRec.fMedhFlag" ng-click="fMedhFlag()">无</label>
+                                                                    <label class="checkbox-inline mgb10 left"><input type="checkbox" ng-model="FstRegRec.tMedhFlag" ng-click="tMedhFlag()">有：&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
+                                                                </div>
+                                                                <div class="left width80">
+                                                                    <input type="text" class="form-control" ng-disabled="!FstRegRec.MedhFlag" ng-model="FstRegRec.Medh" />
+                                                                </div>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td><label class="left" style="font-weight:600">药/食物过敏史：</label></td>
+                                                            <td>
+                                                                <div class="left">
+                                                                    <label class="checkbox-inline mgb10 left"><input type="checkbox" ng-model="FstRegRec.fAllergichFlag" ng-click="fAllergichFlag()">无</label>
+                                                                    <label class="checkbox-inline mgb10 left"><input type="checkbox" ng-model="FstRegRec.tAllergichFlag" ng-click="tAllergichFlag()">有：&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
+                                                                </div>
+                                                                <div class="left width80">
+                                                                    <input type="text" class="form-control" ng-disabled="!FstRegRec.AllergichFlag" ng-model="FstRegRec.Allergich" />
+                                                                </div>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td><label class="left" style="font-weight:600">手术史：</label></td>
+                                                            <td>
+                                                                <div class="left">
+                                                                    <label class="checkbox-inline mgb10 left"><input type="checkbox" ng-model="FstRegRec.fOperationhxFlag" ng-click="fOperationhxFlag()">无</label>
+                                                                    <label class="checkbox-inline mgb10 left"><input type="checkbox" ng-model="FstRegRec.tOperationhxFlag" ng-click="tOperationhxFlag()">有：&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
+                                                                </div>
+                                                                <div class="left width80">
+                                                                    <input type="text" class="form-control" ng-disabled="!FstRegRec.OperationhxFlag" ng-model="FstRegRec.Operationhx" />
+                                                                </div>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td><label class="left" style="font-weight:600">个人史：</label></td>
+                                                            <td>
+                                                                <div class="left">
+                                                                    <label class="checkbox-inline mgb10 left"><input type="checkbox" ng-model="FstRegRec.fPersonalhxFlag" ng-click="fPersonalhxFlag()">无不良嗜好（如吸毒酗酒等）</label>
+                                                                    <label class="checkbox-inline mgb10 left"><input type="checkbox" ng-model="FstRegRec.tPersonalhxFlag" ng-click="tPersonalhxFlag()">有：&nbsp;</label>
+                                                                </div>
+                                                                <div class="left " style="width: 60%">
+                                                                    <input type="text" class="form-control" ng-disabled="!FstRegRec.PersonalhxFlag" ng-model="FstRegRec.Personalhx" />
+                                                                </div>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td><label class="left" style="font-weight:600">家族史：</label></td>
+                                                            <td>
+                                                                <div class="left">
+                                                                    <label class="checkbox-inline mgb10 left"><input type="checkbox" ng-model="FstRegRec.fFhxFlag" ng-click="fFhxFlag()">无遗传病史</label>
+                                                                    <label class="checkbox-inline mgb10 left"><input type="checkbox" ng-model="FstRegRec.tFhxFlag" ng-click="tFhxFlag()">有遗传病史&nbsp;</label>
+                                                                </div>
+                                                                <div class="left width80">
+                                                                    <input type="text" class="form-control" ng-disabled="!FstRegRec.FhxFlag" ng-model="FstRegRec.Fhx" />
+                                                                </div>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td><label class="left" style="font-weight:600">生命体征：</label></td>
+                                                            <td>
+                                                                <div class="input-group left">
+                                                                    <div class="input-group-addon">体温</div>
+                                                                    <input class="form-control" name="体温" type="text" ng-model="FstRegRec.Temp" maxlength="5">
+                                                                    <div class="input-group-addon">℃</div>
+
+                                                                    <div class="input-group-addon">脉搏</div>
+                                                                    <input class="form-control" name="脉搏" type="text" ng-model="FstRegRec.Pulse" maxlength="5">
+                                                                    <div class="input-group-addon">次/分</div>
+
+                                                                    <div class="input-group-addon">呼吸</div>
+                                                                    <input class="form-control" name="呼吸" type="text" ng-model="FstRegRec.Breath" maxlength="5">
+                                                                    <div class="input-group-addon">次/分</div>
+
+                                                                    <div class="input-group-addon">血压</div>
+                                                                    <input class="form-control" name="舒张压" type="text" ng-model="FstRegRec.DP" maxlength="5">
+                                                                    <div class="input-group-addon">/</div>
+                                                                    <input class="form-control" name="收缩压" type="text" ng-model="FstRegRec.SP" maxlength="5">
+                                                                    <div class="input-group-addon">mmHg</div>
+                                                                </div>
+                                                            </td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                            <div class="tab-pane fade" id="box_tab2">
+                                                <table class="table table-Style  table-bordered">
+                                                    <tbody>
+                                                        <tr>
+                                                            <td><label class="left" style="font-weight:600">体格检查：</label></td>
+                                                            <td>
+                                                                <div class="form-group">
+                                                                    <div class="col-sm-4">
+                                                                        <div class="input-group left">
+                                                                            <div class="input-group-addon">身高</div>
+                                                                            <input class="form-control" name="身高" type="text" ng-model="FstRegRec.Height" maxlength="3">
+                                                                            <div class="input-group-addon">cm</div>
+                                                                            <div class="input-group-addon">体重</div>
+                                                                            <input class="form-control" name="体重" type="text" ng-model="FstRegRec.Weight" maxlength="3">
+                                                                            <div class="input-group-addon">kg</div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+
+                                                                <div class="form-group">
+                                                                    <div class="col-sm-12">
+                                                                        <div class="left">
+                                                                            <label class="left label-Style">皮肤黏膜：</label>
+                                                                            <label class="checkbox-inline mgb10 left"><input type="checkbox" ng-model="FstRegRec.SkinmucosaHRun" ng-click="SkinmucosaHRunFlag()">红润</label>
+                                                                            <label class="checkbox-inline mgb10 left"><input type="checkbox" ng-model="FstRegRec.SkinmucosaHRan" ng-click="SkinmucosaHRanFlag()">黄染</label>
+                                                                            <label class="checkbox-inline mgb10 left"><input type="checkbox" ng-model="FstRegRec.SkinmucosaCB" ng-click="SkinmucosaCBFlag()">苍白</label>
+                                                                            <label class="checkbox-inline mgb10 left"><input type="checkbox" ng-model="FstRegRec.SkinmucosaQB" ng-click="SkinmucosaQBFlag()">千瘪</label>
+                                                                            <label class="checkbox-inline mgb10 left"><input type="checkbox" ng-model="FstRegRec.SkinmucosaPZ" ng-click="SkinmucosaPZFlag()">皮疹：</label>
+                                                                        </div>
+                                                                        <div class="left">
+                                                                            <input type="text" class="form-control width80" ng-disabled="!FstRegRec.SkinmucosaPZ" ng-model="FstRegRec.Skinmucosa" />
+                                                                        </div>
+                                                                        <div class="left">
+                                                                            <label class="checkbox-inline mgb10 left"><input type="checkbox" ng-model="FstRegRec.OtherSkinmucosaF" ng-click="OtherSkinmucosaFlag()">&nbsp;其它：</label>
+                                                                        </div>
+                                                                        <div class="left">
+                                                                            <input type="text" class="form-control" ng-disabled="!FstRegRec.OtherSkinmucosaF" ng-model="FstRegRec.OtherSkinmucosa" />
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+
+                                                                <div class="form-group">
+                                                                    <div class="col-sm-12">
+                                                                        <div class="left">
+                                                                            <label class="left label-Style">淋巴结：</label>
+                                                                            <label class="checkbox-inline mgb10 left"><input type="checkbox" ng-model="FstRegRec.fLymphGlandFlag" ng-click="fLymphGlandFlag()">无肿大</label>
+                                                                            <label class="checkbox-inline mgb10 left"><input type="checkbox" ng-model="FstRegRec.tLymphGlandFlag" ng-click="tLymphGlandFlag()">肿大</label>
+                                                                        </div>
+                                                                        <div class="left">
+                                                                            <input type="text" class="form-control left" ng-disabled="!FstRegRec.LymphGlandFlag" ng-model="FstRegRec.LymphGland" />
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+
+                                                                <div class="form-group">
+                                                                    <div class="col-sm-12">
+                                                                        <div class="left">
+                                                                            <label class="left label-Style">头颅五官：</label>
+                                                                            <label class="checkbox-inline mgb10 left"><input type="checkbox" ng-model="FstRegRec.tHeadFlag" ng-click="tHeadFlag()">头颅正常</label>
+                                                                            <label class="checkbox-inline mgb10 left"><input type="checkbox" ng-model="FstRegRec.fHeadFlag" ng-click="fHeadFlag()">头颅异常</label>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+
+                                                                <div class="form-group">
+                                                                    <div class="col-sm-12">
+                                                                        <div class="left">
+                                                                            <label class="left label-Style">眼：巩膜</label>
+                                                                            <label class="checkbox-inline mgb10 left"><input type="checkbox" ng-model="FstRegRec.tScleraFlag" ng-click="tScleraFlag()">正常</label>
+                                                                            <label class="checkbox-inline mgb10 left"><input type="checkbox" ng-model="FstRegRec.fScleraFlag" ng-click="fScleraFlag()">黄染</label>
+                                                                        </div>
+                                                                        <div class="left">
+                                                                            <label class="control-label left" style="font-weight:600">&nbsp;&nbsp;空桶&nbsp;</label>
+                                                                            <label class="checkbox-inline mgb10 left"><input type="checkbox" ng-model="FstRegRec.tEBFlag" ng-click="tEBFlag()">等大等圆</label>
+                                                                            <label class="checkbox-inline mgb10 left"><input type="checkbox" ng-model="FstRegRec.fEBFlag" ng-click="fEBFlag()">异常：</label>
+                                                                        </div>
+                                                                        <div class="left">
+                                                                            <input type="text" class="form-control" ng-disabled="FstRegRec.EBFlag" ng-model="FstRegRec.EB" />
+                                                                        </div>
+                                                                        <div class="left">
+                                                                            <label class="control-label left" style="font-weight:600">&nbsp;&nbsp;结膜&nbsp;</label>
+                                                                            <label class="checkbox-inline mgb10 left"><input type="checkbox" ng-model="FstRegRec.tConjunctivaFlag" ng-click="tConjunctivaFlag()">正常</label>
+                                                                            <label class="checkbox-inline mgb10 left"><input type="checkbox" ng-model="FstRegRec.fConjunctivaFlag" ng-click="fConjunctivaFlag()">充血</label>
+                                                                        </div>
+                                                                        <div class="left">
+                                                                            <label class="control-label left">&nbsp;其它：&nbsp;</label>
+                                                                        </div>
+                                                                        <div class="left">
+                                                                            <input type="text" class="form-control" ng-model="FstRegRec.OtherConjunctiva" />
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+
+                                                                <div class="form-group">
+                                                                    <div class="col-sm-12">
+                                                                        <div class="left">
+                                                                            <label class="left label-Style">耳：耳廊形态</label>
+                                                                            <label class="checkbox-inline mgb10 left"><input type="checkbox" ng-model="FstRegRec.tEARFlag" ng-click="tEARFlag()">正常</label>
+                                                                            <label class="checkbox-inline mgb10 left"><input type="checkbox" ng-model="FstRegRec.fEARFlag" ng-click="fEARFlag()">异常&nbsp;</label>
+                                                                        </div>
+                                                                        <div class="left">
+                                                                            <input type="text" class="form-control" ng-disabled="FstRegRec.EARFlag" ng-model="FstRegRec.EAR" />
+                                                                        </div>
+                                                                        <div class="left">
+                                                                            <label class="control-label left" style="font-weight:600">外耳道&nbsp;&nbsp;</label>
+                                                                            <label class="checkbox-inline mgb10 left"><input type="checkbox" ng-model="FstRegRec.AcousticDuctPro1" ng-click="AcousticDuctPro1()">流畅</label>
+                                                                            <label class="checkbox-inline mgb10 left"><input type="checkbox" ng-model="FstRegRec.AcousticDuctPro2" ng-click="AcousticDuctPro2()">分泌物&nbsp;</label>
+                                                                        </div>
+                                                                        <div class="left">
+                                                                            <input type="text" class="form-control" ng-disabled="!FstRegRec.AcousticDuctPro2" ng-model="FstRegRec.AcousticDuct" />
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+
+                                                                <div class="form-group">
+                                                                    <div class="col-sm-12">
+                                                                        <div class="left">
+                                                                            <label class="left label-Style">鼻：鼻中隔</label>
+                                                                            <label class="checkbox-inline mgb10 left"><input type="checkbox" ng-model="FstRegRec.NasalseptumPro1" ng-click="NasalseptumPro1()">居中</label>
+                                                                            <label class="checkbox-inline mgb10 left"><input type="checkbox" ng-model="FstRegRec.NasalseptumPro2" ng-click="NasalseptumPro2()">偏曲&nbsp;</label>
+                                                                        </div>
+                                                                        <div class="left">
+                                                                            <input type="text" class="form-control" ng-disabled="!FstRegRec.NasalseptumPro2" ng-model="FstRegRec.Nasalseptum" />
+                                                                        </div>
+                                                                        <div class="left">
+                                                                            <label class="control-label left" style="font-weight:600">鼻腔黏膜&nbsp;&nbsp;</label>
+                                                                            <label class="checkbox-inline mgb10 left"><input type="checkbox" ng-model="FstRegRec.Nasalmucosa1" ng-click="Nasalmucosa1()">正常</label>
+                                                                            <label class="checkbox-inline mgb10 left"><input type="checkbox" ng-model="FstRegRec.Nasalmucosa2" ng-click="Nasalmucosa2()">充血</label>
+                                                                        </div>
+                                                                        <div class="left">
+                                                                            <label class="control-label left" style="font-weight:600">&nbsp;&nbsp;鼻胛&nbsp;</label>
+                                                                            <label class="checkbox-inline mgb10 left"><input type="checkbox" ng-model="FstRegRec.Nasalshoulder1" ng-click="Nasalshoulder1()">正常</label>
+                                                                            <label class="checkbox-inline mgb10 left"><input type="checkbox" ng-model="FstRegRec.Nasalshoulder2" ng-click="Nasalshoulder2()">肥大</label>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+
+                                                                <div class="form-group">
+                                                                    <div class="col-sm-12">
+                                                                        <div class="left">
+                                                                            <label class="left label-Style">口：唇</label>
+                                                                            <label class="checkbox-inline mgb10 left"><input type="checkbox" ng-model="FstRegRec.LIP1" ng-click="LIP1()">红润</label>
+                                                                            <label class="checkbox-inline mgb10 left"><input type="checkbox" ng-model="FstRegRec.LIP2" ng-click="LIP2()">紫绀</label>
+                                                                            <label class="checkbox-inline mgb10 left"><input type="checkbox" ng-model="FstRegRec.LIP3" ng-click="LIP3()">苍白&nbsp;</label>
+                                                                        </div>
+                                                                        <div class="left">
+                                                                            <label class="control-label left" style="font-weight:600">&nbsp;&nbsp;舌&nbsp;</label>
+                                                                            <label class="checkbox-inline mgb10 left"><input type="checkbox" ng-model="FstRegRec.Tongue1" ng-click="Tongue1()">伸舌居中</label>
+                                                                            <label class="checkbox-inline mgb10 left"><input type="checkbox" ng-model="FstRegRec.Tongue2" ng-click="Tongue2()">伸舌左偏</label>
+                                                                            <label class="checkbox-inline mgb10 left"><input type="checkbox" ng-model="FstRegRec.Tongue3" ng-click="Tongue3()">伸舌右偏</label>
+                                                                        </div>
+
+                                                                    </div>
+                                                                </div>
+
+                                                                <div class="form-group">
+                                                                    <div class="col-sm-12">
+                                                                        <div class="left">
+                                                                            <label class="left label-Style">口腔黏膜：</label>
+                                                                            <label class="checkbox-inline mgb10 left"><input type="checkbox" ng-model="FstRegRec.OralmucosaPro1" ng-click="OralmucosaPro1()">红润</label>
+                                                                            <label class="checkbox-inline mgb10 left"><input type="checkbox" ng-model="FstRegRec.OralmucosaPro2" ng-click="OralmucosaPro2()">溃疡&nbsp;</label>
+                                                                        </div>
+                                                                        <div class="left">
+                                                                            <input type="text" class="form-control" ng-disabled="!FstRegRec.OralmucosaPro2" ng-model="FstRegRec.Oralmucosa" />
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+
+                                                                <div class="form-group">
+                                                                    <div class="col-sm-12">
+                                                                        <div class="left">
+                                                                            <label class="left label-Style">咽部：&nbsp;&nbsp;牙齿</label>
+                                                                            <label class="checkbox-inline mgb10 left"><input type="checkbox" ng-model="FstRegRec.Tooth1" ng-click="Tooth1()">无充血</label>
+                                                                            <label class="checkbox-inline mgb10 left"><input type="checkbox" ng-model="FstRegRec.Tooth2" ng-click="Tooth2()">充血</label>
+                                                                        </div>
+                                                                        <div class="left">
+                                                                            <label class="control-label left" style="font-weight:600">&nbsp;&nbsp;扁桃体&nbsp;</label>
+                                                                            <label class="checkbox-inline mgb10 left"><input type="checkbox" ng-model="FstRegRec.Tonsil1" ng-click="Tonsil1()">无肿大</label>
+                                                                            <label class="checkbox-inline mgb10 left"><input type="checkbox" ng-model="FstRegRec.Tonsil2" ng-click="Tonsil2()">肿大：</label>
+                                                                        </div>
+                                                                        <div class="left">
+                                                                            <input type="text" class="form-control" ng-disabled="!FstRegRec.Tonsil2" ng-model="FstRegRec.TonsilC" />
+                                                                        </div>
+                                                                        <div class="left">
+                                                                            <label class="control-label left">&nbsp;侧&nbsp;</label>
+                                                                        </div>
+
+                                                                        <div class="left">
+                                                                            <input type="text" class="form-control" ng-disabled="!FstRegRec.Tonsil2" ng-model="FstRegRec.TonsilD" />
+                                                                        </div>
+                                                                        <div class="left">
+                                                                            <label class="control-label left">&nbsp;度&nbsp;</label>
+                                                                        </div>
+                                                                        <div class="left">
+                                                                            <label class="checkbox-inline mgb10 left"><input type="checkbox" ng-model="FstRegRec.TonsilHN1" ng-click="TonsilHN1()">无化脓</label>
+                                                                            <label class="checkbox-inline mgb10 left"><input type="checkbox" ng-model="FstRegRec.TonsilHN2" ng-click="TonsilHN2()">化脓</label>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+
+                                                                <div class="form-group">
+                                                                    <div class="col-sm-12">
+                                                                        <div class="left">
+                                                                            <label class="left label-Style">颈部：&nbsp;&nbsp;气管</label>
+                                                                            <label class="checkbox-inline mgb10 left"><input type="checkbox" ng-model="FstRegRec.Organ1" ng-click="Organ1()">居中</label>
+                                                                            <label class="checkbox-inline mgb10 left"><input type="checkbox" ng-model="FstRegRec.Organ2" ng-click="Organ2()">左偏</label>
+                                                                            <label class="checkbox-inline mgb10 left"><input type="checkbox" ng-model="FstRegRec.Organ3" ng-click="Organ3()">右偏</label>
+                                                                        </div>
+                                                                        <div class="left">
+                                                                            <label class="control-label left" style="font-weight:600">&nbsp;&nbsp;甲状腺&nbsp;</label>
+                                                                            <label class="checkbox-inline mgb10 left"><input type="checkbox" ng-model="FstRegRec.ThyroidGland1" ng-click="ThyroidGland1()">无肿大</label>
+                                                                            <label class="checkbox-inline mgb10 left"><input type="checkbox" ng-model="FstRegRec.ThyroidGland2" ng-click="ThyroidGland2()">肿大</label>
+                                                                        </div>
+                                                                        <div class="left">
+                                                                            <input type="text" class="form-control" ng-disabled="!FstRegRec.ThyroidGland2" ng-model="FstRegRec.ThyroidGlandC" />
+                                                                        </div>
+                                                                        <div class="left">
+                                                                            <label class="control-label left">&nbsp;侧&nbsp;</label>
+                                                                        </div>
+
+                                                                        <div class="left">
+                                                                            <input type="text" class="form-control" ng-disabled="!FstRegRec.ThyroidGland2" ng-model="FstRegRec.ThyroidGlandD" />
+                                                                        </div>
+                                                                        <div class="left">
+                                                                            <label class="control-label left">&nbsp;度&nbsp;</label>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+
+                                                                <div class="form-group">
+                                                                    <div class="col-sm-12">
+                                                                        <div class="left">
+                                                                            <label class="left label-Style">胸部：&nbsp;&nbsp;胸廊</label>
+                                                                            <label class="checkbox-inline mgb10 left"><input type="checkbox" ng-model="FstRegRec.tThoraxFlag" ng-click="tThoraxFlag()">正常</label>
+                                                                            <label class="checkbox-inline mgb10 left"><input type="checkbox" ng-model="FstRegRec.fThoraxFlag" ng-click="fThoraxFlag()">异常&nbsp;</label>
+                                                                        </div>
+                                                                        <div class="left">
+                                                                            <input type="text" class="form-control" ng-disabled="FstRegRec.ThoraxFlag" ng-model="FstRegRec.Thorax" />
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+
+                                                                <div class="form-group">
+                                                                    <div class="col-sm-12">
+                                                                        <div class="left">
+                                                                            <label class="left label-Style">肺：</label>
+                                                                            <label class="checkbox-inline mgb10 left"><input type="checkbox" ng-model="FstRegRec.LungPro1" ng-click="LungPro1()">呼吸音清晰</label>
+                                                                            <label class="checkbox-inline mgb10 left"><input type="checkbox" ng-model="FstRegRec.LungPro2" ng-click="LungPro2()">呼吸音粗</label>
+                                                                            <label class="checkbox-inline mgb10 left"><input type="checkbox" ng-model="FstRegRec.LungPro3" ng-click="LungPro3()">呼吸音粗</label>
+                                                                            <label class="checkbox-inline mgb10 left"><input type="checkbox" ng-model="FstRegRec.LungGLY" ng-click="LungGLYFlag()">干啰音&nbsp;</label>
+                                                                        </div>
+                                                                        <div class="left">
+                                                                            <input type="text" class="form-control" ng-disabled="!FstRegRec.LungGLY" ng-model="FstRegRec.LungG" />
+                                                                        </div>
+                                                                        <div class="left">
+                                                                            <label class="control-label left">&nbsp;侧&nbsp;</label>
+                                                                        </div>
+                                                                        <div class="left">
+                                                                            <label class="checkbox-inline mgb10 left"><input type="checkbox" ng-model="FstRegRec.LungSLY" ng-click="LungSLYFlag()">湿罗音&nbsp;</label>
+                                                                        </div>
+                                                                        <div class="left">
+                                                                            <input type="text" class="form-control" ng-disabled="!FstRegRec.LungSLY" ng-model="FstRegRec.LungS" />
+                                                                        </div>
+                                                                        <div class="left">
+                                                                            <label class="control-label left">&nbsp;侧&nbsp;</label>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+
+                                                                <div class="form-group">
+                                                                    <div class="col-sm-12">
+                                                                        <div class="left">
+                                                                            <label class="left label-Style">心脏：&nbsp;&nbsp;心率</label>
+                                                                            <div class="left">
+                                                                                <input type="text" class="form-control" ng-model="FstRegRec.HeartRate" />
+                                                                            </div>
+                                                                            <div class="left">
+                                                                                <label class="control-label left">&nbsp;次/分&nbsp;</label>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="left">
+                                                                            <label class="control-label left" style="font-weight:600">心律&nbsp;</label>
+                                                                            <label class="checkbox-inline mgb10 left"><input type="checkbox" ng-model="FstRegRec.tHeartrhythmFlag" ng-click="tHeartrhythmFlag()">齐</label>
+                                                                            <label class="checkbox-inline mgb10 left"><input type="checkbox" ng-model="FstRegRec.fHeartrhythmFlag" ng-click="fHeartrhythmFlag()">不齐&nbsp;</label>
+                                                                        </div>
+                                                                        <div class="left">
+                                                                            <input type="text" class="form-control" ng-disabled="FstRegRec.HeartrhythmFlag" ng-model="FstRegRec.HeartRhythm" />
+                                                                        </div>
+                                                                        <div class="left">
+                                                                            <label class="control-label left" style="font-weight:600">心音&nbsp;</label>
+                                                                            <label class="checkbox-inline mgb10 left"><input type="checkbox" ng-model="FstRegRec.HeartSound1" ng-click="HeartSound1()">有力</label>
+                                                                            <label class="checkbox-inline mgb10 left"><input type="checkbox" ng-model="FstRegRec.HeartSound2" ng-click="HeartSound2()">迟钝</label>
+                                                                            <label class="checkbox-inline mgb10 left"><input type="checkbox" ng-model="FstRegRec.HeartSound3" ng-click="HeartSound3()">强弱不等</label>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+
+                                                                <div class="form-group">
+                                                                    <div class="col-sm-12">
+                                                                        <div class="left">
+                                                                            <div class="left">
+                                                                                <label class="left label-Style">乳房：</label>
+                                                                                <label class="checkbox-inline mgb10 left"><input type="checkbox" ng-model="FstRegRec.BreastDC" ng-click="BreastDCFlag()">对称</label>
+                                                                                <label class="checkbox-inline mgb10 left"><input type="checkbox" ng-model="FstRegRec.BreastBK" ng-click="BreastBKFlag()">包块（描述部位、大小、疼痛、质地等）</label>
+                                                                            </div>
+                                                                            <div class="left">
+                                                                                <input type="text" class="form-control" ng-disabled="!FstRegRec.BreastBK" ng-model="FstRegRec.Breast" />
+                                                                            </div>
+                                                                            <div class="left">
+                                                                                <label class="control-label left">&nbsp;其它&nbsp;</label>
+                                                                            </div>
+                                                                            <div class="left">
+                                                                                <input type="text" class="form-control" ng-model="FstRegRec.OtherBreast" />
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+
+                                                                <div class="form-group">
+                                                                    <div class="col-sm-12">
+                                                                        <div class="left">
+                                                                            <div class="left">
+                                                                                <label class="left label-Style">乳头：</label>
+                                                                                <label class="checkbox-inline mgb10 left"><input type="checkbox" ng-model="FstRegRec.NipplePro1" ng-click="NipplePro1()">正常</label>
+                                                                                <label class="checkbox-inline mgb10 left"><input type="checkbox" ng-model="FstRegRec.NipplePro2" ng-click="NipplePro2()">内陷</label>
+                                                                                <label class="checkbox-inline mgb10 left"><input type="checkbox" ng-model="FstRegRec.NippleFMWPro1" ng-click="NippleFMWPro1()">无分泌物</label>
+                                                                                <label class="checkbox-inline mgb10 left"><input type="checkbox" ng-model="FstRegRec.NippleFMWPro2" ng-click="NippleFMWPro2()">有分泌物&nbsp;</label>
+                                                                            </div>
+                                                                            <div class="left">
+                                                                                <input type="text" class="form-control" ng-disabled="!FstRegRec.NippleFMWPro2" ng-model="FstRegRec.Nipple" />
+                                                                            </div>
+                                                                            <div class="left">
+                                                                                <label class="control-label left">&nbsp;其它&nbsp;</label>
+                                                                            </div>
+                                                                            <div class="left">
+                                                                                <input type="text" class="form-control" ng-model="FstRegRec.OtherNipple" />
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+
+                                                                <div class="form-group">
+                                                                    <div class="col-sm-12">
+                                                                        <div class="left">
+                                                                            <div class="left">
+                                                                                <label class="left label-Style">腹部：</label>
+                                                                                <label class="checkbox-inline mgb10 left"><input type="checkbox" ng-model="FstRegRec.AbdomenPro1" ng-click="AbdomenPro1()">服软无压痛</label>
+                                                                                <label class="checkbox-inline mgb10 left"><input type="checkbox" ng-model="FstRegRec.AbdomenBZF" ng-click="AbdomenBZFFlag()">板状腹</label>
+                                                                                <label class="checkbox-inline mgb10 left"><input type="checkbox" ng-model="FstRegRec.AbdomenPro2" ng-click="AbdomenPro2()">压痛(描述部位/性质)&nbsp;</label>
+                                                                            </div>
+                                                                            <div class="left">
+                                                                                <input type="text" class="form-control" ng-disabled="!FstRegRec.AbdomenPro2" ng-model="FstRegRec.Abdomen" />
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+
+                                                                <div class="form-group">
+                                                                    <div class="col-sm-12">
+                                                                        <div class="left">
+                                                                            <div class="left">
+                                                                                <label class="left label-Style">肠鸣音：</label>
+                                                                                <label class="checkbox-inline mgb10 left"><input type="checkbox" ng-model="FstRegRec.BowelSounDPro1" ng-click="BowelSounDPro1()">正常</label>
+                                                                                <label class="checkbox-inline mgb10 left"><input type="checkbox" ng-model="FstRegRec.BowelSounDPro2" ng-click="BowelSounDPro2()">亢进&nbsp;</label>
+                                                                            </div>
+                                                                            <div class="left">
+                                                                                <input type="text" class="form-control" ng-disabled="!FstRegRec.BowelSounDPro2" ng-model="FstRegRec.BowelSoundKJ" />
+                                                                            </div>
+                                                                            <div class="left">
+                                                                                <label class="control-label left">&nbsp;次/分&nbsp;</label>
+                                                                            </div>
+                                                                            <div class="left">
+                                                                                <label class="checkbox-inline mgb10 left"><input type="checkbox" ng-model="FstRegRec.BowelSounDPro3" ng-click="BowelSounDPro3()">减弱&nbsp;</label>
+                                                                            </div>
+                                                                            <div class="left">
+                                                                                <input type="text" class="form-control" ng-disabled="!FstRegRec.BowelSounDPro3" ng-model="FstRegRec.BowelSoundJR" />
+                                                                            </div>
+                                                                            <div class="left">
+                                                                                <label class="control-label left">&nbsp;次/分&nbsp;</label>
+                                                                            </div>
+                                                                            <div class="left">
+                                                                                <label class="control-label left">&nbsp;其它&nbsp;</label>
+                                                                            </div>
+                                                                            <div class="left">
+                                                                                <input type="text" class="form-control" ng-model="FstRegRec.OtherBowelSound" />
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+
+                                                                <div class="form-group">
+                                                                    <div class="col-sm-12">
+                                                                        <div class="left">
+                                                                            <div class="left">
+                                                                                <label class="left label-Style">脊柱四肢：</label>
+                                                                                <label class="checkbox-inline mgb10 left"><input type="checkbox" ng-model="FstRegRec.SpinelimbsPro1" ng-click="SpinelimbsPro1()">活动自如</label>
+                                                                                <label class="checkbox-inline mgb10 left"><input type="checkbox" ng-model="FstRegRec.SpinelimbsPro2" ng-click="SpinelimbsPro2()">活动受限(部位)&nbsp;</label>
+                                                                            </div>
+                                                                            <div class="left">
+                                                                                <input type="text" class="form-control" ng-disabled="!FstRegRec.SpinelimbsPro2" ng-model="FstRegRec.Spinelimbsbw" />
+                                                                                &nbsp;&nbsp;
+                                                                            </div>
+                                                                            <div class="left">
+                                                                                <label class="checkbox-inline mgb10 left"><input type="checkbox" ng-model="FstRegRec.SpinelimbsJXPro1" ng-click="SpinelimbsJXPro1()">无畸形</label>
+                                                                                <label class="checkbox-inline mgb10 left"><input type="checkbox" ng-model="FstRegRec.SpinelimbsJXPro2" ng-click="SpinelimbsJXPro2()">畸形&nbsp;</label>
+                                                                            </div>
+                                                                            <div class="left">
+                                                                                <input type="text" class="form-control" ng-disabled="!FstRegRec.SpinelimbsPro4" ng-model="FstRegRec.Spinelimbsjx" />
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+
+                                                                <div class="form-group">
+                                                                    <div class="col-sm-12">
+                                                                        <div class="left">
+                                                                            <div class="left">
+                                                                                <label class="left label-Style">肛门及外生殖器：</label>
+                                                                                <label class="checkbox-inline mgb10 left"><input type="checkbox" ng-model="FstRegRec.AnusgenitaliaPro1" ng-click="AnusgenitaliaPro1()">外观正常</label>
+                                                                                <label class="checkbox-inline mgb10 left"><input type="checkbox" ng-model="FstRegRec.AnusgenitaliaPro2" ng-click="AnusgenitaliaPro2()">内痔</label>
+                                                                                <label class="checkbox-inline mgb10 left"><input type="checkbox" ng-model="FstRegRec.AnusgenitaliaPro3" ng-click="AnusgenitaliaPro3()">外痔</label>
+                                                                                <label class="checkbox-inline mgb10 left"><input type="checkbox" ng-model="FstRegRec.AnusgenitaliaPro4" ng-click="AnusgenitaliaPro4()">其它&nbsp;</label>
+                                                                            </div>
+                                                                            <div class="left">
+                                                                                <input type="text" class="form-control" ng-disabled="!FstRegRec.AnusgenitaliaPro4" ng-model="FstRegRec.OtherAnusgenitaliaPro" />
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+
+                                                                <div class="form-group">
+                                                                    <div class="col-sm-12">
+                                                                        <div class="left">
+                                                                            <div class="left">
+                                                                                <label class="left label-Style">神经系统：</label>
+                                                                                <label class="checkbox-inline mgb10 left"><input type="checkbox" ng-model="FstRegRec.Nervous1" ng-click="Nervous1()">肌力正常</label>
+                                                                                <label class="checkbox-inline mgb10 left"><input type="checkbox" ng-model="FstRegRec.Nervous2" ng-click="Nervous2()">肌力减弱&nbsp;</label>
+                                                                            </div>
+                                                                            <div class="left">
+                                                                                <input type="text" class="form-control" ng-disabled="!FstRegRec.Nervous2" ng-model="FstRegRec.Nervousc" />
+                                                                            </div>
+                                                                            <div class="left">
+                                                                                <label class="control-label left">&nbsp;侧&nbsp;</label>
+                                                                            </div>
+                                                                            <div class="left">
+                                                                                <input type="text" class="form-control" ng-disabled="!FstRegRec.Nervous2" ng-model="FstRegRec.Nervousl" />
+                                                                            </div>
+                                                                            <div class="left">
+                                                                                <label class="control-label left">&nbsp;级&nbsp;</label>
+                                                                            </div>
+                                                                            <div class="left">
+                                                                                <label class="checkbox-inline mgb10 left"><input type="checkbox" ng-model="FstRegRec.Nervous3" ng-click="Nervous3()">其它&nbsp;</label>
+                                                                            </div>
+                                                                            <div class="left">
+                                                                                <input type="text" class="form-control" ng-disabled="!FstRegRec.Nervous3" ng-model="FstRegRec.OtherNervous" />
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+
+                                                                <div class="form-group">
+                                                                    <div class="col-sm-12">
+                                                                        <div class="left">
+                                                                            <label class="left label-Style">其他专科体查：</label>
+                                                                        </div>
+                                                                        <div>
+                                                                            <textarea class="form-control" rows="3" ng-model="FstRegRec.OtheRdeptexam" maxlength="500"/>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+
+                                                                <div class="form-group">
+                                                                    <div class="col-sm-12">
+                                                                        <div class="left">
+                                                                            <div class="left">
+                                                                                <label class="left label-Style">疼痛情况：</label>
+                                                                                <label class="checkbox-inline mgb10 left"><input type="checkbox" ng-model="FstRegRec.tPainFlag" ng-click="tPainFlag()">无</label>
+                                                                                <label class="checkbox-inline mgb10 left"><input type="checkbox" ng-model="FstRegRec.fPainFlag" ng-click="fPainFlag()">有&nbsp;</label>
+                                                                            </div>
+                                                                            <div class="left">
+                                                                                <input type="text" class="form-control" ng-disabled="!FstRegRec.fPainFlag" ng-model="FstRegRec.PainScore" />
+                                                                            </div>
+                                                                            <div class="left">
+                                                                                <label class="control-label left">&nbsp;分，</label>
+                                                                            </div>
+                                                                            <div class="left">
+                                                                                <label class="control-label left">疼痛部位：&nbsp;</label>
+                                                                            </div>
+                                                                            <div class="left">
+                                                                                <input type="text" class="form-control" ng-disabled="!FstRegRec.fPainFlag" ng-model="FstRegRec.PainPosition" />
+                                                                            </div>
+                                                                            <div class="left">
+                                                                                <label class="control-label left">&nbsp;性质：&nbsp;</label>
+                                                                            </div>
+                                                                            <div class="left">
+                                                                                <input type="text" class="form-control" ng-disabled="!FstRegRec.fPainFlag" ng-model="FstRegRec.PainProperty" />
+                                                                            </div>
+                                                                            <div class="left">
+                                                                                <label class="control-label left">&nbsp;频率：&nbsp;</label>
+                                                                            </div>
+                                                                            <div class="left">
+                                                                                <input type="text" class="form-control" ng-disabled="!FstRegRec.fPainFlag" ng-model="FstRegRec.PainFreq" />
+                                                                            </div>
+                                                                            <div class="left">
+                                                                                <label class="control-label left">（0分以上需描述）</label>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                            <div class="tab-pane fade" id="box_tab3">
+                                                <table class="table table-Style  table-bordered">
+                                                    <tbody>
+                                                        <tr>
+                                                            <td><label class="left" style="font-weight:600">营养需求：</label></td>
+                                                            <td>
+                                                                <div class="left">
+                                                                    <label class="control-label left" style="font-weight:600">BMI&nbsp;&nbsp;</label>
+                                                                </div>
+                                                                <div class="left">
+                                                                    <input type="text" class="form-control left" ng-disabled="true" ng-model="FstRegRec.BMI" />
+                                                                </div>
+                                                                <div class="left">
+                                                                    <label class="control-label left" style="font-weight:600">&nbsp;&nbsp;{{FstRegRec.BMIFruit}}&nbsp;&nbsp;</label>
+                                                                </div>
+                                                                <div class="left">
+                                                                    <label class="control-label left">（BMI=体重（km）÷身高m２）&nbsp;&nbsp;</label>
+                                                                </div>
+                                                                <div class="left">
+                                                                    <label class="checkbox-inline mgb10 left"><input type="checkbox" ng-model="FstRegRec.fNutritionalFlag" ng-click="fNutritionalFlag()">无</label>
+                                                                    <label class="checkbox-inline mgb10 left"><input type="checkbox" ng-model="FstRegRec.tNutritionalFlag" ng-click="tNutritionalFlag()">有&nbsp;&nbsp;</label>
+                                                                </div>
+                                                                <div class="left width40">
+                                                                    <input type="text" class="form-control" ng-disabled="!FstRegRec.NutritionalFlag" ng-model="FstRegRec.Nutritional" />
+                                                                </div>
+                                                            </td>
+                                                        </tr>
+
+                                                        <tr>
+                                                            <td><label class="left" style="font-weight:600">康复需求：</label></td>
+                                                            <td>
+                                                                <div class="left">
+                                                                    <label class="checkbox-inline mgb10 left"><input type="checkbox" ng-model="FstRegRec.tRehagNeeds" ng-click="tRehagNeeds()">无</label>
+                                                                    <label class="checkbox-inline mgb10 left"><input type="checkbox" ng-model="FstRegRec.fRehagNeeds" ng-click="fRehagNeeds()">有</label>
+                                                                </div>
+                                                                <div class="left">
+                                                                    <label class="control-label left" style="font-weight:600">&nbsp;&nbsp;特殊需求 牙齿：&nbsp;</label>
+                                                                    <label class="checkbox-inline mgb10 left"><input type="checkbox" ng-model="FstRegRec.SpecialNeedsTooth1" ng-click="SpecialNeedsTooth1()">正常</label>
+                                                                    <label class="checkbox-inline mgb10 left"><input type="checkbox" ng-model="FstRegRec.SpecialNeedsTooth2" ng-click="SpecialNeedsTooth2()">异常</label>
+                                                                    <label class="checkbox-inline mgb10 left"><input type="checkbox" ng-model="FstRegRec.SpecialNeedsTooth3" ng-click="SpecialNeedsTooth3()">假牙</label>
+
+                                                                    <label class="control-label left" style="font-weight:600">&nbsp;&nbsp;听力：&nbsp;</label>
+                                                                    <label class="checkbox-inline mgb10 left"><input type="checkbox" ng-model="FstRegRec.SpecialNeedHear1" ng-click="SpecialNeedHear1()">正常</label>
+                                                                    <label class="checkbox-inline mgb10 left"><input type="checkbox" ng-model="FstRegRec.SpecialNeedHear2" ng-click="SpecialNeedHear2()">异常：</label>
+                                                                    <label class="checkbox-inline mgb10 left"><input type="checkbox" ng-model="FstRegRec.SpecialNeedHearpos1" ng-click="SpecialNeedHearpos1()">左</label>
+                                                                    <label class="checkbox-inline mgb10 left"><input type="checkbox" ng-model="FstRegRec.SpecialNeedHearpos2" ng-click="SpecialNeedHearpos2()">右</label>
+                                                                </div>
+                                                                <div>
+                                                                    <label class="control-label left" style="font-weight:600">&nbsp;&nbsp;视力 ：&nbsp;</label>
+                                                                    <label class="checkbox-inline mgb10 left"><input type="checkbox" ng-model="FstRegRec.SpecialNeedVision1" ng-click="SpecialNeedVision1()">正常</label>
+                                                                    <label class="checkbox-inline mgb10 left"><input type="checkbox" ng-model="FstRegRec.SpecialNeedVision2" ng-click="SpecialNeedVision2()">异常：</label>
+                                                                    <label class="checkbox-inline mgb10 left"><input type="checkbox" ng-model="FstRegRec.SpecialNeedVisionPos1" ng-click="SpecialNeedVisionPos1()">左</label>
+                                                                    <label class="checkbox-inline mgb10 left"><input type="checkbox" ng-model="FstRegRec.SpecialNeedVisionPos2" ng-click="SpecialNeedVisionPos2()">右</label>
+                                                                </div>
+
+                                                            </td>
+                                                        </tr>
+
+                                                        <tr>
+                                                            <td><label class="left" style="font-weight:600">教育需求：</label></td>
+                                                            <td>
+                                                                <div class="left">
+                                                                    <label class="control-label left" style="font-weight:600">宣教对象：&nbsp;&nbsp;</label>
+                                                                    <label class="checkbox-inline mgb10 left"><input type="checkbox" ng-model="FstRegRec.Missionobj1" ng-click="Missionobj1()">客户</label>
+                                                                    <label class="checkbox-inline mgb10 left"><input type="checkbox" ng-model="FstRegRec.Missionobj2" ng-click="Missionobj2()">家属</label>
+                                                                </div>
+                                                                <div class="left">
+                                                                    <label class="control-label left" style="font-weight:600">&nbsp;&nbsp;学习能力：&nbsp;</label>
+                                                                    <label class="checkbox-inline mgb10 left"><input type="checkbox" ng-model="FstRegRec.tLearnAbility" ng-click="tLearnAbility()">有</label>
+                                                                    <label class="checkbox-inline mgb10 left"><input type="checkbox" ng-model="FstRegRec.fLearnAbility" ng-click="fLearnAbility()">无</label>
+                                                                </div>
+                                                                <div class="left">
+                                                                    <label class="control-label left" style="font-weight:600">&nbsp;&nbsp;学习意愿：&nbsp;</label>
+                                                                    <label class="checkbox-inline mgb10 left"><input type="checkbox" ng-model="FstRegRec.LearnWish1" ng-click="LearnWish1()">高</label>
+                                                                    <label class="checkbox-inline mgb10 left"><input type="checkbox" ng-model="FstRegRec.LearnWish2" ng-click="LearnWish2()">低</label>
+                                                                </div>
+                                                                <div class="left">
+                                                                    <label class="control-label left" style="font-weight:600">&nbsp;&nbsp;学习需求：&nbsp;</label>
+                                                                    <label class="checkbox-inline mgb10 left"><input type="checkbox" ng-model="FstRegRec.tLearnNeedFlag" ng-click="tLearnNeedFlag()">无</label>
+                                                                    <label class="checkbox-inline mgb10 left"><input type="checkbox" ng-model="FstRegRec.fLearnNeedFlag" ng-click="fLearnNeedFlag()">有</label>
+                                                                </div>
+                                                                <div class="left width40">
+                                                                    <input type="text" class="form-control" ng-disabled="!FstRegRec.fLearnNeedFlag" ng-model="FstRegRec.LearnNeed" />
+                                                                </div>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td><label class="left" style="font-weight:600">初步诊断：</label></td>
+                                                            <td><textarea class="form-control" rows="3" ng-model="FstRegRec.TentativeDiag" maxlength="500" select-items="初步诊断" /></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td><label class="left" style="font-weight:600">诊疗计划：</label></td>
+                                                            <td><textarea class="form-control" rows="3" ng-model="FstRegRec.Plan" maxlength="500" select-items="诊疗计划" /></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td><label class="left" style="font-weight:600">处理：</label></td>
+                                                            <td><textarea class="form-control" rows="3" ng-model="FstRegRec.Handle" maxlength="500" select-items="处理" /></td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </form>
+                                <div class="row">
+                                    <div class="col-md-12 text-right">
+                                        <button type="button" class="btn btn-primary" ng-click="save()">保存</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- /基本信息 -->
+                    </div>
+                </div>
+            </div>
+
+            <div class="footer-tools">
+                <span class="go-top" back-to-top>
+                    <i class="fa fa-chevron-up"></i> Top
+                </span>
+            </div>
+        </div>
+    </div>
+</form>

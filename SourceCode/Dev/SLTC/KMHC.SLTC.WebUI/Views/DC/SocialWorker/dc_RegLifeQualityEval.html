@@ -1,0 +1,894 @@
+<!--家庭照顾者生活品质评估问卷-->
+<!---->
+<link href="../../../Content/socialworker.css" rel="stylesheet" />
+
+<div class="row">
+    <div id="content" class="col-md-12">
+        <div class="row">
+            <div class="col-md-2">
+                <div class="marginLeft5">
+                    <resident-list feeno={{FeeNo}} callback="residentSelected(resident)" />
+                </div>
+
+            </div>
+            <div class="col-md-10 marginTop5">
+                <div class="col-md-12">
+                    <div class="panel panel-default">
+                        <div class="panel-body">
+                            <button class="btn btn-default" ng-disabled="buttonShow" ng-click="currentItem={}"><i class="fa fa-plus"></i> 新增品质问卷</button>
+
+                            <button class="btn btn-primary" ng-click="saveForm(currentItem)" ng-disabled="buttonShow"><i class="fa fa-save"></i> 保存</button>
+
+                            <button class="btn btn-warning" ng-disabled="buttonShow" ng-click="PrintPreview()"><i class="fa fa-print"></i> 打印预览</button>
+                            <button class="btn btn-primary" ng-disabled="buttonShow" ng-click="DownloadWord()"><i class="fa fa-reply"></i>&nbsp; 导出</button>
+                            <button class="btn btn-info" ng-disabled="buttonShow" ng-click="showHistory()"><i class="fa fa-list"></i> 历次记录</button>
+                            <a class="fa fa-fastnav pull-right" href="/dc/SocialNavigate/{{FeeNo}}"></a>
+                        </div>
+                    </div>
+                    <div class="panel panel-default">
+                        <div class="panel-body">
+                            <form class="form-horizontal" name="rlqForm" role="form" novalidate>
+                                <div class="content">
+
+                                    <div style="margin-bottom:5px;" class="col-md-12">
+                                        <div style="text-align:center;font-size:24px;font-weight:700;line-height:36px;font-family: DFKai-SB;">
+
+                                            <table style="border:none;margin-top:5px;" class="col-md-7">
+                                                <tr>
+                                                    <td class="tdBord_T tdBord_R tdBord_L tdBord_B font25">
+                                                        <h3><strong>{{Org}}老人日间照顾中心</strong></h3>
+                                                        <h4><strong>家庭照顾者生活品质评估问卷</strong></h4>
+                                                    </td>
+
+                                                </tr>
+                                                <tr>
+                                                    <td class="tdBord_T tdBord_R tdBord_L tdBord_B font16 fsl">
+                                                        <div>
+                                                            以下问题是有关您的生活品质的评估问卷，<br />
+                                                            当您想到您的生活时，有许多不同层面，有一些下面有列出，请思考每一个项目，并用四个形容词：<span style="text-decoration:underline" class="text-decoration">差、尚可、好或非常好</span>，来评选您目前各方面的生活品质。请根据您目前的生活来评量（如过去这几周），若您对题目有任何疑问，可请问卷提供者协助。<br />
+                                                            <!--<font style="text-decoration:underline" class="text-decoration">请您在□中以打勾的方式，填写下列题目。</font>-->
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                            </table>
+                                        </div>
+                                        <div class="col-md-7 font16 spantitle">
+                                            <div class="form-group">
+                                                <label class="col-sm-3 control-label" for="inputEmail3">个案姓名:{{currentResident.Name}}</label>
+                                                <label class="col-sm-2 control-label" for="inputPassword3">性别:{{currentResident.Sex}}</label>
+                                                <label class="col-sm-4 control-label" for="inputPassword3">出生日期:{{currentResident.BirthDate | dateFormat}}</label>
+
+                                                <label class="col-sm-3 control-label" for="inputPassword3">日字号:{{currentResident.ResidentNo}}</label>
+                                            </div>
+
+                                        </div>
+
+                                    </div>
+                                    <div style="margin-bottom:5px;border:2px solid #000;padding:1px;" class="col-md-7 tb">
+                                        <form class="form-horizontal" name="rlqForm" role="form" novalidate>
+                                            <table class="col-md-12">
+                                                <tr class="hieght50">
+                                                    <td class="col-md-2 tdlbl">题目</td>
+                                                    <td class="col-md-2 tdlbl">差</td>
+                                                    <td class="col-md-2 tdlbl">尚可</td>
+                                                    <td class="col-md-2 tdlbl">好</td>
+                                                    <td class="col-md-2 tdlbl">非常好</td>
+                                                </tr>
+                                                <tr class="height40">
+                                                    <td class="col-md-2 tdlbl">1.身体健康</td>
+                                                    <td class="col-md-2" ng-click="currentItem.Health='差'">
+                                                        <table style="border:none">
+                                                            <tr>
+                                                                <td style="border:none">
+                                                                    <input name="Health" ng-model="currentItem.Health" type="radio" value="差">
+                                                                </td>
+                                                                <td style="border:none">
+                                                                    <label class="lbLeft">差</label>
+                                                                </td>
+
+                                                            </tr>
+                                                        </table>
+                                                    </td>
+                                                    <td class="col-md-2" ng-click="currentItem.Health='尚可'">
+                                                        <table style="border:none">
+                                                            <tr>
+                                                                <td style="border:none">
+                                                                    <input name="Health" ng-model="currentItem.Health" type="radio" value="尚可">
+                                                                </td>
+                                                                <td style="border:none">
+                                                                    <label class="lbLeft">尚可</label>
+                                                                </td>
+
+                                                            </tr>
+                                                        </table>
+                                                    </td>
+                                                    <td class="col-md-2" ng-click="currentItem.Health='好'">
+                                                        <table style="border:none">
+                                                            <tr>
+                                                                <td style="border:none">
+                                                                    <input name="Health" ng-model="currentItem.Health" type="radio" value="好">
+                                                                </td>
+                                                                <td style="border:none">
+                                                                    <label class="lbLeft">好</label>
+                                                                </td>
+
+                                                            </tr>
+                                                        </table>
+                                                    </td>
+                                                    <td class="col-md-2" ng-click="currentItem.Health='非常好'">
+                                                        <table style="border:none">
+                                                            <tr>
+                                                                <td style="border:none">
+                                                                    <input name="Health" ng-model="currentItem.Health" type="radio" value="非常好">
+                                                                </td>
+                                                                <td style="border:none">
+                                                                    <label class="lbLeft">非常好</label>
+                                                                </td>
+
+                                                            </tr>
+                                                        </table>
+                                                    </td>
+                                                </tr>
+                                                <tr class="height40">
+                                                    <td class="col-md-2 tdlbl">2.精力</td>
+                                                    <td class="col-md-2" ng-click="currentItem.Energy='差'">
+                                                        <table style="border:none">
+                                                            <tr>
+                                                                <td style="border:none">
+                                                                    <input name="Energy" ng-model="currentItem.Energy" type="radio" value="差">
+                                                                </td>
+                                                                <td style="border:none">
+                                                                    <label class="lbLeft">差</label>
+                                                                </td>
+
+                                                            </tr>
+                                                        </table>
+                                                    </td>
+                                                    <td class="col-md-2" ng-click="currentItem.Energy='尚可'">
+                                                        <table style="border:none">
+                                                            <tr>
+                                                                <td style="border:none">
+                                                                    <input name="Energy" ng-model="currentItem.Energy" type="radio" value="尚可">
+                                                                </td>
+                                                                <td style="border:none">
+                                                                    <label class="lbLeft">尚可</label>
+                                                                </td>
+
+                                                            </tr>
+                                                        </table>
+                                                    </td>
+                                                    <td class="col-md-2" ng-click="currentItem.Energy='好'">
+                                                        <table style="border:none">
+                                                            <tr>
+                                                                <td style="border:none">
+                                                                    <input name="Energy" ng-model="currentItem.Energy" type="radio" value="好">
+                                                                </td>
+                                                                <td style="border:none">
+                                                                    <label class="lbLeft">好</label>
+                                                                </td>
+
+                                                            </tr>
+                                                        </table>
+                                                    </td>
+                                                    <td class="col-md-2" ng-click="currentItem.Energy='非常好'">
+                                                        <table style="border:none">
+                                                            <tr>
+                                                                <td style="border:none">
+                                                                    <input name="Energy" ng-model="currentItem.Energy" type="radio" value="非常好">
+                                                                </td>
+                                                                <td style="border:none">
+                                                                    <label class="lbLeft">非常好</label>
+                                                                </td>
+
+                                                            </tr>
+                                                        </table>
+                                                    </td>
+                                                </tr>
+                                                <tr class="height40">
+                                                    <td class="col-md-2 tdlbl">3.心情</td>
+                                                    <td class="col-md-2" ng-click="currentItem.Mood='差'">
+                                                        <table style="border:none">
+                                                            <tr>
+                                                                <td style="border:none">
+                                                                    <input name="Mood" ng-model="currentItem.Mood" type="radio" value="差">
+                                                                </td>
+                                                                <td style="border:none">
+                                                                    <label class="lbLeft">差</label>
+                                                                </td>
+
+                                                            </tr>
+                                                        </table>
+                                                    </td>
+                                                    <td class="col-md-2" ng-click="currentItem.Mood='尚可'">
+                                                        <table style="border:none">
+                                                            <tr>
+                                                                <td style="border:none">
+                                                                    <input name="Mood" ng-model="currentItem.Mood" type="radio" value="尚可">
+                                                                </td>
+                                                                <td style="border:none">
+                                                                    <label class="lbLeft">尚可</label>
+                                                                </td>
+
+                                                            </tr>
+                                                        </table>
+                                                    </td>
+                                                    <td class="col-md-2" ng-click="currentItem.Mood='好'">
+                                                        <table style="border:none">
+                                                            <tr>
+                                                                <td style="border:none">
+                                                                    <input name="Mood" ng-model="currentItem.Mood" type="radio" value="好">
+                                                                </td>
+                                                                <td style="border:none">
+                                                                    <label class="lbLeft">好</label>
+                                                                </td>
+
+                                                            </tr>
+                                                        </table>
+                                                    </td>
+                                                    <td class="col-md-2" ng-click="currentItem.Mood='非常好'">
+                                                        <table style="border:none">
+                                                            <tr>
+                                                                <td style="border:none">
+                                                                    <input name="Mood" ng-model="currentItem.Mood" type="radio" value="非常好">
+                                                                </td>
+                                                                <td style="border:none">
+                                                                    <label class="lbLeft">非常好</label>
+                                                                </td>
+
+                                                            </tr>
+                                                        </table>
+                                                    </td>
+                                                </tr>
+                                                <tr class="height40">
+                                                    <td class="col-md-2 tdlbl">4.住家环境</td>
+                                                    <td class="col-md-2" ng-click="currentItem.LivingCondition='差'">
+                                                        <table style="border:none">
+                                                            <tr>
+                                                                <td style="border:none">
+                                                                    <input name="LivingCondition" ng-model="currentItem.LivingCondition" type="radio" value="差">
+                                                                </td>
+                                                                <td style="border:none">
+                                                                    <label class="lbLeft">差</label>
+                                                                </td>
+
+                                                            </tr>
+                                                        </table>
+                                                    </td>
+                                                    <td class="col-md-2" ng-click="currentItem.LivingCondition='尚可'">
+                                                        <table style="border:none">
+                                                            <tr>
+                                                                <td style="border:none">
+                                                                    <input name="LivingCondition" ng-model="currentItem.LivingCondition" type="radio" value="尚可">
+                                                                </td>
+                                                                <td style="border:none">
+                                                                    <label class="lbLeft">尚可</label>
+                                                                </td>
+
+                                                            </tr>
+                                                        </table>
+                                                    </td>
+                                                    <td class="col-md-2" ng-click="currentItem.LivingCondition='好'">
+                                                        <table style="border:none">
+                                                            <tr>
+                                                                <td style="border:none">
+                                                                    <input name="LivingCondition" ng-model="currentItem.LivingCondition" type="radio" value="好">
+                                                                </td>
+                                                                <td style="border:none">
+                                                                    <label class="lbLeft">好</label>
+                                                                </td>
+
+                                                            </tr>
+                                                        </table>
+                                                    </td>
+                                                    <td class="col-md-2" ng-click="currentItem.LivingCondition='非常好'">
+                                                        <table style="border:none">
+                                                            <tr>
+                                                                <td style="border:none">
+                                                                    <input name="LivingCondition" ng-model="currentItem.LivingCondition" type="radio" value="非常好">
+                                                                </td>
+                                                                <td style="border:none">
+                                                                    <label class="lbLeft">非常好</label>
+                                                                </td>
+
+                                                            </tr>
+                                                        </table>
+                                                    </td>
+                                                </tr>
+                                                <tr class="height40">
+                                                    <td class="col-md-2 tdlbl">5.记忆</td>
+                                                    <td class="col-md-2" ng-click="currentItem.Memory='差'">
+                                                        <table style="border:none">
+                                                            <tr>
+                                                                <td style="border:none">
+                                                                    <input name="Memory" ng-model="currentItem.Memory" type="radio" value="差">
+                                                                </td>
+                                                                <td style="border:none">
+                                                                    <label class="lbLeft">差</label>
+                                                                </td>
+
+                                                            </tr>
+                                                        </table>
+                                                    </td>
+                                                    <td class="col-md-2" ng-click="currentItem.Memory='尚可'">
+                                                        <table style="border:none">
+                                                            <tr>
+                                                                <td style="border:none">
+                                                                    <input name="Memory" ng-model="currentItem.Memory" type="radio" value="尚可">
+                                                                </td>
+                                                                <td style="border:none">
+                                                                    <label class="lbLeft">尚可</label>
+                                                                </td>
+
+                                                            </tr>
+                                                        </table>
+                                                    </td>
+                                                    <td class="col-md-2" ng-click="currentItem.Memory='好'">
+                                                        <table style="border:none">
+                                                            <tr>
+                                                                <td style="border:none">
+                                                                    <input name="Memory" ng-model="currentItem.Memory" type="radio" value="好">
+                                                                </td>
+                                                                <td style="border:none">
+                                                                    <label class="lbLeft">好</label>
+                                                                </td>
+
+                                                            </tr>
+                                                        </table>
+                                                    </td>
+                                                    <td class="col-md-2" ng-click="currentItem.Memory='非常好'">
+                                                        <table style="border:none">
+                                                            <tr>
+                                                                <td style="border:none">
+                                                                    <input name="Memory" ng-model="currentItem.Memory" type="radio" value="非常好">
+                                                                </td>
+                                                                <td style="border:none">
+                                                                    <label class="lbLeft">非常好</label>
+                                                                </td>
+
+                                                            </tr>
+                                                        </table>
+                                                    </td>
+                                                </tr>
+
+                                                <tr class="height40">
+                                                    <td class="col-md-2 tdlbl">6.家庭</td>
+                                                    <td class="col-md-2" ng-click="currentItem.Family='差'">
+                                                        <table style="border:none">
+                                                            <tr>
+                                                                <td style="border:none">
+                                                                    <input name="Family" ng-model="currentItem.Family" type="radio" value="差">
+                                                                </td>
+                                                                <td style="border:none">
+                                                                    <label class="lbLeft">差</label>
+                                                                </td>
+
+                                                            </tr>
+                                                        </table>
+                                                    </td>
+                                                    <td class="col-md-2" ng-click="currentItem.Family='尚可'">
+                                                        <table style="border:none">
+                                                            <tr>
+                                                                <td style="border:none">
+                                                                    <input name="Family" ng-model="currentItem.Family" type="radio" value="尚可">
+                                                                </td>
+                                                                <td style="border:none">
+                                                                    <label class="lbLeft">尚可</label>
+                                                                </td>
+
+                                                            </tr>
+                                                        </table>
+                                                    </td>
+                                                    <td class="col-md-2" ng-click="currentItem.Family='好'">
+                                                        <table style="border:none">
+                                                            <tr>
+                                                                <td style="border:none">
+                                                                    <input name="Family" ng-model="currentItem.Family" type="radio" value="好">
+                                                                </td>
+                                                                <td style="border:none">
+                                                                    <label class="lbLeft">好</label>
+                                                                </td>
+
+                                                            </tr>
+                                                        </table>
+                                                    </td>
+                                                    <td class="col-md-2" ng-click="currentItem.Family='非常好'">
+                                                        <table style="border:none">
+                                                            <tr>
+                                                                <td style="border:none">
+                                                                    <input name="Family" ng-model="currentItem.Family" type="radio" value="非常好">
+                                                                </td>
+                                                                <td style="border:none">
+                                                                    <label class="lbLeft">非常好</label>
+                                                                </td>
+
+                                                            </tr>
+                                                        </table>
+                                                    </td>
+                                                </tr>
+                                                <tr class="height40">
+                                                    <td class="col-md-2 tdlbl">7.婚姻</td>
+                                                    <td class="col-md-2" ng-click="currentItem.Merry='差'">
+                                                        <table style="border:none">
+                                                            <tr>
+                                                                <td style="border:none">
+                                                                    <input name="Merry" ng-model="currentItem.Merry" type="radio" value="差">
+                                                                </td>
+                                                                <td style="border:none">
+                                                                    <label class="lbLeft">差</label>
+                                                                </td>
+
+                                                            </tr>
+                                                        </table>
+                                                    </td>
+                                                    <td class="col-md-2" ng-click="currentItem.Merry='尚可'">
+                                                        <table style="border:none">
+                                                            <tr>
+                                                                <td style="border:none">
+                                                                    <input name="Merry" ng-model="currentItem.Merry" type="radio" value="尚可">
+                                                                </td>
+                                                                <td style="border:none">
+                                                                    <label class="lbLeft">尚可</label>
+                                                                </td>
+
+                                                            </tr>
+                                                        </table>
+                                                    </td>
+                                                    <td class="col-md-2" ng-click="currentItem.Merry='好'">
+                                                        <table style="border:none">
+                                                            <tr>
+                                                                <td style="border:none">
+                                                                    <input name="Merry" ng-model="currentItem.Merry" type="radio" value="好">
+                                                                </td>
+                                                                <td style="border:none">
+                                                                    <label class="lbLeft">好</label>
+                                                                </td>
+
+                                                            </tr>
+                                                        </table>
+                                                    </td>
+                                                    <td class="col-md-2" ng-click="currentItem.Merry='非常好'">
+                                                        <table style="border:none">
+                                                            <tr>
+                                                                <td style="border:none">
+                                                                    <input name="Merry" ng-model="currentItem.Merry" type="radio" value="非常好">
+                                                                </td>
+                                                                <td style="border:none">
+                                                                    <label class="lbLeft">非常好</label>
+                                                                </td>
+
+                                                            </tr>
+                                                        </table>
+                                                    </td>
+                                                </tr>
+                                                <tr class="height40">
+                                                    <td class="col-md-2 tdlbl">8.朋友</td>
+                                                    <td class="col-md-2" ng-click="currentItem.Friends='差'">
+                                                        <table style="border:none">
+                                                            <tr>
+                                                                <td style="border:none">
+                                                                    <input name="Friends" ng-model="currentItem.Friends" type="radio" value="差">
+                                                                </td>
+                                                                <td style="border:none">
+                                                                    <label class="lbLeft">差</label>
+                                                                </td>
+
+                                                            </tr>
+                                                        </table>
+                                                    </td>
+                                                    <td class="col-md-2" ng-click="currentItem.Friends='尚可'">
+                                                        <table style="border:none">
+                                                            <tr>
+                                                                <td style="border:none">
+                                                                    <input name="Friends" ng-model="currentItem.Friends" type="radio" value="尚可">
+                                                                </td>
+                                                                <td style="border:none">
+                                                                    <label class="lbLeft">尚可</label>
+                                                                </td>
+
+                                                            </tr>
+                                                        </table>
+                                                    </td>
+                                                    <td class="col-md-2" ng-click="currentItem.Friends='好'">
+                                                        <table style="border:none">
+                                                            <tr>
+                                                                <td style="border:none">
+                                                                    <input name="Friends" ng-model="currentItem.Friends" type="radio" value="好">
+                                                                </td>
+                                                                <td style="border:none">
+                                                                    <label class="lbLeft">好</label>
+                                                                </td>
+
+                                                            </tr>
+                                                        </table>
+                                                    </td>
+                                                    <td class="col-md-2" ng-click="currentItem.Friends='非常好'">
+                                                        <table style="border:none">
+                                                            <tr>
+                                                                <td style="border:none">
+                                                                    <input name="Friends" ng-model="currentItem.Friends" type="radio" value="非常好">
+                                                                </td>
+                                                                <td style="border:none">
+                                                                    <label class="lbLeft">非常好</label>
+                                                                </td>
+
+                                                            </tr>
+                                                        </table>
+                                                    </td>
+                                                </tr>
+                                                <tr class="height40" >
+                                                    <td class="col-md-2 tdlbl">9.自己本人</td>
+                                                    <td class="col-md-2" ng-click="currentItem.Self='差'">
+                                                        <table style="border:none">
+                                                            <tr>
+                                                                <td style="border:none">
+                                                                    <input name="Self" ng-model="currentItem.Self" type="radio" value="差">
+                                                                </td>
+                                                                <td style="border:none">
+                                                                    <label class="lbLeft">差</label>
+                                                                </td>
+
+                                                            </tr>
+                                                        </table>
+                                                    </td>
+                                                    <td class="col-md-2" ng-click="currentItem.Self='尚可'">
+                                                        <table style="border:none">
+                                                            <tr>
+                                                                <td style="border:none">
+                                                                    <input name="Self" ng-model="currentItem.Self" type="radio" value="尚可">
+                                                                </td>
+                                                                <td style="border:none">
+                                                                    <label class="lbLeft">尚可</label>
+                                                                </td>
+
+                                                            </tr>
+                                                        </table>
+                                                    </td>
+                                                    <td class="col-md-2" ng-click="currentItem.Self='好'">
+                                                        <table style="border:none">
+                                                            <tr>
+                                                                <td style="border:none">
+                                                                    <input name="Self" ng-model="currentItem.Self" type="radio" value="好">
+                                                                </td>
+                                                                <td style="border:none">
+                                                                    <label class="lbLeft">好</label>
+                                                                </td>
+
+                                                            </tr>
+                                                        </table>
+                                                    </td>
+                                                    <td class="col-md-2" ng-click="currentItem.Self='非常好'">
+                                                        <table style="border:none">
+                                                            <tr>
+                                                                <td style="border:none">
+                                                                    <input name="Self" ng-model="currentItem.Self" type="radio" value="非常好">
+                                                                </td>
+                                                                <td style="border:none">
+                                                                    <label class="lbLeft">非常好</label>
+                                                                </td>
+
+                                                            </tr>
+                                                        </table>
+                                                    </td>
+                                                </tr>
+                                                <tr class="height40">
+                                                    <td class="col-md-2 tdlbl">10.家事能力</td>
+                                                    <td class="col-md-2" ng-click="currentItem.FamilyAbility='差'">
+                                                        <table style="border:none">
+                                                            <tr>
+                                                                <td style="border:none">
+                                                                    <input name="FamilyAbility" ng-model="currentItem.FamilyAbility" type="radio" value="差">
+                                                                </td>
+                                                                <td style="border:none">
+                                                                    <label class="lbLeft">差</label>
+                                                                </td>
+
+                                                            </tr>
+                                                        </table>
+                                                    </td>
+                                                    <td class="col-md-2" ng-click="currentItem.FamilyAbility='尚可'">
+                                                        <table style="border:none">
+                                                            <tr>
+                                                                <td style="border:none">
+                                                                    <input name="FamilyAbility" ng-model="currentItem.FamilyAbility" type="radio" value="尚可">
+                                                                </td>
+                                                                <td style="border:none">
+                                                                    <label class="lbLeft">尚可</label>
+                                                                </td>
+
+                                                            </tr>
+                                                        </table>
+                                                    </td>
+                                                    <td class="col-md-2" ng-click="currentItem.FamilyAbility='好'">
+                                                        <table style="border:none">
+                                                            <tr>
+                                                                <td style="border:none">
+                                                                    <input name="FamilyAbility" ng-model="currentItem.FamilyAbility" type="radio" value="好">
+                                                                </td>
+                                                                <td style="border:none">
+                                                                    <label class="lbLeft">好</label>
+                                                                </td>
+
+                                                            </tr>
+                                                        </table>
+                                                    </td>
+                                                    <td class="col-md-2" ng-click="currentItem.FamilyAbility='非常好'">
+                                                        <table style="border:none">
+                                                            <tr>
+                                                                <td style="border:none">
+                                                                    <input name="FamilyAbility" ng-model="currentItem.FamilyAbility" type="radio" value="非常好">
+                                                                </td>
+                                                                <td style="border:none">
+                                                                    <label class="lbLeft">非常好</label>
+                                                                </td>
+
+                                                            </tr>
+                                                        </table>
+                                                    </td>
+                                                </tr>
+                                                <tr class="height40">
+                                                    <td class="col-md-2 tdlbl">11.娱乐能力</td>
+                                                    <td class="col-md-2" ng-click="currentItem.EnterTainment='差'">
+                                                        <table style="border:none">
+                                                            <tr>
+                                                                <td style="border:none">
+                                                                    <input name="EnterTainment" ng-model="currentItem.EnterTainment" type="radio" value="差">
+                                                                </td>
+                                                                <td style="border:none">
+                                                                    <label class="lbLeft">差</label>
+                                                                </td>
+
+                                                            </tr>
+                                                        </table>
+                                                    </td>
+                                                    <td class="col-md-2" ng-click="currentItem.EnterTainment='尚可'">
+                                                        <table style="border:none">
+                                                            <tr>
+                                                                <td style="border:none">
+                                                                    <input name="EnterTainment" ng-model="currentItem.EnterTainment" type="radio" value="尚可">
+                                                                </td>
+                                                                <td style="border:none">
+                                                                    <label class="lbLeft">尚可</label>
+                                                                </td>
+
+                                                            </tr>
+                                                        </table>
+                                                    </td>
+                                                    <td class="col-md-2" ng-click="currentItem.EnterTainment='好'">
+                                                        <table style="border:none">
+                                                            <tr>
+                                                                <td style="border:none">
+                                                                    <input name="EnterTainment" ng-model="currentItem.EnterTainment" type="radio" value="好">
+                                                                </td>
+                                                                <td style="border:none">
+                                                                    <label class="lbLeft">好</label>
+                                                                </td>
+
+                                                            </tr>
+                                                        </table>
+                                                    </td>
+                                                    <td class="col-md-2" ng-click="currentItem.EnterTainment='非常好'">
+                                                        <table style="border:none">
+                                                            <tr>
+                                                                <td style="border:none">
+                                                                    <input name="EnterTainment" ng-model="currentItem.EnterTainment" type="radio" value="非常好">
+                                                                </td>
+                                                                <td style="border:none">
+                                                                    <label class="lbLeft">非常好</label>
+                                                                </td>
+
+                                                            </tr>
+                                                        </table>
+                                                    </td>
+                                                </tr>
+                                                <tr class="height40">
+                                                    <td class="col-md-2 tdlbl">12.金钱</td>
+                                                    <td class="col-md-2" ng-click="currentItem.Money='差'">
+                                                        <table style="border:none">
+                                                            <tr>
+                                                                <td style="border:none">
+                                                                    <input name="Money" ng-model="currentItem.Money" type="radio" value="差">
+                                                                </td>
+                                                                <td style="border:none">
+                                                                    <label class="lbLeft">差</label>
+                                                                </td>
+
+                                                            </tr>
+                                                        </table>
+                                                    </td>
+                                                    <td class="col-md-2" ng-click="currentItem.Money='尚可'">
+                                                        <table style="border:none">
+                                                            <tr>
+                                                                <td style="border:none">
+                                                                    <input name="Money" ng-model="currentItem.Money" type="radio" value="尚可">
+                                                                </td>
+                                                                <td style="border:none">
+                                                                    <label class="lbLeft">尚可</label>
+                                                                </td>
+
+                                                            </tr>
+                                                        </table>
+                                                    </td>
+                                                    <td class="col-md-2" ng-click="currentItem.Money='好'">
+                                                        <table style="border:none">
+                                                            <tr>
+                                                                <td style="border:none">
+                                                                    <input name="Money" ng-model="currentItem.Money" type="radio" value="好">
+                                                                </td>
+                                                                <td style="border:none">
+                                                                    <label class="lbLeft">好</label>
+                                                                </td>
+
+                                                            </tr>
+                                                        </table>
+                                                    </td>
+                                                    <td class="col-md-2" ng-click="currentItem.Money='非常好'">
+                                                        <table style="border:none">
+                                                            <tr>
+                                                                <td style="border:none">
+                                                                    <input name="Money" ng-model="currentItem.Money" type="radio" value="非常好">
+                                                                </td>
+                                                                <td style="border:none">
+                                                                    <label class="lbLeft">非常好</label>
+                                                                </td>
+
+                                                            </tr>
+                                                        </table>
+                                                    </td>
+                                                </tr>
+                                                <tr class="height40">
+                                                    <td class="col-md-2 tdlbl">13.整体生活</td>
+                                                    <td class="col-md-2" ng-click="currentItem.WholeLife='差'">
+                                                        <table style="border:none">
+                                                            <tr>
+                                                                <td style="border:none">
+                                                                    <input name="WholeLife" ng-model="currentItem.WholeLife" type="radio" value="差">
+                                                                </td>
+                                                                <td style="border:none">
+                                                                    <label class="lbLeft">差</label>
+                                                                </td>
+
+                                                            </tr>
+                                                        </table>
+                                                    </td>
+                                                    <td class="col-md-2" ng-click="currentItem.WholeLife='尚可'">
+                                                        <table style="border:none">
+                                                            <tr>
+                                                                <td style="border:none">
+                                                                    <input name="WholeLife" ng-model="currentItem.WholeLife" type="radio" value="尚可">
+                                                                </td>
+                                                                <td style="border:none">
+                                                                    <label class="lbLeft">尚可</label>
+                                                                </td>
+
+                                                            </tr>
+                                                        </table>
+                                                    </td>
+                                                    <td class="col-md-2" ng-click="currentItem.WholeLife='好'">
+                                                        <table style="border:none">
+                                                            <tr>
+                                                                <td style="border:none">
+                                                                    <input name="WholeLife" ng-model="currentItem.WholeLife" type="radio" value="好">
+                                                                </td>
+                                                                <td style="border:none">
+                                                                    <label class="lbLeft">好</label>
+                                                                </td>
+
+                                                            </tr>
+                                                        </table>
+                                                    </td>
+                                                    <td class="col-md-2" ng-click="currentItem.WholeLife='非常好'">
+                                                        <table style="border:none">
+                                                            <tr>
+                                                                <td style="border:none">
+                                                                    <input name="WholeLife" ng-model="currentItem.WholeLife" type="radio" value="非常好">
+                                                                </td>
+                                                                <td style="border:none">
+                                                                    <label class="lbLeft">非常好</label>
+                                                                </td>
+
+                                                            </tr>
+                                                        </table>
+                                                    </td>
+                                                </tr>
+                                            </table>
+                                        </form>
+
+                                    </div>
+
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>   
+    </div>
+</div>
+
+<!--显示历次记录-->
+<div class="modal fade" id="historyModal" tabindex="-1" role="dialog" aria-labelledby="modalBedLabel" data-target=".bs-example-modal-lg">
+    <div class="modal-dialog bs-example-modal-lg" role="document" style="width:80%;">
+        <div class="modal-content modal-lg">
+            <div class="modal-header bg-success">
+                <button type="button" id="chargeClose" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            </div>
+            <div class="modal-body">
+                <!--<div ng-include="'/Views/Socialworker/AddProposalDisscuss.html'"></div>-->
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="box border primary">
+                            <div class="box-title">
+                                <h4>{{currentHistory.Name}} 历次评估记录</h4>
+                            </div>
+                            <div class="box-body">
+                                <div class="dataTables_wrapper form-inline" role="grid">
+                                    <ui-data-table options="options">
+                                        <table class="table table-striped table-bordered table-hover table-handler">
+                                            <thead>
+                                                <tr>
+                                                    <th>个案姓名</th>
+                                                    <th>评估日期</th>
+                                                    <th>身体健康</th>
+                                                    <th>精力</th>
+                                                    <th>心情</th>
+                                                    <th>住家环境</th>
+                                                    <th>记忆</th>
+                                                    <th>家庭</th>
+                                                    <th>婚姻</th>
+                                                    <th>朋友</th>
+                                                    <th>自己本人</th>
+                                                    <th>家事能力</th>
+                                                    <th>娱乐能力</th>
+                                                    <th>金钱</th>
+                                                    <th>整体生活</th>
+                                                    <th>操作</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr ng-repeat="list in HistoryList">
+                                                    <td>{{currentResident.Name}}</td>
+                                                    <td>{{list.CreateDate| dateFormat }}</td>
+                                                    <td>{{list.Health}}</td>
+                                                    <td>{{list.Energy}}</td>
+                                                    <td>{{list.Mood}}</td>
+                                                    <td>{{list.LivingCondition}}</td>
+                                                    <td>{{list.Memory}}</td>
+                                                    <td>{{list.Family}}</td>
+                                                    <td>{{list.Merry}}</td>
+                                                    <td>{{list.Friends}}</td>
+                                                    <td>{{list.Self}}</td>
+                                                    <td>{{list.FamilyAbility}}</td>
+                                                    <td>{{list.EnterTainment}}</td>
+                                                    <td>{{list.Money}}</td>
+                                                    <td>{{list.WholeLife}}</td>
+                                                    <td>
+                                                        <div class="btn-group btn-group-xs">
+
+                                                            <a ng-click="editEval(list.Id)" class=" btn btn-info" role="button"><i class="fa fa-pencil-square-o"></i>编辑</a>
+                                                            <a ng-click="deleteEval(list)" class=" btn btn-primary" role="button"><i class="fa fa-trash-o"></i> 删除</a>
+
+                                                        </div>
+
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+
+                                        </table>
+                                    </ui-data-table>
+                                </div>
+
+                                <div class="col-sm-offset-10">
+                                    <div class="btn-group" role="group" aria-label="...">
+                                        <button class="btn btn-primary" ng-disabled="buttonShow" ng-click="cancelEdit()"><i class="fa fa-power-off"></i> 关  闭</button>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

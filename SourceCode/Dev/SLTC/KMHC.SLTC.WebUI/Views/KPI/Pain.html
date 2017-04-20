@@ -1,0 +1,329 @@
+
+<div class="row">
+    <div id="content" class="col-lg-12">
+        <!--标题-->
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="page-header">
+                    <ul class="breadcrumb">
+                        <li>
+                            <i class="fa fa-home"></i>
+                            <a href="/">首页</a>
+                        </li>
+                        <li>指标管理</li>
+                    </ul>
+                    
+                </div>
+
+
+            </div>
+        </div>
+        <!--标题-->
+
+        <div class="row">
+            <div class="col-sm-2">
+                <div class="box border primary">
+                    <div class="box-title">
+                        <h4>
+                            <i class="fa fa-bars"></i>住民信息
+                        </h4>
+                    </div>
+                    <div class="box-body">
+                        <resident-card feeno={{FeeNo}} callback="residentSelected(resident)" />
+                    </div>
+                </div>
+                <div class="box border primary">
+                    <div class="box-title">
+                        <h4>
+                            <i class="fa fa-bars"></i>图示
+                        </h4>
+                    </div>
+                    <div class="box-body" style="height:400px;text-align:center">
+                        <img src="{{curDelItem.Picture}}" style="margin:2px;width:96%;height:94%" />
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-10">
+                <div class="box border primary">
+                    <div class="box-title">
+                        <h4>疼痛情况</h4>
+                    </div>
+                    <div class="box-body">
+                        <div id="SituationInfo" class="tab-pane active">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="pull-right">
+                                        <div class="btn-group btn-large">
+                                            <button type="button" ng-show="buttonShow" class="btn btn-info" data-toggle="modal" data-target="#modalAll" ng-click="searchAll()">查看所有记录</button>
+                                            <button type="button" ng-show="buttonShow" class="btn btn-info" ng-click="mEditOrAdd('add')">新增主文档</button>
+                                            <button type="button" ng-show="buttonShow" class="btn btn-info" ng-click="mEditOrAdd('edit')">保存主文档</button>
+                                            <button type="button" ng-show="buttonShow" class="btn btn-info" ng-click="init()">清空当前文档</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="well form-horizontal">
+                                        <fieldset>
+                                            <legend>疼痛收案</legend>
+                                            <div class="form-group">
+                                                <label class="col-sm-1 control-label" for="txtEvalDate">评估日期</label><div class="col-sm-2"><input id="txtEvalDate" name="EvalDate" class="form-control" ng-model="curItem.EvalDate" ca-date-picker require /></div>
+                                                <label class="col-sm-1 control-label" for="txtNextEvalDate">下次评估日期</label><div class="col-sm-2"><input id="txtNextEvalDate" name="NextEvalDate" class="form-control" ng-model="curItem.NextEvaldate" ca-date-picker require /></div>
+                                                <label class="col-sm-1 control-label" for="txtNextEvaluateBy">下次受托者</label><div class="col-sm-2"><input-staff callback="staffSelected(item,'NextEvaluateBy')" value="{{curItem.NextEvaluateBy}}" /></div>
+                                                <label class="col-sm-1 control-label" for="txtDiagDesc">诊断</label><div class="col-sm-2"><input id="txtDiagDesc" name="DiagDesc" class="form-control" ng-model="curItem.DiagDesc" ng-maxlength="200" /></div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-sm-1 control-label" for="txtTransferPart">转移部位</label><div class="col-sm-2"><input id="txtTransferPart" name="TransferPart" class="form-control" ng-model="curItem.TransferPart" ng-maxlength="200" /></div>
+                                                <label class="col-sm-1 control-label" for="txtComaE">昏迷指数</label>
+                                                <div class="col-sm-6" style="padding-right:0px;">
+                                                    <select id="selComaE" name="ComaE" class="form-control" ng-model="curItem.Coma_e" style="width: 30%; display: inline-block" select-code="F00.020"></select>
+                                                    <select id="selComaM" name="ComaM" class="form-control" ng-model="curItem.Coma_m" style="width: 30%; display: inline-block" select-code="F00.021"></select>
+                                                    <select id="selComaV" name="ComaV" class="form-control" ng-model="curItem.Coma_v" style="width: 30%; display: inline-block" select-code="F00.022"></select>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-sm-1 control-label" for="txtGCS">GCS评估结果</label><div class="col-sm-2"><input id="txtGCS" name="GCS" class="form-control" ng-model="curItem.GCS" ng-maxlength="50" /></div>
+                                                <label class="col-sm-1 control-label" for="selConsciousness">外表意识</label><div class="col-sm-2"><select id="selConsciousness" name="Consciousness" class="form-control" ng-model="curItem.Consciousness" select-code="F00.023"></select></div>
+                                                <label class="col-sm-1 control-label" for="selPainExpression">表达疼痛方式</label><div class="col-sm-2"><select id="selPainExpression" name="PainExpression" class="form-control" ng-model="curItem.PainExpression" select-code="F00.024"></select></div>
+                                                <label class="col-sm-1 control-label" for="selPainReaction">疼痛反应</label><div class="col-sm-2"><select id="selPainReaction" name="PainReaction" class="form-control" ng-model="curItem.PainReaction" select-code="F00.025"></select></div>
+                                            </div>
+                                        </fieldset>
+                                        <fieldset>
+                                            <legend>
+                                                所有疼痛解除
+                                            </legend>
+                                            <div class="form-group">
+                                                <div class="col-sm-2">
+                                                    <input id="txtCancelFlag" name="CancelFlag" class="checkbox-inline" ng-model="curItem.CancelFlag" type="checkbox" ng-change="itemChange()" style="margin-left:5px;" /><label class="control-label" for="txtCancelFlag">已解除</label>
+                                                </div>
+                                                <label class="col-sm-1 control-label" for="txtCancelDate">解除日期</label><div class="col-sm-2"><input id="txtCancelDate" name="CancelDate" class="form-control" ng-model="curItem.CancelDate" ca-date-picker require /></div>
+                                                <label class="col-sm-1 control-label" for="txtCancelReason">解除原因</label><div class="col-sm-2"><input id="txtCancelReason" name="CancelReason" class="form-control" ng-model="curItem.CancelReason" ng-maxlength="50" /></div>
+                                            </div>
+                                        </fieldset>
+
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <form class="form-horizontal" role="form" name="painfrom">
+                                    <div class="col-sm-12">
+                                        <fieldset>
+                                            <legend>疼痛部位评估</legend>
+                                            <div class="well">
+                                                <div class="row">
+                                                    <div class="col-sm-12">
+                                                        <fieldset>
+                                                            <legend>基本信息</legend>
+                                                            <div class="form-group">
+                                                                <label class="col-sm-1 control-label" for="selPainPart">部位</label><div class="col-sm-2"><select id="selPainPart" name="PainPart" class="form-control" ng-model="curDelItem.PainPart" select-code="F00.007"></select></div>
+                                                                <label class="col-sm-1 control-label" for="selPainNature">性质</label><div class="col-sm-2"><select id="selPainNature" name="PainNature" class="form-control" ng-model="curDelItem.PainNature" select-code="F00.059"></select></div>
+                                                                <label class="col-sm-1 control-label" for="selOccurchance">发生时机</label><div class="col-sm-2"><select id="selOccurchance" name="Occurchance" class="form-control" ng-model="curDelItem.OccurChance" select-code="F00.005"></select></div>
+                                                                <label class="col-sm-1 control-label" for="selOccurReason">发生原因</label><div class="col-sm-2"><select id="selOccurReason" name="OccurReason" class="form-control" ng-model="curDelItem.OccurReason" select-code="F00.027"></select></div>
+                                                            </div>
+                                                        </fieldset>
+                                                        <fieldset>
+                                                            <legend>疼痛强度</legend>
+                                                            <div class="form-group">
+                                                                <label class="col-sm-1 control-label" for="selPainSeverityCurrent">目前强度</label><div class="col-sm-2"><select id="selPainSeverityCurrent" name="PainSeverityCurrent" class="form-control" ng-model="curDelItem.PainSeverityCurrent" select-code="F00.028"></select></div>
+                                                                <label class="col-sm-1 control-label" for="selPainSeverityMost">最痛时</label><div class="col-sm-2"><select id="selPainSeverityMost" name="PainSeverityMost" class="form-control" ng-model="curDelItem.PainSeverityMost" select-code="F00.028"></select></div>
+                                                                <label class="col-sm-1 control-label" for="selPainSeverityLow">最轻时</label><div class="col-sm-2"><select id="selPainSeverityLow" name="PainSeverityLow" class="form-control" ng-model="curDelItem.PainSeverityLow" select-code="F00.028"></select></div>
+                                                                <label class="col-sm-1 control-label" for="selPainSeverityBear">可忍受度</label><div class="col-sm-2"><select id="selPainSeverityBear" name="PainSeverityBear" class="form-control" ng-model="curDelItem.PainSeverityBear" select-code="F00.028"></select></div>
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <label class="col-sm-1 control-label" for="selPainDepth">深度</label><div class="col-sm-2"><select id="selPainDepth" name="PainDepth" class="form-control" ng-model="curDelItem.PainDepth" select-code="F00.029"></select></div>
+                                                                <label class="col-sm-1 control-label" for="selPainExtension">疼痛延伸</label><div class="col-sm-2"><select id="selPainExtension" name="PainExtension" class="form-control" ng-model="curDelItem.PainExtension" select-code="F00.030"></select></div>
+                                                                <label class="col-sm-1 control-label" for="selStartPain">何时开始痛</label><div class="col-sm-2"><select id="selStartPain" name="StartPain" class="form-control" ng-model="curDelItem.StartPain" select-code="F00.031"></select></div>
+                                                                <label class="col-sm-1 control-label" for="selPainFrequency">发生频率</label><div class="col-sm-2"><select id="selPainFrequency" name="PainFrequency" class="form-control" ng-model="curDelItem.PainFrequency" select-code="F00.032"></select></div>
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <label class="col-sm-1 control-label" for="selPainDuration">每次疼痛持续时间</label><div class="col-sm-2"><select id="selPainDuration" name="PainDuration" class="form-control" ng-model="curDelItem.PainDuration" select-code="F00.033"></select></div>
+                                                                <label class="col-sm-1 control-label" for="selMostPain1Day">一天当中最痛的时刻为</label><div class="col-sm-2"><select id="selMostPain1Day" name="MostPain1Day" class="form-control" ng-model="curDelItem.MostPain1Day" select-code="F00.034"></select></div>
+                                                                <label class="col-sm-1 control-label" for="selEasePainWay">缓解疼痛的办法</label><div class="col-sm-2"><select id="selEasePainWay" name="EasePainWay" class="form-control" ng-model="curDelItem.EasePainWay" select-code="F00.035"></select></div>
+                                                                <label class="col-sm-1 control-label" for="selPainSeriousFactor">加重疼痛的因素</label><div class="col-sm-2"><select id="selPainSeriousFactor" name="PainSeriousFactor" class="form-control" ng-model="curDelItem.PainSeriousFactor" select-code="F00.036"></select></div>
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <label class="col-sm-1 control-label" for="selSymptom">疼痛伴随症状</label><div class="col-sm-2"><select id="selSymptom" name="Symptom" class="form-control" ng-model="curDelItem.Symptom" select-code="F00.037"></select></div>
+                                                            </div>
+                                                        </fieldset>
+                                                        <fieldset>
+                                                            <legend>疼痛造成影响</legend>
+                                                            <div class="form-group">
+                                                                <label class="col-sm-1 control-label" for="selAffectSleep">睡眠</label><div class="col-sm-2"><select id="selAffectSleep" name="AffectSleep" class="form-control" ng-model="curDelItem.AffectSleep" select-code="F00.038"></select></div>
+                                                                <label class="col-sm-1 control-label" for="selAffectActivity">一般活动</label><div class="col-sm-2"><select id="selAffectActivity" name="AffectActivity" class="form-control" ng-model="curDelItem.AffectActivity" select-code="F00.039"></select></div>
+                                                                <label class="col-sm-1 control-label" for="selAffectEating">食欲</label><div class="col-sm-2"><select id="selAffectEating" name="AffectEating" class="form-control" ng-model="curDelItem.AffectEating" select-code="F00.040"></select></div>
+                                                                <label class="col-sm-1 control-label" for="selAffectAttention">注意力</label><div class="col-sm-2"><select id="selAffectAttention" name="AffectAttention" class="form-control" ng-model="curDelItem.AffectAttention" select-code="F00.041"></select></div>
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <label class="col-sm-1 control-label" for="selAffectEmotion">情绪</label><div class="col-sm-2"><select id="selAffectEmotion" name="AffectEmotion" class="form-control" ng-model="curDelItem.AffectEmotion" select-code="F00.042"></select></div>
+                                                                <label class="col-sm-1 control-label" for="selAffectRelations">人际关系</label><div class="col-sm-2"><select id="selAffectRelations" name="AffectRelations" class="form-control" ng-model="curDelItem.AffectRelations" select-code="F00.043"></select></div>
+                                                                <label class="col-sm-1 control-label" for="selAffectOthers">其他</label><div class="col-sm-2"><select id="selAffectOthers" name="AffectOthers" class="form-control" ng-model="curDelItem.AffectOthers" select-code="F00.044"></select></div>
+                                                            </div>
+                                                        </fieldset>
+                                                        <fieldset>
+                                                            <legend>
+                                                                疼痛解除
+                                                            </legend>
+                                                            <div class="form-group">
+                                                                <div class="col-sm-2">
+                                                                    <input id="txtCancelFlag2" name="CancelFlag2" class="checkbox-inline" ng-model="curDelItem.CancelFlag" type="checkbox" style="margin-left:5px;" ng-change="itemDtlChange()" />
+                                                                    <label class="control-label" for="txtCancelFlag2" style="text-align:left;">已解除</label>
+                                                                </div>
+                                                                <label class="col-sm-1 control-label" for="txtCancelDate2">解除日期</label><div class="col-sm-2"><input id="txtCancelDate2" name="CancelDate2" class="form-control" ng-model="curDelItem.CancelDate" ca-date-picker require /></div>
+                                                                <label class="col-sm-1 control-label" for="selCancelReason">解除原因</label><div class="col-sm-2"><select id="selCancelReason" name="CancelReason" class="form-control" ng-model="curDelItem.CancelReason" select-code="F00.015"></select></div>
+
+                                                            </div>
+                                                        </fieldset>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </fieldset>
+                                        <div class="form-group">
+                                            <div class="col-sm-12 text-center">
+                                                <button class="btn btn-primary" ng-show="buttonShow" ng-click="dEditOrAdd()" type="button" ng-disabled="painfrom.$invalid">保存</button>
+                                                <button class="btn btn-primary" ng-show="buttonShow" ng-click="initDel()" type="reset">重置</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                            <div class="row">
+                                    <div class="col-md-12">
+
+                                        <table class="table table-striped table-bordered table-hover table-handler">
+                                            <thead>
+                                                <tr>
+                                                    <td>疼痛部位</td>
+                                                    <td>疼痛性质</td>
+                                                    <td>发生时机</td>
+                                                    <td>发生原因</td>
+                                                    <td>目前</td>
+                                                    <td>最痛时</td>
+                                                    <td>最轻时</td>
+                                                    <td>可忍受度</td>
+                                                    <td>疼痛深度</td>
+                                                    <td>疼痛延伸</td>
+                                                    <td>何时开始痛</td>
+                                                    <td>疼痛发生频率</td>
+                                                    <td>每次疼痛持续时间</td>
+                                                    <td>一天当中最痛的时刻为</td>
+                                                    <td>缓解疼痛的办法</td>
+                                                    <td>加重疼痛的因素</td>
+                                                    <td>疼痛伴随症状</td>
+                                                    <td>睡眠</td>
+                                                    <td>一般活动</td>
+                                                    <td>食欲</td>
+                                                    <td>注意力</td>
+                                                    <td>情绪</td>
+                                                    <td>人际关系</td>
+                                                    <td>其他</td>
+                                                    <td>此部位已解除</td>
+                                                    <td>解除日期</td>
+                                                    <td>解除原因</td>
+                                                    <th><i class="fa fa-bars"></i> 操作</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr ng-repeat="item in curItem.Detail">
+                                                    <td><span select-code="F00.007" select-value="{{item.PainPart}}"></span></td>
+                                                    <td><span select-code="F00.026" select-value="{{item.PainNature}}"></span></td>
+                                                    <td><span select-code="F00.005" select-value="{{item.OccurChance}}"></span></td>
+                                                    <td><span select-code="F00.027" select-value="{{item.OccurReason}}"></span></td>
+                                                    <td><span select-code="F00.028" select-value="{{item.PainSeverityCurrent}}"></span></td>
+                                                    <td><span select-code="F00.028" select-value="{{item.PainSeverityMost}}"></span></td>
+                                                    <td><span select-code="F00.028" select-value="{{item.PainSeverityLow}}"></span></td>
+                                                    <td><span select-code="F00.028" select-value="{{item.PainSeverityBear}}"></span></td>
+                                                    <td><span select-code="F00.029" select-value="{{item.PainDepth}}"></span></td>
+                                                    <td><span select-code="F00.030" select-value="{{item.PainExtension}}"></span></td>
+                                                    <td><span select-code="F00.031" select-value="{{item.StartPain}}"></span></td>
+                                                    <td><span select-code="F00.032" select-value="{{item.PainFrequency}}"></span></td>
+                                                    <td><span select-code="F00.033" select-value="{{item.PainDuration}}"></span></td>
+                                                    <td><span select-code="F00.034" select-value="{{item.MostPain1Day}}"></span></td>
+                                                    <td><span select-code="F00.035" select-value="{{item.EasePainWay}}"></span></td>
+                                                    <td><span select-code="F00.036" select-value="{{item.PainSeriousFactor}}"></span></td>
+                                                    <td><span select-code="F00.037" select-value="{{item.Symptom}}"></span></td>
+                                                    <td><span select-code="F00.038" select-value="{{item.AffectSleep}}"></span></td>
+                                                    <td><span select-code="F00.039" select-value="{{item.AffectActivity}}"></span></td>
+                                                    <td><span select-code="F00.040" select-value="{{item.AffectEating}}"></span></td>
+                                                    <td><span select-code="F00.041" select-value="{{item.AffectAttention}}"></span></td>
+                                                    <td><span select-code="F00.042" select-value="{{item.AffectEmotion}}"></span></td>
+                                                    <td><span select-code="F00.043" select-value="{{item.AffectRelations}}"></span></td>
+                                                    <td><span select-code="F00.044" select-value="{{item.AffectOthers}}"></span></td>
+                                                    <td>{{item.CancelFlag?"是":"否"}}</td>
+                                                    <td>{{item.CancelDate|date:'yyyy-MM-dd HH:mm:ss'}}</td>
+                                                    <td><span select-code="F00.005" select-value="{{item.CancelReason}}"></span></td>
+                                                    <td>
+                                                        <div class="btn-group btn-group-xs" role="group" aria-label="...">
+                                                            <a class="btn btn-info" role="button" ng-click="editOrCreate(item)"><i class="fa fa-pencil"></i>编辑</a>
+                                                            <a class="btn btn-primary" role="button" ng-click="deleteItem(item)"><i class="fa fa-times"></i>删除</a>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="modalAll" tabindex="-1" role="dialog" aria-labelledby="modalBedLabel" data-target=".bs-example-modal-lg">
+    <div class="modal-dialog bs-example-modal-lg" role="document" style="width: 80%">
+        <div class="modal-content modal-lg">
+            <div class="modal-header bg-success">
+                <button type="button" id="billClose" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">
+                    历史疼痛记录
+                </h4>
+            </div>
+            <div class="modal-body">
+                <table class="table table-striped table-bordered table-hover table-handler">
+                    <thead>
+                        <tr>
+                            <td>评估日期</td>
+                            <td>下次评估日期</td>
+                            <td>下次受托者</td>
+                            <td>诊断</td>
+                            <td>转移部位</td>
+                            <td>昏迷指数_E</td>
+                            <td>昏迷指数_M</td>
+                            <td>昏迷指数_V</td>
+                            <td>GCS评估结果</td>
+                            <td>外表意识</td>
+                            <td>表达疼痛的方式</td>
+                            <td>疼痛反应</td>
+                            <td>已解除</td>
+                            <td>解除日期</td>
+                            <td>解除原因</td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="item in painList" ng-click="modify(item)">
+                            <td>{{item.EvalDate|date:'yyyy-MM-dd'}}</td>
+                            <td>{{item.NextEvalDate|date:'yyyy-MM-dd'}}</td>
+                            <td>{{item.NextEvaluateBy}}</td>
+                            <td>{{item.DiagDesc}}</td>
+                            <td>{{item.TransferPart}}</td>
+                            <td><span select-code="F00.020" select-value="{{item.ComaE}}"></span></td>
+                            <td><span select-code="F00.021" select-value="{{item.ComaM}}"></span></td>
+                            <td><span select-code="F00.022" select-value="{{item.ComaV}}"></span></td>
+                            <td>{{item.GCS}}</td>
+                            <td><span select-code="F00.023" select-value="{{item.Consciousness}}"></span></td>
+                            <td><span select-code="F00.024" select-value="{{item.PainExpression}}"></span></td>
+                            <td><span select-code="F00.025" select-value="{{item.PainReaction}}"></span></td>
+                            <td>{{item.CancelFlag?"是":"否"}}</td>
+                            <td>{{item.CancelDate|date:'yyyy-MM-dd'}}</td>
+                            <td>{{item.CancelReason}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+

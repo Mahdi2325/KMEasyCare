@@ -1,0 +1,317 @@
+<div class="row">
+    <div class="box-body">
+        <div id="content" class="col-lg-12">
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="page-header" ng-init="urlstr='StaffList'">
+                        <ul class=" breadcrumb">
+                            <li>
+                                <i class="fa fa-home"></i>
+                                <a href="/">首页</a>
+                            </li>
+                            <li>我的文件</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="box border primary">
+                        <div class="box-title">
+                            <h4><i class="fa fa-bars"></i>我的文件</h4>
+                        </div>
+                        <div class="box-body">
+                            <form class="form-horizontal" role="form" name="formEmp"  novalidate>
+                                <div class="form-group" ng-hide="OrgISSelect">
+                                    <label class="col-sm-1 control-label">所属机构</label>
+                                    <div class="col-sm-10">
+                                        <select class="form-control" ng-disabled="lockOrg" ng-model="Data.empFile.OrgId" ng-change="Orgchange()" ng-options=" item.orgid as item.orgname for item in Orglist"></select>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-1 control-label">名称<span class="required">*</span></label>
+                                    <div class="col-sm-4">
+                                        <input type="text" class="form-control" ng-model="Data.empFile.EmpName" ng-maxlength="50" placeholder="请填入员工姓名" required />
+                                    </div>
+                                    <label class="col-sm-2 control-label">身份证号<span class="required">*</span></label>
+                                    <div class="col-sm-4">
+                                        <input class="form-control" ng-blur="Getsex(Data.empFile.IdNo)" ng-model="Data.empFile.IdNo" ng-pattern="/^(\d{15}$|^[a-zA-Z][0-9]{9}$|^\d{18}$|^\d{17}(\d|X|x))$/" unique-type="EmpIdNo" unique-key="EmpNo" unique required />
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-1 control-label">性别</label>
+                                    <div class="col-sm-4">
+                                        <select class="form-control" ng-model="Data.empFile.Sex" select-code="A00.001"></select>
+                                        <!--<input type="text" class="form-control" ng-model="Data.empFile.Sex" ng-disabled="true" />-->
+                                    </div>
+                                    <label class="col-sm-2 control-label">血型</label>
+                                    <div class="col-sm-4">
+                                        <select class="form-control" ng-model="Data.empFile.BloodType" select-code="A00.014"></select>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-1 control-label">出生日期</label>
+                                    <div class="col-sm-4">
+                                        <input class="form-control datepicker" type="text" ng-model="Data.empFile.Brithdate" ca-date-picker>
+                                    </div>
+                                    <label class="col-sm-2 control-label">出生地址</label>
+                                    <div class="col-sm-4">
+                                        <input class="form-control" ng-model="Data.empFile.BrithPlace" ng-maxlength="20" />
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-1 control-label">婚姻状况</label>
+                                    <div class="col-sm-4">
+                                        <select class="form-control" ng-model="Data.empFile.MerryFlag" select-code="A00.011"></select>
+                                    </div>
+                                    <label class="col-sm-2 control-label">联系电话</label>
+                                    <div class="col-sm-4">
+                                        <input type="tel" class="form-control" ng-model="Data.empFile.HomeTelNo" ng-maxlength="20" ng-pattern="/^\d+-?\d+$/" />
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-1 control-label">邮编区号一</label>
+                                    <div class="col-sm-4">
+                                        <input class="form-control" ng-model="Data.empFile.Zip1" ng-maxlength="10" ng-pattern="/^\d+$/" />
+                                    </div>
+                                    <label class="col-sm-2 control-label">地址一</label>
+                                    <div class="col-sm-4">
+                                        <input class="form-control" ng-model="Data.empFile.Address1" ng-maxlength="200" />
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-1 control-label">邮编区号二</label>
+                                    <div class="col-sm-4">
+                                        <input type="text" class="form-control" ng-model="Data.empFile.Zip2" ng-maxlength="10" ng-pattern="/^\d+$/" />
+                                    </div>
+                                    <label class="col-sm-2 control-label">地址二</label>
+                                    <div class="col-sm-4">
+                                        <input class="form-control" ng-model="Data.empFile.Address2" ng-maxlength="200" />
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-1 control-label">紧急联系人</label>
+                                    <div class="col-sm-4">
+                                        <input class="form-control" ng-model="Data.empFile.ContName" ng-maxlength="20" />
+                                    </div>
+                                    <label class="col-sm-2 control-label">血缘关系</label>
+                                    <div class="col-sm-4">
+                                        <select class="form-control" ng-model="Data.empFile.ContRelation" select-code="A00.031"></select>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-1 control-label">紧急联系人电话</label>
+                                    <div class="col-sm-4">
+                                        <input type="tel" class="form-control" ng-model="Data.empFile.ContTelphone" ng-maxlength="20" ng-pattern="/^\d+-?\d+$/" />
+                                    </div>
+                                    <label class="col-sm-2 control-label">联系人地址</label>
+                                    <div class="col-sm-4">
+                                        <input class="form-control" ng-model="Data.empFile.ContAddress" ng-maxlength="200" />
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="col-sm-1 control-label">学历</label>
+                                    <div class="col-sm-4">
+                                        <select class="form-control" ng-model="Data.empFile.Education" select-code="A00.007"></select>
+                                    </div>
+                                    <label class="col-sm-2 control-label">聘用类别</label>
+                                    <div class="col-sm-4">
+                                        <!--<input class="form-control" id="txtHiredType" ng-model="Data.empFile.HiredType" maxlength="10" />-->
+                                        <select class="form-control" ng-model="Data.empFile.HiredType" select-code="D00.002"></select>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-1 control-label">职称</label>
+                                    <div class="col-sm-4">
+                                        <select class="form-control" ng-model="Data.empFile.JobTitle" select-code="D00.004"></select>
+                                        <!--<select name="JobTitle" class="form-control" ng-model="Data.empFile.JobTitle" ng-options="t.RoleId as t.RoleName for t in Info.Roles"></select>-->
+                                        <!--<input class="form-control" id="txtRoleName" ng-model="Show.RoleName" placeholder="点击选择职称" data-toggle="modal" data-target="#modalRoleList" readonly="readonly" />-->
+                                    </div>
+                                    <label class="col-sm-2 control-label">职别</label>
+                                    <div class="col-sm-4">
+                                        <select class="form-control" ng-model="Data.empFile.JobType" select-code="D00.001"></select>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-1 control-label">部门<span class="required">*</span></label>
+                                    <div class="col-sm-4">
+                                        <select class="form-control" ng-model="Data.empFile.DeptNo" ng-options="x.DeptNo as x.DeptName for x in Info.Depts" required></select>
+                                    </div>
+                                    <label class="col-sm-2 control-label">国籍</label>
+                                    <div class="col-sm-4">
+                                        <select class="form-control" ng-model="Data.empFile.Nationality" select-code="D00.003"></select>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-1 control-label">宗教信仰</label>
+                                    <div class="col-sm-4">
+                                        <select class="form-control" ng-model="Data.empFile.LigiousFaith" select-code="A00.008"></select>
+                                    </div>
+                                    <label class="col-sm-2 control-label">是否为身心障碍者</label>
+                                    <div class="col-sm-1">
+                                        <label class="checkbox-inline"><input type="checkbox" class="uniform" ng-model="Data.empFile.DisabilityFlag">是</label>
+                                    </div>
+                                    <label class="col-sm-2 control-label hidden">是否为原住民</label>
+                                    <div class="col-sm-1 hidden">
+                                        <label class="checkbox-inline"><input type="checkbox" class="uniform" ng-model="Data.empFile.NativesFlag">是</label>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <!--<label class="col-sm-1 control-label">机构<span class="required">*</span></label>
+                                    <div class="col-sm-4">
+                                        <select class="form-control" ng-model="Data.empFile.OrgId" ng-options="t.OrgId as t.OrgName for t in Info.Orgs" required></select>
+                                    </div>-->
+                                    <label class="col-sm-1 control-label">RTH</label>
+                                    <div class="col-sm-4">
+                                        <select class="form-control" ng-model="Data.empFile.RthType" select-code="A00.047"></select>
+                                    </div>
+                                    <label class="col-sm-2 control-label">事业类型<span class="required">*</span></label>
+                                    <div class="col-sm-4">
+                                        <select class="form-control" ng-model="Data.empFile.EmpGroup" select-code="E00.013" required></select>
+                                        <!--<input id="txtGroupName" name="GroupName" type="text" class="form-control" ng-model="Show.GroupName" placeholder="点击选择集团" data-toggle="modal" data-target="#modalGroupList" readonly="readonly" />-->
+                                    </div>
+                                </div>
+
+
+                                <!--<div class="form-group">
+                                    <label class="col-sm-1 control-label">RTH</label>
+                                    <div class="col-sm-4">
+                                        <select class="form-control" ng-model="Data.empFile.RthType" select-code="A00.047"></select>
+                                    </div>
+                                </div>-->
+                                <!--<input id="OrgID" name="OrgID" type="hidden" class="form-control" ng-model="Data.empFile.OrgId" />
+                                <input id="Title" name="Title" type="hidden" class="form-control" ng-model="Data.empFile.JobTitle" />
+                                <input id="EmpGroup" name="EmpGroup" type="hidden" class="form-control" ng-model="Data.empFile.EmpGroup" />-->
+                                <div class="form-group center" style="margin-top: 20px;">
+                                    <button class="btn btn-info " ng-click="save()" ng-disabled="formEmp.$invalid">保存</button>
+                                    <button class="btn btn-grey " ng-click="cancel()">取消</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--机构Modal -->
+    <div class="modal fade" id="modalOrgList" tabindex="-2" role="dialog" aria-labelledby="modalOrgListLabel" data-target=".bs-example-modal-lg">
+        <div class="modal-dialog bs-example-modal-lg" role="document">
+            <div class="modal-content modal-lg">
+                <div class="modal-header bg-success">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">  &times; </button>
+                    <h4 class="modal-title" id="modalOrgListLabel">机构选择</h4>
+                </div>
+                <div class="modal-body">
+                    <table class="table table-striped table-bordered table-hover table-handler">
+                        <thead>
+                            <tr>
+                                <th>编号</th>
+                                <th>名称</th>
+                                <th>负责人</th>
+                                <th>电话</th>
+                                <th>床位数</th>
+                                <th><i class="fa fa-bars"></i> 操作</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="Org in Info.Orgs">
+                                <td>{{Org.OrgId}}</td>
+                                <td>{{Org.OrgName}}</td>
+                                <td>{{Org.Responsible}}</td>
+                                <td>{{Org.Tel}}</td>
+                                <td>{{Org.BedCount}}</td>
+                                <td class="center">
+                                    <button class="btn btn-primary" ng-click="selectOrg(Org.OrgId)">选择</button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" data-dismiss="modal">关闭</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!--角色Modal -->
+    <div class="modal fade" id="modalRoleList" tabindex="-2" role="dialog" aria-labelledby="modalRoleListLabel" data-target=".bs-example-modal-lg">
+        <div class="modal-dialog bs-example-modal-lg" role="document">
+            <div class="modal-content modal-lg">
+                <div class="modal-header bg-success">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">  &times; </button>
+                    <h4 class="modal-title" id="modalRoleListLabel">角色选择</h4>
+                </div>
+                <div class="modal-body">
+                    <table class="table table-striped table-bordered table-hover table-handler">
+                        <thead>
+                            <tr>
+                                <th>编号</th>
+                                <th>名称</th>
+                                <th>状态</th>
+                                <th><i class="fa fa-bars"></i> 操作</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="role in Info.Roles">
+                                <td>{{role.RoleId}}</td>
+                                <td>{{role.RoleName}}</td>
+                                <td>{{role.Status}}</td>
+                                <td class="center">
+                                    <button class="btn btn-primary" ng-click="selectRole(role.RoleId)">选择</button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" data-dismiss="modal">关闭</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!--集团Modal -->
+    <div class="modal fade" id="modalGroupList" tabindex="-2" role="dialog" aria-labelledby="modalGroupListLabel" data-target=".bs-example-modal-lg">
+        <div class="modal-dialog bs-example-modal-lg" role="document">
+            <div class="modal-content modal-lg">
+                <div class="modal-header bg-success">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">  &times; </button>
+                    <h4 class="modal-title" id="modalGroupListLabel">集团选择</h4>
+                </div>
+                <div class="modal-body">
+                    <table class="table table-striped table-bordered table-hover table-handler">
+                        <thead>
+                            <tr>
+                                <th>编号</th>
+                                <th>名称</th>
+                                <th>状态</th>
+                                <th><i class="fa fa-bars"></i> 操作</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="group in Info.Groups">
+                                <td>{{group.GroupId}}</td>
+                                <td>{{group.GroupName}}</td>
+                                <td>{{group.Address}}</td>
+                                <td class="center">
+                                    <button class="btn btn-primary" ng-click="selectGroup(group.GroupId)">选择</button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" data-dismiss="modal">关闭</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+</div>

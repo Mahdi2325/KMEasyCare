@@ -1,0 +1,149 @@
+<form class="form-horizontal" role="form">
+    <div class="row">
+        <div class="col-md-12">
+
+            <div class="box-body">
+                <div class="tab-pane ">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">登记信息</div>
+                        <div class="panel-body">
+                            <div class="form-group">
+                                <label class="col-sm-1 control-label">姓名</label>
+                                <div class="col-sm-2">
+                                    <input ng-model="currentItem.Name" class="form-control" type="text" ng-disabled="disabled">
+                                </div>
+                                <label class="col-sm-1 control-label">性别</label>
+                                <div class="col-sm-2">
+                                    <select class="form-control" ng-model="currentItem.Gender" select-code="A00.001" ng-disabled="disabled"></select>
+                                </div>
+                                <label class="col-sm-1 control-label">生日</label>
+                                <div class="col-sm-2">
+                                    <input class="form-control datepicker" size="10" type="text" ng-model="currentItem.BirthDay" ca-date-picker ng-change="birthDayChange(currentItem.BirthDay)" ng-disabled="disabled" />
+                                </div>
+                                <label class="col-sm-1 control-label">年龄</label>
+                                <div class="col-sm-2">
+                                    <input type="text" class="form-control" id="txtAge" ng-model="currentItem.Age" ng-disabled="disabled">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-1 control-label">收案日期</label>
+                                <div class="col-sm-2">
+                                    <input class="form-control datepicker" size="10" type="text" ng-model="currentItem.InDate" ca-date-picker  />
+                                </div>
+                                <label class="col-sm-1 control-label">身份证号</label>
+                                <div class="col-sm-2">
+                                    <input ng-model="currentItem.IdNo" class="form-control" type="text" ng-disabled="disabled">
+                                </div>
+                                <label class="col-sm-1 control-label">服务类型</label>
+                                <div class="col-sm-2">
+                                    <select class="form-control" ng-model="currentItem.ServiceType" select-code="A00.002"></select>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-1 control-label">主责社工</label>
+                                <div class="col-sm-2">
+                                    <input-staff value="{{currentItem.Carer}}" />
+                                </div>
+                                <label class="col-sm-1 control-label">主责护士</label>
+                                <div class="col-sm-2">
+                                    <input-staff value="{{currentItem.NurseNO}}" />
+                                </div>
+                                <label class="col-sm-1 control-label">社工提示</label>
+                                <div class="col-sm-2">
+                                    <input ng-model="currentItem.CarerTips" class="form-control" type="text">
+                                </div>
+                                <label class="col-sm-1 control-label">护理提示</label>
+                                <div class="col-sm-2">
+                                    <input ng-model="currentItem.NursingTips" class="form-control" type="text">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-sm-2 col-sm-offset-1">
+                                    <input type="checkbox" class="uniform" ng-model="currentItem.DangerFlag"> 出入管制标记
+                                </div>
+                                <label class="col-sm-1 control-label">管制原因</label>
+                                <div class="col-sm-2">
+                                    <input ng-model="currentItem.CtrlReason" class="form-control" type="text">
+                                </div>
+                                <label class="col-sm-1 control-label">目前动态</label>
+                                <div class="col-sm-2">
+                                    <select class="form-control" ng-model="currentItem.StateFlag" select-code="A00.006"></select>
+                                </div>
+                                <label class="col-sm-1 control-label">动态说明</label>
+                                <div class="col-sm-2">
+                                    <input ng-model="currentItem.StateReason" class="form-control" type="text">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel panel-default">
+                        <div class="panel-heading">派案信息</div>
+                        <div class="panel-body">
+                            <div class="form-group">
+                                <label class="col-sm-1 control-label">营养师</label>
+                                <div class="col-sm-2">
+                                    <input-staff value="{{currentItem.Nutritionist}}" />
+                                </div>
+                                <label class="col-sm-1 control-label">物理治疗师</label>
+                                <div class="col-sm-2">
+                                    <input-staff value="{{currentItem.Physiotherapist}}" />
+                                </div>
+                                <label class="col-sm-1 control-label">医师</label>
+                                <div class="col-sm-2">
+                                    <input-staff callback="DoctorSelected(item)" value="{{currentItem.Doctor}}" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel panel-default">
+                        <div class="panel-heading">床位信息</div>
+                        <div class="panel-body">
+                            <div class="form-group">
+                                <label class="col-sm-1 control-label">床号</label>
+                                <div class="col-sm-2">
+                                    <input-bed value="{{currentItem.BedNO}}" callback="selectBed(item)" />
+                                </div>
+                                <label class="col-sm-1 control-label">楼层</label>
+                                <div class="col-sm-2">
+                                    <input ng-model="currentItem.Floor" class="form-control" type="text" readonly="readonly">
+                                </div>
+                                <label class="col-sm-1 control-label">房间号</label>
+                                <div class="col-sm-2">
+                                    <input ng-model="currentItem.RoomNO" class="form-control" type="text" readonly="readonly">
+                                </div>
+                                <label class="col-sm-1 control-label">床别</label>
+                                <div class="col-sm-2">
+                                    <select class="form-control" ng-model="currentItem.BedKind" select-code="J00.004" readonly="readonly"></select>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-1 control-label">床等别</label>
+                                <div class="col-sm-2">
+                                    <select class="form-control" ng-model="currentItem.BedClass" select-code="J00.004" readonly="readonly"></select>
+                                </div>
+                                <div class="col-sm-2 col-sm-offset-1">
+                                    <input type="checkbox" class="uniform" ng-model="currentItem.SickFlag"> 隔离床别
+                                </div>
+                                <div class="col-sm-2 col-sm-offset-1">
+                                    <input type="checkbox" class="uniform" ng-model="currentItem.RoomFlag"> 包房
+                                </div>
+                                <div class="col-sm-1"></div>
+                                <div class="col-sm-2">
+                                    <input type="checkbox" class="uniform" ng-model="currentItem.Protflaf"> 需保密
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-sm-2 col-sm-offset-10">
+                    <button class="btn btn-primary" type="submit" ng-click="saveEdit(currentItem)">保存</button>
+                    <button class="btn btn-primary" ng-click="cancelEdit()">取消</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</form>

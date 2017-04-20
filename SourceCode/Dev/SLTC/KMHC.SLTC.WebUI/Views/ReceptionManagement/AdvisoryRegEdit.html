@@ -1,0 +1,96 @@
+﻿<div class="row">
+    <div class="box-body">
+        <div id="content" class="col-lg-12">
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="page-header">
+                        <ul class="breadcrumb">
+                            <li>
+                                <i class="fa fa-home"></i>
+                                <a href="/">首页</a>
+                            </li>
+                            <li>
+                                <a href="/angular/ReceptionManagement/AdvisoryReg">咨询登记</a>
+                            </li>
+                            <li>咨询登记管理</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="box border primary">
+                        <div class="box-title">
+                            <h4><i class="fa fa-bars"></i>咨询登记信息</h4>
+                        </div>
+                        <div class="box-body">
+                            <form class="form-horizontal" role="form" name="advisoryReg" ng-submit="save(Data)" novalidate>
+                                <div class="panel panel-default">
+                                    <div class="panel-body">
+                                        <div class="form-group">
+                                            <label class="col-sm-1 control-label">咨询人姓名<span class="required">*</span></label>
+                                            <div class="col-sm-2">
+                                                <input class="form-control" name="咨询人姓名" type="text" ng-model="Data.ConsultantName" ng-maxlength="50" required />
+                                            </div>
+                                            <label class="col-sm-1 control-label">联系电话<span class="required">*</span></label>
+                                            <div class="col-sm-2">
+                                                <input class="form-control" name="联系电话" type="text" ng-model="Data.ConsultantPhone" ng-maxlength="50" required />
+                                            </div>
+                                            <label class="col-sm-1 control-label">老人姓名<span class="required">*</span></label>
+                                            <div class="col-sm-2">
+                                                <input class="form-control" name="老人姓名" type="text" ng-model="Data.OldManName" ng-maxlength="20" required />
+                                            </div>
+
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-sm-1 control-label">与老人关系</label>
+                                            <div class="col-sm-2">
+                                                <select class="form-control" ng-model="Data.Appellation" select-code="L03.020"></select>
+                                            </div>
+                                            <label class="col-sm-1 control-label">老人年龄</label>
+                                            <div class="col-sm-2">
+                                                <input class="form-control" type="text" name="老人年龄" ng-model="Data.OldManAge" ng-maxlength="3" />
+                                            </div>
+                                            <label class="col-sm-1 control-label">老人性别</label>
+                                            <div class="col-sm-2">
+                                                <div class="form-group">
+                                                    <label class="col-lg-offset-1 col-sm-2 radio-inline"><input type="radio" value="1" name="OldManSex" ng-model="Data.OldManSex" />男</label>
+                                                    <label class="col-lg-offset-1 col-sm-2 radio-inline"><input type="radio" value="0" name="OldManSex" ng-model="Data.OldManSex" />女</label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-sm-1 control-label">渠道来源</label>
+                                            <div class="col-sm-2">
+                                                <div class="form-group">
+                                                    <label class="col-lg-offset-1  radio-inline "><input type="radio" value="朋友介绍" name="Channel" ng-model="Data.Channel" />朋友介绍</label>
+                                                    <label class="col-lg-offset-1  radio-inline "><input type="radio" value="宣传单" name="Channel" ng-model="Data.Channel" />宣传单</label>
+                                                    <label class="col-lg-offset-1  radio-inline "><input type="radio" value="其他" name="Channel" ng-model="Data.Channel" />其他</label>
+                                                </div>
+                                            </div>
+                                            <label class="col-sm-1 control-label">登记人</label>
+                                            <div class="col-sm-2">
+                                                <input-staff  value="{{Data.RecordBy}}" />
+                                            </div>
+
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-sm-1 control-label">备注</label>
+                                            <div class="col-sm-11">
+                                                <textarea class="form-control" rows="3" name="备注" ng-model="Data.Remark" ng-maxlength="200"></textarea>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group center">
+                                    <button class="btn btn-info btn-lg" type="submit">保存</button>
+                                    <button class="btn btn-grey btn-lg" ui-sref="AdvisoryReg">取消</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

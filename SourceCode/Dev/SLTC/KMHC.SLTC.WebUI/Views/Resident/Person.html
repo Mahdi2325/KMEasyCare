@@ -1,0 +1,134 @@
+<form class="form-horizontal" role="form" name="form1" novalidate>
+    <div class="row">
+        <div id="content" class="col-lg-12">
+            <!-- PAGE HEADER-->
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="page-header">
+                        <!-- STYLER -->
+                        <!-- /STYLER -->
+                        <!-- BREADCRUMBS -->
+                        <ul class="breadcrumb">
+                            <li>
+                                <i class="fa fa-home"></i>
+                                <a href="/">首页</a>
+                            </li>
+                            <li><a href="/angular/ResidentList/{{mode}}">住民列表</a></li>
+                            <li>住民资料编辑</li>
+                        </ul>
+                        <!-- /BREADCRUMBS -->
+                        <div class="clearfix"><!--<h3 class="content-title pull-left">SLTC</h3>--></div>
+                        <div class="description"></div>
+                    </div>
+                </div>
+            </div>
+            <!-- /PAGE HEADER -->
+
+            <div class="row">
+                <div class="col-md-12">
+                    <!-- 基本信息 -->
+                    <div class="box border primary">
+                        <div class="box-title">
+                            <h4><i class="fa fa-bars"></i>基本信息</h4>
+                            <div class="tools hidden-xs">
+                                <a href="javascript:;" class="collapse" ca-collapse>
+                                    <i class="fa fa-chevron-up"></i>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="box-body">
+
+                            <div class="form-group">
+                                <label class="col-sm-1 control-label">姓名<span class="required">*</span></label>
+                                <div class="col-sm-2">
+                                    <input type="text" class="form-control" placeholder="姓名" ng-model="person.Name" ng-maxlength="50" required>
+                                </div>
+                                <label class="col-sm-1 control-label">昵称</label>
+                                <div class="col-sm-2">
+                                    <input type="text" id="txtNC" class="form-control" placeholder="昵称" ng-model="person.NickName" ng-maxlength="50">
+                                </div>
+                                <label class="col-sm-1 control-label">性别</label>
+                                <div class="col-sm-2">
+                                    <select class="form-control" ng-model="person.Sex" select-code="A00.001"></select>
+                                </div>
+                                <label class="col-sm-1 control-label">身份证号<span class="required">*</span></label>
+                                <div class="col-sm-2">
+                                    <input type="text" class="form-control" ng-model="person.IdNo" ng-maxlength="18" ng-readonly="person.RegNo>0">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-1 control-label" ng-show="false">住民类型</label>
+                                <div class="col-sm-2" ng-show="false">
+                                    <select class="form-control" ng-model="person.RsType" select-code="A00.051"></select>
+                                </div>
+                                <label class="col-sm-1 control-label" ng-show="false">住民身份</label>
+                                <div class="col-sm-2" ng-show="false">
+                                    <select class="form-control" ng-model="person.RsStatus" select-code="A00.052"></select>
+                                </div>
+                                <label class="col-sm-1 control-label">生日</label>
+                                <div class="col-sm-2">
+                                    <input class="form-control" type="text" ca-date-picker ng-model="person.Brithdate" max="0" />
+                                </div>
+                                <label class="col-sm-1 control-label" ng-show="false">民国</label>
+                                <div class="col-sm-2" ng-show="false">
+                                    <input class="form-control" type="text" in-value="person.Brithdate" tw-time-format />
+                                </div>
+                                <label class="col-sm-1 control-label">年龄</label>
+                                <div class="col-sm-2">
+                                    <input class="form-control" type="text" value="{{person.Brithdate | ageFormat}}" ng-disabled="true" />
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-1 control-label">住民编号</label>
+                                    <div class="col-sm-2">
+                                        <input type="text" class="form-control" ng-model="person.ResidengNo" ng-maxlength="20" unique-type="ResidengNo" unique-key="RegNo" unique>
+                                    </div>
+                                </div>
+                        </div>
+                    </div>
+                    <!-- /基本信息 -->
+                </div>
+            </div>
+                <div class="col-md-12">
+                    <div class="box border primary">
+                        <div class="box-title">
+                            <h4><i class="fa fa-columns"></i><span class="hidden-inline-mobile">详细信息</span></h4>
+                        </div>
+                        <div class="box-body">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="tabbable header-tabs">
+                                        <ul class="nav nav-tabs" id="tabResident">
+                                            <li ui-sref-active="active" ng-show="person.FeeNo > 0"><a ui-sref=".AttachArchives"><i class="fa fa-circle-o"></i> <span class="hidden-inline-mobile">附加文件</span></a></li>
+                                            <li ui-sref-active="active" ng-show="person.FeeNo > 0"><a ui-sref=".HomePhoto"><i class="fa fa-circle-o"></i> <span class="hidden-inline-mobile">照片/家系图</span></a></li>
+                                            <li ui-sref-active="active" ng-show="person.FeeNo > 0"><a ui-sref=".HisDisease"><i class="fa fa-circle-o"></i> <span class="hidden-inline-mobile">疾病史</span></a></li>
+                                            <li ui-sref-active="active" ng-show="person.FeeNo > 0"><a ui-sref=".Contact"><i class="fa fa-circle-o"></i> <span class="hidden-inline-mobile">联系人</span></a></li>
+                                            <li ui-sref-active="active" ng-show="person.FeeNo > 0"><a ui-sref=".Address"><i class="fa fa-circle-o"></i> <span class="hidden-inline-mobile">通讯录</span></a></li>
+                                            <li ui-sref-active="active"><a ui-sref=".BasicInfo"><i class="fa fa-calendar-o"></i> <span class="hidden-inline-mobile">基本资料</span></a></li>
+                                        </ul>
+                                        <div class="tab-content" style="padding: 10px">
+                                            <div ui-view=""></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12 center">
+                                    <button type="button" class="btn btn-info" ng-if="!isAdd" ng-disabled="form1.$invalid" ng-click="save()">保存</button>
+                                    <button type="button" class="btn btn-default" ng-click="cancel()">返回</button>
+                                    <button type="button" class="btn btn-info" ng-if="isAdd" ng-disabled="form1.$invalid">确定添加</button>
+                                </div>
+                            </div>
+
+                        </div>
+
+                    </div>
+                </div>
+
+            <div class="footer-tools">
+                <span class="go-top" back-to-top>
+                    <i class="fa fa-chevron-up"></i> Top
+                </span>
+            </div>
+        </div>
+    </div>
+</form>

@@ -1,0 +1,164 @@
+<div class="row">
+    <div id="content" class="col-lg-12">
+
+        <!--标题-->
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="page-header">
+                    <ul class="breadcrumb">
+                        <li>
+                            <i class="fa fa-home"></i>
+                            <a href="/">首页</a>
+                        </li>
+                        <li>固定费用设定</li>
+                    </ul>
+
+                </div>
+            </div>
+        </div>
+        <!--标题-->
+
+        <div class="row">
+            <div class="col-sm-2">
+                <div class="box border primary">
+                    <div class="box-title">
+                        <h4>
+                            <i class="fa fa-bars"></i>住民信息
+                        </h4>
+                    </div>
+                    <div class="box-body">
+                        <resident-card feeno={{FeeNo}} callback="residentSelected(resident)" />
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-10">
+                <div class="box border primary">
+                    <div class="box-title">
+                        <h4>
+                            <i class="fa fa-bars"></i>费用套餐
+                        </h4>
+                    </div>
+                    <div class="box-body">
+                        <form name="form2" class="form-horizontal ng-pristine ng-valid ng-valid-required" role="form" novalidate>
+                            <div class="form-group">
+                                <label class="col-sm-1 control-label">费用套餐<span class="required">*</span></label>
+                                <div class="col-sm-2">
+                                    <select class="form-control" ng-model="curItem.GroupNo" required ng-options="item.Id as item.GroupName for item in chargeGroups"></select>
+                                </div>
+                                <label class="col-sm-1 control-label">开始时间<span class="required">*</span></label>
+                                <div class="col-sm-2">
+                                    <input class="form-control" type="text" ng-model="curItem.GroupStartDate" ng-change="datepickChange()" required ca-date-time-picker />
+                                </div>
+                                <label class="col-sm-1 control-label">结束时间</label>
+                                <div class="col-sm-2">
+                                    <input class="form-control" type="text" ng-model="curItem.GroupEndDate" ng-change="datepickChange()" ca-date-time-picker />
+                                </div>
+                                <div class="col-sm-2">
+                                    <button class="btn btn-primary" type="button" ng-show="buttonShow" ng-disabled="form2.$invalid" ng-click="inputChargeGroup(curItem.GroupNo)">保存</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <div class="box border primary">
+                    <div class="box-title">
+                        <h4>
+                            <i class="fa fa-bars"></i>固定费用设定
+                        </h4>
+                    </div>
+                    <div class="box-body">
+                        <form name="form1" class="form-horizontal" role="form" ng-submit="saveEdit(curItem)" novalidate>
+                            <div class="form-group">
+                                <label class="col-sm-1 control-label">收费项目编码<span class="required">*</span></label>
+                                <div class="col-sm-2">
+                                    <input value="{{curItem.FeeNo}}" ng-hide="true" />
+                                    <input-charge-item callback="chargeSelected(item)" value="{{curItem.CostItemNo}}" required="true" />
+                                </div>
+                                <label class="col-sm-1 control-label">收费项目名称</label>
+                                <div class="col-sm-2">
+                                    <input type="text" class="form-control" placeholder="收费项目名称" value="{{curItem.CostName}}" readonly>
+                                </div>
+                                <label class="col-sm-1 control-label">单位</label>
+                                <div class="col-sm-2">
+                                    <input type="text" class="form-control" placeholder="单位" value="{{curItem.ItemUnit}}" readonly>
+                                </div>
+                                <label class="col-sm-1 control-label">单价</label>
+                                <div class="col-sm-2">
+                                    <input type="text" class="form-control" placeholder="单价" value="{{curItem.Price}}" readonly>
+                                </div>
+                            </div>
+ 
+                            <div class="form-group">
+                                <label class="col-sm-1 control-label">重复周期<span class="required">*</span></label>
+                                <div class="col-sm-2">
+                                    <select class="form-control" ng-model="curItem.Period" no-null="true" ng-disabled="itemEdit" select-code="J00.006" required></select>
+                                </div>
+                                <label class="col-sm-1 control-label">开始时间<span class="required">*</span></label>
+                                <div class="col-sm-2">
+                                    <input class="form-control" type="text" ng-model="curItem.StartDate" ng-disabled="itemEdit" ca-date-time-picker required="true" />
+                                </div>
+                                <label class="col-sm-1 control-label">结束时间</label>
+                                <div class="col-sm-2">
+                                    <input class="form-control" type="text" ng-model="curItem.EndDate" ng-change="dateChange()" ca-date-time-picker />
+                                </div>
+                                <label class="col-sm-1 control-label">是否停止缴费</label>
+                                <div class="col-sm-2">
+                                    <input style="margin-top:8px;" type="checkbox" ng-model="curItem.IsEndCharGes">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-sm-offset-1 col-sm-11">
+                                    <button class="btn btn-primary" type="submit" ng-show="buttonShow" ng-disabled="form1.$invalid">保存</button>
+                                    <button class="btn btn-primary" type="button" ng-show="buttonShow" ng-click="loadPage()">重置</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <div class="box border primary">
+                    <div class="box-title">
+                        <h4>
+                            <i class="fa fa-table"></i>固定费用列表
+                        </h4>
+                    </div>
+                    <div class="box-body">
+                        <ui-data-table options="options">
+                            <table class="table table-striped table-bordered table-hover table-handler">
+                                <thead>
+                                    <tr>
+                                        <th>#</th>
+                                        <th>编码</th>
+                                        <th>收费项目名称</th>
+                                        <th>单价</th>
+                                        <th>收费周期</th>
+                                        <th ng-show="false">次数</th>
+                                        <th><i class="fa fa-bars"></i> 操作</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr ng-repeat="item in fixedCharges">
+                                        <td>{{$index + 1}}</td>
+                                        <td>{{item.CostItemNo}}</td>
+                                        <td>{{item.CostName}}</td>
+                                        <td>{{item.Price}}</td>
+                                        <td>{{item.Period}}</td>
+                                        <td ng-show="false">{{item.RepeatCount}}</td>
+                                        <td>
+                                            <div class="btn-group btn-group-xs" role="group">
+                                                <a class="btn btn-info" ng-click="rowSelect(item)"><i class="fa fa-pencil"></i>编辑</a>
+                                                <a class="btn btn-primary" role="button" data-toggle="modal" ng-click="deleteItem(item)"><i class="fa fa-times"></i>删除</a>
+
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </ui-data-table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+

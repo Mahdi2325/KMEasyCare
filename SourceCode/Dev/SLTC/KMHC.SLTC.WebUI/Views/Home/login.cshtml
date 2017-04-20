@@ -1,0 +1,530 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <meta charset="utf-8">
+    <title>长期护理险管理系统 | 登录</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1, user-scalable=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <!-- STYLESHEETS --><!--[if lt IE 9]><script src="js/flot/excanvas.min.js"></script><script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script><script src="http://css3-mediaqueries-js.googlecode.com/svn/trunk/css3-mediaqueries.js"></script><![endif]-->
+    <link rel="stylesheet" type="text/css" href="/Content/CloudAdmin/css/cloud-admin.css">
+
+    <link rel="stylesheet" type="text/css" href="../../Content/CloudAdmin/font-awesome/css/font-awesome.min.css">
+    <!-- DATE RANGE PICKER -->
+    <link rel="stylesheet" type="text/css" href="../../Content/CloudAdmin/js/bootstrap-daterangepicker/daterangepicker-bs3.css" />
+    <!-- UNIFORM -->
+    <link rel="stylesheet" type="text/css" href="../../Content/CloudAdmin/js/uniform/css/uniform.default.min.css" />
+    <!-- ANIMATE -->
+    <link rel="stylesheet" type="text/css" href="../../Content/CloudAdmin/css/animatecss/animate.min.css" />
+    <!-- MainForm -->
+    <link rel="stylesheet" type="text/css" href="../../Content/MainForm/mainform.css" />
+    <!-- WIZARD -->
+    <link rel="stylesheet" type="text/css" href="/Content/CloudAdmin/js/bootstrap-wizard/wizard.css" />
+</head>
+
+<body class="login1  loginbody" onload="">
+
+    <div class="kmlogo"></div>
+    <form role="form" method="post">
+        <div class="loginMain">
+            <div class="errorMsg">@ViewBag.Msg</div>
+            <div>
+                <i class="iuserName"></i>
+                <input type="text" id="exampleInputEmail1" name="name" class="userName" placeholder="Account" value="" />
+            </div>
+            <div>
+                <i class="ipwd"></i>
+                <input type="password" id="exampleInputPassword1" name="pwd" class="pwd" placeholder="Password" value="" />
+            </div>
+            <div class="sMain">
+                <i class="iOrg"></i>
+                <select id="selOrgID" name="orgId">
+                    @foreach (KMHC.SLTC.Business.Entity.Model.Organization item in ViewBag.OrgList)
+                    {
+                        <option  value="@item.OrgId">&nbsp;&nbsp;&nbsp;@item.OrgName</option>
+                    }
+                </select>
+                <input type="hidden" id="iOrgId" value=" @ViewBag.OrgId " />
+            </div>
+            <div>
+                <input type="submit" value="登&nbsp;&nbsp;录" class="btnLogin" />
+            </div>
+            <div class="dfgt">
+                @*<a href="#" class="fgtPwd" onclick="swapScreen('forgot');return false;">忘记密码?</a>*@
+            </div>
+        </div>
+        <div class="footer">
+            康美健康云@@版权所有  
+            <div><span>版本号:</span><span>V3.8</span></div>
+            @*备案号:粤ICP备15086500号-2*@
+            @*<div><span>关于我们</span>|<span>联系我们</span></div>*@
+        </div>
+    </form>
+    <!-- PAGE -->
+    <section id="page">
+        <div style="display:none">
+            <section id="login" class="visible">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-4 col-md-offset-4">
+                            <div class="login-box-plain">
+                                <h2 class="bigintro">智慧长照系统平台</h2>
+                                <div class="divide-40"></div>
+
+
+                                <div class="form-group">
+                                    <label for="exampleInputPassword1">密码</label>
+                                    <i class="fa fa-lock"></i>
+                                    <input type="password" class="form-control" id="exampleInputPassword1" name="pwd" />
+                                </div>
+
+
+                                <div class="form-group">
+                                    <label>输入验证码</label>
+                                    <div class="row col-md-12">
+                                        <div class="row col-md-6">
+                                            <input type="text" id="inputCode" class="form-control col-md-5" name="code">
+                                        </div>
+                                        <img id="imgCheckNo" onclick="refreshValidateCode()" src="@Url.Action("getCheckCode", "Home")" class="code">
+                                        <a href="#" class="col-md-2" onclick="refreshValidateCode()"><label style="color:#FFF">换一张</label></a>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <div class="col-md-2 text-right">
+                                        <input type="checkbox" class="uniform" value="">
+                                    </div>
+                                    <div class="col-md-6">
+                                        记住密码
+                                    </div>
+                                    <div class="col-md-4">
+                                        <a href="#" onclick="swapScreen('forgot');return false;">忘记密码？</a>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <button type="submit" class="btn btn-info btn-lg btn-block" style="border: 0px;background:#008B8B">登录</button>
+                                    <div class="center loginError">
+                                        <span>@ViewBag.Msg</span>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </section>
+        </div>
+     
+        <!--/LOGIN -->
+        <!-- FORGOT PASSWORD -->
+        <section id="forgot">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-4 col-md-offset-4">
+                        <!-- BOX -->
+                        <div class="login-box-plain" id="formWizard">
+                            <div class="box-title">
+                                <h4>找回密码 - <span class="stepHeader">步骤 1 of 3</span></h4>
+                                <div class="tools hidden-xs">
+                                    <a href="javascript:;" class="collapse" ca-collapse>
+                                        <i class="fa fa-chevron-up"></i>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="box-body form">
+                                <form id="wizForm" class="form-horizontal">
+                                    <div class="wizard-form">
+                                        <div class="wizard-content">
+                                            <ul class="nav nav-pills nav-justified steps">
+                                                <li>
+                                                    <a href="#step1" data-toggle="tab" class="wiz-step">
+                                                        <span class="step-number">01</span>
+                                                        <span class="step-name">输入账号</span>
+                                                    </a>
+                                                </li>
+                                                <li>
+                                                    <a href="#step2" data-toggle="tab" class="wiz-step active">
+                                                        <span class="step-number">02</span>
+                                                        <span class="step-name">进行安全认证</span>
+                                                    </a>
+                                                </li>
+                                                <li>
+                                                    <a href="#step3" data-toggle="tab" class="wiz-step active">
+                                                        <span class="step-number">03</span>
+                                                        <span class="step-name">设置新密码</span>
+                                                    </a>
+                                                </li>
+                                            </ul>
+                                            <div id="bar" class="progress progress-striped progress-sm active" role="progressbar">
+                                                <div class="progress-bar progress-bar-warning"></div>
+                                            </div>
+                                            <div class="tab-content">
+                                                <div class="tab-pane active" id="step1">
+                                                    <div class="panel panel-default">
+                                                        <div class="panel-body">
+                                                            <div class="form-group">
+                                                                <label class="col-sm-2">机构</label>
+                                                                <div class="col-sm-10">
+                                                                    <i class="fa fa-home"></i>
+                                                                    <select id="selOrgID1" class="form-control">
+                                                                        <option value="0"></option>
+                                                                        @foreach (KMHC.SLTC.Business.Entity.Model.Organization item in ViewBag.OrgList)
+                                                                        {
+                                                                            <option value="@item.OrgId">&nbsp;&nbsp;&nbsp;@item.OrgName</option>
+                                                                        }
+                                                                    </select>
+                                                                </div>
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <label class="col-sm-2">账号</label>
+                                                                <div class="col-sm-10">
+                                                                    <input class="form-control" type="text" id="loginName" name="loginName" placeholder="请输入账号" />
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                    </div>
+                                                </div>
+                                                <div class="tab-pane" id="step2">
+                                                    <div class="panel panel-default">
+                                                        <div class="panel-body">
+                                                            <div class="form-group">
+                                                                <label id="sendMsg" class="col-sm-12"></label>
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <div class="col-sm-12">
+                                                                    <input class="form-control" type="text" name="validateCode" placeholder="请输入邮箱收到的验证码" />
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="tab-pane" id="step3">
+                                                    <div class="panel panel-default">
+                                                        <div class="panel-body">
+                                                            <div class="form-group">
+                                                                <label id="saveMsg" class="col-sm-12"></label>
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <div class="col-sm-12">
+                                                                    <input class="form-control" type="password" id="newPassword" name="newPassword" placeholder="设置新密码" />
+                                                                </div>
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <div class="col-sm-12">
+                                                                    <input class="form-control" type="password" name="confirmPassword" placeholder="确认新密码" />
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="wizard-buttons">
+                                            <div class="row">
+                                                <div class="col-md-12 center">
+                                                    <a href="javascript:;" class="btn btn-default prevBtn">后退</a>
+                                                    <a href="javascript:;" class="btn btn-primary nextBtn">继续</a>
+                                                    <a href="javascript:;" class="btn btn-info submitBtn">完成</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </form>
+
+                                <div class="login-helpers text-right">
+                                    <a href="#" onclick="swapScreen('login');return false;">返回登录页面</a> <br>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- /BOX -->
+                    </div>
+
+                    <div class="col-md-4 col-md-offset-4" style="display:none">
+                        <div class="login-box-plain">
+                            <h2 class="bigintro">重置密码</h2>
+                            <div class="divide-40"></div>
+                            <form role="form" autocomplete="off">
+                                <div class="form-group">
+                                    <label for="exampleInputEmail1">输入您的电邮地址</label>
+                                    <i class="fa fa-envelope"></i>
+                                    <input type="email" class="form-control" id="exampleInputEmail1">
+                                </div>
+                                <div class="form-actions">
+                                    <button type="submit" class="btn btn-info">新的密码指令</button>
+                                </div>
+                            </form>
+                            <div class="login-helpers">
+                                <a href="#" onclick="swapScreen('login');return false;">返回登录页面</a> <br>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+        </section>
+        <!-- FORGOT PASSWORD -->
+    </section>
+
+    <label class="versions" style="display:none">
+        V20160726.01
+    </label>
+    <!--/PAGE -->
+    <!-- JAVASCRIPTS -->
+    @*@Scripts.Render("~/Scripts/angular")
+        @Scripts.Render("~/Script/AppCommon")
+        @System.Web.Optimization.Scripts.Render("~/Script/angular")*@
+    <!-- Placed at the end of the document so the pages load faster -->
+    <!-- JQUERY -->
+    <script src="../../Content/CloudAdmin/js/jquery/jquery-2.0.3.min.js"></script>
+    <!-- JQUERY UI-->
+    <script src="../../Content/CloudAdmin/js/jquery-ui-1.10.3.custom/js/jquery-ui-1.10.3.custom.min.js"></script>
+    <!-- BOOTSTRAP -->
+    <script src="../../Content/CloudAdmin/bootstrap-dist/js/bootstrap.min.js"></script>
+    <!-- UNIFORM -->
+    <script type="text/javascript" src="../../Content/CloudAdmin/js/uniform/jquery.uniform.min.js"></script>
+    <!-- CUSTOM SCRIPT -->
+    <script src="../../Content/MainForm/mainform.js"></script>
+    <!-- WIZARD -->
+    <script src="/Content/CloudAdmin/js/bootstrap-wizard/jquery.bootstrap.wizard.min.js"></script>
+    <script src="/Content/CloudAdmin/js/jquery-validate/jquery.validate.js"></script>
+    <script src="/Content/MainForm/selectpick.js"></script>
+    <script type="text/javascript">
+        //$(function () {
+        //    $("#selOrgID").val() = $("#iOrgId").val()
+        //})
+
+        (function () {
+            return {
+                init: function () {
+                    if (!jQuery().bootstrapWizard) {
+                        return;
+                    }
+                    ///*-----------------------------------------------------------------------------------*/
+                    ///*	Show country list in Uniform style
+                    ///*-----------------------------------------------------------------------------------*/
+                    //$("#country_select").select2({
+                    //    placeholder: "Select your country"
+                    //});
+
+                    var wizform = $('#wizForm');
+
+                    /*-----------------------------------------------------------------------------------*/
+                    /*	Validate the form elements
+                    /*-----------------------------------------------------------------------------------*/
+                    wizform.validate({
+                        doNotHideMessage: false,
+                        errorClass: 'error-span',
+                        errorElement: 'span',
+                        rules: {
+                            /* Create Account */
+                            loginName: {
+                                required: true,
+                                remote: {
+                                    url: "/api/Common/ValidateLoginName", //后台处理程序
+                                    type: "post",                //数据发送方式
+                                    dataType: "json",       //接受数据格式
+                                    data: {                     //要传递的数据
+                                        OrgID: function () {
+                                            return $("#selOrgID1").val();
+                                        }
+
+                                    }
+                                }
+                            },
+                            validateCode: {
+                                required: true,
+                                minlength: 4,
+                                maxlength: 4,
+                                remote: {
+                                    url: "/api/Common/ValidateCode", //后台处理程序
+                                    type: "post"                //数据发送方式
+                                }
+                            },
+                            newPassword: {
+                                required: true,
+                                minlength: 3
+                            },
+                            confirmPassword: {
+                                required: true,
+                                minlength: 3,
+                                equalTo: "#newPassword"
+                            }
+                        },
+
+                        messages: {
+                            loginName: {
+                                required: "请输入账号",
+                                remote: "账号不存在"
+                            },
+                            validateCode: {
+                                required: "请输入验证码",
+                                minlength: "验证码不能小于4个数字",
+                                maxlength: "验证码不能大于4个数字",
+                                remote: "验证码不正确"
+                            },
+                            newPassword: {
+                                required: "请输入新密码",
+                                minlength: "新密码的长度不能小于3个字符"
+                            },
+                            confirmPassword: {
+                                required: "请输入确认密码",
+                                minlength: "确认密码的长度不能小于3个字符",
+                                equalTo: "请输入相同的密码"
+                            },
+                        },
+
+                        invalidHandler: function (event, validator) {
+                        },
+
+                        highlight: function (element) {
+                            $(element)
+                                .closest('.form-group').removeClass('has-success').addClass('has-error');
+                        },
+
+                        unhighlight: function (element) {
+                            $(element)
+                                .closest('.form-group').removeClass('has-error');
+                        },
+
+                        success: function (label) {
+                            //if (label.attr("for") == "gender") {
+                            //    label.closest('.form-group').removeClass('has-error').addClass('has-success');
+                            //    label.remove();
+                            //} else {
+                            //    label.addClass('valid')
+                            //    .closest('.form-group').removeClass('has-error').addClass('has-success');
+                            //}
+                        }
+                    });
+
+                    //通过DOM操作获取app对象
+
+                    //得到app对象，可以获取app的controller
+                    //var controller = element.controller();
+                    //得到app对象，可以获取app的$scope
+
+                    //调用$scope中的方法
+                    //var appElement = document.querySelector('[ng-controller=regResidentCtrl]');
+                    //var $scope = angular.element(appElement).scope();
+                    /*-----------------------------------------------------------------------------------*/
+                    /*	Initialize Bootstrap Wizard
+                    /*-----------------------------------------------------------------------------------*/
+                    $('#formWizard').bootstrapWizard({
+                        'nextSelector': '.nextBtn',
+                        'previousSelector': '.prevBtn',
+                        onNext: function (tab, navigation, index) {
+                            if (wizform.valid() == false) {
+                                return false;
+                            }
+                            var total = navigation.find('li').length;
+                            var current = index + 1;
+                            if (current == 2) {
+                                $.ajax({
+                                    type: "GET",
+                                    url: "/api/Common/ValidateCode/SendEmail/" + $("#selOrgID").val() + "/" + $("#loginName").val(),
+                                    dataType: "json",
+                                    success: function (data) {
+                                        $('#sendMsg').text(data);
+                                    }
+                                });
+                            }
+                            $('.stepHeader', $('#formWizard')).text('Step ' + (index + 1) + ' of ' + total);
+                            jQuery('li', $('#formWizard')).removeClass("done");
+                            var li_list = navigation.find('li');
+                            for (var i = 0; i < index; i++) {
+                                jQuery(li_list[i]).addClass("done");
+                            }
+                            if (current == 1) {
+                                $('#formWizard').find('.prevBtn').hide();
+                            } else {
+                                $('#formWizard').find('.prevBtn').show();
+                            }
+                            if (current >= total) {
+                                $('#formWizard').find('.nextBtn').hide();
+                                $('#formWizard').find('.submitBtn').show();
+                            } else {
+                                $('#formWizard').find('.nextBtn').show();
+                                $('#formWizard').find('.submitBtn').hide();
+                            }
+                            //if (current == 4) {
+                            //    $scope.saveReginsdtl();
+                            //}
+                        },
+                        onPrevious: function (tab, navigation, index) {
+                            var total = navigation.find('li').length;
+                            var current = index + 1;
+                            $('.stepHeader', $('#formWizard')).text('Step ' + (index + 1) + ' of ' + total);
+                            jQuery('li', $('#formWizard')).removeClass("done");
+                            var li_list = navigation.find('li');
+                            for (var i = 0; i < index; i++) {
+                                jQuery(li_list[i]).addClass("done");
+                            }
+                            if (current == 1) {
+                                $('#formWizard').find('.prevBtn').hide();
+                            } else {
+                                $('#formWizard').find('.prevBtn').show();
+                            }
+                            if (current >= total) {
+                                $('#formWizard').find('.nextBtn').hide();
+                                $('#formWizard').find('.submitBtn').show();
+                            } else {
+                                $('#formWizard').find('.nextBtn').show();
+                                $('#formWizard').find('.submitBtn').hide();
+                            }
+                        },
+                        onTabClick: function (tab, navigation, index) {
+                            //bootbox.alert('On Tab click is disabled');
+                            return false;
+                        },
+                        onTabShow: function (tab, navigation, index) {
+                            var total = navigation.find('li').length;
+                            var current = index + 1;
+                            var $percent = (current / total) * 100;
+                            $('#formWizard').find('.progress-bar').css({
+                                width: $percent + '%'
+                            });
+                        }
+                    });
+                    $('#formWizard').find('.prevBtn').hide();
+                    $('#formWizard').find('.submitBtn').hide();
+                    $('#formWizard .submitBtn').unbind('click').click(function () {
+                        if (wizform.valid()) {
+                            $.ajax({
+                                type: "POST",
+                                url: "/api/Common/ResetPassword/",
+                                dataType: "json",
+                                data: { NewPassword: $("#newPassword").val() },
+                                success: function (data) {
+                                    $('#saveMsg').text(data);
+                                }
+                            });
+                        }
+                    });
+                    var orgIdVal = $("#iOrgId").val().trim();
+                    if (orgIdVal != "") {
+                        $("#selOrgID").val(orgIdVal);
+                    }
+                    $("#selOrgID").selectpick({
+                        container: '.sMain',
+                        width: '100%',
+                        height: '34px'
+                    });
+                    if ($(".errorMsg").text() != "")
+                    {
+                        $(".errorMsg").slideDown(500);
+                    }
+                   
+                }
+            };
+        })().init();
+    </script>
+</body>
+</html>

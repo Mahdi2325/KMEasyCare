@@ -1,0 +1,251 @@
+
+<div class="row" ng-controller="regEvalueateCtrl">
+    <div class="col-md-12">
+
+        <div class="panel panel-default">
+            <div class="panel-heading">身心社会评估</div>
+            <div class="panel-body">
+                <form class="form-horizontal" role="form">
+                    <div class="form-group">
+                        <div class="col-md-12">
+                            <label for="txtAidTools" class="col-md-2 control-label">使用辅具</label>
+                            <div class="col-md-2">
+                                <input type="text" class="form-control" id="txtAidTools" ng-model="currentItem.AidTools" select-items="已使用辅具_文字">
+                            </div>
+                            <label for="txtBookType" class="col-md-2 control-label">手册障碍类别</label>
+                            <div class="col-md-2">
+                                <input type="text" class="form-control" id="txtBookType" ng-model="currentItem.BookType" select-items="手册障别_文字" />
+                            </div>
+                            <label for="seleBookDegree" class="col-md-2 control-label">障碍等级</label>
+                            <div class="col-md-2">
+
+                                <select class="form-control" id="seleBookDegree" ng-model="currentItem.BookDegree" select-code="E00.014">
+                                    <option value="">-- 请选择 --</option>
+                                </select>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="col-md-12">
+                            <label for="txtIllCardName" class="col-md-2 control-label">重大伤病卡名称</label>
+                            <div class="col-md-2">
+                                <input type="text" class="form-control" id="txtIllCardName" ng-model="currentItem.IllCardName" select-items="重大伤病卡名称" />
+                            </div>
+                            <label for="txtServiceName" class="col-md-2 control-label">曾接受相关服务</label>
+                            <div class="col-md-6">
+                                <input type="text" class="form-control" id="txtServiceName" ng-model="currentItem.ServiceName" />
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-md-12">
+                            <label for="selMidState" class="col-md-2 control-label">意识状态</label>
+                            <div class="col-md-2">
+                                <select class="form-control" id="selMidState" ng-model="currentItem.MindState" select-code="E00.005">
+                                    <option value="">-- 请选择 --</option>
+                                </select>
+                            </div>
+                            <label for="txtCognitiveState" class="col-md-2 control-label">认知状况</label>
+                            <div class="col-md-6">
+                                <input type="text" class="form-control" id="txtCognitiveState" ng-model="currentItem.CognitiveState" select-items="认知状况" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-md-12">
+                            <label for="selExpressionState" class="col-md-2 control-label">口语表达能力</label>
+                            <div class="col-md-2">
+                                <select class="form-control" id="selExpressionState" ng-model="currentItem.ExpressionState" select-code="E00.008">
+                                    <option value="">-- 请选择 --</option>
+                                </select>
+                            </div>
+                            <label for="selNonExpressionState" class="col-md-2 control-label">非口语表达能力</label>
+                            <div class="col-md-2">
+                                <select class="form-control" id="selNonExpressionState" ng-model="currentItem.NonExpressionState" select-code="E00.009">
+                                    <option value="">-- 请选择 --</option>
+                                </select>
+                            </div>
+                            <label for="selLanguageState" class="col-md-2 control-label">语言理解能力</label>
+                            <div class="col-md-2">
+                                <select class="form-control" id="selLanguageState" ng-model="currentItem.LanguageState" select-code="E00.015">
+                                    <option value="">-- 请选择 --</option>
+                                </select>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-md-12">
+                            <label for="selEmotionState" class="col-md-2 control-label">情绪状况</label>
+                            <div class="col-md-2">
+                                <select class="form-control" id="selEmotionState" ng-model="currentItem.EmotionState" select-code="E00.016">
+                                    <option value="">-- 请选择 --</option>
+                                </select>
+                            </div>
+                            <label for="selPersnality" class="col-md-2 control-label">外显人格</label>
+                            <div class="col-md-6">
+                                <select class="form-control" id="selPersnality" ng-model="currentItem.Personality" select-code="E00.017">
+                                    <option value="">-- 请选择 --</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-md-12">
+                            <label for="selAttention" class="col-md-2 control-label">注意力</label>
+                            <div class="col-md-2">
+                                <select class="form-control" id="selAttention" ng-model="currentItem.Attention" select-code="E00.018">
+                                    <option value="">-- 请选择 --</option>
+                                </select>
+                            </div>
+                            <label for="selRealsticsense" class="col-md-2 control-label">现实感</label>
+                            <div class="col-md-6">
+                                <select class="form-control" id="selRealsticsense" ng-model="currentItem.Realisticsense" select-code="E00.019">
+                                    <option value="">-- 请选择 --</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-md-12">
+                            <label for="selSocialPartcipation" class="col-md-2 control-label">社交参与度</label>
+                            <div class="col-md-2">
+                                <select class="form-control" id="selSocialPartcipation" ng-model="currentItem.SocialParticipation" select-code="E00.206">
+                                    <option value="">-- 请选择 --</option>
+                                </select>
+                            </div>
+                            <label for="selSocialAttitude" class="col-md-2 control-label">社交态度</label>
+                            <div class="col-md-2">
+                                <select class="form-control" id="selSocialAttitude" ng-model="currentItem.SocialAttitude" select-code="E00.207">
+                                    <option value="">-- 请选择 --</option>
+                                </select>
+                            </div>
+                            <label for="selSocialSkills" class="col-md-2 control-label">社交能力</label>
+                            <div class="col-md-2">
+                                <select class="form-control" id="selSocialSkills" ng-model="currentItem.SocialSkills" select-code="E00.208">
+                                    <option value="">-- 请选择 --</option>
+                                </select>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="col-md-12">
+                            <label for="selCommSkills" class="col-md-2 control-label">社交技巧-沟通技巧</label>
+                            <div class="col-md-2">
+                                <select class="form-control" id="selCommSkills" ng-model="currentItem.CommSkills" select-code="E00.209">
+                                    <option value="">-- 请选择 --</option>
+                                </select>
+                            </div>
+                            <label for="selResponseSkills" class="col-md-2 control-label">社交技巧-应变能力</label>
+                            <div class="col-md-2">
+                                <select class="form-control" id="selResponseSkills" ng-model="currentItem.ResponseSkills" select-code="E00.210">
+                                    <option value="">-- 请选择 --</option>
+                                </select>
+                            </div>
+                            <label for="selFixssueSkills" class="col-md-2 control-label">社交技巧-解决问题能力</label>
+                            <div class="col-md-2">
+                                <select class="form-control" id="selFixssueSkills" ng-model="currentItem.FixissueSkills" select-code="E00.211">
+                                    <option value="">-- 请选择 --</option>
+                                </select>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-md-12">
+                            <label for="txtHobby" class="col-md-2 control-label">个人兴趣嗜好</label>
+                            <div class="col-md-10">
+                                <input type="text" class="form-control" id="txtHobby" ng-model="currentItem.Hobby" select-items="兴趣" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-md-12">
+                            <label for="txtExpertise" class="col-md-2 control-label">个人专长</label>
+                            <div class="col-md-10">
+                                <input type="text" class="form-control" id="txtExpertise" ng-model="currentItem.Expertise" select-items="专长" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-md-12">
+                            <label for="txtSpecialBehavior" class="col-md-2 control-label">特殊行为</label>
+                            <div class="col-md-10">
+                                <input type="text" class="form-control" id="txtSpecialBehavior" ng-model="currentItem.SpecialBehavior" select-items="特殊行为" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-md-12">
+                            <label for="txtAdmissionReason" class="col-md-2 control-label">入住原因摘要</label>
+                            <div class="col-md-10">
+                                <input type="text" class="form-control" id="txtAdmissionReason" ng-model="currentItem.AdmissionReason" select-items="入住原因" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-md-12">
+                            <label for="txtMedicalHistory" class="col-md-2 control-label">生理层面概述(过去病史)</label>
+                            <div class="col-md-10">
+                                <input type="text" class="form-control" id="txtMedicalHistory" ng-model="currentItem.MedicalHistory" select-items="健康状况" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-md-12">
+                            <label for="txtPsychologyDesc" class="col-md-2 control-label">心理层面概述</label>
+                            <div class="col-md-10">
+                                <input type="text" class="form-control" id="txtPsychologyDesc" ng-model="currentItem.PsychologyDesc" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="panel panel-default">
+                            <div class="panel-body">
+                                <form class="form-horizontal" novalidate>
+                                    <div class="form-group">
+
+                                        <label class="col-md-1 control-label">评估人员</label>
+                                        <div class="col-md-2">
+                                            <select class="form-control" id="selEvaluator" ng-model="currentItem.EvaluateBy" select-code="E00.206"></select>
+                                        </div>
+                                        <label class="col-md-1 control-label">评估日期</label>
+                                        <div class="col-md-2">
+                                            <input type="text" class="form-control datepicker" id="dtEvalDate" ng-model="currentItem.EvalDate">
+                                        </div>
+                                        <label class="col-md-1 control-label">下次评估日期</label>
+                                        <div class="col-md-2">
+                                            <input type="text" class="form-control datepicker" id="dtNextEvalDate" ng-model="currentItem.NextEvalDate">
+                                        </div>
+                                        <label class="col-md-1 control-label">下次受托者</label>
+                                        <div class="col-md-2">
+                                            <select class="form-control" id="selNextEvaluator" ng-model="currentItem.NextEvaluateBy" ng-options="t.value as t.text for t in Data.Evaluators"></select>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="col-md-12">
+                                            <div class="col-sm-offset-11">
+                                                <div class="btn-group btn-group-sm" role="group" aria-label="...">
+                                                    <input type="text" class="form-control" ng-model="currentItem.feeNo " /><input type="hidden" ng-model="currentItem.RgeNo" />
+                                                    <button class="btn btn-primary" type="button" ng-click="saveRegEvaluate(currentItem)">存档</button>
+                                                    <button type="button" class="btn btn-default" ng-click="currentItem={}">重置</button>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+    </div>
+</div>
+

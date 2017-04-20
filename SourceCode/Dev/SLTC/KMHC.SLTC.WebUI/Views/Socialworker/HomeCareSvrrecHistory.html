@@ -1,0 +1,535 @@
+<!--个案研讨会议历次记录-->
+<div class="row">
+    <div id="content" class="col-md-12">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="page-header">
+                    <!-- BREADCRUMBS -->
+                    <ul class="breadcrumb">
+                        <li>
+                            <i class="fa fa-home"></i>
+                            <a href="/">首页</a>
+                        </li>
+                        <li>
+                            <a href="#">社工/行政</a>
+                        </li>
+                        <li>服务中心日志记录</li>
+                    </ul>
+                    <!-- /BREADCRUMBS -->
+                    <div class="clearfix"></div>
+                    <div class="description">
+                        <h4> <!--个案-{{personName}}资源连接视窗--></h4>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-12">
+                <div class="form-group">
+                    <div class="input-group col-md-10">
+                        <input class="form-control ng-pristine ng-valid ng-touched" id="Keyword" type="text" placeholder="请输入您想要查询的内容" ng-model="filter.keyContent">
+                        <span class="input-group-btn">
+                            <a class="btn btn-primary" ng-click="search()"><i class="icon-search"></i>搜索</a>
+                            <button type="button" ng-click="editOrCreate()" class="btn btn-primary">新增</button>
+                        </span>
+                    </div>
+                </div>
+                <div class="box border primary">
+                    <div class="box-title">
+                        <h4>日照服务记录视窗</h4>
+                        <div class="tools hidden-xs">
+                            <!--<a href="#box-config" data-toggle="modal" class="config">
+                                <i class="fa fa-cog"></i>
+                            </a>-->
+                            <a class="reload" href="javascript:;" ca-reload>
+                                <i class="fa fa-refresh"></i>
+                            </a>
+                            <a href="javascript:;" class="collapse" ca-collapse>
+                                <i class="fa fa-chevron-up"></i>
+                            </a>
+                            <a class="remove" href="javascript:;" ca-remove>
+                                <i class="fa fa-times"></i>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="box-body">
+                        <table id="tbEvalList"   class="table table-striped table-bordered table-hover table-handler">
+                            <thead>
+                                <tr>
+                                    <th>服务日志</th>
+                                    <th>记录人员</th>
+                                    <th>出席类型</th>
+                                    <th>请假原因</th>
+                                    <th><i class="fa fa-bars"></i> 操作</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr ng-repeat="homecaresvrrec in homecaresvrrecList">
+                                    <td>{{homecaresvrrec.RecrDate}}</td>
+                                    <td>{{homecaresvrrec.RecordBy}}</td>
+                                    <td>{{homecaresvrrec.AttendType}}</td>
+                                    <td>{{homecaresvrrec.LeaveReason}}</td>
+                                    <td>
+                                        <div class="btn-group btn-group-xs" role="group" aria-label="...">
+
+                                            <button class="btn btn-primary" ng-click="editOrCreate(homecaresvrrec)">编辑</button>
+
+                                            <a class="btn btn-primary" role="button" data-toggle="modal" ng-click="deleteItem(homecaresvrrec)">删除</a>
+
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+<!--弹出添加窗口-->
+<div class="modal fade" id="modalHomeCareService" tabindex="-1" role="dialog" aria-labelledby="modalBedLabel" data-target=".bs-example-modal-lg">
+    <div class="modal-dialog bs-example-modal-lg" role="document" style="width:65%;">
+        <div class="modal-content modal-lg">
+            <div class="modal-header bg-success">
+                <button type="button" id="chargeClose" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            </div>
+            <div class="modal-body">
+                <!--<div ng-include="'/Views/Socialworker/AddProposalDisscuss.html'"></div>-->
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="box border primary">
+                            <div class="box-title">
+                                <h4>新增日照服务</h4>
+                            </div>
+                            <div class="box-body">
+                                <table id="example-paper" class="table table-striped table-bordered table-hover table-handler">
+                                    <tbody>
+                                        <tr>
+                                            <td></td>
+                                            <td>
+                                                <div class="form-horizontal">
+                                                    <label for="selProposalBy" class="col-sm-1 control-label">记录人员</label>
+                                                    <div class="col-sm-2">
+                                                        <select class="form-control" id="selRecordBy" ng-model="currentItem.RecordBy" ng-options="Socialworkers.Value as Socialworkers.Name for Socialworkers in Dic.Socialworkers">
+                                                            <option value="">-- 请选择 --</option>
+                                                        </select>
+                                                    </div>
+                                                    <label for="dtPropsoalDate" class="col-sm-1 control-label">服务日期</label>
+                                                    <div class="col-sm-2">
+                                                        <input type="text" class="form-control datepicker" readonly id="dtMeetingDate" ng-model="currentItem.RecrDate">
+                                                    </div>
+                                                    <label for="selMeetingAddress" class="col-sm-1 control-label">出席类型</label>
+                                                    <div class="col-sm-2">
+                                                        <select class="form-control" id="selMeetingAddress" ng-model="currentItem.AttendType" ng-options="a.value as a.text for a in Data.AttendType">
+                                                            <option value="">-- 请选择 --</option>
+                                                        </select>
+                                                    </div>
+                                                    <label for="dtRecordBy" class="col-sm-1 control-label">请假原因</label>
+                                                    <div class="col-sm-2">
+                                                        <select class="form-control" id="selRecordBy" ng-model="currentItem.LeaveReason" ng-options="l.value as l.text for l in Data.LeaveReason">
+                                                            <option value="">-- 请选择 --</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+
+                                            </td>
+
+                                        </tr>
+                                        <tr>
+                                            <td>生命体征</td>
+                                            <td>
+                                                <div class="form-horizontal">
+                                                    <div class="form-group">
+                                                        <div class="col-sm-1２">
+                                                            <label class="checkbox-inline">
+                                                                体温<input ng-model="currentItem.BodyTemp">℃
+                                                            </label>
+                                                            <label class="checkbox-inline">
+                                                                呼吸<input ng-model="currentItem.Breathe" value="0">次/分
+                                                            </label>
+                                                            <label class="checkbox-inline">
+                                                                脉搏<input ng-model="currentItem.Pulse" value="0">次/分
+                                                            </label>
+                                                            <label class="checkbox-inline">
+                                                                血压(收缩／舒张)<input ng-model="currentItem.SBP" style="width:40px" value="0"> / <input style="width:40px" ng-model="currentItem.DBP" value="0">mmHg
+                                                            </label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>生理照顾</td>
+                                            <td>
+                                                <div class="form-horizontal">
+                                                    <div class="form-group">
+                                                        <label class="col-sm-1 control-label">口腔护理</label>
+                                                        <div class="col-sm-11">
+                                                            <label class="checkbox-inline">
+                                                                <input type="checkbox" ng-model="currentItem.TeethCare" >刷牙护理
+                                                            </label>
+                                                            <label class="checkbox-inline">
+                                                                <input type="checkbox" ng-model="currentItem.DentureCare"> 假牙护理
+                                                            </label>
+                                                            <label class="checkbox-inline">
+                                                                <input type="checkbox" ng-model="currentItem.Gargle"> 漱口
+                                                            </label>
+                                                            <label class="checkbox-inline">
+                                                                <input type="checkbox" ng-model="currentItem.MouthCheck"> 口腔检查
+                                                            </label>
+                                                            <label class="checkbox-inline">
+                                                                <input type="checkbox" ng-model="currentItem.WoundCare"> 伤口护理，原因
+                                                            </label>
+                                                            <label class="checkbox-inline">
+                                                                <select class="" id="selWoundCareReason" ng-model="currentItem.WoundCareReason" ng-options="w.value as w.text for w in Data.WoundCareReason">
+                                                                    <option value="">----  请选择  ----</option>
+                                                                </select>
+                                                            </label>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label class="col-sm-1 control-label">身体照顾</label>
+                                                        <div class="col-sm-11">
+                                                            <label class="checkbox-inline">
+                                                                <input type="checkbox" ng-model="currentItem.CutNails"> 剪指甲
+                                                            </label>
+                                                            <label class="checkbox-inline">
+                                                                <input type="checkbox" ng-model="currentItem.Shave"> 刮胡子
+                                                            </label>
+                                                            <label class="checkbox-inline">
+                                                                <input type="checkbox" ng-model="currentItem.ChangeCloth"> 更换衣物
+                                                            </label>
+                                                            <label class="checkbox-inline">
+                                                                <input type="checkbox" ng-model="currentItem.CutHair"> 剪头发
+                                                            </label>
+                                                            <label class="checkbox-inline">
+                                                                <input type="checkbox" ng-model="currentItem.Bath"> 洗澡
+                                                            </label>
+                                                            <label class="checkbox-inline">
+                                                                <input type="checkbox" ng-model="currentItem.Washhair"> 洗头
+                                                            </label>
+
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>营养状况</td>
+                                            <td>
+                                                <div class="form-horizontal">
+                                                    <div class="form-group">
+                                                        <div class="col-sm-1２">
+                                                            <label class="checkbox-inline">
+                                                                午餐<select style="width:80px" id="selLunch" ng-model="currentItem.Lunch" ng-options="n.value as n.text for n in Data.nomalData"><option value="">- -</option></select>份,
+                                                            </label>
+                                                            <label class="checkbox-inline">
+                                                                荤素<select style="width:80px" id="selLunchMeat" ng-model="currentItem.LunchMeat" ng-options="LunchMeat.value as LunchMeat.text for LunchMeat in Data.LunchMeat"><option value="">-请选择-</option></select>
+                                                            </label>
+                                                            <label class="checkbox-inline">
+                                                                <input type="checkbox" ng-model="currentItem.GeneralDiet"> 一般食物
+                                                            </label>
+                                                            <label class="checkbox-inline">
+                                                                <input type="checkbox" ng-model="currentItem.SoftDiet"> 软质食物
+                                                            </label>
+                                                            <label class="checkbox-inline">
+                                                                <input type="checkbox" ng-model="currentItem.BrokenDiet"> 碎质食物
+                                                            </label>
+                                                            <label class="checkbox-inline">
+                                                                <input type="checkbox" ng-model="currentItem.LowSugarDiet"> 低糖食物
+                                                            </label>
+                                                            <label class="checkbox-inline">
+                                                                <input type="checkbox" ng-model="currentItem.LowSodiumDiet"> 低钠食物
+                                                            </label>
+                                                            <label class="checkbox-inline">
+                                                                <input type="checkbox" ng-model="currentItem.LowOilDiet"> 低油食物
+                                                            </label>
+                                                            <label class="checkbox-inline">
+                                                                <input type="checkbox" ng-model="currentItem.PastyDiet"> 糊状食物
+                                                            </label>
+                                                            <label class="checkbox-inline">
+                                                                <input type="checkbox" ng-model="currentItem.OtherDiet"> 其他
+                                                            </label>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label class="checkbox-inline">
+                                                            点心<select style="width:80px" id="selSnack" ng-model="currentItem.Snack" ng-options="nomalData.value as nomalData.text for nomalData in Data.nomalData"><option value="">- -</option></select>份,
+                                                        </label>
+                                                        <label class="checkbox-inline">
+                                                            饮水量 <input ng-model="currentItem.WaterAMT" style="width:65px" />cc.
+                                                        </label>
+                                                        <label class="checkbox-inline">
+                                                            进食协助<select style="width:80px" id="selRecordBy" ng-model="currentItem.EatAssist" ng-options="ExcreteHelp.value as ExcreteHelp.text for ExcreteHelp in Data.ExcreteHelp">
+    <option value="">-请选择-</option>
+</select>
+                                                        </label>
+                                                    </div>
+                                                    </div>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>医药服务</td>
+                                            <td>
+                                                <div class="form-horizontal">
+                                                    <div class="form-group">
+                                                        <label class="col-sm-1 control-label">服药</label>
+                                                        <div class="col-sm-11">
+                                                            <label class="checkbox-inline">
+                                                                <input type="checkbox" ng-model="currentItem.MedicationBB"> 早餐前
+                                                            </label>
+                                                            <label class="checkbox-inline">
+                                                                <input type="checkbox" ng-model="currentItem.MedicationAB"> 早餐後
+                                                            </label>
+                                                            <label class="checkbox-inline">
+                                                                <input type="checkbox" ng-model="currentItem.MedicationBL"> 午餐前
+                                                            </label>
+                                                            <label class="checkbox-inline">
+                                                                <input type="checkbox" ng-model="currentItem.MedicationAL"> 午餐後
+                                                            </label>
+                                                            <label class="checkbox-inline">
+                                                                <input type="checkbox" ng-model="currentItem.MedicationAS"> 点心後
+                                                            </label>
+                                                            <label class="checkbox-inline">
+                                                                <input type="checkbox" ng-model="currentItem.EyeDrops"> 眼药水使用
+                                                            </label>
+                                                            <label class="checkbox-inline">
+                                                                <input value="0" ng-model="currentItem.EyeDropsTimes"> 次／天
+                                                            </label>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label class="col-sm-2 control-label">取药(特约药局）</label>
+                                                        <div class="col-sm-10">
+                                                            <label class="checkbox-inline">
+                                                                <input type="checkbox" ng-model="currentItem.VisitDoctor"> 就医(医院）
+                                                            </label>
+                                                            <label class="checkbox-inline">
+                                                                <select class="" id="selVisitHospital" ng-model="currentItem.VisitHospital" ng-options="VisitHospital.value as VisitHospital.text for VisitHospital in Data.VisitHospital">
+                                                                    <option value="">----  请选择  ----</option>
+                                                                </select>
+                                                            </label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>排泄状况</td>
+                                            <td>
+                                                <div class="form-horizontal">
+                                                    <div class="form-group">
+                                                        <label class="col-sm-1 control-label">小便</label>
+                                                        <div class="col-sm-11">
+                                                            
+                                                            <label class="checkbox-inline">
+                                                                次数<input value="0" style="width:60px" ng-model="currentItem.UrineTimes"> 次／天，
+                                                            </label>
+                                                            <label class="checkbox-inline">
+                                                                换尿布<input value="0" style="width:60px" ng-model="currentItem.DiaperChangeTimes"> 次／天，
+                                                            </label>
+                                                            <label class="checkbox-inline">
+                                                                大便次数<input value="0" style="width:60px" ng-model="currentItem.DefectionTimes"> 次／天，
+                                                            </label>
+                                                            <label class="checkbox-inline">
+                                                                排泄协助
+                                                                <select class="" id="selExcreteHelp" ng-model="currentItem.DischargeState" ng-options="ExcreteHelp.value as ExcreteHelp.text for ExcreteHelp in Data.ExcreteHelp">
+                                                                    <option value="">----  请选择  ----</option>
+                                                                </select>
+                                                            </label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>情绪状况</td>
+                                            <td>
+                                                <div class="form-horizontal">
+                                                    <div class="form-group">
+                                                        
+                                                        <div class="col-sm-12">
+                                                            <label class="checkbox-inline">
+                                                                <input type="checkbox" ng-model="currentItem.MoodsTable"> 平稳
+                                                            </label>
+                                                            <label class="checkbox-inline">
+                                                                <input type="checkbox" ng-model="currentItem.MoodAnxious"> 焦虑
+                                                            </label>
+                                                            <label class="checkbox-inline">
+                                                                <input type="checkbox" ng-model="currentItem.MoodDysphoria"> 躁动
+                                                            </label>
+                                                            <label class="checkbox-inline">
+                                                                <input type="checkbox" ng-model="currentItem.MoodAnger"> 愤怒
+                                                            </label>
+                                                            <label class="checkbox-inline">
+                                                                <input type="checkbox" ng-model="currentItem.MoodApathy"> 冷漠
+                                                            </label>
+                                                            <label class="checkbox-inline">
+                                                                <input type="checkbox" ng-model="currentItem.SundowSyndRome"> 日落症候群
+                                                            </label>
+                                                            <label class="checkbox-inline">
+                                                                <input type="checkbox" ng-model="currentItem.MoodOthers"> 其他，说明
+                                                            </label>
+                                                            <label class="checkbox-inline">
+                                                                <input ng-model="currentItem.MoodOthersDesc"> 
+                                                            </label>
+                                                            <label class="checkbox-inline">
+                                                                午休
+                                                                <select class="" id="selRecordBy" ng-model="currentItem.NoonBreak" ng-options="NoonBreak.value as NoonBreak.text for NoonBreak in Data.NoonBreak">
+                                                                    <option value="">----  请选择  ----</option>
+                                                                </select>
+                                                            </label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>接送方式</td>
+                                            <td>
+                                                <div class="form-horizontal">
+                                                    <div class="form-group">
+
+                                                        <div class="col-sm-12">
+                                                            <label class="checkbox-inline">
+                                                                上午
+                                                                <select style="width:100px;" id="selRecordBy" ng-model="currentItem.NoonShuttle" ng-options="TrafficMode.Value as TrafficMode.Name for TrafficMode in Dic.TrafficMode">
+                                                                    <option value="">----  请选择  ----</option>
+                                                                </select>
+                                                            </label>
+                                                            <label class="checkbox-inline">
+                                                                下午
+                                                                <select style="width:100px;" id="selRecordBy" ng-model="currentItem.AfterNoonShuttle" ng-options="TrafficMode.Value as TrafficMode.Name for TrafficMode in Dic.TrafficMode">
+                                                                    <option value="">----  请选择  ----</option>
+                                                                </select>
+                                                            </label>
+                                                            <label class="checkbox-inline">
+                                                                 家属联系
+                                                            </label>
+                                                            <label class="checkbox-inline">
+                                                                <input type="checkbox" ng-model="currentItem.RelativesVisit"> 家属探访
+                                                            </label>
+                                                            <label class="checkbox-inline">
+                                                                <input type="checkbox" ng-model="currentItem.RelativesTalk"> 家属面谈
+                                                            </label>
+                                                            <label class="checkbox-inline">
+                                                                <input type="checkbox" ng-model="currentItem.RelativesTel"> 家属电访
+                                                            </label>
+                                                            <label class="checkbox-inline">
+                                                                <input type="checkbox" ng-model="currentItem.ContactBook"> 通讯录
+                                                            </label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>活动状况</td>
+                                            <td>
+                                                <div class="form-horizontal">
+                                                    <div class="form-group">
+                                                        <div class="col-sm-12">
+                                                            <label class="checkbox-inline">
+                                                                上午活动
+                                                                <select style="width:200px;" id="selRecordBy" ng-model="currentItem.AM_Activity" ng-options="AMActivity.Value as AMActivity.Name for AMActivity in Dic.AMActivity">
+                                                                    <option value="">----  请选择  ----</option>
+                                                                </select>
+                                                            </label>
+                                                            <label class="checkbox-inline">
+                                                                活动参与度
+                                                                <select style="width:90px;" id="selAParticipate" ng-model="currentItem.AM_A_Participate" ng-options="Participate.Value as Participate.Name for Participate in Dic.Participate">
+                                                                    <option value="">----  请选择  ----</option>
+                                                                </select>
+                                                            </label>
+                                                            <label class="checkbox-inline">
+                                                                专注力
+                                                                <select style="width:90px;" id="selRecordBy" ng-model="currentItem.AM_ATTENTION" ng-options="co.Value as co.Name for co in Dic.Concentration">
+                                                                    <option value="">----  请选择  ----</option>
+                                                                </select>
+                                                            </label>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <div class="col-sm-12">
+                                                            <label class="checkbox-inline">
+                                                                下午活动
+                                                                <select style="width:200px;" id="selRecordBy" ng-model="currentItem.PMActivity" ng-options="AMActivity.Value as AMActivity.Name for AMActivity in Dic.AMActivity">
+                                                                    <option value="">----  请选择  ----</option>
+                                                                </select>
+                                                            </label>
+                                                            <label class="checkbox-inline">
+                                                                活动参与度
+                                                                <select style="width:90px;" id="selRecordBy" ng-model="currentItem.PM_A_Participate" ng-options="Participate.Value as Participate.Name for Participate in Dic.Participate">
+                                                                    <option value="">----  请选择  ----</option>
+                                                                </select>
+                                                            </label>
+                                                            <label class="checkbox-inline">
+                                                                专注力
+                                                                <select style="width:90px;" id="selRecordBy" ng-model="currentItem.PM_Attention" ng-options="co.Value as co.Name for co in Dic.Concentration">
+                                                                    <option value="">----  请选择  ----</option>
+                                                                </select>
+                                                            </label>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <div class="col-sm-12">
+                                                            <label class="checkbox-inline">
+                                                                个人化活动
+                                                                <select style="width:200px;" id="selRecordBy" ng-model="currentItem.PersonalActivity" ng-options="PersonalActivity.Value as PersonalActivity.Name for PersonalActivity in Dic.PersonalActivity">
+                                                                    <option value="">----  请选择  ----</option>
+                                                                </select>
+                                                            </label>
+                                                            <label class="checkbox-inline">
+                                                                运动器材使用
+                                                                <select style="width:200px;" id="selRecordBy" ng-model="currentItem.Equipmentuse" ng-options="Equipmentuse.Value as Equipmentuse.Name for Equipmentuse in Dic.Equipmentuse">
+                                                                    <option value="">----  请选择  ----</option>
+                                                                </select>
+                                                            </label>
+                                                            
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>特殊状况</td>
+                                            <td>
+                                                <div class="form-group">
+                                                    <div class="col-sm-12">
+                                                        <textarea class="form-control" rows="5" ng-model="currentItem.SpecialCase"></textarea>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                                <div class="form-group">
+
+                                    <div class="col-sm-offset-10">
+                                        <div class="btn-group btn-group-sm" role="group" aria-label="...">
+                                            <button class="btn btn-primary" type="button" ng-click="saveEdit(currentItem)">保存</button>&nbsp;<button type="button" class="btn btn-default" ng-click="cancelEdit()">取消</button>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    $(".datepicker").datepicker({
+        dateFormat: "yy-mm-dd",
+        changeMonth: true,
+        changeYear: true
+    });
+</script>

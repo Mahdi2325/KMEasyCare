@@ -1,0 +1,78 @@
+<div class="row">
+    <div id="content" class="col-lg-12">
+
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="page-header">
+                    <ul class="breadcrumb">
+                        <li>
+                            <i class="fa fa-home"></i>
+                            <a href="/">首页</a>
+                        </li>
+                        <li>
+                            <a href="angular/TsgQuestionList">帮助问题列表</a>
+                        </li>
+                        <li>
+                            帮助问题编辑
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+
+            <form class="form-horizontal" role="form" name="cartegoryForm" novalidate>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">问题类别<span class="required">*</span></label>
+                    <div class="col-sm-2">
+                        <select class="form-control" name="问题类别" ng-model="currentItem.Question.CategoryCode" ng-options="item.Code as item.Name for item in tsgCategoryList" required>
+                            <option value="">--请选择--</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">问题序号<span class="required">*</span></label>
+                    <div class="col-sm-2">
+                        <input class="form-control" name="问题序号" ng-model="currentItem.Question.OrderSeq" type="number" required ng-maxlength="10" ng-pattern="/^[1-9]\d*|0$/"/>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">问题<span class="required">*</span></label>
+                    <div class="col-sm-8">
+                        <textarea class="form-control" name="问题" type="text" ng-model="currentItem.Question.Name" rows="2" required ng-maxlength="100"></textarea>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label"> 问题详细描述</label>
+                    <div class="col-sm-8">
+                        <textarea class="form-control" name="问题详细描述" type="text" ng-model="currentItem.Question.Description" rows="5" ng-maxlength="65535"></textarea>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">答案<span class="required">*</span></label>
+                    <div class="col-sm-8">
+                        <textarea class="form-control" name="答案" type="text" ng-model="currentItem.Answer.Name" rows="2" required ng-maxlength="100"></textarea>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">答案详细描述</label>
+                    <div class="col-sm-8">
+                        <textarea class="keditor" name="答案详细描述" ng-model="info.content" data-config="config" cols="30" rows="10" ng-maxlength="65535"></textarea>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-sm-offset-3 col-sm-2">
+                        <label class="control-label checkbox-inline">
+                            <input type="checkbox" ng-model="currentItem.Question.Status" />启用
+                        </label>
+                    </div>
+                </div>
+                <div class="form-group center">
+                    <button class="btn btn-info btn-lg" ng-click="saveTsgQuestion(currentItem)">保存</button>
+                    <button class="btn btn-grey btn-lg" ui-sref="TsgQuestionList">取消</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+

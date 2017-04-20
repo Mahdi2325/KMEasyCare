@@ -1,0 +1,199 @@
+<div class="row">
+    <div id="content" class="col-lg-12">
+        <!--标题-->
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="page-header">
+                    <ul class="breadcrumb">
+                        <li>
+                            <i class="fa fa-home"></i>
+                            <a href="/">首页</a>
+                        </li>
+                        <li>
+                            医师巡诊
+                        </li>
+                    </ul>
+
+                </div>
+
+
+            </div>
+        </div>
+        <!--标题-->
+
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="col-sm-2">
+                    <div class="box border primary">
+                        <div class="box-title">
+                            <h4>
+                                <i class="fa fa-bars"></i>住民信息
+                            </h4>
+                        </div>
+                        <div class="box-body">
+                            <resident-card feeno={{FeeNo}} callback="residentSelected(resident)" />
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-10">
+                    <div class="box border primary">
+                        <div class="box-title">
+                            <h4>
+                                <i class="fa fa-bars"></i>医师查房记录
+                            </h4>
+                        </div>
+                        <div class="box-body">
+                            <form class="form-horizontal" role="form" name="docCheckfrom" novalidate>
+                                <div class="form-group">
+
+                                    <label class="col-sm-1 control-label">巡诊日期<span class="required">*</span></label>
+                                    <div class="col-sm-2">
+                                        <input id="txtCheckDate" name="巡诊日期" class="form-control datepicker" type="text" ng-model="currentItem.CheckDate" ca-date-picker required>
+                                    </div>
+
+                                    <label class="col-sm-1 control-label">科别</label>
+                                    <div class="col-sm-2">
+                                        <select class="form-control" id="selDeptNo" ng-model="currentItem.DeptNo" select-code="E00.200"></select>
+                                    </div>
+
+                                    <label class="col-sm-1 control-label">医师姓名</label>
+                                    <div class="col-sm-2">
+                                        <!--<select class="form-control" id="selDocNo" ng-model="currentItem.DocNo" select-code="F00.062"></select>-->
+                                        <input-staff id="txtDocNo" callback="staffSelected(item)" value="{{currentItem.DocNo}}" />
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+
+                                    <label class="col-sm-1 control-label">意识</label>
+                                    <div class="col-sm-2">
+                                        <!--<select class="form-control" id="selConsciousness" ng-model="currentItem.Consciousness" select-code="F00.023"></select>-->
+                                        <input id="txt_Consciousness" name="意识" type="text" ng-model="currentItem.Consciousness" class="form-control" select-items="意识" ng-maxlength="20" />
+                                    </div>
+
+                                    <label class="col-sm-1 control-label">生理</label>
+                                    <div class="col-sm-2">
+                                        <!--<select class="form-control" id="selPhysiology" ng-model="currentItem.Physiology" select-code="F00.064"></select>-->
+                                        <input id="txt_Physiology" name="生理" type="text" ng-model="currentItem.Physiology" class="form-control" select-items="生理检查追踪情形" ng-maxlength="20" />
+                                    </div>
+                                    <label class="col-sm-1 control-label">舒张压</label>
+                                    <div class="col-sm-2">
+                                        <div class="input-group">
+                                            <input id="txt_Bp" name="舒张压" type="text" ng-model="currentItem.BPH" class="form-control" ng-maxlength="5" />
+                                            <div class="input-group-addon">mmHg</div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="col-sm-1 control-label">体温</label>
+                                    <div class="col-sm-2">
+                                        <div class="input-group">
+                                            <input id="txt_BodyTemp" name="体温" type="text" ng-model="currentItem.BodyTemp" class="form-control" min="0.01"  ng-pattern="/^([0-9]{1,2}|0)([.][0-9]{0,2})?$/" />
+                                            <div class="input-group-addon">°C</div>
+                                        </div>
+                                    </div>
+                                    <label class="col-sm-1 control-label">脉搏</label>
+                                    <div class="col-sm-2">
+                                        <div class="input-group">
+                                            <input id="txt_Pulse" name="脉搏" type="text" ng-model="currentItem.Pulse" class="form-control" ng-maxlength="5" />
+                                            <div class="input-group-addon">次/Min</div>
+                                        </div>
+                                    </div>
+                                    <label class="col-sm-1 control-label">收缩压</label>
+                                    <div class="col-sm-2">
+                                        <div class="input-group">
+                                            <input id="txt_Bp" name="收缩压" type="text" ng-model="currentItem.Bp" class="form-control" ng-maxlength="5" />
+                                            <div class="input-group-addon">mmHg</div>
+                                        </div>
+                                    </div>
+                                    <label class="col-sm-1 control-label">血氧</label>
+                                    <div class="col-sm-2">
+                                        <div class="input-group">
+                                            <input id="txt_Oxygen" name="血氧" type="text" ng-model="currentItem.Oxygen" min="0.1" class="form-control" ng-pattern="/^([0-9]{1,2}|0)([.][0-9]{0,1})?$/" />
+                                            <div class="input-group-addon">%</div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="col-sm-1 control-label">血糖</label>
+                                    <div class="col-sm-2">
+                                        <div class="input-group">
+                                            <input id="txt_Bs" name="血糖" type="text" ng-model="currentItem.Bs" class="form-control" min="0.1" ng-pattern="/^([0-9]{1,3}|0)([.][0-9]{0,1})?$/" />
+                                            <div class="input-group-addon">mg/dl</div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-1 control-label">生化异常及处置</label>
+                                    <div class="col-sm-11">
+                                        <textarea rows="3" id="txt_DispositionDesc" name="生化异常及处置" type="text" ng-model="currentItem.DispositionDesc" class="form-control" select-items="生化异常及处置" ng-maxlength="254"></textarea>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-1 control-label">其他</label>
+                                    <div class="col-sm-11">
+                                        <textarea rows="3" id="txt_OtherDesc" name="其他" type="text" ng-model="currentItem.OtherDesc" class="form-control" select-items="医师巡诊其他" ng-maxlength="254"></textarea>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-sm-offset-1 col-sm-11">
+                                        <button class="btn btn-primary" type="submit" ng-show="buttonShow" ng-click="saveDocCheckEdit(currentItem)">保存</button>
+                                        <button class="btn btn-primary" ng-show="buttonShow" ng-click="currentItem = {}">重置</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                    <div class="box border primary">
+                        <div class="box-title">
+                            <h4>
+                                <i class="fa fa-bars"></i>医师查房记录列表
+                            </h4>
+                        </div>
+                        <div class="box-body">
+                            <ui-data-table options="options">
+                                <table class="table table-striped table-bordered table-hover table-handler">
+                                    <thead>
+                                        <tr>
+                                            <th>#</th>
+                                            <th>巡诊日期</th>
+                                            <th>科别</th>
+                                            <th>医师姓名</th>
+                                            <th>意识</th>
+                                            <th>生理</th>
+                                            <th>生化异常及处置</th>
+                                            <th><i class="fa fa-bars"></i> 操作</th>
+                                        </tr>
+                                    </thead>
+
+                                    <tbody>
+                                        <tr ng-repeat="item in Data.docCheckList">
+                                            <td>{{$index + 1}}</td>
+                                            <td>{{item.CheckDate | dateFormat}}</td>
+                                            <td><span select-code="E00.200" select-value="{{item.DeptNo}}"></></span></td>
+                                            <td>{{item.DocName}}</td>
+                                            <td><span select-code="F00.063" select-value="{{item.Consciousness}}"></></span></td>
+                                            <td><span select-code="F00.064" select-value="{{item.Physiology}}"></></span></td>
+                                            <td style="word-break: break-all; word-wrap: break-word; ">{{item.DispositionDesc}}</td>
+                                            <td>
+                                                <div class="btn-group btn-group-xs" role="group" aria-label="...">
+                                                    <a class="btn btn-info" role="button" ng-click="rowSelect(item)"><i class="fa fa-pencil"></i>编辑</a>
+                                                    <a class="btn btn-primary" role="button" ng-click="deleteItem(item)"><i class="fa fa-times"></i>删除</a>
+                                                    <a class="btn btn-warning" role="button" ng-click="PrintPreview(item)"><i class="fa fa-times"></i>打印</a>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+
+                                </table>
+                            </ui-data-table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>

@@ -1,0 +1,274 @@
+<!--住民清册详情页-->
+<div class="row">
+    <div id="content" class="col-lg-12">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="page-header">
+                    <ul class="breadcrumb">
+                        <li>
+                            <i class="fa fa-home"></i>
+                            <a href="/">首页</a>
+                        </li>
+                        <li>在院住民信息</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="box border primary">
+                    <div class="box-title">
+                        <h4>住民入住详情</h4>
+                    </div>
+                    <div class="box-body">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                入住基本信息
+                            </div>
+                            <div class="panel-body">
+                                <form class="form-horizontal" name="dataForm" role="form" novalidate>
+                                    <div class="form-group">
+                                        <label class="col-sm-1 control-label">姓名</label>
+                                        <div class="col-sm-2">
+                                            <input type="text" class="form-control" id="txtItemName" ng-model="currentItem.Name" ng-disabled="true" readonly>
+                                        </div>
+                                        <label class="col-sm-1 control-label">年龄</label>
+                                        <div class="col-sm-2">
+                                            <input type="text" class="form-control" id="txtAge" ng-model="currentItem.Age" ng-disabled="true" readonly />
+                                        </div>
+                                        <label class="col-sm-1 control-label">性别</label>
+                                        <div class="col-sm-2">
+                                            <select class="form-control" ng-model="currentItem.Sex" select-code="A00.001" ng-disabled="true" readonly></select>
+                                        </div>
+                                        <label class="col-sm-1 control-label" ng-show="false">服务类型</label>
+                                        <div class="col-sm-2">
+                                            <select class="form-control" ng-model="currentItem.ServiceType" select-code="A00.002" ng-show="false"></select>
+                                        </div>
+                                        <!--<label class="col-sm-1 control-label">入院状态</label>
+                                        <div class="col-sm-2">
+                                            <select class="form-control" ng-model="currentItem.IpdFlag" select-code="A00.080"></select>
+                                        </div>-->
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-sm-1 control-label">目前动态</label>
+                                        <div class="col-sm-2">
+                                            <select class="form-control" ng-model="currentItem.StateFlag" select-code="A00.006"></select>
+                                        </div>
+                                        <label class="col-sm-1 control-label">住民类型</label>
+                                        <div class="col-sm-2">
+                                            <select class="form-control" ng-model="currentItem.RsType" select-code="A00.051"></select>
+                                        </div>
+                                        <label class="col-sm-1 control-label">住民身份</label>
+                                        <div class="col-sm-2">
+                                            <select class="form-control" ng-model="currentItem.RsStatus" select-code="A00.052"></select>
+                                        </div>
+                                        <label class="col-sm-1 control-label">护理等级</label>
+                                        <div class="col-sm-2">
+                                            <select class="form-control" ng-model="currentItem.NurLevel" select-code="A00.055"></select>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-sm-1 control-label">入院日期</label>
+                                        <div class="col-sm-2">
+                                            <input type="text" class="form-control" id="dtInDate" ng-model="currentItem.InDate" ca-date-picker />
+                                        </div>
+                                        <label class="col-sm-1 control-label">床号<span class="required">*</span></label>
+                                        <div class="col-sm-2">
+                                            <!--<div class="input-group">
+                                                <input class="form-control" ng-disabled="disabled" readonly="readonly" ng-model="currentItem.BedNo" required />
+                                                <div class="input-group-addon" style="cursor:pointer;background:#5E87B0;color:#fff" ng-click="chooseBed()" data-toggle="modal" data-target="#modalBed">
+                                                    重新安排
+                                                </div>
+                                            </div>-->
+                                            <km-look-up title="床位" single="true" required="true" callback="selectBed(item)" is-can-choose="[{key:'BedStatus',value:'Empty'}]" ng-model="currentItem.BedNo" input-show="true" item-property="{key:'BedNo',name:'BedNo'}" factory-name="bedRes" search-params="{Code:'keyWords',Text:'请输入楼层或房间号查询'}" col-list="[{Code:'BedNo',Name:'床位号'},{Code:'BedStatus',Name:'状态',Format:'dic',dicCode:'J00.002'},{Code:'FloorName',Name:'所在楼层'},{Code:'RoomName',Name:'所在房间'},{Code:'Area',Name:'所属区域',Format:'dic',dicCode:'L04.001'},{Code:'RoomType',Name:'房间类别',Format:'dic',dicCode:'L04.002'},{Code:'ResidentName',Name:'姓名'}]"></km-look-up>
+                                        </div>
+                                        <label class="col-sm-1 control-label">楼层</label>
+                                        <div class="col-sm-2">
+                                            <input type="text" class="form-control" ng-disabled="true" readonly ng-model="currentItem.FloorName" />
+                                        </div>
+                                        <label class="col-sm-1 control-label">房间</label>
+                                        <div class="col-sm-2">
+                                            <input type="text" class="form-control" ng-disabled="true" readonly ng-model="currentItem.RoomName" />
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <!--<label class="col-sm-1 control-label">床类别</label>
+                                        <div class="col-sm-2">
+                                            <select class="form-control" ng-model="currentItem.BedKind" ng-disabled="true" select-code="J00.004" readonly="readonly"></select>
+                                        </div>
+                                        <label class="col-sm-1 control-label">床位型态</label>
+                                        <div class="col-sm-2">
+                                            <select class="form-control" ng-model="currentItem.BedType" ng-disabled="true" select-code="J00.003" readonly="readonly"></select>
+                                        </div>-->
+                                        <label class="col-sm-1 control-label">所属区域</label>
+                                        <div class="col-sm-2">
+                                            <select class="form-control" ng-model="currentItem.Area" select-code="L04.001" ng-disabled="true"  readonly="readonly"></select>
+                                        </div>
+                                        <label class="col-sm-1 control-label">房间类别</label>
+                                        <div class="col-sm-2">
+                                            <select class="form-control" ng-model="currentItem.RoomType" select-code="L04.002" ng-disabled="true"  readonly="readonly"></select>
+                                        </div>
+                                        <label class="col-sm-1 control-label">护理提示</label>
+                                        <div class="col-sm-2">
+                                            <select class="form-control" ng-model="currentItem.NursingTips" select-code="A00.004"></select>
+                                        </div>
+                                        <label class="col-sm-1 control-label">社工提示</label>
+                                        <div class="col-sm-2">
+                                            <select class="form-control" ng-model="currentItem.CarerTips" select-code="A00.003"></select>
+                                        </div>
+                                        <!--<div class="col-sm-offset-1 col-sm-2">
+                                           <input type="checkbox" class="uniform" ng-model="currentItem.SickFlag"> 隔离床别
+                                            <input type="checkbox" class="uniform" ng-model="currentItem.RoomFlag"> 包房
+                                            <input type="checkbox" class="uniform" ng-model="currentItem.ProtFlaf"> 需保密
+                                            <input type="checkbox" class="uniform" ng-model="currentItem.DangerFlag"> 病危设定
+                                        </div>-->
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-sm-1 control-label">主责护士</label>
+                                        <div class="col-sm-2">
+                                            <!--<select class="form-control" ng-model="currentItem.NurseNo" ng-options="item.EmpNo as item.EmpName+'('+item.EmpNo+')' for item in NurseNoData"></select>-->
+                                            <div class="input-group input-group-sm">
+                                                <input type="text" readonly class="form-control" value={{currentItem.NurseNo|filterLookupName}} />
+                                                <span class="input-group-btn">
+                                                    <button class="btn btn-default" ng-click="showNurse(enum.careerType.Nurse)">
+                                                        <span class="fa fa-search"></span>
+                                                    </button>
+                                                </span>
+                                            </div>
+                                        </div>
+                                        <label class="col-sm-1 control-label">主责社工</label>
+                                        <div class="col-sm-2">
+                                            <!--<select class="form-control" ng-model="currentItem.Carer" ng-options="item.EmpNo as item.EmpName+'('+item.EmpNo+')'  for item in CarerData"></select>-->
+                                            <div class="input-group input-group-sm">
+                                                <input type="text" readonly class="form-control" value={{currentItem.Carer|filterLookupName}} />
+                                                <span class="input-group-btn">
+                                                    <button class="btn btn-default" ng-click="showNurse(enum.careerType.Carer)">
+                                                        <span class="fa fa-search"></span>
+                                                    </button>
+                                                </span>
+                                            </div>
+                                        </div>
+
+                                        <label class="col-sm-1 control-label">医师</label>
+                                        <div class="col-sm-2">
+                                            <!--<select class="form-control" ng-model="currentItem.Doctor" ng-options="item.EmpNo as item.EmpName+'('+item.EmpNo+')'  for item in DoctorData"></select>-->
+                                            <div class="input-group input-group-sm">
+                                                <input type="text" readonly class="form-control" value={{currentItem.Doctor|filterLookupName}} />
+                                                <span class="input-group-btn">
+                                                    <button class="btn btn-default" ng-click="showNurse(enum.careerType.Doctor)">
+                                                        <span class="fa fa-search"></span>
+                                                    </button>
+                                                </span>
+                                            </div>
+                                        </div>
+                                        <label class="col-sm-1 control-label">物理治疗师</label>
+                                        <div class="col-sm-2">
+                                            <!--<select class="form-control" ng-model="currentItem.Physiotherapist" ng-options="item.EmpNo as item.EmpName+'('+item.EmpNo+')'  for item in PhysiotherapistData"></select>-->
+                                            <div class="input-group input-group-sm">
+                                                <input type="text" readonly class="form-control" value={{currentItem.Physiotherapist|filterLookupName}} />
+                                                <span class="input-group-btn">
+                                                    <button class="btn btn-default" ng-click="showNurse(enum.careerType.Physiotherapist)">
+                                                        <span class="fa fa-search"></span>
+                                                    </button>
+                                                </span>
+                                            </div>
+                                        </div>
+                                        <label class="col-sm-1 control-label" ng-show="false">营养师</label>
+                                        <div class="col-sm-2" ng-show="false">
+                                            <select class="form-control" ng-model="currentItem.Nutritionist" ng-options="item.EmpNo as item.EmpName+'('+item.EmpNo+')' for item in NutritionistData"></select>
+                                        </div>
+                                    </div>
+                                    <div class="form-group" ng-show="false">
+                                        <label class="col-sm-1 control-label">保管医疗费</label>
+                                        <div class="col-sm-2">
+                                            <input class="form-control" type="number" ng-model="currentItem.DepositAmt">
+                                        </div>
+                                        <label class="col-sm-1 control-label">预收款</label>
+                                        <div class="col-sm-2">
+                                            <input class="form-control" type="number" ng-model="currentItem.PrepayAmt">
+                                        </div>
+
+                                        <!--<label class="col-sm-1 control-label">部门</label>
+                                        <div class="col-sm-2">
+                                            <select class="form-control" id="selDeptNo" ng-model="currentItem.DeptNo" ng-options="x.DeptNo as x.DeptName for x in Info.Depts" required></select>
+                                        </div>-->
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-sm-1 control-label">住民入住态度</label>
+                                        <div class="col-sm-5">
+
+                                            <textarea class="form-control" rows="3" ng-model="currentItem.RsAtt" />
+                                        </div>
+                                        <label class="col-sm-1 control-label">家属对托养人的入住态度</label>
+                                        <div class="col-sm-5">
+
+                                            <textarea class="form-control" rows="3" ng-model="currentItem.FmyRsAtt" />
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label class="col-sm-1 control-label">护理等级评估小组意见</label>
+                                        <div class="col-sm-5">
+                                            <textarea class="form-control" rows="3" ng-model="currentItem.NurAssSugg" maxlength="200" />
+                                        </div>
+                                        <label class="col-sm-1 control-label">中心意见或建议</label>
+                                        <div class="col-sm-5">
+                                            <textarea class="form-control" rows="3" ng-model="currentItem.OrgSugg" maxlength="200" />
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-sm-1 control-label">家属对住民自由出入意见</label>
+                                        <div class="col-sm-2">
+                                            <select class="form-control" ng-model="currentItem.ImpComment" select-code="A00.056"></select>
+                                        </div>
+                                        <label class="col-sm-1 control-label"><input type="checkbox" class="uniform" ng-model="currentItem.CtrlFlag" ng-change="changCF(currentItem.CtrlFlag)">出入管制,原因</label>
+                                        <div class="col-sm-2">
+                                            <select class="form-control" ng-model="currentItem.CtrlReason" select-code="A00.005" ng-disabled="cflg" default-first="true"></select>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-sm-1 control-label">动态说明</label>
+                                        <div class="col-sm-11">
+                                            <textarea class="form-control" rows="6" ng-model="currentItem.StateReason" maxlength="500" />
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-sm-2 control-label"></label>
+                                        <div class="col-sm-offset-10">
+                                            <div class="btn-group btn-group-sm" role="group" aria-label="...">
+                                                <button class="btn btn-primary" type="button" ng-click="updateResident(currentItem)" ng-disabled="dataForm.$invalid">保存</button>&nbsp;
+                                                <button type="button" class="btn btn-default" ng-click="cancelEdit()">取消</button>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- 床位Modal -->
+<div class="modal fade" id="modalBed" tabindex="-1" role="dialog" aria-labelledby="modalBedLabel" data-target=".bs-example-modal-lg">
+    <div class="modal-dialog bs-example-modal-lg" role="document">
+        <div style="width:850px" class="modal-content modal-lg">
+            <!--<div class="modal-header bg-success">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="modalBedLabel">床位信息</h4>
+            </div>
+            <button type="button" class="close" style="padding-right:5px" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>-->
+            <div class="modal-body">
+                <div ng-include="'/Views/OrganizationManage/BedModal.html'"></div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-dismiss="modal">关闭</button>
+                <!--<button type="button" class="btn btn-primary" id="btnOk">确定</button>-->
+            </div>
+        </div>
+    </div>
+</div>
